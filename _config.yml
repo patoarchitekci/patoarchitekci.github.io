@@ -19,7 +19,7 @@ about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważny
 social-email: kontakt@patoarchitekci.io
 
 # Disqus
-#discus-identifier: mr-brown # add your discus identifier
+discus-identifier: patoarchitekci-io # add your discus identifier
 
 # Tracker
 analytics: UA-142509712-1
