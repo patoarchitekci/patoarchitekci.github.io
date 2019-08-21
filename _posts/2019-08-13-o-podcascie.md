@@ -6,11 +6,8 @@ description: You’ll find this post in your `_posts` directory. Go ahead and ed
 img: logo.png
 tags: 
 ---
-Czym są **PATOARCHITEKCI**? Miejsce, gdzie w luźnej formie możemy się uzewnętrzniać i dzielić doświadczeniem, wiedzą i poglądami na temat nowoczesnej architektury, IT oraz okolic.
 
-Sama idea **PATOARCHITEKCI** powstała latem 2018 gdzieś na facebookowym czacie pomiędzy Łukasz Kałużny, Maćkiem Misztalem i Marcinem Kosieradzkim. Nawet został nagrany jeden odcinek, który ze względu na tragiczną jakoś się nie ukazał jak i wspaniałe logo symbolizujące prześmiewczego kolorowego DevOpsowego jednorożca w wersji karykaturalnej.
-
-Na bazie reanimacji tej idei możecie posłuchać teraz PATOARCHITEKTÓW dzięki Łukaszowi oraz Szymonowi.
+**PATOARCHITEKCI** - *Uwaga, rzucamy mięsem*, czyli podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT, ale podany w luźnej formie tak jak przystało na tytułowe pato oraz logo symbolizujące prześmiewczego kolorowego DevOpsowego jednorożca!
 
 Podcast można słuchać na:
 
