@@ -14,6 +14,7 @@ Na bazie reanimacji tej idei możecie posłuchać teraz PATOARCHITEKTÓW dzięki
 
 Podcast można słuchać na:
 
+- [Apple Podcasts](https://podcasts.apple.com/pl/podcast/patoarchitekci/id1477067604?l=pl)
 - [anchor.fm](https://anchor.fm/patoarchitekciio)
 - [Spotify](https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J)
 - [YouTube](https://www.youtube.com/channel/UC9_1emyCJi4YhLQWOAEIaMQ/videos)
@@ -21,8 +22,6 @@ Podcast można słuchać na:
 - [Breaker](https://www.breaker.audio/patoarchitekci)
 - [Google Podcasts](https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy84NzIwMTBjL3BvZGNhc3QvcnNz)
 - [RadioPublic](https://radiopublic.com/patoarchitekci-6BJROa)
-
-... inne platfromy w drodze.
 
 ## Autorzy
 
