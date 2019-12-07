@@ -5,9 +5,9 @@ permalink: ':title/'
 
 logo: /assets/images/logo.png
 
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-site-twitter: #if your site has a twitter account, enter it here
 
+url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com
+site-twitter: patoarchitekci
 # Author Settings
 author: Patoarchitekci # add your name
 author-img: logo.png # add your photo
@@ -17,7 +17,7 @@ about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważny
 #social-github: artemsheludko # add your Github handle
 #social-linkedin: # add your Linkedin handle
 social-email: kontakt@patoarchitekci.io
-
+social-twitter: patoarchitekci
 # Disqus
 discus-identifier: patoarchitekci-io # add your discus identifier
 
