@@ -34,4 +34,13 @@ plugins:
 paginate: 8
 paginate_path: "/page/:num"
 
-exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+exclude:
+  - node_modules
+  - gulpfile.js
+  - package.json
+  - yarn.lock
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+  - Docker.ps1
+  - LICENSE
