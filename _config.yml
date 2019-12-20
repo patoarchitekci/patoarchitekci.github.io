@@ -1,6 +1,6 @@
 title: Patoarchitekci
 description: >
-  Uwaga, rzucamy mięsem! czyli lekki podcast o chyba poważnym temacie jaki jest nowoczesna architektura w IT
+  Uwaga, rzucamy mięsem! czyli lekki podcast o chyba poważnym temacie jakim jest nowoczesna architektura w IT
 permalink: ':title/'
 
 logo: /assets/images/logo.png
@@ -11,7 +11,7 @@ site-twitter: patoarchitekci
 # Author Settings
 author: Patoarchitekci # add your name
 author-img: logo.png # add your photo
-about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważnym temacie jaki jest nowoczesna architektura w IT.
+about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
 #social-twitter: # add your Twitter handle
 #social-facebook: # add your Facebook handle
 #social-github: artemsheludko # add your Github handle
