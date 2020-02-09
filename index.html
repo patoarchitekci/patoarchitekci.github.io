@@ -1,19 +1,43 @@
 ---
 layout: main
 ---
-{% for post in paginator.posts %}
-<article class="post">
-  {% if post.img %}
-    <a class="post-thumbnail" style="background-image: url({{"/assets/img/" | prepend: site.baseurl | append : post.img}})" href="{{post.url | prepend: site.baseurl}}"></a>
-  {% else %}
-  {% endif %}
-  <div class="post-content">
-    <h2 class="post-title"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
-    <p>{{ post.content | strip_html | truncatewords: 15 }}</p>
-    <span class="post-date">{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;</span>
-    <span class="post-words">{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " min czytania" }}{% endunless %}</span>
+{% for post in site.posts limit:1 %}
+<div class="site-blocks-cover overlay" style="background-image: url(/assets/images/cover-default.jpg);" data-aos="fade"
+  data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row align-items-center justify-content-center text-center">
+      <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+        <h2 class="text-white font-weight-light mb-2 display-4">
+          {{post.title}}
+        </h2>
+        <div class="text-white mb-4"><span
+            class="text-white-opacity-05"><small>{{post.date | date: '%Y, %b %d'}}</small></span></div>
+        <p><a href="{{post.url | prepend: site.baseurl}}" class="btn btn-primary btn-sm py-3 px-4 small">Materiały do odcinka</a></p>
+        <a class="spreaker-player" href="https://www.spreaker.com/episode/{{ post.spreaker }}" data-resource="episode_id={{ post.spreaker }}"
+          data-width="100%" data-height="150px" data-theme="light" data-playlist="false"
+          data-playlist-continuous="false" data-autoplay="false" data-live-autoplay="false" data-chapters-image="true"
+          data-episode-image-position="right" data-hide-logo="true" data-hide-likes="false" data-hide-comments="false"
+          data-hide-sharing="false" data-hide-download="true">Posłuchaj <b>"{{post.title}}"</b> na Spreaker</a>
+      </div>
+    </div>
   </div>
-</article>
+</div>
 {% endfor %}
-
-{% include pagination.html %}
+<div class="site-section bg-light">
+  <div class="container">
+    {% for post in paginator.posts offset:1 %}
+    <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+      <div class="image" style="background-image: url('/assets/images/logo-default.jpg');"></div>
+      <div class="text">
+        <h3 class="font-weight-light"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h3>
+        <div class="text-white mb-3"><span
+            class="text-black-opacity-05"><small>{{post.date | date: '%Y, %b %d'}}</small></span></div>
+        <p class="mb-4">
+          {{ post.content | strip_html | truncatewords: 20 }}
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% include pagination.html %}
+</div>
