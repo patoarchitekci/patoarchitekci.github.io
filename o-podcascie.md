@@ -12,7 +12,6 @@ tags:
 Podcast można słuchać na:
 
 - [Apple Podcasts](https://podcasts.apple.com/pl/podcast/patoarchitekci/id1477067604?l=pl)
-- [anchor.fm](https://anchor.fm/patoarchitekciio)
 - [Overcast](https://overcast.fm/itunes1477067604/patoarchitekci)
 - [Spotify](https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J)
 - [YouTube](https://www.youtube.com/channel/UC9_1emyCJi4YhLQWOAEIaMQ/videos)
