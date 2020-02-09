@@ -14,7 +14,7 @@ author-img: logo.png # add your photo
 about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
 #social-twitter: # add your Twitter handle
 #social-facebook: # add your Facebook handle
-#social-github: artemsheludko # add your Github handle
+social-github: patoarchitekci # add your Github handle
 #social-linkedin: # add your Linkedin handle
 social-email: kontakt@patoarchitekci.io
 social-twitter: patoarchitekci
@@ -31,7 +31,7 @@ plugins:
   - jekyll-paginate
   - jemoji
 
-paginate: 8
+paginate: 5
 paginate_path: "/page/:num"
 
 exclude:
@@ -43,4 +43,5 @@ exclude:
   - Gemfile.lock
   - CNAME
   - Docker.ps1
+  - docker.sh
   - LICENSE
