@@ -24,6 +24,16 @@ discus-identifier: patoarchitekci-io # add your discus identifier
 # Tracker
 analytics: UA-142509712-1
 
+menu:
+- title: Patoarchitekci
+  url: /
+- title: Gdzie słuchać?
+  url: /gdzie-sluchac/
+- title: O podcaście
+  url: /o-podcascie/
+- title: Kontakt
+  url: mailto:kontakt@patoarchitekci.io
+
 # Build Settings
 markdown: kramdown
 plugins:
