@@ -1,37 +1,92 @@
 ---
-layout: main
+layout: default
 ---
-<article class="article-page">
-  <div class="page-content">
-    {% if page.img %}
-    <div class="page-cover-image">
-      <figure>
-        <img class="page-image" src={{ "/assets/img/" | prepend: site.baseurl | append : page.img}} alt="{{page.title}}">
-        {% if page.fig-caption %}
-          <figcaption>{{page.fig-caption}}</figcaption>
-        {% endif %}
-      </figure>
-    </div> <!-- End Page Cover Image -->
-    {% else %}
-    {% endif %}
-    <div class="wrap-content">
-      <header class="header-page">
-        <h1 class="page-title">{{page.title}}</h1>
-        <div class="page-date"><span>{{page.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-      </header>
+<div class="site-blocks-cover overlay inner-page-cover" style="background-image: url(/assets/images/cover-default.jpg);"
+  data-aos="fade" data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row align-items-center justify-content-center text-center">
+      <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
+        <h2 class="text-white font-weight-light mb-2 display-4">
+          {{ page.title }}
+        </h2>
+        <div class="text-white mb-3"><span
+            class="text-white-opacity-05"><small>{{page.date | date: '%Y, %b %d'}}</small></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container site-section">
+  {% if page.spreaker %}
+  <div class="player mb-5">
+    <a class="spreaker-player" href="https://www.spreaker.com/episode/{{ page.spreaker }}"
+      data-resource="episode_id={{ page.spreaker }}" data-width="100%" data-height="150px" data-theme="light"
+      data-playlist="true" data-playlist-continuous="false" data-autoplay="false" data-live-autoplay="false"
+      data-chapters-image="true" data-episode-image-position="right" data-hide-logo="true" data-hide-likes="false"
+      data-hide-comments="false" data-hide-sharing="false" data-hide-download="true">Posłuchaj <b>"{{post.title}}"</b>
+      na Spreaker</a>
+  </div>
+  {% endif %}
+  <div class="row justify-content-center">
+    <div class="col-md-7">
       {{content | markdownify}}
-      <div class="page-footer">
-        <div class="page-share">
-          <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
-          <a href="https://facebook.com/sharer.php?u={{ site.url }}{{ page.url }}" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
-        </div>
-        <div class="page-tag">
-          {% for tag in page.tags %}
-            <a href="{{site.baseurl}}/tags#{{tag}}" class="tag">&#35; {{ tag }}</a>
-          {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- Powiązane podcasty
+  <div class="site-section bg-light">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12 text-center">
+          <h2 class="font-weight-bold text-black">Powiązane podcasty</h2>
         </div>
       </div>
-      {% include disqus.html %}
-    </div> <!-- End Wrap Content -->
-  </div> <!-- End Page Content -->
-</article> <!-- End Article Page -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="d-block podcast-entry bg-white mb-5" data-aos="fade-up">
+            <div class="image w-100" style="height: 300px; background-image: url('/assets/images/img_2.jpg');"></div>
+            <div class="text w-100">
+
+              <h3 class="font-weight-light"><a href="single-post.html">Episode 07: How To Create Web Page Using
+                  Bootstrap 4</a></h3>
+              <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By Mike Smith <span
+                      class="sep">/</span> 16 September 2017 <span class="sep">/</span> 1:30:20</small></span></div>
+              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti repellat mollitia
+                consequatur, optio nesciunt placeat. Iste voluptates excepturi tenetur, nesciunt.</p>
+
+
+              <div class="player">
+                <audio id="player2" preload="none" controls style="max-width: 100%">
+                  <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+                </audio>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-block podcast-entry bg-white mb-5" data-aos="fade-up">
+            <div class="image w-100" style="height: 300px; background-image: url('/assets/images/img_3.jpg');"></div>
+            <div class="text w-100">
+
+              <h3 class="font-weight-light"><a href="single-post.html">Episode 07: How To Create Web Page Using
+                  Bootstrap 4</a></h3>
+              <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By Mike Smith <span
+                      class="sep">/</span> 16 September 2017 <span class="sep">/</span> 1:30:20</small></span></div>
+              <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti repellat mollitia
+                consequatur, optio nesciunt placeat. Iste voluptates excepturi tenetur, nesciunt.</p>
+
+
+              <div class="player">
+                <audio id="player2" preload="none" controls style="max-width: 100%">
+                  <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+                </audio>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  //-->
+</div>

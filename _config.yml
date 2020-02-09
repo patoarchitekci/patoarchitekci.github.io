@@ -4,7 +4,7 @@ description: >
 permalink: ':title/'
 
 logo: /assets/images/logo.png
-
+timezone: Europe/Warsaw
 
 url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: patoarchitekci
@@ -14,7 +14,7 @@ author-img: logo.png # add your photo
 about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
 #social-twitter: # add your Twitter handle
 #social-facebook: # add your Facebook handle
-#social-github: artemsheludko # add your Github handle
+social-github: patoarchitekci # add your Github handle
 #social-linkedin: # add your Linkedin handle
 social-email: kontakt@patoarchitekci.io
 social-twitter: patoarchitekci
@@ -24,6 +24,16 @@ discus-identifier: patoarchitekci-io # add your discus identifier
 # Tracker
 analytics: UA-142509712-1
 
+menu:
+- title: Patoarchitekci
+  url: /
+- title: Gdzie słuchać?
+  url: /gdzie-sluchac/
+- title: O podcaście
+  url: /o-podcascie/
+- title: Kontakt
+  url: mailto:kontakt@patoarchitekci.io
+
 # Build Settings
 markdown: kramdown
 plugins:
@@ -31,7 +41,7 @@ plugins:
   - jekyll-paginate
   - jemoji
 
-paginate: 8
+paginate: 5
 paginate_path: "/page/:num"
 
 exclude:
@@ -43,4 +53,5 @@ exclude:
   - Gemfile.lock
   - CNAME
   - Docker.ps1
+  - docker.sh
   - LICENSE
