@@ -4,7 +4,7 @@ description: >
 permalink: ':title/'
 
 logo: /assets/images/logo.png
-
+timezone: Europe/Warsaw
 
 url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: patoarchitekci
