@@ -27,7 +27,9 @@ layout: main
 {% endfor %}
 <div class="site-section bg-light">
   <div class="container">
-    {% for post in paginator.posts offset:1 %}
+    {% for post in paginator.posts %}
+    {% for post_c in site.posts limit:1 %}
+    {% if post != post_c% %}
     <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
       <div class="image" style="background-image: url('/assets/images/logo-default.jpg');"></div>
       <div class="text">
@@ -39,6 +41,8 @@ layout: main
         </p>
       </div>
     </div>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
   </div>
   {% include pagination.html %}
