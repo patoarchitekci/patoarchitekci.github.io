@@ -1,9 +1,15 @@
-/* Base */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+
+
 body {
   line-height: 1.7;
   color: #4d4d4d;
   font-weight: 200;
-  font-size: 1.1rem; }
+  font-size: 1.1rem;
+  font-display: optional;
+  font-family: 'Poppins', sans-serif;
+  font-display: auto;
+}
 
 ::-moz-selection {
   background: #000;
