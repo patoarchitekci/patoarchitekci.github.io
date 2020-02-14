@@ -13,6 +13,7 @@ Podcast można słuchać na:
 - [Apple Podcasts](https://podcasts.apple.com/pl/podcast/patoarchitekci/id1477067604?l=pl)
 - [Overcast](https://overcast.fm/itunes1477067604/patoarchitekci)
 - [Spotify](https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J)
+- [RSS](https://www.spreaker.com/show/4215515/episodes/feed)
 - [YouTube](https://www.youtube.com/channel/UC9_1emyCJi4YhLQWOAEIaMQ/videos)
 - [Pocket Casts](https://pca.st/16k1)
 - [Breaker](https://www.breaker.audio/patoarchitekci)
