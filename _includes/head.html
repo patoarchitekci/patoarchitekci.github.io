@@ -25,7 +25,9 @@
   {% endif %}
   {% if page.date %}
   <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
-  <meta content="{{ site.url }}/about/" property="article:author">
+  <meta content="{{ site.url }}/o-podcascie/" property="article:author">
+  <meta property="article:author" content="https://www.facebook.com/kaluznypro/" />
+  <meta property="article:author" content="https://www.facebook.com/Indexoutofrange-454575682037657/" />
   {% endif %}
   {% if page.img %}
   <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}" property="og:image">
