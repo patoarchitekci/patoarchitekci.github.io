@@ -10,7 +10,11 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-3">
+                {% if page.url == "/index.html" %}
+                <h1><a href="/" class="text-white h2">Patoarchitekci</a></h1>
+                {% else %}
                 <h2><a href="/" class="text-white h2">Patoarchitekci</a></h2>
+                {% endif %}
             </div>
             <div class="col-9">
                 <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
