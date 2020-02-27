@@ -53,7 +53,6 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@{{ site.site-twitter }}">
-  <meta name="twitter:creator" content="@{{ site.social-twitter }}">
   {% if page.title %}
   <meta name="twitter:title" content="{{ page.title }}">
   {% else %}
@@ -68,9 +67,9 @@
   <meta name="twitter:description" content="{{ site.description }}">
   {% endif %}
   {% if page.img %}
-  <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter.png">
+  <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter.png">
   {% else %}
-  <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}">
   {% endif %}
 
   <meta name="description" content="{{ page.description }}">
