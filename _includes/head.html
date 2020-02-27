@@ -30,7 +30,13 @@
   <meta property="article:author" content="https://www.facebook.com/Indexoutofrange-454575682037657/" />
   {% endif %}
   {% if page.img %}
+  {% if page.img contains '.' %}
   <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}" property="og:image">
+  {% else %}
+  <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Facebook" property="og:image">
+  <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-LinkedIn" property="og:image">
+  <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter" property="og:image">
+  {% endif %}
   {% else %}
   <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}" property="og:image">
   {% endif %}
@@ -62,7 +68,7 @@
   <meta name="twitter:description" content="{{ site.description }}">
   {% endif %}
   {% if page.img %}
-  <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}">
+  <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter.png">
   {% else %}
   <meta name="twitter:image:src" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}">
   {% endif %}
