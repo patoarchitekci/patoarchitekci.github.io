@@ -1,9 +1,7 @@
 <head>
   <meta charset="utf-8">
   <title>{% if page.title %}{{page.title}} - {{site.title}}{% else %}{{site.title}}{% endif %}</title>
-
-  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
-
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
   <meta content="{{ site.title }}" property="og:site_name">
   {% if page.title %}
   <meta content="{{ page.title }}" property="og:title">
@@ -81,4 +79,6 @@
   <link rel="stylesheet" href="/assets/css/aos.css">
   <link rel="stylesheet" href="/assets/css/style.css">
   {% include analytics.html %}
+  <script async>(function (s, u, m, o, j, v) { j = u.createElement(m); v = u.getElementsByTagName(m)[0]; j.async = 1; j.src = o; j.dataset.sumoSiteId = 'c9deacc9f1d3167e1afaa639907facadfca22caa8450f3eea66a8dd20d953034'; v.parentNode.insertBefore(j, v) })(window, document, 'script', '//load.sumo.com/');
+  </script>
 </head>
