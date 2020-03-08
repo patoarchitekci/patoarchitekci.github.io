@@ -18,17 +18,40 @@
             </div>
             <div class="col-9">
                 <nav class="site-navigation position-relative text-right text-md-right" role="navigation">
-                    <div class="d-inline-block ml-md-0 mr-auto py-3"><a href="#"
-                            class="site-menu-toggle js-menu-toggle text-white"><i class="fas fa-bars fa-lg"></i></span></a>
+                    <div class="d-inline-block ml-md-0 mr-auto py-3">
+                        <a href="#" class="site-menu-toggle js-menu-toggle text-white">
+                            <i class="fas fa-bars fa-lg">
+                            </i>
+                        </a>
                     </div>
                     <ul class="site-menu js-clone-nav d-none">
                         {% for item in site.menu %}
                         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
                         {% endfor %}
+                        <li>
+                            {% if site.social-facebook %}
+                            <a href="{{ site.social-facebook }}" style="display: inline-block;">
+                                <i class="fab fa-facebook-f"></i></a>
+                            {% endif %}
+                            {% if site.social-twitter %}
+                            <a href="https://twitter.com/{{ site.social-twitter }}" style="display: inline-block;">
+                                <i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                            {% if site.social-github %}
+                            <a href="https://github.com/{{ site.social-github }}" style="display: inline-block;">
+                                <i class="fab fa-github"></i></a>
+                            {% endif %}
+                            {% if site.social-linkedin %}
+                            <a href="{{ site.social-linkedin }}">
+                                <i class="fab fa-linkedin-in"></i></a>
+                            {% endif %}
+                        </li>
                         <li><a href="https://podcasts.apple.com/pl/podcast/patoarchitekci/id1477067604?l=pl"><img
-                                    src="/assets/images/podcast-apple.svg" width="100%" alt="Słuchaj podcastu w Apple Podcast!></a></li>
-                        <li><a href=" https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"><img
-                                    src="/assets/images/podcast-spotify.png" width="100%" alt="Słuchaj podcastu w Spotify!></a></li>
+                                    src="/assets/images/podcast-apple.svg" width="100%"
+                                    alt="Słuchaj podcastu w Apple Podcast!"></a></li>
+                        <li><a href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"><img
+                                    src="/assets/images/podcast-spotify.png" width="100%"
+                                    alt="Słuchaj podcastu w Spotify!"></a></li>
                         <li><a
                                 href="
                                     https://podcasts.google.com/?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy84NzIwMTBjL3BvZGNhc3QvcnNz"><img

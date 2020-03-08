@@ -11,9 +11,8 @@ site-twitter: patoarchitekci
 # Author Settings
 author: Patoarchitekci # add your name
 author-img: logo.png # add your photo
-about-author: <b>Uwaga, rzucamy mięsem</b>, czyli lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
-#social-twitter: # add your Twitter handle
-#social-facebook: # add your Facebook handle
+about-author: lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
+social-facebook: https://facebook.com/patoarchitekci/
 social-github: patoarchitekci # add your Github handle
 #social-linkedin: # add your Linkedin handle
 social-email: kontakt@patoarchitekci.io
