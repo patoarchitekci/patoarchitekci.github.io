@@ -29,7 +29,7 @@ layout: main
   <div class="container">
     {% for post in paginator.posts %}
     {% for post_c in site.posts limit:1 %}
-    {% if post != post_c% %}
+    {% if post != post_c %}
     <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
       <div class="image" style="background-image: url('/assets/images/logo-default.jpg');"></div>
       <div class="text">
