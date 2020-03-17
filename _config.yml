@@ -3,7 +3,7 @@ description: >
   Uwaga, rzucamy mięsem! czyli lekki podcast o chyba poważnym temacie jakim jest nowoczesna architektura w IT
 permalink: ':title/'
 
-logo: /assets/images/logo.png
+logo: /assets/images/logo.jpg
 timezone: Europe/Warsaw
 
 url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com

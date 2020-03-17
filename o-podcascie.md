@@ -2,7 +2,7 @@
 layout: post
 title: O podcaście
 description:
-img: logo.png
+img: logo.jpg
 permalink: /o-podcascie/
 tags: 
 ---

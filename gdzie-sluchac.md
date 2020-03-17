@@ -2,7 +2,7 @@
 layout: post
 title: Gdzie słuchać?
 description:
-img: logo.png
+img: logo.jpg
 permalink: /gdzie-sluchac/
 tags: 
 ---
