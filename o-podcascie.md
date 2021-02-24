@@ -32,7 +32,7 @@ albo jak można znaleźć w konferencyjnych opisach
 
 > Pasjonat chmury publicznej oraz szeroko pojętej nowoczesnej architektury w IT oraz hipsterskich technologii, które dopiero się pojawiają
 
-W Internetach możesz znaleść na:
+W Internetach możesz znaleźć na:
 
 - [kaluzny.io](https://kaluzny.io)
 - [twitter](https://twitter.com/kaluzaaa)
