@@ -8,7 +8,7 @@ body {
   font-display: auto;
 }
 
-strong { font-weight: bold; }
+strong { font-weight: bold !important; }
 
 ::-moz-selection {
   background: #000;
