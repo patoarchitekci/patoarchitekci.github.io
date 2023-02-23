@@ -30,7 +30,10 @@
   <meta property="article:author" content="https://www.facebook.com/kaluznypro/" />
   <meta property="article:author" content="https://www.facebook.com/Indexoutofrange-454575682037657/" />
   {% endif %}
-  {% if page.img %}
+  {% if page.episode %}
+  <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg" property="og:image">
+  <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-portrait.jpg" property="og:image">
+  {% elsif page.img %}
   {% if page.img contains '.' %}
   <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}" property="og:image">
   {% else %}
