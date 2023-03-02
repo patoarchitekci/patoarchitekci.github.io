@@ -70,7 +70,9 @@
   {% else %}
   <meta name="twitter:description" content="{{ site.description }}">
   {% endif %}
-  {% if page.img %}
+  {% if page.episode %}
+   <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg">
+  {% elsif page.img %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter.png">
   {% else %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}">
