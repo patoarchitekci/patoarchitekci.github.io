@@ -16,7 +16,11 @@ layout: default
   </div>
 </div>
 <div class="container site-section">
-  {% if page.spreaker %}
+  {% if page.apple %}
+  <div class="player mb-5">
+    <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/pl/id1477067604?i={{{ page.apple }}}&l=pl"></iframe>
+  </div>
+  {% elsif page.spreaker %}
   <div class="player mb-5">
     <a class="spreaker-player" href="https://www.spreaker.com/episode/{{ page.spreaker }}"
       data-resource="episode_id={{ page.spreaker }}" data-width="100%" data-height="150px" data-theme="light"
