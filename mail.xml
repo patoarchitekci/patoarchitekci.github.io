@@ -23,11 +23,11 @@
 				{% endif %}
 				{% if post.excerpt %}
 					<description>
-						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.excerpt | xml_escape }}!]]>
+						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | xml_escape }}!]]>
 				        </description>
 				{% else %}
 					<description>
-						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.content | xml_escape }}!]]>
+						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | xml_escape }}!]]>
 				        </description>
 				{% endif %}
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
