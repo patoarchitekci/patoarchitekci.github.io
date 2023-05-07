@@ -19,7 +19,7 @@
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
 				<description>
-					<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | markdownify }}!]]>
+					<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | markdownify }}]]>
 				</description>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
