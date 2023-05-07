@@ -22,7 +22,7 @@
 					<dc:creator>{{ post.author.name | xml_escape }}</dc:creator>
 				{% endif %}
 				{% if post.excerpt %}
-					<description>{{ post.excerpt | xml_escape }}</description>
+					<description><![CDATA[<p><img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.excerpt | xml_escape }}</description>
 				{% else %}
 					<description><![CDATA[<p><img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.content | xml_escape }}</description>
 				{% endif %}
