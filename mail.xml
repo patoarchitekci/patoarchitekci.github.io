@@ -14,22 +14,13 @@
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/{{ page.path }}" rel="self" type="application/rss+xml" />
 		<lastBuildDate>{% for post in site.posts limit:1 %}{{ post.date | date_to_rfc822 }}{% endfor %}</lastBuildDate>
-		{% assign feed_items = site.feed_items | default: 10 %}
+		{% assign feed_items = site.feed_items | default: 1 %}
 		{% for post in site.posts limit:feed_items %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
-				{% if post.author.name %}
-					<dc:creator>{{ post.author.name | xml_escape }}</dc:creator>
-				{% endif %}
-				{% if post.excerpt %}
-					<description>
-						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | xml_escape }}!]]>
-				        </description>
-				{% else %}
-					<description>
-						<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter | xml_escape }}!]]>
-				        </description>
-				{% endif %}
+				<description>
+					<![CDATA[<img width="1080" height="1080" src="{{ site.url }}{{ site.baseurl }}/assets/img/{{ post.episode }}-square.jpg" alt="{{ post.title | xml_escape }}" decoding="async" title="{{ post.title | xml_escape }}">{{ post.newsletter }}!]]>
+				</description>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
 				<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
