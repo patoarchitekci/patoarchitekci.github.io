@@ -26,7 +26,7 @@ Podcast można słuchać na:
 
 Na potrzeby podcastu dobrze sprawdzi się marge opisu z Twitter i LinkedIn, czyli 
 
-> Engineer,  Architect,  Technology Leader @ Beyond.pl, Consultant, Geek,  MVP: Microsoft Azure i ojciec dwójki maluchów.”
+> Engineer,  Architect, Co-founder & Technology Advisor @ [Protopia](https://protopia.tech), Geek,  MVP: Microsoft Azure i ojciec dwójki maluchów.”
 
 albo jak można znaleźć w konferencyjnych opisach
 
@@ -44,8 +44,7 @@ W Internetach możesz znaleźć na:
 
 Z .net od wersji 1.1 budował aplikacje webowe w czasach jak IE6 był “tą lepszą przeglądarką”. 
 
-- Architekt & Problem Solver @ [Meniga](https://www.meniga.com/).
+- Co-founder & Technology Advisor @ [Protopia](https://protopia.tech)
 - Blogger @ [IndexOutOfRange](http://indexoutofrange.com)
-- Trener @ [Bottega](http://bottega.com.pl)
 - Autor @ [Pluralsight](https://www.pluralsight.com/courses/microsoft-tpl-dataflow)
 - Ambasador @ [Neo4j](https://neo4j.com/ambassador/)
