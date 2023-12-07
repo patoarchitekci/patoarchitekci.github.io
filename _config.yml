@@ -32,6 +32,10 @@ menu:
   url: /o-podcascie/
 - title: Kontakt
   url: mailto:kontakt@patoarchitekci.io
+- title: Regulamin
+  url: https://app.easy.tools/terms/otwarte-pato
+- title: Polityka prywatności
+  url: https://app.easy.tools/policies/otwarte-pato
 
 # Build Settings
 markdown: kramdown
