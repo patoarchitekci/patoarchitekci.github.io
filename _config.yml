@@ -11,7 +11,9 @@ site-twitter: patoarchitekci
 # Author Settings
 author: Patoarchitekci # add your name
 author-img: logo.jpg # add your photo
-about-author: lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
+about-author: >
+  lekki podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT.
+  Słuchasz Patoarchitektów dzięki Protopii. Sprawdź, jak Patoarchitekci i Protopia mogą Ci pomóc ➡️ [protopia.tech](https://protopia.tech/)
 social-facebook: https://facebook.com/patoarchitekci/
 social-github: patoarchitekci # add your Github handle
 #social-linkedin: # add your Linkedin handle
