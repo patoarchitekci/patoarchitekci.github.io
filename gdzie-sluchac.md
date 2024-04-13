@@ -20,3 +20,5 @@ Podcast można słuchać na:
 - [Google Podcasts](https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy84NzIwMTBjL3BvZGNhc3QvcnNz)
 - [RadioPublic](https://radiopublic.com/patoarchitekci-6BJROa)
 - [Spreaker](https://www.spreaker.com/show/patoarchitekci)
+
+Słuchasz Patoarchitektów dzięki Protopii. Sprawdź, jak Patoarchitekci i Protopia mogą Ci pomóc ➡️ [protopia.tech](https://protopia.tech/)
