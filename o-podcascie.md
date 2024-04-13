@@ -9,6 +9,8 @@ tags:
 
 **PATOARCHITEKCI** - *Uwaga, rzucamy mięsem*, czyli podcast o niby poważnym temacie jakim jest nowoczesna architektura w IT, ale podany w luźnej formie tak jak przystało na tytułowe pato oraz logo symbolizujące prześmiewczego kolorowego DevOpsowego jednorożca!
 
+Słuchasz Patoarchitektów dzięki Protopii. Sprawdź, jak Patoarchitekci i Protopia mogą Ci pomóc ➡️ [protopia.tech](https://protopia.tech/)
+
 Podcast można słuchać na:
 
 - [Apple Podcasts](https://podcasts.apple.com/pl/podcast/patoarchitekci/id1477067604?l=pl)
