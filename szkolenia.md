@@ -119,6 +119,10 @@ Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez
 
 W tym kursie Łukasz przekaże Ci nie tylko **fundamentalne zasady projektowania efektywnych systemów,** ale także pokaże, **jak teorie aplikować w codziennej pracy.** Odkryjesz, **jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT.**
 
+Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych **architecture kata**, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach.
+
+**UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
+
 [Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/04062024-architektura-101)
 
 ---
