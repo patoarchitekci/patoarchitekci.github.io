@@ -188,6 +188,7 @@ Zgłębisz **tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes 
 
 [Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/14112024-azure-aks-masterclass)
 
+---
 **Kubernetes the Hard Way**
 
 **Prowadzący**: Łukasz Kałużny
