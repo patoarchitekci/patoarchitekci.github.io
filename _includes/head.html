@@ -71,7 +71,7 @@
   <meta name="twitter:description" content="{{ site.description }}">
   {% endif %}
   {% if page.episode %}
-   <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg">
+  <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.episode }}-square.jpg">
   {% elsif page.img %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}-Twitter.png">
   {% else %}
@@ -81,21 +81,26 @@
   <meta name="description" content="{{ page.description }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <script src="https://kit.fontawesome.com/702fdb20b2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/css/jquery-ui.css">
   <link rel="stylesheet" href="/assets/css/aos.css">
   <link rel="stylesheet" href="/assets/css/style.css">
   {% include analytics.html %}
-<!-- MailerLite Universal -->
-<script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  <!-- MailerLite Universal -->
+  <script>
+    (function (w, d, e, u, f, l, n) {
+      w[f] = w[f] || function () {
+        (w[f].q = w[f].q || [])
+        .push(arguments);
+      }, l = d.createElement(e), l.async = 1, l.src = u,
+      n = d.getElementsByTagName(e)[0], n.parentNode.insertBefore(l, n);
+    })
+      (window, document, 'script', 'https://assets.mailerlite.com/js/universal.js', 'ml');
     ml('account', '802946');
-</script>
-<!-- End MailerLite Universal -->
+  </script>
+  <!-- End MailerLite Universal -->
 
 </head>

@@ -8,6 +8,11 @@ body {
   font-display: auto;
 }
 
+blockquote {
+  padding-left: 1rem;
+  border-left: 2px solid #ccc;
+}
+
 strong { font-weight: bold !important; }
 
 ::-moz-selection {
