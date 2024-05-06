@@ -4,6 +4,7 @@ title: "Nie dla mięczaków: Patoszkolenia, które zmieniają zasady gry!"
 description:
 img: logo.jpg
 permalink: /szkolenia/
+cta: false
 tags: 
 ---
 **Patoszkolenia wywracają do góry nogami wszystko, co myślałeś o szkoleniach IT.**
