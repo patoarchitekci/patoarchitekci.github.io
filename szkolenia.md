@@ -180,7 +180,7 @@ Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz za
 [Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/22102024-azure-networking-masterclass)
 
 ---
-**Azure AKS Masterclass** 
+#### Azure AKS Masterclass
 
 **Prowadzący**: Łukasz Kałużny
 
@@ -193,7 +193,7 @@ Zgłębisz **tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes 
 [Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/14112024-azure-aks-masterclass)
 
 ---
-**Kubernetes the Hard Way**
+#### Kubernetes the Hard Way
 
 **Prowadzący**: Łukasz Kałużny
 
