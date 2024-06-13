@@ -5,7 +5,6 @@ permalink: ':title/'
 
 logo: /assets/images/logo.jpg
 timezone: Europe/Warsaw
-cta: false
 url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: patoarchitekci
 # Author Settings
@@ -50,6 +49,12 @@ plugins:
 
 paginate: 5
 paginate_path: "/page/:num"
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      cta: false
 
 exclude:
   - node_modules
