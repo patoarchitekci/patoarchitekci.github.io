@@ -5,7 +5,7 @@ permalink: ':title/'
 
 logo: /assets/images/logo.jpg
 timezone: Europe/Warsaw
-
+cta: false
 url: "https://patoarchitekci.io" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: patoarchitekci
 # Author Settings
