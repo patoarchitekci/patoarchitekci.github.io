@@ -100,7 +100,7 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - 24-25.09
 
-➡️ [Modelowanie Danych](#modelowanie-danych) - 08.10
+➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10
 
@@ -156,7 +156,7 @@ W tej intensywnej klasie mistrzowskiej dowiesz się, **jak wykorzystać platform
 
 **Prowadzący**: Szymon Warda
 
-**Daty**: 08.10
+**Daty**: 15.10
 
 Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. W tym kursie Szymon pokaże, **jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów.**
 
