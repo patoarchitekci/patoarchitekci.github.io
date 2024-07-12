@@ -1,0 +1,21 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>{{ site.title }}</title>
+    <link>{{ site.url }}</link>
+    <description>{{ site.description }}</description>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    {% for item in site.news %}
+    <item>
+      <title>{{ item.title }}</title>
+      <link>{{ site.url }}{{ item.url }}</link>
+      <description><![CDATA[{{ item.content | markdownify }}]]></description>
+      <pubDate>{{ item.date | date_to_rfc822 }}</pubDate>
+      <guid>{{ site.url }}{{ item.url }}</guid>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

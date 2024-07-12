@@ -50,6 +50,10 @@ plugins:
 paginate: 5
 paginate_path: "/page/:num"
 
+collections:
+  news:
+    output: false
+
 defaults:
   - scope:
       path: ""
