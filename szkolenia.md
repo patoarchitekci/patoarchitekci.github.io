@@ -94,8 +94,6 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Architektura 101](#architektura-101) - 4.06, 5.06 11.06, 12.06
-
 ➡️ [Observability](#observability) - 18.06
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - 24-25.09
@@ -108,35 +106,9 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Kubernetes the Hard Way](#kubernetes-the-hard-way) - 28.11
 
----
-#### Architektura 101 
+➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12
 
-**Prowadzący**: Łukasz Kałużny
-
-**Daty**: 4.06, 5.06 11.06, 12.06 *(po 4 godzinny)*
-
-Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
-
-W tym kursie Łukasz przekaże Ci nie tylko **fundamentalne zasady projektowania efektywnych systemów,** ale także pokaże, **jak teorie aplikować w codziennej pracy.** Odkryjesz, **jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT.**
-
-Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych **architecture kata**, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach.
-
-**UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
-
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/04062024-architektura-101)
-
----
-#### Observability
-
-**Prowadzący**: Szymon Warda
-
-**Daty**: 18.06
-
-Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
-
-Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
-
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/062024-observabiity)
+➡️ [Observability](#observability) - termin w drodze
 
 ---
 #### Azure Container Apps Masterclass
@@ -206,6 +178,35 @@ Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik t
 [Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/28112024-kubernetes-the-hard-way)
 
 ---
+#### Architektura 101 
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: 03.12, 04.12, 10.12, 11.12 *(po 4 godzinny)*
+
+Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
+
+W tym kursie Łukasz przekaże Ci nie tylko **fundamentalne zasady projektowania efektywnych systemów,** ale także pokaże, **jak teorie aplikować w codziennej pracy.** Odkryjesz, **jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT.**
+
+Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych **architecture kata**, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach.
+
+**UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
+
+[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/04062024-architektura-101)
+
+---
+#### Observability
+
+**Prowadzący**: Szymon Warda
+
+**Daty**: Termin w drodze
+
+Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
+
+Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
+
+[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/78499600/062024-observabiity)
+
 ### Poznaj naszych mistrzów
 
 **Łukasz Kałużny** – Technologiczny wizjoner i frontman naszego zespołu, Łukasz to facet, który sprawia, że technologia staje się ekscytująca i przystępna. Nie ma mowy o nudzie, gdy prowadzi kursy; jego entuzjazm jest zaraźliwy, a zdolność tłumaczenia najbardziej skomplikowanych zagadnień w prosty sposób to czysta magia. Jako współgospodarz podcastu "Patoarchitekci", Łukasz regularnie rozprawia o najświeższych technologicznych szaleństwach, co czyni go nie tylko ekspertem, ale i rockstar'em świata IT.
