@@ -94,8 +94,6 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Observability](#observability) - 18.06
-
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - 24-25.09
 
 ➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10
