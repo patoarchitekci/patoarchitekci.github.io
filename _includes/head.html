@@ -6,7 +6,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
   <link rel="icon" href="/favicon.png">
-  <script src="https://app.easy.tools/cookies/scripts/ed9244c3a950479fa8658838fa15d425.js" type="text/javascript"></script>
+  <script src="https://app.easy.tools/cookies/scripts/ed9244c3a950479fa8658838fa15d425.js"
+    type="text/javascript"></script>
   <meta content="{{ site.title }}" property="og:site_name">
   {% if page.title %}
   <meta content="{{ page.title }}" property="og:title">
@@ -96,13 +97,43 @@
     (function (w, d, e, u, f, l, n) {
       w[f] = w[f] || function () {
         (w[f].q = w[f].q || [])
-        .push(arguments);
+          .push(arguments);
       }, l = d.createElement(e), l.async = 1, l.src = u,
-      n = d.getElementsByTagName(e)[0], n.parentNode.insertBefore(l, n);
+        n = d.getElementsByTagName(e)[0], n.parentNode.insertBefore(l, n);
     })
       (window, document, 'script', 'https://assets.mailerlite.com/js/universal.js', 'ml');
     ml('account', '802946');
   </script>
   <!-- End MailerLite Universal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the current URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const promoCode = urlParams.get('promo');
 
+      // If a promo code is present in the URL
+      if (promoCode) {
+        // Select all links on the page
+        const links = document.getElementsByTagName('a');
+
+        // Iterate through each link
+        for (let i = 0; i < links.length; i++) {
+          const link = links[i];
+          const href = link.getAttribute('href');
+
+          // Check if the link is to an easycart.pl domain
+          if (href && href.includes('easycart.pl')) {
+            // Create a URL object from the href
+            const url = new URL(href);
+
+            // Add or update the promo parameter
+            url.searchParams.set('promo', promoCode);
+
+            // Update the link's href with the new URL
+            link.setAttribute('href', url.toString());
+          }
+        }
+      }
+    });
+  </script>
 </head>
