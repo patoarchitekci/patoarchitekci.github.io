@@ -84,8 +84,8 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
                 allowfullscreen
                 frameborder="0"
                 scrolling="no"
-                ></iframe>
-                <script> window.addEventListener("message", (e) => {!!e.data.frameHeight && e.data.wallUuid === "patoszkolenia" && (document.getElementById("patoszkolenia").style.height = e.data.frameHeight);});</script>
+                >
+</iframe>
 
 ---
 
