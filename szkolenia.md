@@ -76,6 +76,19 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ---
 
+<iframe
+                id="patoszkolenia"
+                width="100%"
+                src="https://app.easy.tools/walls/patoszkolenia"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                frameborder="0"
+                scrolling="no"
+                ></iframe>
+                <script> window.addEventListener("message", (e) => {!!e.data.frameHeight && e.data.wallUuid === "patoszkolenia" && (document.getElementById("patoszkolenia").style.height = e.data.frameHeight);});</script>
+
+---
+
 > Nie spotkałem wcześniej bardziej entuzjastycznego trenera i kogokolwiek w naszej branży. Tak trzymać :)
 
 [👍 Wiem już wszystko, pokażcie te szkolenia >>](#oto-kursowe-patomenu)
