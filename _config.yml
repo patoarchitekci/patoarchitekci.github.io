@@ -58,7 +58,7 @@ defaults:
   - scope:
       path: ""
     values:
-      cta: false
+      cta: true
 
 exclude:
   - node_modules
