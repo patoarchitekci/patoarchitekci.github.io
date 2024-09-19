@@ -124,6 +124,8 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 ---
 #### Azure Container Apps Masterclass
 
+> (3398,99 zł)
+
 **Prowadzący**: Łukasz Kałużny i Szymon Warda
 
 **Daty**: 24-25.09
@@ -132,10 +134,12 @@ Zanurz się w konteneryzację z Azure. **Nauczysz się zarządzania, optymalizac
 
 W tej intensywnej klasie mistrzowskiej dowiesz się, **jak wykorzystać platformę Azure do tworzenia, wdrażania i skalowania aplikacji kontenerowych.** Odkryjesz najlepsze praktyki w zarządzaniu kontenerami, bezpieczeństwie i automatyzacji, co pozwoli Ci zbudować wydajne i bezpieczne środowisko w chmurze.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/azure-container-apps-masterclass)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-container-apps-masterclass)
 
 ---
 #### Modelowanie Danych
+
+> (1799 zł)
 
 **Prowadzący**: Szymon Warda
 
@@ -145,10 +149,12 @@ Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. W tym
 
 Dowiesz się, **jak projektować bazy danych, które są nie tylko wydajne, ale również łatwe w utrzymaniu i rozbudowie.** Szymon podzieli się sprawdzonymi technikami normalizacji, denormalizacji, oraz projektowania schematów, które pomogą Ci wyeliminować redundancję i zapewnić integralność danych w twoich aplikacjach.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/modelowanie-danych)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/modelowanie-danych)
 
 ---
 #### Azure Networking Masterclass
+
+> (1799 zł)
 
 **Prowadzący**: Łukasz Kałużny
 
@@ -160,10 +166,12 @@ W tym kursie nauczysz się konfigurować, zarządzać i optymalizować sieć w A
 
 Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz zaawansowane funkcje bezpieczeństwa**, które są kluczowe dla każdego administratora, DevOps i architekta rozwiązań w chmurze.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/azure-networking-masterclass)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-networking-masterclass)
 
 ---
 #### Azure AKS Masterclass
+
+> (1799 zł)
 
 **Prowadzący**: Łukasz Kałużny
 
@@ -173,10 +181,12 @@ Zgłębisz **tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes 
 
  Nauczysz się, **jak efektywnie wykorzystywać funkcje AKS do automatyzacji deploymentu, monitoringu oraz zarządzania usługami.** Odkryjesz najlepsze praktyki związane z bezpieczeństwem, siecią i zarządzaniem tożsamością w kontenerach, co sprawi, że Twoje aplikacje będą zarówno wydajne, jak i bezpieczne.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/azure-aks-masterclass)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-aks-masterclass)
 
 ---
 #### Kubernetes the Hard Way
+
+> (1799 zł)
 
 **Prowadzący**: Łukasz Kałużny
 
@@ -186,10 +196,12 @@ To intensywne szkolenie jest przeznaczone dla tych, którzy chcą zrozumieć, ja
 
 Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik troubleshootingu i zabezpieczeń. Kurs dostarczy Ci **głębokiego zrozumienia procesów i najlepszych praktyk,** które będą kluczowe przy rozbudowie i zarządzaniu własnymi klastrami Kubernetes.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/kubernetes-the-hard-way)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/kubernetes-the-hard-way)
 
 ---
-#### Architektura 101 
+#### Architektura 101
+
+> (3398,99 zł)
 
 **Prowadzący**: Łukasz Kałużny
 
@@ -203,7 +215,7 @@ Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na
 
 **UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
 
 ---
 #### Observability
@@ -216,7 +228,7 @@ Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj na
 
 Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
 
-[Sprawdź więcej szczegółów >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
 
 ### Poznaj naszych mistrzów
 
@@ -229,5 +241,7 @@ Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci 
 Masz pytania? Potrzebujesz faktury proforma? Szukasz więcej informacji? Nie krępuj się, pisz śmiało: [szkolenia@patoarchitekci.io](mailto:szkolenia@patoarchitekci.io)
 
 Chcesz, abyśmy przeprowadzili szkolenie specjalnie dla Twojej firmy? Sprawdź opcje dostosowane do potrzeb Twojego zespołu na naszej stronie i skontaktuj się z nami.
+
+> Szkolenia są prowadzone i sprzedawane przez PROTOPIA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, Tytusa Chałubińskiego 9/2, 02-004 Warszawa, Polska, NIP 7010947615, REGON: 384491842, KRS: 0000806334.
 
 {% include cta.html href="mailto:szkolenia@patoarchitekci.io" content="Skontaktuj się po więcej informacji!" %}
