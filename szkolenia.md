@@ -107,8 +107,6 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - 24-25.09
-
 ➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10
@@ -119,22 +117,9 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12
 
-➡️ [Observability](#observability) - termin w drodze
+➡️ [Observability](#observability)
 
----
-#### Azure Container Apps Masterclass
-
-> (3398,99 zł)
-
-**Prowadzący**: Łukasz Kałużny i Szymon Warda
-
-**Daty**: 24-25.09
-
-Zanurz się w konteneryzację z Azure. **Nauczysz się zarządzania, optymalizacji i bezpieczeństwa Twoich kontenerów z wykorzystaniem Azure Container Apps.**
-
-W tej intensywnej klasie mistrzowskiej dowiesz się, **jak wykorzystać platformę Azure do tworzenia, wdrażania i skalowania aplikacji kontenerowych.** Odkryjesz najlepsze praktyki w zarządzaniu kontenerami, bezpieczeństwie i automatyzacji, co pozwoli Ci zbudować wydajne i bezpieczne środowisko w chmurze.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-container-apps-masterclass)
+➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - termin w drodze
 
 ---
 #### Modelowanie Danych
@@ -229,6 +214,21 @@ Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj na
 Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
+
+---
+#### Azure Container Apps Masterclass
+
+> (3398,99 zł)
+
+**Prowadzący**: Łukasz Kałużny i Szymon Warda
+
+**Daty**: Termin w drodze
+
+Zanurz się w konteneryzację z Azure. **Nauczysz się zarządzania, optymalizacji i bezpieczeństwa Twoich kontenerów z wykorzystaniem Azure Container Apps.**
+
+W tej intensywnej klasie mistrzowskiej dowiesz się, **jak wykorzystać platformę Azure do tworzenia, wdrażania i skalowania aplikacji kontenerowych.** Odkryjesz najlepsze praktyki w zarządzaniu kontenerami, bezpieczeństwie i automatyzacji, co pozwoli Ci zbudować wydajne i bezpieczne środowisko w chmurze.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-container-apps-masterclass)
 
 ### Poznaj naszych mistrzów
 
