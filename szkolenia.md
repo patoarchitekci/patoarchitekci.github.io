@@ -107,13 +107,13 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10
+➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10.2024
 
-➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10
+➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10.2024
 
-➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12
+➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12.2024
 
-➡️ [Observability](#observability) - 18.11, 20.11
+➡️ [Observability](#observability) - 18.11, 20.11.2024
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - termin w drodze
 
@@ -128,7 +128,7 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 **Prowadzący**: Szymon Warda
 
-**Daty**: 15.10
+**Daty**: 15.10.2024
 
 Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. W tym kursie Szymon pokaże, **jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów.**
 
@@ -143,7 +143,7 @@ Dowiesz się, **jak projektować bazy danych, które są nie tylko wydajne, ale 
 
 **Prowadzący**: Łukasz Kałużny
 
-**Daty**: 22.10
+**Daty**: 22.10.2024
 
 Zdobądź głębokie zrozumienie sieci w Azure. **Od teorii do praktycznych zastosowań – wszystko, co musisz wiedzieć, by skutecznie zarządzać siecią.** 
 
@@ -158,7 +158,7 @@ Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz za
 
 **Prowadzący**: Szymon Warda
 
-**Daty**:  - 18.11.2024, 20.11.2024
+**Daty**:  18.11.2024, 20.11.2024
 
 Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
 
@@ -174,7 +174,7 @@ Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci 
 
 **Prowadzący**: Łukasz Kałużny
 
-**Daty**: 03.12, 04.12, 10.12, 11.12 *(po 4 godzinny)*
+**Daty**: 03.12, 04.12, 10.12, 11.12 *(po 4 godzinny)* 2024
 
 Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
 
