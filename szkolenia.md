@@ -111,15 +111,15 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10
 
-➡️ [Azure AKS Masterclass](#azure-aks-masterclass) - 14.11
-
-➡️ [Kubernetes the Hard Way](#kubernetes-the-hard-way) - 28.11
-
 ➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12
 
-➡️ [Observability](#observability)
+➡️ [Observability](#observability) - 18.11, 20.11
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - termin w drodze
+
+➡️ [Azure AKS Masterclass](#azure-aks-masterclass) - termin w drodze
+
+➡️ [Kubernetes the Hard Way](#kubernetes-the-hard-way) - termin w drodze
 
 ---
 #### Modelowanie Danych
@@ -154,36 +154,20 @@ Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz za
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-networking-masterclass)
 
 ---
-#### Azure AKS Masterclass
+#### Observability
 
-> (1799 zł)
+**Prowadzący**: Szymon Warda
 
-**Prowadzący**: Łukasz Kałużny
+**Daty**:  - 18.11.2024, 20.11.2024
 
-**Daty**: 14.11
+Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
 
-Zgłębisz **tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes Service (AKS)**. Łukasz przeprowadzi Cię przez konfigurację, zarządzanie i skalowanie aplikacji w środowisku AKS.
+Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
 
- Nauczysz się, **jak efektywnie wykorzystywać funkcje AKS do automatyzacji deploymentu, monitoringu oraz zarządzania usługami.** Odkryjesz najlepsze praktyki związane z bezpieczeństwem, siecią i zarządzaniem tożsamością w kontenerach, co sprawi, że Twoje aplikacje będą zarówno wydajne, jak i bezpieczne.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-aks-masterclass)
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
 
 ---
-#### Kubernetes the Hard Way
 
-> (1799 zł)
-
-**Prowadzący**: Łukasz Kałużny
-
-**Daty**: 28.11
-
-To intensywne szkolenie jest przeznaczone dla tych, którzy chcą zrozumieć, jak działa Kubernetes od środka. Łukasz pokaże Ci, **jak skonfigurować każdy komponent klastra Kubernetes**, aby zrozumieć, jak poszczególne elementy współpracują ze sobą. 
-
-Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik troubleshootingu i zabezpieczeń. Kurs dostarczy Ci **głębokiego zrozumienia procesów i najlepszych praktyk,** które będą kluczowe przy rozbudowie i zarządzaniu własnymi klastrami Kubernetes.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/kubernetes-the-hard-way)
-
----
 #### Architektura 101
 
 > (3398,99 zł)
@@ -203,19 +187,6 @@ Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
 
 ---
-#### Observability
-
-**Prowadzący**: Szymon Warda
-
-**Daty**: Termin w drodze
-
-Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
-
-Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
-
----
 #### Azure Container Apps Masterclass
 
 > (3398,99 zł)
@@ -229,6 +200,37 @@ Zanurz się w konteneryzację z Azure. **Nauczysz się zarządzania, optymalizac
 W tej intensywnej klasie mistrzowskiej dowiesz się, **jak wykorzystać platformę Azure do tworzenia, wdrażania i skalowania aplikacji kontenerowych.** Odkryjesz najlepsze praktyki w zarządzaniu kontenerami, bezpieczeństwie i automatyzacji, co pozwoli Ci zbudować wydajne i bezpieczne środowisko w chmurze.
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-container-apps-masterclass)
+
+---
+#### Azure AKS Masterclass
+
+> (1799 zł)
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: termin w drodze
+
+Zgłębisz **tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes Service (AKS)**. Łukasz przeprowadzi Cię przez konfigurację, zarządzanie i skalowanie aplikacji w środowisku AKS.
+
+ Nauczysz się, **jak efektywnie wykorzystywać funkcje AKS do automatyzacji deploymentu, monitoringu oraz zarządzania usługami.** Odkryjesz najlepsze praktyki związane z bezpieczeństwem, siecią i zarządzaniem tożsamością w kontenerach, co sprawi, że Twoje aplikacje będą zarówno wydajne, jak i bezpieczne.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-aks-masterclass)
+
+---
+#### Kubernetes the Hard Way
+
+> (1799 zł)
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: termin w drodze
+
+To intensywne szkolenie jest przeznaczone dla tych, którzy chcą zrozumieć, jak działa Kubernetes od środka. Łukasz pokaże Ci, **jak skonfigurować każdy komponent klastra Kubernetes**, aby zrozumieć, jak poszczególne elementy współpracują ze sobą. 
+
+Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik troubleshootingu i zabezpieczeń. Kurs dostarczy Ci **głębokiego zrozumienia procesów i najlepszych praktyk,** które będą kluczowe przy rozbudowie i zarządzaniu własnymi klastrami Kubernetes.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/kubernetes-the-hard-way)
+---
 
 ### Poznaj naszych mistrzów
 
