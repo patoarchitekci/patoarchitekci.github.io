@@ -111,9 +111,9 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10.2024
 
-➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12.2024
-
 ➡️ [Observability](#observability) - 18.11, 20.11.2024
+
+➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12.2024
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - termin w drodze
 
