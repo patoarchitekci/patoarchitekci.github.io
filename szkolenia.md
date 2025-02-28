@@ -107,13 +107,13 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Modelowanie Danych](#modelowanie-danych) - 15.10.2024
+➡️ [Observability](#observability) - 01.04, 02.04.2025
 
-➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - 22.10.2024
+➡️ [Architektura 101](#architektura-101) - 13.05, 14.05, 20.05, 21.05.2025
 
-➡️ [Observability](#observability) - 18.11, 20.11.2024
+➡️ [Modelowanie Danych](#modelowanie-danych) - termin w drodze
 
-➡️ [Architektura 101](#architektura-101) - 03.12, 04.12, 10.12, 11.12.2024
+➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - termin w drodze
 
 ➡️ [Azure Container Apps Masterclass](#azure-container-apps-masterclass) - termin w drodze
 
@@ -122,43 +122,11 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 ➡️ [Kubernetes the Hard Way](#kubernetes-the-hard-way) - termin w drodze
 
 ---
-#### Modelowanie Danych
-
-> (1799 zł)
-
-**Prowadzący**: Szymon Warda
-
-**Daty**: 15.10.2024
-
-Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. W tym kursie Szymon pokaże, **jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów.**
-
-Dowiesz się, **jak projektować bazy danych, które są nie tylko wydajne, ale również łatwe w utrzymaniu i rozbudowie.** Szymon podzieli się sprawdzonymi technikami normalizacji, denormalizacji, oraz projektowania schematów, które pomogą Ci wyeliminować redundancję i zapewnić integralność danych w twoich aplikacjach.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/modelowanie-danych)
-
----
-#### Azure Networking Masterclass
-
-> (1799 zł)
-
-**Prowadzący**: Łukasz Kałużny
-
-**Daty**: 22.10.2024
-
-Zdobądź głębokie zrozumienie sieci w Azure. **Od teorii do praktycznych zastosowań – wszystko, co musisz wiedzieć, by skutecznie zarządzać siecią.** 
-
-W tym kursie nauczysz się konfigurować, zarządzać i optymalizować sieć w Azure, wykorzystując najnowsze narzędzia i technologie. 
-
-Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz zaawansowane funkcje bezpieczeństwa**, które są kluczowe dla każdego administratora, DevOps i architekta rozwiązań w chmurze.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-networking-masterclass)
-
----
 #### Observability
 
 **Prowadzący**: Szymon Warda
 
-**Daty**:  18.11.2024, 20.11.2024
+**Daty**:  01.04.2025, 02.04.2025
 
 Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
 
@@ -174,7 +142,7 @@ Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci 
 
 **Prowadzący**: Łukasz Kałużny
 
-**Daty**: 03.12, 04.12, 10.12, 11.12 *(po 4 godzinny)* 2024
+**Daty**: 13.05, 14.05, 20.05, 21.05 *(po 4 godzinny)* 2025
 
 Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
 
@@ -185,6 +153,38 @@ Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na
 **UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
+
+---
+#### Modelowanie Danych
+
+> (1799 zł)
+
+**Prowadzący**: Szymon Warda
+
+**Daty**: termin w drodze
+
+Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. W tym kursie Szymon pokaże, **jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów.**
+
+Dowiesz się, **jak projektować bazy danych, które są nie tylko wydajne, ale również łatwe w utrzymaniu i rozbudowie.** Szymon podzieli się sprawdzonymi technikami normalizacji, denormalizacji, oraz projektowania schematów, które pomogą Ci wyeliminować redundancję i zapewnić integralność danych w twoich aplikacjach.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/modelowanie-danych)
+
+---
+#### Azure Networking Masterclass
+
+> (1799 zł)
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: termin w drodze
+
+Zdobądź głębokie zrozumienie sieci w Azure. **Od teorii do praktycznych zastosowań – wszystko, co musisz wiedzieć, by skutecznie zarządzać siecią.** 
+
+W tym kursie nauczysz się konfigurować, zarządzać i optymalizować sieć w Azure, wykorzystując najnowsze narzędzia i technologie. 
+
+Kurs obejmuje tematy takie jak **wirtualne sieci, subnety, VPN, routingu oraz zaawansowane funkcje bezpieczeństwa**, które są kluczowe dla każdego administratora, DevOps i architekta rozwiązań w chmurze.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/azure-networking-masterclass)
 
 ---
 #### Azure Container Apps Masterclass
