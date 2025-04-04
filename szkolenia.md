@@ -107,9 +107,9 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Observability](#observability) - 01.04, 02.04.2025
-
 ➡️ [Architektura 101](#architektura-101) - 13.05, 14.05, 20.05, 21.05.2025
+
+➡️ [Observability](#observability) - 19.05, 20.05.2025
 
 ➡️ [Modelowanie Danych](#modelowanie-danych) - termin w drodze
 
@@ -120,19 +120,6 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 ➡️ [Azure AKS Masterclass](#azure-aks-masterclass) - termin w drodze
 
 ➡️ [Kubernetes the Hard Way](#kubernetes-the-hard-way) - termin w drodze
-
----
-#### Observability
-
-**Prowadzący**: Szymon Warda
-
-**Daty**:  01.04.2025, 02.04.2025
-
-Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
-
-Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
 
 ---
 
@@ -154,6 +141,19 @@ Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
 
+---
+
+#### Observability
+
+**Prowadzący**: Szymon Warda
+
+**Daty**:  19.05.2025, 20.05.2025
+
+Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
+
+Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
 ---
 #### Modelowanie Danych
 
