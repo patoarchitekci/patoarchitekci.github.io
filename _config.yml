@@ -46,6 +46,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jemoji
+  - jekyll-redirect-from
 
 paginate: 5
 paginate_path: "/page/:num"
