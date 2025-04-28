@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jane's Content Viewer</title>
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.tailwindcss.com?v=4.0.0-alpha.1"></script>
+
+  <!-- Alpine.js CDN -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+
+  <!-- Highlight.js official CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
+  <!-- Marked.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  
+  <!-- Add some additional styles -->
+  <style>
+    pre {
+      position: relative;
+      border-radius: 0.375rem;
+      margin: 1rem 0;
+    }
+    
+    pre code {
+      display: block;
+      overflow-x: auto;
+      padding: 1rem;
+      background: #282c34;
+      border-radius: 0.375rem;
+      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    
+    .copy-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .copy-button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body class="bg-zinc-100 antialiased">
+  <div x-data="contentViewer()" class="min-h-screen flex justify-center">
+    <div class="container max-w-7xl mx-auto py-8 px-4">
+      <!-- Header -->
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold text-center text-zinc-800">Jane's Content Viewer</h1>
+      </header>
+
+      <!-- Content -->
+      <div x-show="!loading && !error" class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+        <div x-html="content" class="max-w-none text-zinc-700 leading-relaxed [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:mb-4 [&>h1]:mt-6 [&>h2]:text-xl [&>h2]:font-semibold [&>h2]:mb-3 [&>h2]:mt-5 [&>h3]:text-lg [&>h3]:font-medium [&>h3]:mb-2 [&>h3]:mt-4 [&>p]:mb-4 [&>ul]:list-disc [&>ul]:pl-5 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:pl-5 [&>ol]:mb-4 [&>li]:mb-1 [&>a]:text-blue-600 [&>a]:underline [&>a]:hover:text-blue-800 [&>a]:transition-colors [&>blockquote]:pl-4 [&>blockquote]:border-l-4 [&>blockquote]:border-zinc-300 [&>blockquote]:italic [&>blockquote]:my-4 [&>pre]:my-4 [&>img]:max-w-full [&>img]:rounded">
+          <!-- Markdown content will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div x-show="loading" class="text-center py-12">
+        <div class="inline-block animate-spin h-8 w-8 border-4 border-zinc-300 border-t-zinc-600 rounded-full"></div>
+        <p class="mt-4 text-zinc-600">Loading content...</p>
+      </div>
+
+      <!-- Error State -->
+      <div x-show="error" class="bg-red-50 border border-red-200 text-red-700 px-6 py-8 rounded-lg text-center">
+        <p class="text-lg font-medium">Unable to load content</p>
+        <p class="mt-2" x-text="errorMessage"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function contentViewer() {
+      return {
+        content: '',
+        loading: true,
+        error: false,
+        errorMessage: '',
+
+        init() {
+          this.fetchContent();
+        },
+        
+        setupCodeCopyButtons() {
+          document.querySelectorAll('pre code').forEach((codeBlock) => {
+            // Create the copy button
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            
+            // Add the copy button to the <pre> tag
+            const pre = codeBlock.parentNode;
+            pre.style.position = 'relative';
+            pre.appendChild(copyButton);
+            
+            // Add click handler
+            copyButton.addEventListener('click', () => {
+              const code = codeBlock.textContent;
+              navigator.clipboard.writeText(code).then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                  copyButton.textContent = 'Copy';
+                }, 2000);
+              });
+            });
+          });
+        },
+
+        fetchContent() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const interactionId = urlParams.get('id');
+
+          if (!interactionId) {
+            this.error = true;
+            this.errorMessage = 'No interaction ID provided. Use ?id=your-interaction-id in the URL.';
+            this.loading = false;
+            return;
+          }
+
+          const url = `https://patodeepresearch.blob.core.windows.net/deepresearch/${interactionId}.md`;
+
+          fetch(url)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Failed to load content (${response.status} ${response.statusText})`);
+              }
+              return response.text();
+            })
+            .then(markdown => {
+              try {
+                // Configure marked renderer for better links and code blocks
+                const renderer = new marked.Renderer();
+                
+                renderer.link = function(href, title, text) {
+                  return `<a href="${href}" title="${title || ''}" target="_blank" rel="noopener" class="underline text-blue-600 hover:text-blue-800">${text}</a>`;
+                };
+                
+                // Use a simple code block renderer that doesn't rely on highlight.js being available yet
+                renderer.code = function(code, language) {
+                  return `<pre><code class="language-${language || 'plaintext'}">${code}</code></pre>`;
+                };
+                
+                marked.setOptions({
+                  renderer: renderer,
+                  gfm: true,
+                  breaks: false,
+                  langPrefix: 'language-'
+                });
+                
+                this.content = marked.parse(markdown);
+                this.loading = false;
+                
+                // Initialize syntax highlighting after content is loaded
+                // Use setTimeout to ensure DOM is updated before we try to highlight
+                setTimeout(() => {
+                  // Use the hljs global variable directly as recommended in the docs
+                  if (typeof hljs !== 'undefined') {
+                    hljs.highlightAll();
+                    this.setupCodeCopyButtons();
+                  } else {
+                    console.error('highlight.js is not available');
+                  }
+                }, 100);
+              } catch (error) {
+                console.error('Error processing markdown:', error);
+                this.error = true;
+                this.errorMessage = `Error processing content: ${error.message}`;
+                this.loading = false;
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching content:', error);
+              this.error = true;
+              this.errorMessage = error.message;
+              this.loading = false;
+            });
+        }
+      };
+    }
+  </script>
+</body>
+</html> 
