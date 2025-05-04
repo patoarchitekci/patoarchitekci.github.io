@@ -1,0 +1,4 @@
+pyairtable
+requests
+jinja2
+python-dotenv 

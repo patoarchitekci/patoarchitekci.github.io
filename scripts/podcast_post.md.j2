@@ -1,0 +1,58 @@
+---
+layout: post
+title: '{{ episode.title | escape }}'
+date: {{ episode.date }} 08:00:00 +0200
+description: {# TODO: Add description field to Airtable or generate dynamically? #}
+
+episode: "{{ episode.episode_number }}"
+tags: [{{ tags | map('tojson') | join(', ') }}]
+spreaker: {{ episode.spreaker_id }}
+apple: {{ episode.apple_id }}
+spotify: {{ episode.spotify_url }}
+youtube: {{ episode.youtube_url }}
+newsletter: |
+  Cześć! 👋 ✨
+  
+  {{ episode.intro | replace('\n', '\n  ') | default('', true) }}
+  
+  {{ episode.newsletter | replace('\n', '\n  ') | default('', true) }}
+  
+  ## Odcinek na stronie i materiały do niego ⬇️
+  
+  ➡️ [Odsłuchaj na stronie](https://patoarchitekci.io/{{ episode.episode_number }})
+  ➡️ [Spotify]({{ episode.spotify_url | default('#', true) }})
+  ➡️ [Apple Podcasts]({{ episode.apple_id | default('#', true) }})
+  ➡️ [YouTube]({{ episode.youtube_url | default('#', true) }})
+  
+  ## Short & Sweet
+  {# TODO: Add logic for Szymon/Lukasz links if available and needed #}
+  {# Example: Check if fields exist #}
+  {% if episode['Link_Name (from Szymon_Link)'] and episode['Link (from Szymon_Link)'] %}
+  ### Szymon poleca: [{{ episode['Link_Name (from Szymon_Link)'] | first | escape }}]({{ episode['Link (from Szymon_Link)'] | first }})
+  {{ episode['Link_Comment (from Szymon_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
+  {% endif %}
+  {% if episode['Link_Name (from Lukasz_Link)'] and episode['Link (from Lukasz_Link)'] %}
+  ### Łukasz poleca: [{{ episode['Link_Name (from Lukasz_Link)'] | first | escape }}]({{ episode['Link (from Lukasz_Link)'] | first }})
+  {{ episode['Link_Comment (from Lukasz_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
+  {% endif %}
+
+  ### 🤝 Dołącz do Discord 👉 [https://discord.gg/78zPcEaP22](https://discord.gg/78zPcEaP22)
+  
+  ### 🏢 Patron odcinka
+  Słuchasz Patoarchitektów dzięki PROTOPII – firmie, w której Łukasz i Szymon działają na co dzień, wspierając zespoły IT na każdym etapie: od projektowania, przez wdrożenia i migracje, aż po optymalizację i zabezpieczenia. Oferujemy też mentoring i szkolenia dostosowane do potrzeb każdej firmy, niezależnie od wielkości. Sprawdź nas: [protopia.tech](https://protopia.tech/)
+  
+  PS. Masz pytania? Pisz śmiało po drugiej stronie to nie bot na bazie GPT czy Claude 😎
+---
+{{ episode.intro | default('', true) }}
+
+Słuchasz Patoarchitektów dzięki PROTOPII – firmie, w której Łukasz i Szymon działają na co dzień, wspierając zespoły IT na każdym etapie: od projektowania, przez wdrożenia i migracje, aż po optymalizację i zabezpieczenia. Oferujemy też mentoring i szkolenia dostosowane do potrzeb każdej firmy, niezależnie od wielkości. Sprawdź nas: [protopia.tech](https://protopia.tech/)
+
+Discord 👉 [https://discord.gg/78zPcEaP22](https://discord.gg/78zPcEaP22)
+
+Linki i ciekawe znaleziska:
+
+{{ links_markdown | default('Brak linków.', true) }}
+
+### Transkrypcja
+
+{{ episode.transcription | default('Transkrypcja wkrótce.', true) }} 
