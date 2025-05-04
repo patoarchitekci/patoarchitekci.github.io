@@ -288,23 +288,17 @@ def main():
         logger.error("Failed to save markdown file. Exiting.")
         sys.exit(1)
         
-    generated_files = [markdown_filepath] # Start list of files for output
-    
     # Download and save images
     episode_num = episode_fields.get('episode_number')
     if episode_num:
         # Square Image (og_square)
         og_square_list = episode_fields.get('og_square', [])
         square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
-        if square_filepath:
-            generated_files.append(square_filepath)
         # Warning logged within download_and_save_image if og_square_list is empty/invalid
 
         # Portrait Image (og_portrait)
         og_portrait_list = episode_fields.get('og_portrait', [])
         portrait_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-portrait")
-        if portrait_filepath:
-            generated_files.append(portrait_filepath)
         # Warning logged within download_and_save_image if og_portrait_list is empty/invalid
     else:
         logger.error("Cannot download images, episode number is missing.")
@@ -312,9 +306,6 @@ def main():
 
     # 7. Update Airtable
     update_airtable_published_flag(airtable_api, episode_data['id'])
-
-    # 8. Output File Paths for GitHub Action
-    print(" ".join(generated_files)) # Print paths space-separated
 
     logger.info(f"Successfully processed episode #{args.episode_number}.")
 
