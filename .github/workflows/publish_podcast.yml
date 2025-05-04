@@ -43,7 +43,7 @@ jobs:
         with:
           # Add the directories containing the generated files
           add: '_posts/ assets/img/'
-          commit_message: 'Publish episode ${{ github.event.inputs.episode_number }}'
+          message: 'Publish episode ${{ github.event.inputs.episode_number }}'
           default_author: github_actions # Use the default GitHub Actions bot user
           # Ensure pushing to the correct branch (default is usually the branch the workflow runs on)
           # push: 'true' # Default is true, explicitly setting for clarity if needed
