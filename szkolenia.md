@@ -113,6 +113,8 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [GitHub Actions w Praktyce](#github-actions-w-praktyce) - 16.06, 17.06.2025
 
+➡️ [Model Context Protocol (MCP) Masterclass](#model-context-protocol-mcp-masterclass) - 24.06.2025
+
 ➡️ [Modelowanie Danych](#modelowanie-danych) - termin w drodze
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - termin w drodze
@@ -170,6 +172,21 @@ Intensywne, dwudniowe szkolenie w formie praktycznego warsztatu (90% praktyki). 
 Szymon pokaże Ci nie tylko "jak zrobić", ale także "dlaczego tak robić i jak nie robić" - dzięki czemu unikniesz typowych pułapek i błędów popełnianych przez początkujących użytkowników GitHub Actions.
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/github-actions-w-praktyce)
+
+---
+#### Model Context Protocol (MCP) Masterclass
+
+> (1799 zł)
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: 24.06.2025
+
+Podczas tego intensywnego szkolenia nauczysz się praktycznej implementacji Model Context Protocol (MCP) w rzeczywistych zastosowaniach biznesowych. MCP to nowy standard komunikacji między modelami AI a zewnętrznymi źródłami danych i narzędziami, który ma szansę stać się kluczowym protokołem w świecie technologii. Zdobędziesz konkretne narzędzia do tworzenia interoperacyjnych rozwiązań gotowych do współpracy z najnowszymi modelami AI.
+
+Warsztaty skupiają się na budowaniu działających implementacji, poznawaniu rozwiązań typowych problemów technicznych i opanowaniu wzorców projektowych specyficznych dla tego protokołu.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/model-context-protocol-mcp-masterclass)
 
 ---
 #### Modelowanie Danych
