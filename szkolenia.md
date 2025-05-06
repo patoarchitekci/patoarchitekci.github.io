@@ -111,6 +111,8 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ➡️ [Observability](#observability) - 19.05, 20.05.2025
 
+➡️ [GitHub Actions w Praktyce](#github-actions-w-praktyce) - 16.06, 17.06.2025
+
 ➡️ [Modelowanie Danych](#modelowanie-danych) - termin w drodze
 
 ➡️ [Azure Networking Masterclass](#azure-networking-masterclass) - termin w drodze
@@ -154,6 +156,21 @@ Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj na
 Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
+---
+#### GitHub Actions w Praktyce
+
+> (3398,99 zł)
+
+**Prowadzący**: Szymon Warda
+
+**Daty**: 16.06.2025, 17.06.2025
+
+Intensywne, dwudniowe szkolenie w formie praktycznego warsztatu (90% praktyki). Poznasz nie tylko podstawy, ale również zaawansowane techniki budowania pipeline'ów, zarządzania sekretami, tworzenia własnych akcji i wdrażania wielośrodowiskowych konfiguracji. Szkolenie skupia się na realnych przypadkach użycia GitHub Actions, z którymi spotkasz się w codziennej pracy deweloperskiej.
+
+Szymon pokaże Ci nie tylko "jak zrobić", ale także "dlaczego tak robić i jak nie robić" - dzięki czemu unikniesz typowych pułapek i błędów popełnianych przez początkujących użytkowników GitHub Actions.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/github-actions-w-praktyce)
+
 ---
 #### Modelowanie Danych
 
