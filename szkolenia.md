@@ -107,13 +107,13 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ### Oto kursowe patomenu
 
-➡️ [Architektura 101](#architektura-101) - 13.05, 14.05, 20.05, 21.05.2025
-
-➡️ [Observability](#observability) - 19.05, 20.05.2025
-
 ➡️ [GitHub Actions w Praktyce](#github-actions-w-praktyce) - 16.06, 17.06.2025
 
 ➡️ [Model Context Protocol (MCP) Masterclass](#model-context-protocol-mcp-masterclass) - 24.06.2025
+
+➡️ [Architektura 101](#architektura-101) - termin w drodze
+
+➡️ [Observability](#observability) - termin w drodze
 
 ➡️ [Modelowanie Danych](#modelowanie-danych) - termin w drodze
 
@@ -127,38 +127,6 @@ Jesteśmy tutaj, aby rzucić wyzwanie status quo, dając Ci narzędzia, które *
 
 ---
 
-#### Architektura 101
-
-> (3398,99 zł)
-
-**Prowadzący**: Łukasz Kałużny
-
-**Daty**: 13.05, 14.05, 20.05, 21.05 *(po 4 godzinny)* 2025
-
-Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
-
-W tym kursie Łukasz przekaże Ci nie tylko **fundamentalne zasady projektowania efektywnych systemów,** ale także pokaże, **jak teorie aplikować w codziennej pracy.** Odkryjesz, **jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT.**
-
-Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych **architecture kata**, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach.
-
-**UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
-
----
-
-#### Observability
-
-**Prowadzący**: Szymon Warda
-
-**Daty**:  19.05.2025, 20.05.2025
-
-Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
-
-Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
-
-[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
----
 #### GitHub Actions w Praktyce
 
 > (3398,99 zł)
@@ -189,6 +157,41 @@ Warsztaty skupiają się na budowaniu działających implementacji, poznawaniu r
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/model-context-protocol-mcp-masterclass)
 
 ---
+
+#### Architektura 101
+
+> (3398,99 zł)
+
+**Prowadzący**: Łukasz Kałużny
+
+**Daty**: termin w drodze
+
+Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki. 
+
+W tym kursie Łukasz przekaże Ci nie tylko **fundamentalne zasady projektowania efektywnych systemów,** ale także pokaże, **jak teorie aplikować w codziennej pracy.** Odkryjesz, **jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT.**
+
+Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych **architecture kata**, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach.
+
+**UWAGA!** To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/architektura-101)
+
+---
+
+#### Observability
+
+**Prowadzący**: Szymon Warda
+
+**Daty**: termin w drodze
+
+Naucz się, **jak monitorować systemy tak, by nie zbankrutować** – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu. 
+
+Szymon **pokieruje Cię przez labirynt narzędzi i technik,** które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, **jak implementować inteligentne systemy monitorujące,** które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT.
+
+[Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/observabiity)
+
+---
+
 #### Modelowanie Danych
 
 > (1799 zł)
@@ -264,6 +267,7 @@ To intensywne szkolenie jest przeznaczone dla tych, którzy chcą zrozumieć, ja
 Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik troubleshootingu i zabezpieczeń. Kurs dostarczy Ci **głębokiego zrozumienia procesów i najlepszych praktyk,** które będą kluczowe przy rozbudowie i zarządzaniu własnymi klastrami Kubernetes.
 
 [Sprawdź więcej szczegółów i kup >>](https://app.easycart.pl/checkout/patoarchitekci/kubernetes-the-hard-way)
+
 ---
 
 ### Poznaj naszych mistrzów
