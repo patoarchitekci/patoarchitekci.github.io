@@ -25,14 +25,19 @@ newsletter: |
   ➡️ [YouTube]({{ episode.youtube_url | default('#', true) }})
   
   ## Short & Sweet
+  
   {# TODO: Add logic for Szymon/Lukasz links if available and needed #}
   {# Example: Check if fields exist #}
   {% if episode['Link_Name (from Szymon_Link)'] and episode['Link (from Szymon_Link)'] %}
+  
   ### Szymon poleca: [{{ episode['Link_Name (from Szymon_Link)'] | first | escape }}]({{ episode['Link (from Szymon_Link)'] | first }})
+  
   {{ episode['Link_Comment (from Szymon_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
   {% endif %}
   {% if episode['Link_Name (from Lukasz_Link)'] and episode['Link (from Lukasz_Link)'] %}
+
   ### Łukasz poleca: [{{ episode['Link_Name (from Lukasz_Link)'] | first | escape }}]({{ episode['Link (from Lukasz_Link)'] | first }})
+  
   {{ episode['Link_Comment (from Lukasz_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
   {% endif %}
 
