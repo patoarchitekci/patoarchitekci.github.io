@@ -4,6 +4,8 @@ import argparse
 import datetime
 import logging
 import os
+import random
+import re
 import sys
 
 from dotenv import load_dotenv
@@ -47,6 +49,11 @@ def determine_link_order(date_str):
         return ['lukasz', 'szymon']
     else:  # Nieparzysty tydzień
         return ['szymon', 'lukasz']
+
+def get_random_emoji():
+    """Zwraca losowe emoji dla social media post"""
+    emojis = ["🔗", "📝", "🚀", "💡", "🎯", "🛠️", "📊", "🌟", "🔥", "⚡", "🎨", "📱", "💻", "🔧", "📚"]
+    return random.choice(emojis)
 
 # --- Airtable Functions ---
 def fetch_newsletter_data(api: Api, newsletter_id: int) -> dict | None:
@@ -167,6 +174,7 @@ def fetch_links_data(api: Api, lukasz_link_ids: list, szymon_link_ids: list) -> 
 # --- File Operations ---
 NEWSLETTERS_DIR = "_newsletters"
 ASSETS_IMG_DIR = "assets/img/mail"
+SOCIAL_POSTS_DIR = "_social_posts"
 
 def download_and_save_image(attachment_list: list, target_dir: str, base_filename: str) -> str | None:
     """Pobiera obrazek z Airtable i zapisuje z nazwą YYYY-MM-DD-person.ext"""
@@ -273,6 +281,133 @@ def save_markdown_file(content: str, newsletter_fields: dict) -> str | None:
     except Exception as e:
         logger.error(f"Error saving newsletter file: {e}", exc_info=True)
         return None
+
+def clean_markdown_for_social(text: str) -> str:
+    """Usuwa formatowanie markdown i dostosowuje do social media"""
+    if not text:
+        return text
+    
+    # Usuń bold/italic
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)  # **bold**
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)      # *italic*
+    text = re.sub(r'_([^_]+)_', r'\1', text)        # _italic_
+    
+    # Usuń linki markdown [text](url) - zostaw tylko tekst
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+    
+    # Usuń nagłówki ### ## # ale dodaj puste linie przed i po
+    text = re.sub(r'^(#{1,6}\s*)', r'\n\1', text, flags=re.MULTILINE)  # Dodaj pustą linię przed nagłówkiem
+    text = re.sub(r'^#{1,6}\s*(.+)$', r'\1\n', text, flags=re.MULTILINE)  # Usuń # i dodaj pustą linię po
+    
+    # Zamień bullet points na emoji
+    text = re.sub(r'^[-•]\s*', '🔸 ', text, flags=re.MULTILINE)
+    
+    # Usuń cytaty >
+    text = re.sub(r'^>\s*', '', text, flags=re.MULTILINE)
+    
+    # Usuń podwójne puste linie
+    text = re.sub(r'\n\n\n+', '\n\n', text)
+    
+    return text.strip()
+
+def generate_social_posts(links: dict, newsletter_fields: dict) -> list:
+    """Generuje posty do social media z linków newslettera"""
+    posts = []
+    newsletter_date = newsletter_fields.get('Date')
+    newsletter_id = newsletter_fields.get('Id')
+    
+    if not newsletter_date or not newsletter_id:
+        logger.error("Newsletter date or ID missing. Cannot generate social posts.")
+        return posts
+    
+    for person, link_data in links.items():
+        if not link_data:
+            continue
+            
+        # Określ pełną nazwę osoby
+        person_name = 'Łukasz' if person == 'lukasz' else 'Szymon'
+        
+        # Losowe emoji
+        emoji = get_random_emoji()
+        
+        # Tytuł postu
+        post_title = f"{emoji} {link_data['name']} od {person_name}"
+        
+        # Treść postu - tytuł + treść
+        post_content = f"{emoji} {link_data['name']} od {person_name}\n\n"
+        post_content += clean_markdown_for_social(link_data['comment'])
+        post_content += f"\n\n🔗 {link_data['url']}"
+        post_content += "\n\n📬 To fragment z ostatniego newslettera Patoarchitekci! Zapisz się na https://patoarchitekci.io/"
+        
+        # Dane postu
+        post_data = {
+            'title': post_title,
+            'content': post_content,
+            'date': newsletter_date,
+            'person': person,
+            'person_name': person_name,
+            'newsletter_id': newsletter_id,
+            'original_link': link_data['url'],
+            'image_url': f"https://patoarchitekci.io/assets/img/mail/{newsletter_date}-{person}.{link_data['image_ext']}" if link_data['image_ext'] else None,
+            'image_ext': link_data['image_ext']
+        }
+        
+        posts.append(post_data)
+        
+    logger.info(f"Generated {len(posts)} social media posts")
+    return posts
+
+def save_social_posts(posts: list) -> list:
+    """Zapisuje posty social media do plików markdown"""
+    saved_files = []
+    
+    if not posts:
+        logger.info("No social posts to save.")
+        return saved_files
+    
+    os.makedirs(SOCIAL_POSTS_DIR, exist_ok=True)
+    
+    for i, post in enumerate(posts, 1):
+        try:
+            # Nazwa pliku: YYYY-MM-DD-newsletter-ID-person-N.md
+            filename = f"{post['date']}-{post['newsletter_id']}-{post['person']}-{i}.md"
+            filepath = os.path.join(SOCIAL_POSTS_DIR, filename)
+            
+            # Front matter
+            front_matter = f"""---
+layout: post
+title: "{post['title']}"
+date: {post['date']} 08:00:00 +0200
+person: {post['person']}
+person_name: {post['person_name']}
+newsletter_id: {post['newsletter_id']}
+original_link: {post['original_link']}
+"""
+            
+            if post['image_url']:
+                front_matter += f"""image_url: {post['image_url']}
+image_ext: {post['image_ext']}
+"""
+            
+            front_matter += "---\n\n"
+            
+            # Pełna treść pliku
+            full_content = front_matter + post['content']
+            
+            logger.info(f"Saving social post to: {filepath}")
+            
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(full_content)
+                
+            saved_files.append(filepath)
+            logger.info(f"Social post saved: {filename}")
+            
+        except Exception as e:
+            logger.error(f"Error saving social post {i}: {e}", exc_info=True)
+            continue
+    
+    logger.info(f"Successfully saved {len(saved_files)} social posts")
+    return saved_files
 
 # --- Markdown Generation ---
 TEMPLATE_FILENAME = "newsletter_post.md.j2"
@@ -394,6 +529,12 @@ def main():
     if not markdown_filepath:
         logger.error("Failed to save newsletter file.")
         sys.exit(1)
+
+    # Generuj posty social media
+    social_posts = generate_social_posts(links, newsletter_fields)
+    if social_posts:
+        saved_social_files = save_social_posts(social_posts)
+        logger.info(f"Generated {len(saved_social_files)} social media posts")
 
     logger.info(f"Successfully processed newsletter #{args.newsletter_id}.")
 

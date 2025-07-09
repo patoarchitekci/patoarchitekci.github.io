@@ -1,0 +1,39 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:media="http://search.yahoo.com/mrss/">
+    
+  <channel>
+    <title>Patoarchitekci Social Media Posts</title>
+    <description>Automatyczne posty na social media z linków z newslettera</description>
+    <link>{{ site.url }}/social</link>
+    <atom:link href="{{ site.url }}/social.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <language>pl-PL</language>
+    
+    {% for post in site.social_posts reversed %}
+    <item>
+      <title>{{ post.title | xml_escape }}</title>
+      <link>{{ post.original_link }}</link>
+      <guid isPermaLink="false">{{ site.url }}{{ post.url }}</guid>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      
+      <description><![CDATA[
+        {{ post.content | markdownify }}
+      ]]></description>
+      
+      <content:encoded><![CDATA[
+        {{ post.content | markdownify }}
+      ]]></content:encoded>
+      
+      {% if post.image_url %}
+      <media:content url="{{ post.image_url }}" type="image/{{ post.image_ext }}" />
+      {% endif %}
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

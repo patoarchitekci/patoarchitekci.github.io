@@ -57,6 +57,9 @@ collections:
     permalink: /newsletter/:title/
   news:
     output: false
+  social_posts:
+    output: false
+    permalink: /social/:title/
 
 defaults:
   - scope:
