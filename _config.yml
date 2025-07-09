@@ -52,6 +52,9 @@ paginate: 5
 paginate_path: "/page/:num"
 
 collections:
+  newsletters:
+    output: false
+    permalink: /newsletter/:title/
   news:
     output: false
 

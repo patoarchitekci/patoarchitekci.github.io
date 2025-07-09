@@ -1,0 +1,34 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    
+  <channel>
+    <title>PatoArchitekci Newsletter</title>
+    <description>Cotygodniowy newsletter z ciekawymi linkami od Łukasza i Szymona</description>
+    <link>{{ site.url }}/newsletter</link>
+    <atom:link href="{{ site.url }}/newsletter.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+    <language>pl-PL</language>
+    
+    {% for newsletter in site.newsletters reversed %}
+    <item>
+      <title>{{ newsletter.title | xml_escape }}</title>
+      <link>{{ site.url }}{{ newsletter.url }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ newsletter.url }}</guid>
+      <pubDate>{{ newsletter.date | date_to_rfc822 }}</pubDate>
+      
+      <description><![CDATA[
+        {{ newsletter.content | truncatewords: 50 | markdownify }}
+      ]]></description>
+      
+      <content:encoded><![CDATA[
+        {{ newsletter.content | markdownify }}
+      ]]></content:encoded>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

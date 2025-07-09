@@ -1,0 +1,51 @@
+name: Publish Newsletter
+
+on:
+  workflow_dispatch:
+    inputs:
+      newsletter_id:
+        description: 'Newsletter ID from Airtable'
+        required: true
+        type: number
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Publish newsletter
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_NEWSLETTER_BASE_ID: ${{ secrets.AIRTABLE_NEWSLETTER_BASE_ID }}
+          AIRTABLE_EPISODES_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+        run: |
+          python scripts/publish_newsletter.py --newsletter-id ${{ inputs.newsletter_id }}
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _newsletters/ assets/img/mail/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Publish newsletter #${{ inputs.newsletter_id }}
+
+            🤖 Generated with [Claude Code](https://claude.ai/code)
+
+            Co-Authored-By: Claude <noreply@anthropic.com>"
+            git push
+          fi

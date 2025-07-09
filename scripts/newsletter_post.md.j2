@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Pato Short Mail #{{ newsletter.Id }}"
+date: {{ newsletter.Date }} 08:00:00 +0200
+newsletter_id: {{ newsletter.Id }}
+{% if recommended_episode %}
+recommended_episode: {{ recommended_episode.episode_number }}
+{% endif %}
+---
+
+{{ newsletter.Intro | default('', true) }}
+
+{% for person in link_order %}
+{% if links[person] %}
+## {{ 'Łukasz' if person == 'lukasz' else 'Szymon' }}: [{{ links[person].name }}]({{ links[person].url }})
+
+{% if links[person].image_path %}
+![{{ links[person].name }}]({{ site.baseurl }}/assets/img/mail/{{ newsletter.Date }}-{{ person }}.{{ links[person].image_ext }})
+{% endif %}
+
+{{ links[person].comment | default('', true) }}
+
+{% endif %}
+{% endfor %}
+
+{% if recommended_episode %}
+## 📻 Polecany odcinek: #{{ recommended_episode.episode_number }}
+
+{{ newsletter.Recommended_Episode_Description | default('', true) }}
+
+**Posłuchaj odcinka:**
+{% if recommended_episode.spotify_url %}
+➡️ [Spotify]({{ recommended_episode.spotify_url }})
+{% endif %}
+{% if recommended_episode.apple_id %}
+➡️ [Apple Podcasts]({{ recommended_episode.apple_id }})
+{% endif %}
+{% if recommended_episode.youtube_url %}
+➡️ [YouTube]({{ recommended_episode.youtube_url }})
+{% endif %}
+➡️ [Strona odcinka](https://patoarchitekci.io/{{ recommended_episode.episode_number }}/)
+
+{% endif %}
+
+### 🤝 Dołącz do Discord 👉 [https://discord.gg/78zPcEaP22](https://discord.gg/78zPcEaP22)
+
+### 🏢 Patron newslettera
+Słuchasz Patoarchitektów dzięki PROTOPII – firmie, w której Łukasz i Szymon działają na co dzień, wspierając zespoły IT na każdym etapie: od projektowania, przez wdrożenia i migracje, aż po optymalizację i zabezpieczenia. Oferujemy też mentoring i szkolenia dostosowane do potrzeb każdej firmy, niezależnie od wielkości. Sprawdź nas: [protopia.tech](https://protopia.tech/)
+
+PS. Masz pytania? Pisz śmiało po drugiej stronie to nie bot na bazie GPT czy Claude 😎
