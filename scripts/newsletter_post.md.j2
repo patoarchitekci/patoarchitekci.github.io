@@ -15,7 +15,7 @@ recommended_episode: {{ recommended_episode.episode_number }}
 ## {{ 'Łukasz' if person == 'lukasz' else 'Szymon' }}: [{{ links[person].name }}]({{ links[person].url }})
 
 {% if links[person].image_path %}
-![{{ links[person].name }}](/assets/img/mail/{{ newsletter.Date }}-{{ person }}.{{ links[person].image_ext }})
+![{{ links[person].name }}]({{ site_url }}/assets/img/mail/{{ newsletter.Date }}-{{ person }}.{{ links[person].image_ext }})
 {% endif %}
 
 {{ links[person].comment | default('', true) }}

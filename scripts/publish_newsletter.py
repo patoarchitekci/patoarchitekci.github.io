@@ -315,7 +315,8 @@ def main():
         "newsletter": newsletter_fields,
         "links": links,
         "link_order": link_order,
-        "recommended_episode": recommended_episode
+        "recommended_episode": recommended_episode,
+        "site_url": "https://patoarchitekci.io"
     }
 
     # Renderuj markdown
