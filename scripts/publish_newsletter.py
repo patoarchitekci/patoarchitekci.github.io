@@ -190,10 +190,13 @@ def process_link_data(link_record: dict, person: str, newsletter_date: str) -> d
         if image_path:
             image_ext = os.path.splitext(image_path)[-1][1:]  # bez kropki
     
+    comment = fields.get('Link_Comment', '')
+    logger.info(f"RAW Link_Comment from Airtable:\n{repr(comment)}")
+    
     return {
         'url': fields.get('Link', ''),
         'name': fields.get('Link_Name', ''),
-        'comment': fields.get('Link_Comment', ''),
+        'comment': comment,
         'image_path': image_path,
         'image_ext': image_ext
     }
@@ -275,6 +278,10 @@ def main():
         
     newsletter_fields = newsletter_data.get('fields', {})
     newsletter_date = newsletter_fields.get('Date')
+    
+    # Loguj surowe dane richText z newslettera
+    logger.info(f"RAW Newsletter Intro from Airtable:\n{repr(newsletter_fields.get('Intro', ''))}")
+    logger.info(f"RAW Newsletter Recommended_Episode_Description from Airtable:\n{repr(newsletter_fields.get('Recommended_Episode_Description', ''))}")
     
     # Określ kolejność linków
     link_order = determine_link_order(newsletter_date)

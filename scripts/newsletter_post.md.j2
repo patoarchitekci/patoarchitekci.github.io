@@ -24,19 +24,23 @@ recommended_episode: {{ recommended_episode.episode_number }}
 {% endfor %}
 
 {% if recommended_episode %}
-## 📻 Polecany odcinek: #{{ recommended_episode.episode_number }}
+## 📻 Polecany odcinek: #{{ recommended_episode.episode_number }} {{ recommended_episode.title }}
 
 {{ newsletter.Recommended_Episode_Description | default('', true) }}
 
 **Posłuchaj odcinka:**
+
 {% if recommended_episode.spotify_url %}
 ➡️ [Spotify]({{ recommended_episode.spotify_url }})
+
 {% endif %}
 {% if recommended_episode.apple_id %}
 ➡️ [Apple Podcasts]({{ recommended_episode.apple_id }})
+
 {% endif %}
 {% if recommended_episode.youtube_url %}
 ➡️ [YouTube]({{ recommended_episode.youtube_url }})
+
 {% endif %}
 ➡️ [Strona odcinka](https://patoarchitekci.io/{{ recommended_episode.episode_number }}/)
 
