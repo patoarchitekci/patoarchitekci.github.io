@@ -7,8 +7,8 @@ layout: nil
     xmlns:content="http://purl.org/rss/1.0/modules/content/">
     
   <channel>
-    <title>PatoArchitekci Newsletter</title>
-    <description>Cotygodniowy newsletter z ciekawymi linkami od Łukasza i Szymona</description>
+    <title>PatoArchitekci Summer Newsletter Mail 🌞🏖️</title>
+    <description>Wakacyjny newsletter z ciekawymi linkami od Łukasza i Szymona</description>
     <link>{{ site.url }}/newsletter</link>
     <atom:link href="{{ site.url }}/newsletter.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>

@@ -13,6 +13,8 @@ import requests
 
 # --- Configuration ---
 load_dotenv()
+# Also try to load from .env.local for local testing
+load_dotenv('.env.local')
 
 AIRTABLE_API_KEY = os.getenv("AIRTABLE_API_KEY")
 AIRTABLE_NEWSLETTER_BASE_ID = os.getenv("AIRTABLE_NEWSLETTER_BASE_ID")
@@ -115,9 +117,6 @@ def fix_airtable_paragraphs(text):
     # Normalizuj line breaks
     text = text.replace('\r\n', '\n').replace('\r', '\n')
     
-    # Najpierw dodaj puste linie przed **Factor (specjalny przypadek)
-    text = text.replace('\n**Factor', '\n\n**Factor')
-    
     # Podziel na linie
     lines = text.split('\n')
     result = []
@@ -126,8 +125,14 @@ def fix_airtable_paragraphs(text):
         # Sprawdź czy trzeba dodać pustą linię PRZED obecną linią
         if i > 0 and line.strip():
             prev_line = lines[i-1].strip()
+            
             # Dodaj pustą linię przed bullet points jeśli poprzednia linia nie była pusta
             if (line.startswith('• ') or line.startswith('- ')) and prev_line and not prev_line.endswith(':'):
+                if result and result[-1] != '':
+                    result.append('')
+            
+            # Dodaj pustą linię przed bold text jeśli poprzednia linia nie była pusta i nie kończy się dwukropkiem i nie jest nagłówkiem
+            elif line.startswith('**') and prev_line and not prev_line.endswith(':') and not prev_line.startswith('#'):
                 if result and result[-1] != '':
                     result.append('')
         
@@ -136,10 +141,11 @@ def fix_airtable_paragraphs(text):
         # Dodaj pustą linię po każdej niepustej linii, jeśli następna linia też nie jest pusta
         if line.strip() and i < len(lines) - 1 and lines[i + 1].strip():
             next_line = lines[i + 1].strip()
-            # NIE dodawaj pustej linii przed headingami, listami, cytatami
+            
+            # NIE dodawaj pustej linii przed headingami, listami, cytatami, bold text
             if not (next_line.startswith('#') or next_line.startswith('*') or 
                    next_line.startswith('-') or next_line.startswith('•') or
-                   next_line.startswith('>') or next_line.startswith('**Factor')):
+                   next_line.startswith('>')):
                 result.append('')
     
     return '\n'.join(result)
