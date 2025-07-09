@@ -23,11 +23,11 @@ layout: nil
       <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
       
       <description><![CDATA[
-        {{ post.content }}
+        {{ post.content | strip_html }}
       ]]></description>
       
       <content:encoded><![CDATA[
-        {{ post.content }}
+        {{ post.content | strip_html }}
       ]]></content:encoded>
       
       {% if post.image_url %}
