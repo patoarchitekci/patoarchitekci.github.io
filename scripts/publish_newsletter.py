@@ -107,6 +107,33 @@ def fetch_link_data(api: Api, link_id: str) -> dict | None:
         logger.error(f"Error fetching link data: {e}", exc_info=True)
         return None
 
+def fix_airtable_paragraphs(text):
+    """Naprawia paragrafy z Airtable - dodaje puste linie między paragrafami"""
+    if not text:
+        return text
+    
+    # Zamień pojedyncze \n na \n\n ale tylko jeśli już nie ma \n\n
+    # Najpierw normalizuj wszystkie line breaks
+    text = text.replace('\r\n', '\n').replace('\r', '\n')
+    
+    # Podziel na linie
+    lines = text.split('\n')
+    result = []
+    
+    for i, line in enumerate(lines):
+        result.append(line)
+        
+        # Dodaj pustą linię po każdej niepustej linii, jeśli następna linia też nie jest pusta
+        if line.strip() and i < len(lines) - 1 and lines[i + 1].strip():
+            # Sprawdź czy następna linia to nie heading czy lista
+            next_line = lines[i + 1].strip()
+            if not (next_line.startswith('#') or next_line.startswith('*') or 
+                   next_line.startswith('-') or next_line.startswith('•') or
+                   next_line.startswith('>')):
+                result.append('')  # Dodaj pustą linię
+    
+    return '\n'.join(result)
+
 def fetch_links_data(api: Api, lukasz_link_ids: list, szymon_link_ids: list) -> dict:
     """Pobiera dane linków dla Łukasza i Szymona"""
     links = {'lukasz': None, 'szymon': None}
@@ -193,10 +220,14 @@ def process_link_data(link_record: dict, person: str, newsletter_date: str) -> d
     comment = fields.get('Link_Comment', '')
     logger.info(f"RAW Link_Comment from Airtable:\n{repr(comment)}")
     
+    # Napraw paragrafy z Airtable
+    comment_fixed = fix_airtable_paragraphs(comment)
+    logger.info(f"FIXED Link_Comment:\n{repr(comment_fixed)}")
+    
     return {
         'url': fields.get('Link', ''),
         'name': fields.get('Link_Name', ''),
-        'comment': comment,
+        'comment': comment_fixed,
         'image_path': image_path,
         'image_ext': image_ext
     }
@@ -280,8 +311,18 @@ def main():
     newsletter_date = newsletter_fields.get('Date')
     
     # Loguj surowe dane richText z newslettera
-    logger.info(f"RAW Newsletter Intro from Airtable:\n{repr(newsletter_fields.get('Intro', ''))}")
-    logger.info(f"RAW Newsletter Recommended_Episode_Description from Airtable:\n{repr(newsletter_fields.get('Recommended_Episode_Description', ''))}")
+    raw_intro = newsletter_fields.get('Intro', '')
+    raw_episode_desc = newsletter_fields.get('Recommended_Episode_Description', '')
+    
+    logger.info(f"RAW Newsletter Intro from Airtable:\n{repr(raw_intro)}")
+    logger.info(f"RAW Newsletter Recommended_Episode_Description from Airtable:\n{repr(raw_episode_desc)}")
+    
+    # Napraw paragrafy w polach newslettera
+    newsletter_fields['Intro'] = fix_airtable_paragraphs(raw_intro)
+    newsletter_fields['Recommended_Episode_Description'] = fix_airtable_paragraphs(raw_episode_desc)
+    
+    logger.info(f"FIXED Newsletter Intro:\n{repr(newsletter_fields['Intro'])}")
+    logger.info(f"FIXED Newsletter Recommended_Episode_Description:\n{repr(newsletter_fields['Recommended_Episode_Description'])}")
     
     # Określ kolejność linków
     link_order = determine_link_order(newsletter_date)
