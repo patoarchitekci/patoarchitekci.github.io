@@ -1,6 +1,9 @@
+name = "patoarchitekci-io"
+compatibility_date = "2024-07-23"
+pages_build_output_dir = "./_site"
+
 [build]
 command = "bundle exec jekyll build"
-cwd = "."
 
 [build.environment_variables]
 JEKYLL_ENV = "production"
