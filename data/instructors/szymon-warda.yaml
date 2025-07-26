@@ -1,17 +1,12 @@
 id: "szymon-warda"
 name: "Szymon Warda"
 slug: "szymon-warda"
-photo: "/img/instructors/szymon-warda.jpg"
+photo: "/img/instructors/szymon-warda.webp"
 photo_alt: "Szymon Warda - IT Expert i Game Developer"
 
 # Bio
-bio_short: "IT-owy Gandalf z czasów Internet Explorer 6. Ekspert w dziedzinie systemów rozproszonych i modelowania danych."
-bio_long: |
-  Szymon to ten typ IT-owca, który był w branży, zanim stało się to modne. Zaczął, gdy Internet Explorer 6 był królem przeglądarek. Jego marzenie? Stworzyć grę. I wiecie co? Zrobił to! 
-  
-  Teraz Szymon to czarodziej od systemów rozproszonych, modelowania danych, i ewolucyjnej architektury. Uwielbia dzielić się wiedzą – nie tylko z innymi IT-owcami, ale i ze swoimi dziećmi. 
-  
-  Szymon to jak Gandalf w świecie IT – przemierza krainy danych i kodów, rozświetlając je swoim doświadczeniem. Współtwórca popularnego podcastu "Patoarchitekci".
+bio_short: "- IT-owy Gandalf z czasów Internet Explorera 6. Jeśli w Twojej bazie panuje chaos, on zrobi tam porządek."
+bio_long: "Od lat wyciąga firmy z opresji przy dużym ruchu i zaraża pasją do technologii."
 
 # Kontakt i social media
 email: "szymon@wardteam.pl"

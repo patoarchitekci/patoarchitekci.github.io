@@ -14,12 +14,30 @@ title = "PatoArchitekci"
     twitter = "https://x.com/patoarchitekci"
     instagram = "https://www.instagram.com/patoarchitekci"
     
+  # Podcast platforms
+  [params.podcast]
+    youtube = "https://www.youtube.com/c/PatoArchitekci/videos"
+    spotify = "https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"
+    apple = "https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604"
+    
+  # Legal
+  [params.legal]
+    privacyPolicy = "/polityka-prywatnosci/"
+    terms = "/regulamin/"
+    
+  # Footer
+  [params.footer]
+    copyright = "© Protopia 2025"
+    
   # Szkolenia - globalne dane
   [params.trainings]
     [params.trainings.coordinator]
       name = "Mikołaj Szczerbicki"
       phone = "+48 667 013 893"
       email = "mikołaj.szczerbicki@protopia.tech"
+    [params.trainings.certificate]
+      included = true
+      description = "Oficjalne potwierdzenie zdobytych skilli"
 
 [menu]
   [[menu.main]]
