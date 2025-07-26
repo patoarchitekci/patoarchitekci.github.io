@@ -1,0 +1,51 @@
+id: "lukasz-kaluzny"
+name: "Łukasz Kałużny"
+slug: "lukasz-kaluzny"
+photo: "/img/instructors/lukasz-kaluzny.jpg"
+photo_alt: "Łukasz Kałużny - Technology Advisor"
+
+# Bio
+bio_short: "Technology Advisor i Managing Partner w Protopia. Microsoft Azure MVP i ekspert w dziedzinie chmury publicznej."
+bio_long: |
+  Łukasz to mieszanka inżyniera, architekta, konsultanta, i do tego geeka z krwi i kości. Jego pasją jest chmura publiczna i nowoczesna architektura w IT – tak, te wszystkie chmury, które dla innych są tylko mglistym snem. 
+  
+  A wiecie co? Łukasz widział Kubernetes, zanim stał się cool. W 2014 wołał do świata: "Uczcie się tego!", a świat jeszcze nie wiedział, jak bardzo ma rację. Łukasz to nie tylko Microsoft MVP w kategorii Azure, to prawdziwy wymiatacz w świecie IT. 
+  
+  Współtwórca popularnego podcastu "Patoarchitekci", gdzie wraz z Szymonem Wardą przedstawia zaawansowane tematy technologiczne w przystępny sposób.
+
+# Kontakt i social media
+email: "lukasz@protopia.tech"
+social:
+  linkedin: "https://linkedin.com/in/lukasz-kaluzny"
+  twitter: "https://twitter.com/kaluzny"
+  github: "https://github.com/lukaszkaluzny"
+
+# Specjalizacje i umiejętności
+specialties:
+  - "Cloud Architecture"
+  - "Microsoft Azure"
+  - "Kubernetes"
+  - "DevOps"
+  - "System Architecture"
+  - "CNCF Technologies"
+  - "Enterprise Solutions"
+
+# Certyfikacje i osiągnięcia
+achievements:
+  - "Microsoft Azure MVP"
+  - "Certyfikowany trener Microsoft"
+  - "Współtwórca podcastu PatoArchitekci"
+  - "Managing Partner w Protopia"
+
+# Szkolenia prowadzone
+trainings:
+  - "model-context-protocol-mcp-masterclass"
+  - "architektura-101"
+
+# Doświadczenie (lata w branży)
+experience_years: 15+
+
+# Języki
+languages:
+  - "Polski (natywny)"
+  - "Angielski (zaawansowany)"

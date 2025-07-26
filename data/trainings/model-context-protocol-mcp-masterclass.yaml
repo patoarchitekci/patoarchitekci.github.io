@@ -1,0 +1,113 @@
+id: "model-context-protocol-mcp-masterclass"
+title: "Model Context Protocol (MCP) Masterclass"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#MCP"
+  - "#AI"
+  - "#Protocols"
+  - "#TypeScript"
+  - "#Python"
+  - "#Architecture"
+
+# Treść
+description:
+  - "Model Context Protocol (MCP) to nowy standard komunikacji między modelami AI a zewnętrznymi źródłami danych i narzędziami, który ma szansę stać się kolejnym kluczowym protokołem w świecie technologii - obok HTTP API, REST API, GraphQL czy starszego SOAP."
+  - "Podczas tego intensywnego szkolenia nauczysz się praktycznej implementacji MCP w rzeczywistych zastosowaniach biznesowych. Jako inżynier otrzymasz konkretne narzędzia do tworzenia interoperacyjnych rozwiązań, które będą gotowe do współpracy z najnowszymi modelami AI, takimi jak Claude czy GPT."
+  - "MCP to nie tylko kolejna abstrakcja nad HTTP - to fundamentalnie inne podejście do projektowania API, które wymaga zrozumienia specyfiki wymiany danych z systemami AI. Podczas warsztatów zbudujesz działające implementacje, poznasz rozwiązania typowych problemów technicznych i opanujesz wzorce projektowe specyficzne dla tego protokołu."
+
+skills:
+  - "Fundamenty Model Context Protocol (MCP) - poznasz podstawowe założenia i cele protokołu"
+  - "Architektura MCP - zrozumiesz relacje między hostami, klientami i serwerami MCP"
+  - "Zasoby, narzędzia i prompty w MCP - nauczysz się projektować i implementować te elementy"
+  - "Mechanizmy transportu - poznasz różnice między STDIO, SSE i Streamable HTTP"
+  - "Tworzenie pierwszego serwera MCP - zbudujesz od podstaw własny serwer MCP"
+  - "Komunikacja JSON-RPC - zrozumiesz warstwy komunikacji w MCP"
+  - "Bezpieczeństwo serwerów MCP - poznasz najlepsze praktyki uwierzytelniania i autoryzacji"
+  - "Testowanie serwerów MCP - nauczysz się używać MCP Inspector"
+  - "Integracja z agentami AI - przetestujesz swój serwer z różnymi agentami AI"
+  - "Najlepsze praktyki MCP - dowiesz się jak projektować narzędzia zorientowane na użytkownika"
+
+modules:
+  - number: 1
+    title: "Fundamenty Model Context Protocol (MCP)"
+    description: "Podstawowe założenia i cele protokołu, który stanowi 'USB-C dla AI' i umożliwia standardową komunikację między modelami językowymi a zewnętrznymi źródłami danych"
+  - number: 2
+    title: "Architektura MCP"
+    description: "Relacje między hostami, klientami i serwerami MCP oraz kluczowe komponenty ekosystemu"
+  - number: 3
+    title: "Zasoby, narzędzia i prompty w MCP"
+    description: "Projektowanie i implementacja elementów dla maksymalnej przydatności agentów AI"
+  - number: 4
+    title: "Mechanizmy transportu"
+    description: "Różnice między STDIO, SSE i Streamable HTTP oraz implementacja odpowiedniego dla danego zastosowania"
+  - number: 5
+    title: "Tworzenie pierwszego serwera MCP"
+    description: "Budowa od podstaw własnego serwera MCP w wybranym języku programowania"
+  - number: 6
+    title: "Komunikacja JSON-RPC"
+    description: "Warstwy komunikacji w MCP i skuteczna obsługa żądań, odpowiedzi i powiadomień"
+  - number: 7
+    title: "Bezpieczeństwo serwerów MCP"
+    description: "Najlepsze praktyki uwierzytelniania, autoryzacji i ochrony przed zagrożeniami z wykorzystaniem OAuth 2.0"
+  - number: 8
+    title: "Testowanie i integracja"
+    description: "Używanie MCP Inspector, debugowanie serwerów i integracja z agentami AI takimi jak Claude Desktop"
+
+benefits:
+  - title: "Praktyczna wiedza"
+    description: "Protokół, który rewolucjonizuje sposób komunikacji AI z zewnętrznymi systemami"
+  - title: "Umiejętności implementacji"
+    description: "Projektowanie i implementacja własnych serwerów MCP"
+  - title: "Bezpieczeństwo"
+    description: "Tworzenie bezpiecznych i efektywnych narzędzi dla agentów AI"
+  - title: "Gotowe rozwiązania"
+    description: "Przykłady kodu, które możesz wykorzystać w swoich projektach"
+  - title: "Przewaga konkurencyjna"
+    description: "Znajomość technologii, która dopiero zyskuje na popularności"
+
+# Organizacja
+price_net: 1999
+price_gross: 2458.77
+currency: "PLN"
+
+dates:
+  - "2025-06-24"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Całe szkolenie prowadzone w środowisku GitHub Codespaces"
+
+participants:
+  max: 20
+  availability_note: "Ograniczona liczba miejsc dla zapewnienia jakości"
+
+# Prerequisites i przygotowanie
+prerequisites:
+  - "Podstawowa znajomość TypeScript i Python (poziom 'hello world plus')"
+  - "Umiejętność stworzenia prostego endpoint REST z bazą danych"
+  - "Konto na GitHub"
+  - "Opcjonalnie konto na OpenAI"
+  - "Visual Studio Code"
+
+# FAQ
+faq:
+  - question: "Czy potrzebuję zaawansowanej znajomości programowania?"
+    answer: "Nie, wystarczy podstawowa znajomość TypeScript i Python na poziomie 'hello world plus'. Jeśli potrafisz stworzyć prosty endpoint REST z bazą danych, masz wystarczające umiejętności."
+  - question: "Czy muszę konfigurować lokalne środowisko?"
+    answer: "Nie, całe szkolenie będzie prowadzone w środowisku GitHub Codespaces. Wszystkie narzędzia będą już przygotowane."
+  - question: "W jakich językach będziemy programować?"
+    answer: "Kod będziemy pisać głównie w TypeScript, z elementami Pythona dla implementacji agenta w oparciu o OpenAI Agents SDK."
+  - question: "Czy otrzymam materiały po szkoleniu?"
+    answer: "Tak, otrzymasz dostęp do wszystkich przykładów kodu i materiałów szkoleniowych."
+  - question: "Czy szkolenie jest nagrywane?"
+    answer: "Tak, uczestnicy otrzymują dostęp do nagrania na 30 dni po szkoleniu."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

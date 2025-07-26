@@ -1,0 +1,118 @@
+id: "architektura-101"
+title: "Architektura 101"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#Architecture"
+  - "#IT"
+  - "#Systems"
+  - "#Security"
+  - "#Kubernetes"
+  - "#Cloud"
+
+# Treść
+description:
+  - "Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki."
+  - "W tym kursie Łukasz przekaże Ci nie tylko fundamentalne zasady projektowania efektywnych systemów, ale także pokaże, jak teorie aplikować w codziennej pracy. Odkryjesz, jakie narzędzia i technologie są najbardziej efektywne w tworzeniu skalowalnych i bezpiecznych architektur IT."
+  - "Warsztaty mają charakter mocno ćwiczeniowy. Będziemy poznawać zagadnienia na bazie tak zwanych architecture kata, czyli próbach projektowania architektury i jej omawiania oraz grupowych dyskusjach."
+  - "UWAGA! To nie kolejne DNA czy szkolenie z DDD. Szkolenie skupia się na pokazaniu architektury poza kodem i wymaganiami biznesowymi. To wiedza, której brakuje, a pomaga przenieść się na kolejny poziom w projektowaniu!"
+
+skills:
+  - "Zrozumienie czym jest architektura i przejście przez style architektury"
+  - "Wzorce budowy systemów/Style architektury (modularność, komponenty)"
+  - "Charakterystyki architektury (zarządzanie, identyfikacja, zakresy)"
+  - "Architektura vs. Security - zabezpieczenia w kontekście architektury"
+  - "Architektura sieciowa 101 (LB, L7, DNS, GLB, Firewalling, segmentacja)"
+  - "Podejmowanie decyzji: Build vs. build z OSS vs. buy"
+  - "Kubernetes i CNCF - minimal valuable stack"
+  - "Praktyczne podejście do architecture kata"
+
+modules:
+  - number: 1
+    title: "Fundamenty architektury"
+    description: "Czym jest architektura? Przejście przez style architektury i podstawowe pojęcia"
+  - number: 2
+    title: "Wzorce budowy systemów"
+    description: "Style architektury, modularność, komponenty i ich praktyczne zastosowanie"
+  - number: 3
+    title: "Charakterystyki architektury"
+    description: "Zarządzanie, identyfikacja, zakresy odpowiedzialności w systemach"
+  - number: 4
+    title: "Architektura vs. Security"
+    description: "Bezpieczeństwo jako integralny element architektury systemów"
+  - number: 5
+    title: "Architektura sieciowa 101"
+    description: "Load Balancing, L7, DNS, Global Load Balancing, Firewalling, segmentacja i mikrosegmentacja"
+  - number: 6
+    title: "Build vs. buy decisions"
+    description: "Strategiczne decyzje: budowa własna vs. rozwiązania Open Source vs. gotowe produkty"
+  - number: 7
+    title: "Kubernetes i ekosystem CNCF"
+    description: "Czy Kubernetes to lekarstwo na wszystko? Minimal valuable stack w świecie CNCF"
+  - number: 8
+    title: "Architecture Kata"
+    description: "Praktyczne ćwiczenia projektowania architektury i grupowe dyskusje"
+
+benefits:
+  - title: "Praktyczne podejście"
+    description: "Ćwiczenia oparte na architecture kata - prawdziwych przypadkach projektowania"
+  - title: "Doświadczony ekspert"
+    description: "Łukasz Kałużny - architekt z wieloletnim doświadczeniem w projektach enterprise"
+  - title: "Grupowe dyskusje"
+    description: "Wymiana doświadczeń z innymi uczestnikami i wspólne rozwiązywanie problemów"
+  - title: "Wiedza poza kodem"
+    description: "Architektura systemów wykraczająca poza wymagania biznesowe i implementację"
+  - title: "Konkretne narzędzia"
+    description: "Praktyczne wskazówki dotyczące wyboru technologii i podejmowania decyzji architektonicznych"
+
+# Organizacja
+price_net: 3999
+price_gross: 4918.77
+currency: "PLN"
+
+dates:
+  - "2025-05-13"
+  - "2025-05-14"
+  - "2025-05-20"
+  - "2025-05-21"
+time: "9:30 – 13:30"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "4 spotkania, każde trwające 4 godziny"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji i dyskusji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowe doświadczenie w projektowaniu systemów IT"
+  - "Znajomość podstaw architektury aplikacji"
+  - "Doświadczenie w pracy z systemami rozproszonymi (mile widziane)"
+
+# FAQ
+faq:
+  - question: "Czy to szkolenie z DDD lub Domain-Driven Design?"
+    answer: "Nie, to nie jest szkolenie z DDD. Skupiamy się na architekturze systemów poza kodem i wymaganiami biznesowymi."
+  - question: "Jak wyglądają architecture kata?"
+    answer: "To praktyczne ćwiczenia polegające na projektowaniu architektury dla konkretnych przypadków użycia, seguito de grupowych dyskusji i analizy rozwiązań."
+  - question: "Czy szkolenie jest odpowiednie dla początkujących?"
+    answer: "Szkolenie jest skierowane do osób z podstawowym doświadczeniem w IT, które chcą pogłębić wiedzę o architekturze systemów."
+  - question: "Czy otrzymam materiały po szkoleniu?"
+    answer: "Tak, szkolenie jest nagrywane i materiały będą dostępne na naszej platformie dla uczestników."
+  - question: "Dlaczego szkolenie jest podzielone na 4 dni?"
+    answer: "Format 4 x 4 godziny pozwala na lepsze przyswojenie materiału i daje czas na przemyślenie omawianych zagadnień między sesjami."
+
+# Opinie uczestników
+testimonials:
+  - author: "Mateusz Kubaszek"
+    content: "Ostatnio po naszym Architekcie 101 chyba rozbiłem team architektów 😛 przy wdrażaniu płatności. Musieli się kajać, jak mogli zwałić tak 'prosty' temat. 🧙"
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

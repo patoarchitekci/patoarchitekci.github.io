@@ -1,0 +1,56 @@
+id: "szymon-warda"
+name: "Szymon Warda"
+slug: "szymon-warda"
+photo: "/img/instructors/szymon-warda.jpg"
+photo_alt: "Szymon Warda - IT Expert i Game Developer"
+
+# Bio
+bio_short: "IT-owy Gandalf z czasów Internet Explorer 6. Ekspert w dziedzinie systemów rozproszonych i modelowania danych."
+bio_long: |
+  Szymon to ten typ IT-owca, który był w branży, zanim stało się to modne. Zaczął, gdy Internet Explorer 6 był królem przeglądarek. Jego marzenie? Stworzyć grę. I wiecie co? Zrobił to! 
+  
+  Teraz Szymon to czarodziej od systemów rozproszonych, modelowania danych, i ewolucyjnej architektury. Uwielbia dzielić się wiedzą – nie tylko z innymi IT-owcami, ale i ze swoimi dziećmi. 
+  
+  Szymon to jak Gandalf w świecie IT – przemierza krainy danych i kodów, rozświetlając je swoim doświadczeniem. Współtwórca popularnego podcastu "Patoarchitekci".
+
+# Kontakt i social media
+email: "szymon@wardteam.pl"
+social:
+  linkedin: "https://linkedin.com/in/szymon-warda"
+  twitter: "https://twitter.com/szymwarda"
+  github: "https://github.com/szymon-warda"
+
+# Specjalizacje i umiejętności
+specialties:
+  - "NoSQL Databases"
+  - "Data Modeling"
+  - "Distributed Systems"
+  - "Evolutionary Architecture"
+  - "Game Development"
+  - "Big Data"
+  - "Performance Optimization"
+
+# Certyfikacje i osiągnięcia
+achievements:
+  - "Game Developer (publikowane gry)"
+  - "Współtwórca podcastu PatoArchitekci"
+  - "Ekspert systemów rozproszonych"
+  - "Mentor i szkoleniowiec"
+
+# Szkolenia prowadzone
+trainings:
+  - "modelowanie-danych"
+
+# Doświadczenie (lata w branży)
+experience_years: 20+
+
+# Języki
+languages:
+  - "Polski (natywny)"
+  - "Angielski (zaawansowany)"
+
+# Fun facts
+fun_facts:
+  - "Zaczął karierę w czasach Internet Explorer 6"
+  - "Stworzył własną grę komputerową"
+  - "Nazywany IT-owym Gandalfem"

@@ -1,0 +1,114 @@
+id: "modelowanie-danych"
+title: "Modelowanie Danych"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#NoSQL"
+  - "#Databases"
+  - "#Scaling"
+  - "#DataModeling"
+  - "#BigData"
+  - "#Performance"
+
+# Treść
+description:
+  - "Chcesz wiedzieć, jak prawdziwy ninja baz danych wykręca NoSQL na lewą stronę? Szymon pokaże Ci, jak zamienić ograniczenia w atuty i zaprezentuje triki, dzięki którym skalowanie horyzontalne może być prostsze niż zrobienie kawy."
+  - "Skupimy się na zaawansowanych aspektach modelowania danych i projektowaniu baz NoSQL. Przeanalizujemy różne typy baz, takie jak key-value, wide table, document, full-text search, i graph, ucząc, jak wykorzystać ich unikalne cechy."
+  - "Zajmiemy się także skalowaniem horyzontalnym i doborem klucza partycji, a także omówimy, kiedy stosować NoSQL, a kiedy lepiej się wstrzymać. Szkolenie zakończymy na omówieniu projektowania rozwiązań dla dużego ruchu internetowego i obsługi dużych zbiorów danych."
+
+skills:
+  - "Typy baz NoSQL i jak zamienić ich ograniczenia w plusy"
+  - "Projektowanie baz key-value (klucz wartość)"
+  - "Modelowanie danych w bazach wide table (szeroko kolumnowych)"
+  - "Optymalizacja baz document (dokumentowych)"
+  - "Implementacja indeksów full-text search"
+  - "Projektowanie baz graph (grafowych)"
+  - "Skalowanie horyzontalne baz danych"
+  - "Wybór odpowiedniego klucza partycji"
+  - "Projektowanie rozwiązań pod duży ruch i dziesiątki terabajtów"
+  - "Unikanie najczęstszych błędów w modelowaniu danych"
+
+modules:
+  - number: 1
+    title: "Typy baz NoSQL"
+    description: "Omówienie różnych typów baz NoSQL i jak zamienić ich ograniczenia w plusy"
+  - number: 2
+    title: "Bazy key-value"
+    description: "Projektowanie i optymalizacja baz danych typu klucz-wartość"
+  - number: 3
+    title: "Bazy wide table"
+    description: "Modelowanie danych w bazach szeroko kolumnowych"
+  - number: 4
+    title: "Bazy document"
+    description: "Projektowanie efektywnych struktur w bazach dokumentowych"
+  - number: 5
+    title: "Full-text search"
+    description: "Implementacja i optymalizacja indeksów wyszukiwania pełnotekstowego"
+  - number: 6
+    title: "Bazy graph"
+    description: "Modelowanie i zapytania w bazach grafowych"
+  - number: 7
+    title: "Skalowanie horyzontalne"
+    description: "Strategie skalowania baz danych i wybór klucza partycji"
+  - number: 8
+    title: "Projektowanie pod duży ruch"
+    description: "Rozwiązania dla dużego ruchu internetowego i obsługi terabajtów danych"
+  - number: 9
+    title: "Najczęstsze błędy"
+    description: "Analiza typowych problemów i jak ich unikać"
+
+benefits:
+  - title: "Zaawansowane techniki"
+    description: "Krwiste mięso - skupienie na zaawansowanych aspektach modelowania danych"
+  - title: "Praktyczne podejście"
+    description: "Triki i techniki ninja baz danych od doświadczonego eksperta"
+  - title: "Kompleksowe pokrycie"
+    description: "Wszystkie typy baz NoSQL: key-value, wide table, document, full-text, graph"
+  - title: "Skalowanie enterprise"
+    description: "Projektowanie rozwiązań dla dużego ruchu i dziesiątek terabajtów"
+  - title: "Unikanie pułapek"
+    description: "Poznanie najczęstszych błędów i sposób ich unikania"
+
+# Organizacja
+price_net: 1999
+price_gross: 2458.77
+currency: "PLN"
+
+dates:
+  - "2024-10-15"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Szkolenie jest nagrywane i materiały będą dostępne na platformie"
+
+participants:
+  max: 20
+  availability_note: "Ograniczona liczba miejsc"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość baz danych"
+  - "Doświadczenie w projektowaniu systemów"
+  - "Znajomość podstaw NoSQL (mile widziane)"
+
+# FAQ
+faq:
+  - question: "Czy szkolenie obejmuje również bazy SQL?"
+    answer: "Nie, szkolenie skupia się wyłącznie na bazach NoSQL i ich modelowaniu. Omówimy kiedy wybrać NoSQL zamiast SQL."
+  - question: "Czy potrzebuję doświadczenia z konkretnymi bazami NoSQL?"
+    answer: "Nie, szkolenie obejmuje różne typy baz NoSQL. Podstawowa znajomość baz danych jest wystarczająca."
+  - question: "Czy szkolenie jest nagrywane?"
+    answer: "Tak, szkolenie jest nagrywane i materiały będą dostępne na naszej platformie dla uczestników."
+  - question: "Jakie konkretne bazy będą omawiane?"
+    answer: "Omówimy różne typy: MongoDB (document), Redis (key-value), Cassandra (wide table), Elasticsearch (full-text), Neo4j (graph) i inne."
+  - question: "Czy otrzymam praktyczne przykłady kodu?"
+    answer: "Tak, szkolenie zawiera praktyczne przykłady modelowania i implementacji w różnych typach baz NoSQL."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"
