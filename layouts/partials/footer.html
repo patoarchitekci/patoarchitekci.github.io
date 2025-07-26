@@ -1,0 +1,142 @@
+<!-- ===== FOOTER SECTION ===== -->
+<footer class="bg-dark-black -mt-[2px] pb-[35px] sm:pb-[65px] relative">
+    <img src="{{ .Site.BaseURL }}img/png/footer-top-layer.png" alt="bottom-layer"
+        class="absolute -top-[93px] sm:-top-[184px] lg:-top-[296px] w-full h-[95px] sm:h-[192px] lg:h-[297px] pointer-events-none" />
+    <img src="{{ .Site.BaseURL }}img/svg/footer-right-icon.svg" alt="right-half-flower"
+        class="absolute end-0 top-[45%] md:top-[27%] max-w-[41px] sm:max-w-[45px] md:max-w-[70px] xl:max-w-[303px] pointer-events-none min-[2800px]:!right-[clamp(40px,39vw,27%)] min-[4000px]:!right-[clamp(40px,39vw,35%)]" />
+    <div
+        class="max-w-[1219px] mx-auto flex flex-wrap justify-between gap-6 max-xl:px-[30px] py-[50px] sm:py-[48.5px]">
+        {{ with .Site.Params.social.linkedin }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[20px] hover:scale-110 duration-300 transition-all ease-in-out" width="36"
+                viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M31.409 0.5C32.4404 0.5 33.4295 0.909721 34.1588 1.63903C34.8881 2.36834 35.2979 3.35749 35.2979 4.38889V31.6111C35.2979 32.6425 34.8881 33.6317 34.1588 34.361C33.4295 35.0903 32.4404 35.5 31.409 35.5H4.18674C3.15534 35.5 2.16619 35.0903 1.43688 34.361C0.707572 33.6317 0.297852 32.6425 0.297852 31.6111V4.38889C0.297852 3.35749 0.707572 2.36834 1.43688 1.63903C2.16619 0.909721 3.15534 0.5 4.18674 0.5H31.409ZM30.4367 30.6389V20.3333C30.4367 18.6522 29.7689 17.0398 28.5801 15.8511C27.3913 14.6623 25.779 13.9944 24.0979 13.9944C22.4451 13.9944 20.5201 15.0056 19.5867 16.5222V14.3639H14.1617V30.6389H19.5867V21.0528C19.5867 19.5556 20.7923 18.3306 22.2895 18.3306C23.0115 18.3306 23.7039 18.6174 24.2144 19.1279C24.7249 19.6384 25.0117 20.3308 25.0117 21.0528V30.6389H30.4367ZM7.8423 11.3111C8.70867 11.3111 9.53956 10.9669 10.1522 10.3543C10.7648 9.74171 11.109 8.91082 11.109 8.04444C11.109 6.23611 9.65063 4.75833 7.8423 4.75833C6.97077 4.75833 6.13493 5.10455 5.51866 5.72081C4.9024 6.33708 4.55618 7.17291 4.55618 8.04444C4.55618 9.85278 6.03396 11.3111 7.8423 11.3111ZM10.5451 30.6389V14.3639H5.15896V30.6389H10.5451Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.facebook }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[20px] hover:scale-110 duration-300 transition-all ease-in-out" width="36"
+                viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M35.3856 18.0439C35.3856 8.35965 27.5259 0.5 17.8417 0.5C8.1575 0.5 0.297852 8.35965 0.297852 18.0439C0.297852 26.5351 6.33294 33.6053 14.3329 35.2368V23.307H10.8242V18.0439H14.3329V13.6579C14.3329 10.2719 17.0873 7.51754 20.4733 7.51754H24.8593V12.7807H21.3505C20.3856 12.7807 19.5961 13.5702 19.5961 14.5351V18.0439H24.8593V23.307H19.5961V35.5C28.4557 34.6228 35.3856 27.1491 35.3856 18.0439Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.twitter }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[22px] hover:scale-110 duration-300 transition-all ease-in-out" width="39"
+                viewBox="0 0 39 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M30.7981 0.5H36.7206L23.7832 15.3242L39.0047 35.5H27.0879L17.7476 23.266L7.07213 35.5H1.14409L14.9808 19.6386L0.385498 0.502758H12.6057L21.0357 11.683L30.7981 0.5ZM28.7154 31.947H31.998L10.8127 3.86814H7.29281L28.7154 31.947Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.instagram }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[20px] hover:scale-110 duration-300 transition-all ease-in-out" width="35"
+                viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M10.1549 0.5H24.8549C30.4549 0.5 35.0049 5.05 35.0049 10.65V25.35C35.0049 28.0419 33.9355 30.6236 32.032 32.5271C30.1285 34.4306 27.5468 35.5 24.8549 35.5H10.1549C4.55488 35.5 0.00488281 30.95 0.00488281 25.35V10.65C0.00488281 7.95805 1.07425 5.37636 2.97775 3.47287C4.88124 1.56937 7.46294 0.5 10.1549 0.5ZM9.80488 4C8.13402 4 6.53159 4.66375 5.35011 5.84523C4.16863 7.02671 3.50488 8.62914 3.50488 10.3V25.7C3.50488 29.1825 6.32238 32 9.80488 32H25.2049C26.8757 32 28.4782 31.3363 29.6597 30.1548C30.8411 28.9733 31.5049 27.3709 31.5049 25.7V10.3C31.5049 6.8175 28.6874 4 25.2049 4H9.80488ZM26.6924 6.625C27.2725 6.625 27.8289 6.85547 28.2392 7.2657C28.6494 7.67594 28.8799 8.23234 28.8799 8.8125C28.8799 9.39266 28.6494 9.94906 28.2392 10.3593C27.8289 10.7695 27.2725 11 26.6924 11C26.1122 11 25.5558 10.7695 25.1456 10.3593C24.7353 9.94906 24.5049 9.39266 24.5049 8.8125C24.5049 8.23234 24.7353 7.67594 25.1456 7.2657C25.5558 6.85547 26.1122 6.625 26.6924 6.625ZM17.5049 9.25C19.8255 9.25 22.0511 10.1719 23.6921 11.8128C25.333 13.4538 26.2549 15.6794 26.2549 18C26.2549 20.3206 25.333 22.5462 23.6921 24.1872C22.0511 25.8281 19.8255 26.75 17.5049 26.75C15.1842 26.75 12.9586 25.8281 11.3177 24.1872C9.67675 22.5462 8.75488 20.3206 8.75488 18C8.75488 15.6794 9.67675 13.4538 11.3177 11.8128C12.9586 10.1719 15.1842 9.25 17.5049 9.25ZM17.5049 12.75C16.1125 12.75 14.7771 13.3031 13.7926 14.2877C12.808 15.2723 12.2549 16.6076 12.2549 18C12.2549 19.3924 12.808 20.7277 13.7926 21.7123C14.7771 22.6969 16.1125 23.25 17.5049 23.25C18.8973 23.25 20.2326 22.6969 21.2172 21.7123C22.2018 20.7277 22.7549 19.3924 22.7549 18C22.7549 16.6076 22.2018 15.2723 21.2172 14.2877C20.2326 13.3031 18.8973 12.75 17.5049 12.75Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.discord }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[26px] hover:scale-110 duration-300 transition-all ease-in-out" width="46"
+                viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M38.3006 3.4312C35.3304 2.04212 32.1948 1.05666 28.9738 0.5C28.5331 1.30486 28.1343 2.13294 27.7791 2.9808C24.3482 2.45268 20.8591 2.45268 17.4282 2.9808C17.0728 2.13303 16.674 1.30495 16.2334 0.5C13.0104 1.06137 9.87273 2.04916 6.89951 3.43846C0.996912 12.3592 -0.60319 21.0583 0.196861 29.634C3.65357 32.2428 7.52262 34.2269 11.6358 35.5C12.562 34.2276 13.3815 32.8777 14.0858 31.4646C12.7482 30.9543 11.4572 30.3247 10.2277 29.5831C10.5513 29.3434 10.8678 29.0964 11.1736 28.8567C14.751 30.5752 18.6557 31.4663 22.609 31.4663C26.5623 31.4663 30.4669 30.5752 34.0444 28.8567C34.3537 29.1146 34.6702 29.3616 34.9902 29.5831C33.7584 30.3259 32.465 30.9567 31.1251 31.4682C31.8284 32.8806 32.648 34.2294 33.575 35.5C37.6917 34.232 41.5637 32.2489 45.0211 29.6376C45.9598 19.6926 43.4174 11.0734 38.3006 3.4312ZM15.0992 24.36C12.8697 24.36 11.0278 22.2933 11.0278 19.7507C11.0278 17.2082 12.8057 15.1233 15.092 15.1233C17.3784 15.1233 19.2061 17.2082 19.167 19.7507C19.1279 22.2933 17.3713 24.36 15.0992 24.36ZM30.1188 24.36C27.8858 24.36 26.051 22.2933 26.051 19.7507C26.051 17.2082 27.8289 15.1233 30.1188 15.1233C32.4087 15.1233 34.2222 17.2082 34.183 19.7507C34.1439 22.2933 32.3909 24.36 30.1188 24.36Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+        {{ with .Site.Params.social.tiktok }}
+        <a href="{{ . }}" target="_blank">
+            <svg class="max-sm:max-w-[17px] hover:scale-110 duration-300 transition-all ease-in-out" width="31"
+                viewBox="0 0 31 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M24.402 5.98333C23.0732 4.46575 22.3407 2.51716 22.3409 0.5H16.3326V24.6111C16.2872 25.9162 15.7366 27.1526 14.7971 28.0596C13.8575 28.9665 12.6024 29.473 11.2965 29.4722C8.53536 29.4722 6.24091 27.2167 6.24091 24.4167C6.24091 21.0722 9.46869 18.5639 12.7937 19.5944V13.45C6.08536 12.5556 0.213135 17.7667 0.213135 24.4167C0.213135 30.8917 5.5798 35.5 11.277 35.5C17.3826 35.5 22.3409 30.5417 22.3409 24.4167V12.1861C24.7773 13.9358 27.7025 14.8746 30.702 14.8694V8.86111C30.702 8.86111 27.0465 9.03611 24.402 5.98333Z"
+                    fill="white" />
+            </svg>
+        </a>
+        {{ end }}
+    </div>
+
+    <div class="max-w-[1176px] mx-auto max-xl:px-[30px] mx-auto relative z-10">
+        <div class="flex justify-between gap-12 sm:items-start items-end pt-[28.19px] sm:pt-[102px]">
+            <div>
+                <div class="mb-[62.11px] sm:mb-[43.17px]">
+                    <a href="/">
+                        <img class="max-sm:max-w-[98px] max-sm:h-[44px]" src="{{ .Site.BaseURL }}img/svg/footer-logo.svg"
+                            alt="Pato Logo" />
+                    </a>
+                </div>
+                <ul class="gap-4 sm:hidden mb-[34.79px] flex items-center">
+                    <li>
+                        <a target="_blank" href="https://www.youtube.com/c/PatoArchitekci/videos"><img
+                                class="hover:scale-110 w-[28px] h-5 duration-300 transition-all ease-in-out"
+                                src="{{ .Site.BaseURL }}img/svg/youtube-icon.svg" alt="youtube" /></a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"><img
+                                class="hover:scale-110 size-5 duration-300 transition-all ease-in-out"
+                                src="{{ .Site.BaseURL }}img/svg/spotify-icon.svg" alt="spotify" /></a>
+                    </li>
+                    <li>
+                        <a target="_blank"
+                            href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604"><img
+                                class="hover:scale-110 size-5 duration-300 transition-all ease-in-out"
+                                src="{{ .Site.BaseURL }}img/svg/poadcast-icon.svg" alt="poadcast" /></a>
+                    </li>
+                </ul>
+                <p class="text-white text-[10px] leading-120 sm:text-base">
+                    © Protopia 2025 <br />
+                    Polityka prywatności<br />
+                    Regulamin
+                </p>
+            </div>
+            <div class="flex sm:gap-[60px]">
+                <div>
+                    <ul class="flex-col gap-6 hidden sm:flex xl:mt-2">
+                        <li>
+                            <a target="_blank" href="https://www.youtube.com/c/PatoArchitekci/videos"><img
+                                    class="hover:scale-110 duration-300 transition-all ease-in-out"
+                                    src="{{ .Site.BaseURL }}img/svg/youtube-icon.svg" alt="youtube" /></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"><img
+                                    class="hover:scale-110 duration-300 transition-all ease-in-out"
+                                    src="{{ .Site.BaseURL }}img/svg/spotify-icon.svg" alt="spotify" /></a>
+                        </li>
+                        <li>
+                            <a target="_blank"
+                                href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604"><img
+                                    class="hover:scale-110 duration-300 transition-all ease-in-out"
+                                    src="{{ .Site.BaseURL }}img/svg/poadcast-icon.svg" alt="poadcast" /></a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="text-white text-xs sm:text-base flex flex-col max-sm:max-w-[130px] font-bold">
+                    {{ range .Site.Menus.main }}
+                    <a href="{{ .URL }}">
+                        <li
+                            class="hover:text-orange duration-300 leading-180 sm:leading-200 transition-all ease-in-out uppercase">
+                            {{ .Name }}
+                        </li>
+                    </a>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <button id="backToTopBtn"
+        class="hidden fixed bottom-6 right-4 md:right-6 z-50 bg-dark-black border border-white text-white text-3xl size-10 md:size-[50px] rounded-full shadow-md hover:scale-110 transition duration-300">
+        ↑
+    </button>
+</footer>

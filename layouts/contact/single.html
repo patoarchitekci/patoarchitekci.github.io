@@ -1,0 +1,125 @@
+{{ define "main" }}
+<!-- ===== CONTACT SECTION ===== -->
+<section class="lg:pb-[448px] sm:pb-[236px] pb-[120px] px-[30px] relative ">
+    <!-- Form PART -->
+    <div id="formwrapper">
+        <h3
+            class="uppercase md:text-custom-3xl text-2xl text-orange font-semibold font-tomorrow leading-100 text-center">
+            Kontakt</h3>
+        <div class="md:mt-9 mt-6">
+            <form>
+                <div class="grid grid-cols-1 gap-5 sm:gap-[23px] max-w-[810px] mx-auto">
+                    <div>
+                        <div class="flex max-md:flex-col md:items-center gap-4 md:gap-[57px] lg:gap-[67px]">
+                            <p class="text-sm font-semibold leading-100 text-orange uppercase whitespace-nowrap">
+                                call</p>
+                            <div class="flex items-center gap-[17px] w-full">
+                                <div class="flex flex-col w-full max-w-[600px]">
+                                    <input name="phone" id="phone"
+                                        class="py-[9.25px] px-6 sm:px-[31px] font-bold outline-none max-sm:text-sm leading-100 border border-orange text-orange placeholder:text-orange w-full max-w-[600px] rounded-[30px]"
+                                        type="number" placeholder="+48 ...">
+                                    <p class="text-red text-sm text-start mt-1 hidden" id="error-phone">
+                                        Please enter a valid phone number.</p>
+                                </div>
+                                <img class="size-[30px] sm:size-[38px]" src="{{ .Site.BaseURL }}img/svg/call-icon.svg"
+                                    alt="call icon">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex max-md:flex-col md:items-center gap-4 md:gap-[44px] lg:gap-[54px]">
+                            <p class="text-sm font-semibold leading-100 text-orange uppercase whitespace-nowrap">
+                                e-mail</p>
+                            <div class="flex items-center gap-[17px] w-full">
+                                <div class="flex flex-col w-full max-w-[600px]">
+                                    <input name="email" id="email"
+                                        class="py-[9.25px] px-6 sm:px-[31px] font-bold outline-none max-sm:text-sm leading-100 border border-orange text-orange placeholder:text-orange w-full max-w-[600px] rounded-[30px]"
+                                        type="text" placeholder="kontakt@patoarchitekci.io">
+                                    <p class="text-red text-sm text-start mt-1 hidden" id="error-email">
+                                        Please enter a valid email.</p>
+                                </div>
+                                <img class="size-[30px] sm:size-[38px]" src="{{ .Site.BaseURL }}img/svg/red-mail-icon.svg"
+                                    alt="call icon">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="flex max-md:flex-col md:items-center gap-4 md:gap-[26px] lg:gap-9">
+                            <p class="text-sm font-semibold leading-100 text-orange uppercase whitespace-nowrap">
+                                message</p>
+                            <div class="flex items-center gap-[17px] w-full">
+                                <div class="flex flex-col w-full max-w-[600px]">
+                                    <input name="name" id="name"
+                                        class="py-[10.5px] px-6 sm:px-[31px] font-medium text-xs sm:text-sm outline-none leading-100 border border-orange text-lightGray placeholder:text-lightGray w-full max-w-[600px] rounded-[30px]"
+                                        type="text" placeholder="Name">
+                                    <p class="text-red text-sm text-start mt-1 hidden"
+                                        id="error-name">
+                                        Please enter your name.</p>
+                                </div>
+                                <div class="size-[30px] min-w-[30px] sm:size-[38px]"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="max-w-[600px] w-full md:mx-auto mt-[13px]">
+                    <textarea id="message" name="message"
+                        class="py-5 px-[31px] h-[180px] sm:h-[247px] resize-none w-full outline-none rounded-[16px] sm:rounded-[30px] border border-orange text-lightGray placeholder:text-lightGray"
+                        placeholder="Write ....."></textarea>
+                    <p class="text-red max-w-[600px] mx-auto text-sm text-start mt-1 hidden" id="error-message">
+                        Please enter your message.</p>
+                </div>
+                <div
+                    class="md:pt-6 pt-5 flex max-sm:flex-col gap-6 sm:items-center max-w-[600px] md:mx-auto justify-between">
+                    <div>
+                        <div class="flex items-center gap-[7px]">
+                            <button type="button" id="consent-toggle" class="text-white">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="1" y="1" width="16" height="16" rx="2" stroke="#FE4404"
+                                        stroke-width="2" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M14.1927 6.71929C14.2882 6.62704 14.3644 6.5167 14.4168 6.39469C14.4692 6.27269 14.4968 6.14147 14.498 6.00869C14.4991 5.87591 14.4738 5.74423 14.4235 5.62133C14.3732 5.49844 14.299 5.38679 14.2051 5.29289C14.1112 5.199 13.9996 5.12475 13.8767 5.07447C13.7538 5.02419 13.6221 4.99888 13.4893 5.00004C13.3565 5.00119 13.2253 5.02878 13.1033 5.08119C12.9813 5.1336 12.8709 5.20978 12.7787 5.30529L7.8287 10.2553L5.7077 8.13429C5.61486 8.04138 5.50462 7.96766 5.38329 7.91736C5.26196 7.86705 5.1319 7.84113 5.00056 7.84109C4.73529 7.84099 4.48084 7.94628 4.2932 8.13379C4.10556 8.3213 4.00009 8.57566 4 8.84093C3.99991 9.1062 4.10519 9.36065 4.2927 9.54829L7.0507 12.3063C7.15285 12.4085 7.27414 12.4896 7.40763 12.5449C7.54112 12.6002 7.68421 12.6287 7.8287 12.6287C7.9732 12.6287 8.11628 12.6002 8.24977 12.5449C8.38327 12.4896 8.50455 12.4085 8.6067 12.3063L14.1927 6.71929Z"
+                                        fill="CurrentColor" />
+                                </svg>
+                            </button>
+                            <span class="text-[11px] font-medium leading-100 text-dark-black">
+                                Rozporządzenie Ogólne o Ochronie Danych Osobowych
+                            </span>
+                        </div>
+                        <p id="error-consent" class="text-red max-w-[600px] mx-auto text-sm text-start mt-1 hidden">
+                            You must agree before
+                            submitting.
+                        </p>
+                    </div>
+                    <button type="submit"
+                        class="p-[11px_44px_12px_42px] hover:bg-black transition-all duration-300 bg-orange text-white font-semibold leading-100 rounded-[30px]">Send
+                        Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="successMsg" class="px-4 w-full max-w-[1200px] mx-auto left-[50%] hidden  top-0  ">
+        <div
+            class="max-w-[1192px] w-full relative h-[257px] max-[411px]:h-[286px] sm:h-[378px] max-md:px-5 flex flex-col items-center justify-center mx-auto bg-white shadow-[1px_0px_17px_#a884844f] rounded-[30px] md:rounded-[56px] lg:p-[109px_224px_86px_471px]">
+            <img class="absolute top-[2%] xl:top-[7px] max-lg:hidden left-[20%] xl:left-[280px] size-[174px]"
+                src="{{ .Site.BaseURL }}img/svg/red-flower.svg" alt="">
+            <img class="absolute max-md:top-[10%] md:bottom-[127px] left-[6%] md:left-[11%] lg:left-[230px] size-[40px] md:size-[50px]"
+                src="{{ .Site.BaseURL }}img/svg/red-star.svg" alt="">
+            <img class="absolute bottom-8 right-[37px] max-md:hidden size-[102px]"
+                src="{{ .Site.BaseURL }}img/svg/red-flower.svg" alt="">
+            <p class="max-w-[497px] text-center text-red font-semibold font-tomorrow text-2xl md:text-4xl">
+                Dziękujemy
+                <br> za subskrypcję!
+            </p>
+            <p class="md:text-sm text-xs text-red font-medium max-w-[353px] text-center mx-auto pt-5 md:pt-[34px]">
+                Sprawdź
+                skrzynkę
+                pocztową i potwierdź e-mail!
+                PS. Jeśli wiadomość nie dotarła, sprawdź folder Spam lub Oferty.</p>
+        </div>
+    </div>
+</section>
+{{ end }}

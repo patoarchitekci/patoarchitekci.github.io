@@ -1,0 +1,55 @@
+baseURL = "https://patoarchitekci.io/"
+languageCode = "pl-PL"
+title = "PatoArchitekci"
+
+[params]
+  description = "Stworzyliśmy ten podcast, bo sami szukaliśmy miejsca, które łączy wiedzę, praktykę i dystans do branży IT."
+  
+  # Social media
+  [params.social]
+    tiktok = "https://tiktok.com/patoarchitekci"
+    discord = "https://discord.com/invite/78zPcEaP22"
+    linkedin = "https://www.linkedin.com/company/patoarchitekci/"
+    facebook = "https://www.facebook.com/patoarchitekci/"
+    twitter = "https://x.com/patoarchitekci"
+    instagram = "https://www.instagram.com/patoarchitekci"
+    
+  # Szkolenia - globalne dane
+  [params.trainings]
+    [params.trainings.coordinator]
+      name = "Mikołaj Szczerbicki"
+      phone = "+48 667 013 893"
+      email = "mikołaj.szczerbicki@protopia.tech"
+
+[menu]
+  [[menu.main]]
+    name = "Gdzie słuchać"
+    url = "/#podcast"
+    weight = 1
+  [[menu.main]]
+    name = "O nas"
+    url = "/#oh-we"
+    weight = 2
+  [[menu.main]]
+    name = "Szkolenia"
+    url = "/szkolenia/"
+    weight = 3
+  [[menu.main]]
+    name = "Bezpłatna Konsultacja"
+    url = "https://bettersoftwaredesign.pl/wspolpraca/bezplatne-konsultacje"
+    weight = 4
+    [menu.main.params]
+      target = "_blank"
+  [[menu.main]]
+    name = "Kontakt"
+    url = "/kontakt/"
+    weight = 5
+
+[permalinks]
+  episodes = "/:filename/"
+  trainings = "/szkolenia/:filename/"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<!-- ===== 404 SECTION ===== -->
+<section class="pt-6 lg:pt-[50px] pb-32 sm:pb-56 lg:pb-80">
+    <div class="text-center max-w-[800px] mx-auto">
+        <div class="relative inline-block">
+            <h1
+                class="uppercase font-tomorrow font-semibold max-sm:!leading-none text-[77.5px] sm:text-[150px] xl:text-custom-7xl text-orange leading-74">
+                4<span class="inline-block relative font-tomorrow">0
+                    <img src="{{ .Site.BaseURL }}img/webp/404-tree-icon.webp" alt="tree-icon"
+                        class="absolute top-[45.3%] sm:top-[45.3%] left-[47%] transform -translate-x-1/2 -translate-y-[60%] max-w-[77px] sm:max-w-[146px] xl:max-w-[196px]" />
+
+                </span>4
+            </h1>
+        </div>
+
+        <p
+            class="font-medium text-xs md:text-lg lg:text-xl text-dark-black !leading-110 max-w-[264px] sm:max-w-[438px] mx-auto mt-7 sm:mt-5 mb-8">
+            AI stwierdziła, że tej strony nie potrzebujesz. Tak, tak, wiemy, że szukałeś strony, ale AI stwierdziła,
+            że bardziej
+            przyda Ci się jedno <br> z naszych szkoleń. <br>
+            <span class="text-orange">Zaakceptuj swój los.</span>
+        </p>
+
+        <a class="font-bold text-xs md:text-lg lg:text-xl leading-110 text-orange underline"
+            href="/szkolenia/">👉 Nasze szkolenia</a>
+    </div>
+</section>
+{{ end }}

@@ -174,4 +174,20 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/node,macos,jekyll,windows
 
+### Hugo ###
+# Generated files by Hugo
+public/
+# Hugo cache directory  
+resources/
+# Hugo build lock file
+.hugo_build.lock
+# Hugo stats
+hugo_stats.json
+
+### Local development ###
+# MCP configuration
+.mcp.json
+# Claude project instructions
+CLAUDE.md
+
 analiza/

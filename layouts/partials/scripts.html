@@ -1,0 +1,13 @@
+<script src="{{ .Site.BaseURL }}js/common.js"></script>
+{{ if .IsHome }}
+<script src="{{ .Site.BaseURL }}js/main.js"></script>
+{{ end }}
+{{ if eq .Type "contact" }}
+<script src="{{ .Site.BaseURL }}js/contact.js"></script>
+{{ end }}
+{{ if eq .Type "trainings" }}
+<script src="{{ .Site.BaseURL }}js/training.js"></script>
+{{ end }}
+{{ if eq .Type "episodes" }}
+<script src="{{ .Site.BaseURL }}js/podcast.js"></script>
+{{ end }}

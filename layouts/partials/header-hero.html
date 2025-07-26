@@ -1,0 +1,49 @@
+<!-- ===== HEADER SECTION ===== -->
+<header class="relative">
+    <div class="bg-hero bg-no-repeat bg-cover bg-center relative overflow-hidden">
+        <div class="absolute w-full h-full left-0 top-0 z-[1]" style="background: #ff4405"></div>
+
+        <div class="absolute w-full h-full left-0 top-0 z-[2]" style="
+              background: url('{{ .Site.BaseURL }}img/gif/herobg.gif');
+              mix-blend-mode: overlay;
+              background-size: cover;
+              background-position: center;
+            "></div>
+
+        <div class="absolute w-full h-full left-0 top-0 z-[3]" style="background: #ff4405; mix-blend-mode: plus-lighter">
+        </div>
+        <div class="px-[30px] max-md:hidden relative z-20">
+            <div class="max-w-[998px] w-full py-3.5 bg-white mx-auto rounded-b-[15px]">
+                <p class="uppercase font-bold text-base clr-dark-black leading-100 text-center">
+                    Do najbliższego szkolenia
+                    <span class="text-orange">zostały 3 dni! 👉 Zapisz się teraz!</span>
+                </p>
+            </div>
+        </div>
+        <nav class="mt-[74px] lg:mt-[138px] px-[30px] relative z-50">
+            <div class="flex justify-end max-w-[998px] mx-auto">
+                <button id="menu-button" class="lg:hidden focus:outline-none z-[99] relative w-[25px] h-[25px]">
+                    <svg id="icon-hamburger" class="absolute inset-0 w-full h-full transition-opacity duration-200" width="25"
+                        height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="25" height="3" fill="white" />
+                        <rect y="7" width="25" height="3" fill="white" />
+                        <rect y="14" width="25" height="3" fill="white" />
+                    </svg>
+                    <svg id="icon-close"
+                        class="absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-200"
+                        width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="3" y1="3" x2="22" y2="22" stroke="black" stroke-width="3" stroke-linecap="round" />
+                        <line x1="3" y1="22" x2="22" y2="3" stroke="black" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <ul id="menu-list"
+                class="fixed top-0 right-0 h-full w-full bg-white transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col gap-6 items-center justify-center lg:static lg:transform-none lg:flex-row lg:h-auto lg:w-auto lg:bg-transparent lg:shadow-none lg:gap-10 lg:max-w-[998px] mx-auto">
+                {{ range .Site.Menus.main }}
+                <li>
+                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
+                        href="{{ .URL }}"{{ if .Params.target }} target="{{ .Params.target }}"{{ end }}>{{ .Name }}</a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>

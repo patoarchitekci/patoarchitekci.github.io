@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body>
+    {{ block "header" . }}
+        {{ partial "header-dark.html" . }}
+    {{ end }}
+    
+    {{ block "main" . }}{{ end }}
+    
+    {{ partial "footer.html" . }}
+    {{ partial "scripts.html" . }}
+</body>
+</html>
