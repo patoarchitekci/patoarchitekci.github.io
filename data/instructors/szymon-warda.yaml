@@ -6,7 +6,9 @@ photo_alt: "Szymon Warda - IT Expert i Game Developer"
 
 # Bio
 bio_short: "- IT-owy Gandalf z czasów Internet Explorera 6. Jeśli w Twojej bazie panuje chaos, on zrobi tam porządek."
-bio_long: "Od lat wyciąga firmy z opresji przy dużym ruchu i zaraża pasją do technologii."
+bio_paragraph1: "- IT-owy Gandalf z czasów Internet Explorera 6. Jeśli w Twojej bazie panuje chaos, on zrobi tam porządek."
+bio_paragraph2: "Od lat wyciąga firmy z opresji przy dużym ruchu i zaraża pasją do technologii."
+bio_paragraph3: "Po tym kursie piątkowy deploy o 17:00 nie będzie Ci straszny, bo wreszcie ogarniesz NoSQL jak mistrz."
 
 # Kontakt i social media
 email: "szymon@wardteam.pl"

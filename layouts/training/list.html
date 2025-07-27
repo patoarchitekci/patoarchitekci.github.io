@@ -1,0 +1,409 @@
+  {{ define "main" }}
+  <!-- ===== NASZE SECTION ===== -->
+  <section
+    class="bg-dark-black min-h-screen max-xl:px-[30px] -mt-2 pb-[76px] sm:pb-[120px] md:pb-[200px] lg:pb-[250px] xl:pb-[297px] relative">
+    <img src="/img/webp/white-flower-vector.webp" alt="white-flower-vector"
+      class="max-w-14 sm:max-w-[140px] lg:max-w-[180px] xl:max-w-[213px] w-full xl:h-[213px] pointer-events-none absolute bottom-[3%] md:bottom-[1.3%] sm:bottom-0 md:bottom-[3%] xl:bottom-[4%] right-[15%] min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]">
+    <img src="/img/svg/meet-hosts-vector.svg" alt="meet-hosts-vector"
+      class="absolute bottom-0 sm:bottom-8 z-[2] pointer-events-none right-[21%] max-w-2 sm:max-w-5 lg:max-w-[29px] w-full lg:h-[54px] min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]">
+    <img src="/img/webp/orange-cloud-vector.webp" alt="orange-cloud-vector"
+      class="absolute w-full bottom-0 pointer-events-none xl:h-[297px] left-0">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="flex justify-between">
+        <h2
+          class="font-semibold font-tomorrow text-[40px] sm:text-[56px] md:text-[72px] lg:text-[84px] xl:text-[96px] text-orange uppercase leading-100 mt-[5px] sm:mt-[35px]">
+          Nasze szkolenia</h2>
+        <img class="hidden lg:block pointer-events-none max-w-[105.56px] max-h-[105.56px] h-full w-full"
+          src="/img/svg/nasze-arrow.svg" alt="nasze-arrow">
+      </div>
+      <div
+        class="flex justify-between mt-8 sm:mt-12 md:mt-14 lg:mt-[76px] xl:mt-[90px] flex-col gap-[35px] md:flex-row">
+        <h3
+          class="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white uppercase leading-100 font-tomorrow">
+          Szkolenia Otwarte</h3>
+        <div class="relative">
+          <p class="text-sm sm:text-base lg:text-xl !leading-120 max-w-[479px] text-white font-tomorrow"><span
+              class="xl:block">Zapomnij o
+              nudnych wykładach i
+              przestarzałych</span> <span class="xl:block">teoriach. U nas dostaniesz solidną dawkę praktyki</span>
+            <span class="xl:block">i
+              energii,
+              która wprowadzi Cię na nowy poziom</span>
+            w świecie technologii!
+          </p>
+          <img
+            class="absolute -top-[36%] -left-[21%] min-[1320px]:-left-[15%] pointer-events-none max-w-[595px] max-h-[158px] hidden xl:block"
+            src="/img/png/text-circle.png" alt="text-circle">
+        </div>
+      </div>
+      <div id="card-container" class="pt-12 lg:pt-[75px] flex flex-col gap-5 md:gap-[30px] pb-[15px] md:pb-[66px]">
+        {{- range $index, $training := .Site.Data.trainings -}}
+        {{- $hiddenClass := "" -}}
+        {{- if gt $index 2 -}}{{ $hiddenClass = "hidden sm:flex" }}{{- end -}}
+        {{- $isFirstCard := eq $index 0 -}}
+        {{- if $isFirstCard -}}
+        <a href="/szkolenia/{{ $training.id }}/">
+          <div
+            class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative card">
+            <div class="flex flex-col justify-between w-full">
+              <div
+                class="flex max-[576px]:flex-col justify-between items-start w-full gap-2.5 sm:gap-[30px] max-sm:mb-[10px]">
+                <p
+                  class="text-orange group-hover:text-black transition-all ease-linear duration-300 text-xl sm:text-2xl md:text-3xl xl:text-4xl max-sm:pb-8 font-semibold max-w-[650px] w-full">
+                  {{ $training.title | upper }}</p>
+                <p
+                  class="text-xs sm:text-base md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
+                  DATA:
+                  <span class="text-white">
+                    {{- if $training.dates -}}
+                      {{- range $dateIndex, $date := $training.dates -}}
+                        {{- dateFormat "02.01.2006" $date -}}
+                        {{- if ne $dateIndex (sub (len $training.dates) 1) -}}, {{ end -}}
+                      {{- end -}}
+                    {{- else -}}
+                      w drodze
+                    {{- end -}}
+                  </span>
+                </p>
+              </div>
+              <div class="flex sm:justify-between items-end sm:items-baseline w-full gap-10 sm:gap-[30px]">
+                <p
+                  class="text-xs sm:text-base md:text-xl xl:text-2xl text-white font-normal max-w-[650px] w-full max-sm:w-max">
+                  <span class="font-semibold max-sm:block">PROWADZĄCY:</span> {{ $training.instructor | upper }}
+                </p>
+                <p
+                  class="text-lg sm:text-xl md:text-2xl xl:text-custom-3xl text-white font-semibold whitespace-nowrap w-max xl:max-w-[424px] xl:w-full">
+                  {{ $training.price_gross }}&nbsp;zł</p>
+              </div>
+            </div>
+            <button
+              class="min-w-8 min-h-8 sm:min-w-9 sm:min-h-9 h-max flex items-center justify-center group-hover:bg-black bg-orange transition-all ease-linear duration-300 text-white rounded-full bottom-9 xl:absolute right-9 mt-auto">
+              <svg class="w-5 h-[17px] sm:w-[23px] sm:h-5" width="23" height="20" viewBox="0 0 23 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path class="group-hover:fill-orange transition-all ease-linear duration-300"
+                  d="M12.9688 20L11.25 18.3036L18.3259 11.2277H0V8.77232H18.3259L11.25 1.71875L12.9688 0L22.9688 10L12.9688 20Z"
+                  fill="#201B20" />
+              </svg>
+            </button>
+          </div>
+        </a>
+        {{- else -}}
+        <div
+          class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative {{ $hiddenClass }} card">
+          <div class="flex flex-col justify-between w-full">
+            <div
+              class="flex max-[576px]:flex-col justify-between items-start w-full gap-2.5 sm:gap-[30px] max-sm:mb-[10px]">
+              <p
+                class="text-orange group-hover:text-black transition-all ease-linear duration-300 text-xl sm:text-2xl md:text-3xl uppercase xl:text-4xl max-sm:pb-8 font-semibold max-w-[650px] w-full">
+                {{ $training.title }}</p>
+              <p
+                class="text-xs sm:text-base uppercase md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
+                DATA:
+                <span class="text-white">
+                  {{- if $training.dates -}}
+                    {{- range $dateIndex, $date := $training.dates -}}
+                      {{- dateFormat "02.01.2006" $date -}}
+                      {{- if ne $dateIndex (sub (len $training.dates) 1) -}}, {{ end -}}
+                    {{- end -}}
+                  {{- else -}}
+                    w drodze
+                  {{- end -}}
+                </span>
+              </p>
+            </div>
+            <div class="flex sm:justify-between items-end sm:items-baseline w-full gap-10 sm:gap-[30px]">
+              <p
+                class="text-xs max-sm:w-max sm:text-base uppercase md:text-xl xl:text-2xl text-white font-normal max-w-[650px] w-full">
+                <span class="font-semibold max-sm:block">PROWADZĄCY:</span> {{ $training.instructor | upper }}
+              </p>
+              <p
+                class="text-lg sm:text-xl md:text-2xl xl:text-custom-3xl text-white font-semibold whitespace-nowrap w-max xl:max-w-[424px] xl:w-full">
+                {{ $training.price_gross }}&nbsp;zł</p>
+              <button
+                class="min-w-8 min-h-8 sm:min-w-9 sm:min-h-9 flex items-center justify-center group-hover:bg-black bg-orange transition-all ease-linear duration-300 text-white rounded-full bottom-9 xl:absolute right-9">
+                <svg class="w-5 h-[17px] sm:w-[23px] sm:h-5" width="23" height="20" viewBox="0 0 23 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path class="group-hover:fill-orange transition-all ease-linear duration-300"
+                    d="M12.9688 20L11.25 18.3036L18.3259 11.2277H0V8.77232H18.3259L11.25 1.71875L12.9688 0L22.9688 10L12.9688 20Z"
+                    fill="#201B20" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        {{- end -}}
+        {{- end -}}
+        <button id="toggleButton"
+          class="cursor-pointer inline-flex text-orange font-semibold text-xs max-w-[148px] mx-auto sm:hidden">Zobacz
+          wszystkie szkolenia</button>
+      </div>
+    </div>
+  </section>
+  <!-- ===== POZNAJ PROWADZQCYCH ===== -->
+  <section
+    class="pb-[190px] min-[420px]:!pb-[290px] min-[500px]:!pb-[390px] min-[576px]:!pb-[190px] xl:!pb-[297px] pt-[44px] sm:pt-16 md:pt-20 xl:pt-[102px] bg-orange relative">
+    <img src="/img/webp/white-cloud-vector.webp" alt="white-cloud-vector"
+      class="w-full absolute bottom-0 left-0 xl:h-[297px] pointer-events-none z-[1]">
+    <img width="118" height="118" src="/img/svg/black-flower-Vector.svg" alt="black-flower-Vector"
+      class="absolute max-md:-top-[10px] top-[5%] max-w-[30px] md:max-w-20 pointer-events-none w-full lg:max-w-[118px] lg:h-[118px] left-[30px] lg:left-[69px] min-[2200px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,36%)]">
+    <div class="max-w-[1920px] mx-auto">
+      <h2
+        class="uppercase min-[420px]:text-center max-md:px-[30px] font-tomorrow font-semibold text-2xl sm:text-3xl md:text-4xl sm:text-5xl xl:text-custom-6xl text-dark-black">
+        Poznaj prowadzących</h2>
+      <div
+        class="flex flex-col-reverse lg:flex-row max-sm:pt-[35px] gap-2 sm:gap-4 lg:gap-10 min-[1200px]:gap-[100px] xl:gap-[154px] pt-[60px] 2xl:justify-center">
+        <img src="/img/webp/meet-the-host.webp" alt="meet-the-hosts"
+          class="w-full max-w-[500px] min-[1200px]:max-w-[600px] object-contain xl:max-w-[688px] h-full xl:h-[925px] max-md:h-[550px] -mb-[92%] min-[576px]:-mb-[30%] min-[769px]:-mb-[10%] lg:-mb-[25%] xl:-mb-[21%] max-md:translate-y-0 max-lg:translate-y-[4%] max-xl:translate-y-[14%] max-lg:mx-auto">
+        <div class="flex flex-col gap-[35px] sm:gap-7 xl:gap-[45px] max-sm:px-[30px] xl:-mb-16 justify-end">
+          <div class="flex flex-col max-sm:items-start max-lg:items-center w-max mx-auto gap-4 sm:gap-6 xl:gap-[35px]">
+            <h3
+              class="uppercase text-xl sm:text-2xl md:text-3xl lg:text-custom-4xl font-semibold text-start text-white leading-120">
+              Łukasz Kałużny</h3>
+            <ul
+              class="text-sm sm:text-base md:text-lg lg:text-xl pl-5 sm:pl-6 font-medium list-disc text-dark-black leading-120 max-w-[330px] sm:max-w-[437px]">
+              <li class="max-w-[400px] leading-120">
+                Technologiczny wizjoner i frontman zespołu
+              </li>
+              <li class="leading-120">Współgospodarz podcastu Patoarchitekci</li>
+              <li class="max-w-[380px] leading-120"><span>Entuzjastyczne podejście do IT i umiejętność tłumaczenia
+                  trudnych
+                  zagadnień w
+                  prosty sposób</span></li>
+            </ul>
+            <div class="flex gap-2 max-md:pl-6 sm:gap-3">
+              <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+                <img src="/img/svg/linkedin.svg" alt="linkedin"
+                  class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+              </a>
+              <a href="https://x.com/patoarchitekci" target="_blank">
+                <img src="/img/svg/twitter.svg" alt="twitter"
+                  class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+              </a>
+            </div>
+          </div>
+          <div
+            class="flex flex-col max-sm:items-start max-lg:items-center w-max !mx-auto gap-4 sm:gap-6 xl:gap-[35px] -ml-[2px]">
+            <h3
+              class="uppercase text-xl sm:text-2xl md:text-3xl lg:text-custom-4xl font-semibold text-white leading-120">
+              Szymon Warda</h3>
+            <ul
+              class="text-sm sm:text-base md:text-lg lg:text-xl pl-5 sm:pl-6 font-medium list-disc text-dark-black leading-120 max-w-[330px] sm:max-w-[404px] lg:max-w-[437px]">
+              <li class="max-w-[400px] leading-120">
+                Guru rozproszonych systemów i pogromca korporacyjnego nonsensu
+              </li>
+              <li class="max-w-[400px] leading-120">Współprowadzący podcastu „Patoarchitekci</li>
+              <li class="max-w-[380px] leading-120"><span>Hardcore’owa wiedza, praktyczne rozwiązania i pasja do
+                  kodu</span></li>
+            </ul>
+            <div class="flex gap-2 max-md:pl-6 sm:gap-3">
+              <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+                <img src="/img/svg/linkedin.svg" alt="linkedin"
+                  class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+              </a>
+              <a href="https://x.com/patoarchitekci" target="_blank">
+                <img src="/img/svg/twitter.svg" alt="twitter"
+                  class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ========= WE TRAINED PEOPLE ========= -->
+  <section class="bg-white pt-10 md:pt-[59px] pb-[22px] sm:pb-[50px] relative z-10">
+    <div class="max-w-[1206px] mx-auto max-sm:px-[40px] max-xl:px-7">
+      <h2
+        class="uppercase max-lg:text-center font-tomorrow font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-dark-black xl:!leading-[73%]">
+        Szkoliliśmy ludzi z tych firm</h2>
+      <div
+        class="pt-[45px] md:pt-[92px] flex items-center justify-center flex-wrap gap-x-[30px] md:gap-x-[60px] xl:gap-x-[90px] gap-y-[24px] xl:gap-y-[48px]">
+        <img src="/img/webp/pzu-logo.webp" alt="pzu-logo" class="size-[39px] sm:size-[50px] lg:size-[85px]">
+        <img src="/img/webp/bik-logo.webp" alt="bik-logo"
+          class="max-w-[60px] sm:max-w-[90px] lg:max-w-[132px] w-full h-auto lg:h-[78px]">
+        <img src="/img/webp/pwc-logo.webp" alt="pwc-logo" class="size-[52px] sm:size-[72px] lg:size-[114px]">
+        <img src="/img/webp/Procter-&-Gamble-logo.webp" alt="Procter-&-Gamble-logo"
+          class="size-[38px] sm:size-[64px] lg:size-[84px]">
+        <img src="/img/webp/am-rest-logo.webp" alt="am-rest-logo"
+          class="max-w-[63px] max-w-[110px] lg:max-w-[138px] w-full lg:h-[85px]">
+        <img src="/img/webp/bank-polski-logo.webp" alt="bank-polski-logo"
+          class="max-w-[51px] sm:max-w-[90px] lg:max-w-[112px] lg:h-[133px] w-full">
+        <img src="/img/webp/luxmed-logo.webp" alt="luxmed-logo"
+          class="max-w-[66px] sm:max-w-[110px] lg:max-w-[145px] w-full lg:h-[30px]">
+        <img src="/img/webp/m-leasing-logo.webp" alt="m-leasing-logo"
+          class="max-w-[92px] sm:max-w-[120px] lg:max-w-[200px] lg:h-[66px] w-full">
+        <img src="/img/webp/link-4-logo.webp" alt="link-4-logo"
+          class="max-w-[85px] sm:max-w-[130px] lg:max-w-[186px] w-full lg:h-12">
+        <img src="/img/webp/ergo-logo.webp" alt="ergo-logo"
+          class="max-w-[47px] max-w-20 lg:max-w-[103px] lg:h-14 w-full">
+        <img src="/img/webp/bank-millenium-logo.webp" alt="bank-millenium-logo"
+          class="max-w-[91px] max-w-[140px] lg:max-w-[197px] w-full lg:h-[46px]">
+        <img src="/img/webp/orlen-logo.webp" alt="orlen-logo"
+          class="max-w-[53px] sm:max-w-[90px] lg:max-w-[117px] lg:h-[85px] w-full">
+        <img src="/img/webp/kruk-logo.webp" alt="kruk-logo"
+          class="max-w-[53px] sm:max-w-20 lg:max-w-[116px] lg:h-[85px] w-full">
+        <img src="/img/webp/grupa-pracuj-logo.webp" alt="grupa-pracuj-logo"
+          class="max-w-[120px] sm:max-w-[200px] lg:max-w-[260px] lg:h-[70px] w-full">
+        <img src="/img/webp/alior-bank-logo.webp" alt="alior-bank-logo"
+          class="max-w-[64px] sm:max-w-[100px] lg:max-w-[139px] lg:h-[70px] w-full">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS SECTION ===== -->
+  <section class="bg-white md:pb-[60px] pt-[100px] sm:pt-[140px] md:pt-[200px] xl:pt-[292px] pb-[31px] relative">
+    <img class="absolute top-0 w-full max-h-[231px]" src="/img/png/yellow-layer.png" alt="yellow-layer">
+    <img
+      class="max-lg:hidden z-10 absolute top-[20%] xl:top-[241px] right-[122px] size-20 xl:size-[105px] animate-float2"
+      src="/img/svg/top-right-ellipse.svg" alt="top-right-ellipse">
+    <img
+      class="lg:top-[119px] glow-animation top-[9%] z-10 right-[21%] absolute max-md:hidden xl:size-[79px] size-[60px] min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]"
+      src="/img/svg/messages-icon.svg" alt="messages-icon">
+    <div class="max-w-[1440px] mx-auto relative">
+      <h3
+        class="lg:text-5xl md:text-4xl sm:text-3xl max-md:text-center text-2xl leading-110 md:leading-100 pb-[25px] md:pb-[60px] xl:px-[120px] px-6 md:px-10 text-dark-black font-tomorrow font-semibold uppercase">
+        Opinie uczestników
+      </h3>
+      <div>
+        <div class="swiper h-[562px] md:h-auto px-6 md:px-10 xl:px-[120px]">
+          <div class="swiper-wrapper">
+            {{- range $index, $testimonial := .Site.Data.testimonials -}}
+            {{- $fullText := $testimonial.text -}}
+            {{- $maxChars := 257 -}}
+            {{- $needsMore := gt (len $fullText) $maxChars -}}
+            {{- $displayText := $fullText -}}
+            {{- if $needsMore -}}
+              {{- $truncatedText := substr $fullText 0 $maxChars -}}
+              {{- $displayText = printf "%s <span class=\"text-yellowdark font-semibold cursor-pointer\" data-full='%s' data-name='%s' data-role='%s' data-initials='%s'>...czytaj więcej</span>" $truncatedText $fullText $testimonial.name (default "" $testimonial.role) $testimonial.initials -}}
+            {{- end -}}
+            <div class="swiper-slide max-h-[420px] xl:min-w-[383px] h-full max-md:max-w-[272px] max-md:mx-auto md:min-h-[380px] bg-white border-[3px] border-yellowdark rounded-[21px] md:rounded-[30px] p-[14px_17px_12px_17px] md:p-[20px_30px_18px_25px] flex flex-col justify-between">
+              <div class="flex flex-col">
+                <img class="md:w-[144px] w-[102px] h-[14px] md:h-5 mb-4 md:mb-[25px] mx-auto" src="/img/svg/stars-img.svg" alt="testimonial-icon">
+                <p class="xl:text-xl max-md:text-[14.14px] max-md:!leading-[115%] leading-125 lg:leading-110 xl:!leading-125 text-dark-black">{{ $displayText | safeHTML }}</p>
+              </div>
+              <div class="flex gap-[14px] mt-5">
+                <div class="md:size-[52px] size-9 rounded-full border text-yellowdark border-yellowdark text-white font-medium md:text-xl flex items-center justify-center">{{ $testimonial.initials }}</div>
+                <div>
+                  <div class="text-dark-black max-md:text-[11px] pt-[5px]">{{ $testimonial.name }}</div>
+                  {{- if $testimonial.role -}}
+                  <div class="text-xs text-yellowdark max-md:text-[10px]">{{ $testimonial.role }}</div>
+                  {{- end -}}
+                </div>
+              </div>
+            </div>
+            {{- end -}}
+          </div>
+        </div>
+        <div
+          class="flex justify-center md:justify-end px-6 md:px-10 xl:px-[120px] items-center w-full mt-[47px] md:mt-[71px]">
+          <button
+            class="swiper-button-next !static bg-yellowdark hover:bg-dark-black transition-all group duration-300 rounded-full size-10 min-w-10 md:min-w-[50px] md:size-[50px] flex items-center justify-center">
+            <svg class="max-md:rotate-90 max-md:scale-[0.7] !h-[22px] !w-[15px] " width="15" height="22"
+              viewBox="0 0 15 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="group-hover:stroke-white transition-all duration-300" d="M0.999999 21L13 11L1 0.999999"
+                stroke="#201B20" stroke-width="2" />
+            </svg>
+          </button>
+        </div>
+        <div id="testimonial-popup"
+          class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+          <div id="popup-card"
+            class="bg-white border-2 border-yellowdark rounded-[30px] max-w-[700px]  w-full mx-4 px-6 py-10 md:py-5 relative">
+            <div class="flex flex-col justify-between md:min-h-[510px]">
+              <div class="flex flex-col">
+                <img class="w-[144px] h-5 mb-[30px] md:mb-[25px] mx-auto" src="/img/svg/stars-img.svg"
+                  alt="testimonial-stars">
+                <p id="popup-text"
+                  class="text-dark-black lg:text-xl md:text-base text-sm leading-100 md:!leading-[130%] mb-6"></p>
+              </div>
+              <div class="flex items-center gap-3 mt-auto">
+                <p id="popup-initials"
+                  class="md:size-10 size-9 rounded-full bg-yellowdark text-white font-medium md:text-xl flex items-center justify-center">
+                </p>
+                <div>
+                  <p id="popup-name" class="text-sm font-semibold text-dark-black"></p>
+                  <p id="popup-role" class="text-xs text-gray-500"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRAINING SECTION ===== -->
+  <section
+    class="lg:pb-[110px] lg:pt-[105px] md:py-[60px] py-10 xl:px-[120px] md:px-10 px-[30px] bg-yellowdark relative">
+    <img
+      class="absolute xl:top-[66px] top-8 right-5 xl:right-[97px] max-md:hidden size-[60px] lg:size-[74px] animate-float1 min-[2100px]:!right-[clamp(40px,39vw,22%)] min-[4000px]:!right-[clamp(40px,39vw,35%)]"
+      src="/img/svg/black-star.svg" alt="black star">
+    <img class="absolute bottom-[12%] max-2xl:right-[31%] right-[38%] max-lg:hidden"
+      src="/img/svg/rounded-arrow.svg" alt="">
+    <div class="max-w-[1200px] mx-auto ">
+      <div class="flex max-md:flex-col lg:gap-[82px] gap-[25px]">
+        <div>
+          <h3
+            class="lg:text-4xl sm:text-3xl text-2xl leading-110 md:leading-100 text-dark-black font-tomorrow font-semibold uppercase">
+            Koordynator szkoleń dla firm
+          </h3>
+          <p
+            class="lg:text-custom-3xl sm:text-2xl font-bold md:font-semibold leading-100 text-dark-black mt-[25px] md:mt-[69px]">
+            Mikołaj Szczerbicki </p>
+          <p
+            class="lg:text-2xl sm:text-xl max-sm:max-w-[278px] !leading-[105%] text-dark-black md:!leading-120 max-w-[778px] pt-[25px] lg:pt-[31px]">
+            Masz pytania? Chcesz ogarnąć szkolenie dedykowane dla
+            Twojej firmy? Nasz człowiek od zadań specjalnych, czeka na Twój znak. Napisz do niego, a wszystko stanie się
+            jasne.</p>
+        </div>
+        <img class="lg:w-[327px] lg:h-[325px] rounded-full sm:size-[250px] size-[170px]" src="/img/png/trainer-img.png"
+          alt="trainer-img">
+      </div>
+      <button
+        class="bg-white mt-[25px] max-[385px]:text-xl lg:mt-[7px] font-semibold text-2xl tracking-[0.3px] leading-100 text-dark-black flex items-center gap-[39px] py-1 pl-[5px] pr-[60px] rounded-full transition-all ease-linear duration-300 group">
+        <div
+          class="bg-dark-black size-[37px] flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px]  transition-all ease-linear duration-300">
+          <img src="/img/svg/mail-icon.svg" class="w-[22px] h-[17px]" />
+        </div>
+        Pisz do Mikołaja
+      </button>
+    </div>
+  </section>
+
+  <!-- =====TALKING PEOPLE ===== -->
+  <section class="sm:pt-[105px] pt-10 pb-[130px] sm:pb-[210px] lg:pb-[265px] relative overflow-x-clip">
+    <div class="mx-auto max-w-[1536px]">
+      <h2
+        class="uppercase text-yellow text-2xl leading-74 sm:text-5xl lg:text-custom-6xl font-semibold font-tomorrow text-center">
+        Dlaczego warto?
+      </h2>
+      <img class="mx-auto sm:mt-[43px] mt-[25px] max-sm:w-[30px] max-lg:w-[50px]"
+        src="/img/svg/yellow-tick-icon.svg" alt="tick-icon" />
+      <p
+        class="font-regular md:text-custom-3xl sm:text-2xl text-base !leading-150 md:!leading-120 max-w-[914px] text-dark-black text-center mx-auto sm:mt-[43px] mt-[25px] sm:mb-8 mb-1 max-lg:px-[50px]">
+        <span class="font-bold uppercase">100% praktyki: <br /> </span>
+        Zero przestarzałej teorii
+      </p>
+      <p
+        class="font-regular md:text-custom-3xl sm:text-2xl text-base !leading-150 md:!leading-120 max-w-[914px] text-dark-black text-center mx-auto sm:mt-[50px] mt-[25px] sm:mb-8 mb-1 max-lg:px-[50px]">
+        <span class="font-bold uppercase">Realne umiejętności: <br /> </span>
+        Od razu wykorzystasz je w codziennej pracy
+      </p>
+      <p
+        class="font-regular md:text-custom-3xl sm:text-2xl text-base !leading-150 md:!leading-120 max-w-[914px] text-dark-black text-center mx-auto sm:mt-[50px] mt-[25px] sm:mb-8 mb-1 max-lg:px-[50px]">
+        <span class="font-bold uppercase">Fachowcy z pasją: <br /> </span>
+        Prowadzący, którzy żyją tym, czego uczą
+      </p>
+      <p
+        class="font-regular md:text-custom-3xl sm:text-2xl text-base !leading-150 md:!leading-120 max-w-[914px] text-dark-black text-center mx-auto sm:mt-[50px] mt-[25px] sm:mb-8 mb-1 max-lg:px-[50px]">
+        <span class="font-bold uppercase">Dynamiczna forma: <br /> </span>
+        Intensywne warsztaty zamiast długich slajdów
+      </p>
+      <p
+        class="font-regular md:text-custom-3xl sm:text-2xl text-base !leading-150 md:!leading-120 max-w-[914px] text-dark-black text-center mx-auto sm:mt-[50px] mt-[25px] sm:mb-8 mb-1 max-lg:px-[50px]">
+        <span class="font-bold uppercase">Elastyczność: <br /> </span>
+        Szkolenia otwarte i dedykowane – wybierz najlepszą opcję
+      </p>
+    </div>
+  </section>
+  {{ end }}

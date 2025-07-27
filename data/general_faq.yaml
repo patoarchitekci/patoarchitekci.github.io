@@ -1,0 +1,18 @@
+# Ogólne FAQ dla wszystkich szkoleń
+general_faq:
+  - question: "Jakie są metody płatności?"
+    answer: "Akceptujemy płatności przelewem bankowym, kartą płatniczą oraz PayU. Faktury wystawiamy przed szkoleniem."
+  - question: "Czy mogę anulować uczestnictwo?"
+    answer: "Tak, możesz anulować uczestnictwo do 7 dni przed rozpoczęciem szkolenia z pełnym zwrotem środków. W przypadku anulacji w krótszym terminie pobieramy 30% kosztów administracyjnych."
+  - question: "Czy otrzymam certyfikat ukończenia?"
+    answer: "Tak, każdy uczestnik otrzymuje oficjalny certyfikat ukończenia szkolenia po zakończeniu wszystkich sesji."
+  - question: "Co jeśli nie będę mógł uczestniczyć w jednej sesji?"
+    answer: "Wszystkie sesje są nagrywane i będziesz mieć dostęp do nagrań. Dodatkowo możesz umówić się na dodatkową sesję uzupełniającą."
+  - question: "Czy szkolenie jest realizowane w języku polskim?"
+    answer: "Tak, wszystkie nasze szkolenia prowadzone są w języku polskim. Materiały również są przygotowane w języku polskim."
+  - question: "Jak długo mam dostęp do materiałów?"
+    answer: "Dostęp do materiałów i nagrań masz przez 12 miesięcy od zakończenia szkolenia."
+  - question: "Czy mogę otrzymać fakturę?"
+    answer: "Tak, wystawiamy faktury VAT. Podczas rejestracji podaj dane firmy jeśli chcesz otrzymać fakturę na firmę."
+  - question: "Co jeśli szkolenie zostanie odwołane przez organizatora?"
+    answer: "W takim przypadku zwracamy pełną kwotę lub umożliwiamy przeniesienie na następny termin. O ewentualnych zmianach informujemy minimum 7 dni wcześniej."

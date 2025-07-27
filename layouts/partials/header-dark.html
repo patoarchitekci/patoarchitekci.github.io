@@ -1,48 +1,60 @@
-<!-- ===== HEADER SECTION ===== -->
-<header class="relative pt-10 pb-[45px] px-[30px] lg:pt-[65px] lg:pb-[47px] bg-white">
+  <!-- ===== HEADER SECTION ===== -->
+  <header class="relative pt-10 px-[30px] pb-4 sm:pb-[45px] lg:py-[65px] bg-dark-black">
     <div class="max-w-[1200px] mx-auto">
-        <nav class="relative z-50">
-            <div class="flex justify-between items-center max-w-[998px] mx-auto">
-                <a href="/">
-                    <img class="max-w-[96px] sm:max-w-[80px] md:max-w-[145px] lg:hidden"
-                        src="{{ .Site.BaseURL }}img/png/podcast-logo.png" alt="podcast-logo" />
-                </a>
-                <button id="menu-button" class="lg:hidden focus:outline-none z-[99] relative size-[25px]">
-                    <svg id="icon-hamburger" class="absolute inset-0 w-full h-full transition-opacity duration-200"
-                        width="25" height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="25" height="3" fill="black" />
-                        <rect y="7" width="25" height="3" fill="black" />
-                        <rect y="14" width="25" height="3" fill="black" />
-                    </svg>
-                    <svg id="icon-close"
-                        class="absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-200"
-                        width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="3" y1="3" x2="22" y2="22" stroke="black" stroke-width="3"
-                            stroke-linecap="round" />
-                        <line x1="3" y1="22" x2="22" y2="3" stroke="black" stroke-width="3"
-                            stroke-linecap="round" />
-                    </svg>
-                </button>
-            </div>
-            <div class="flex justify-between items-center">
-                <a href="/">
-                    <img class="max-w-[145px] hidden lg:block" src="{{ .Site.BaseURL }}img/png/podcast-logo.png"
-                        alt="podcast-logo" />
-                </a>
-                <ul id="menu-list"
-                    class="fixed top-0 right-0 h-full w-full bg-white transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col gap-6 items-center justify-center lg:static lg:transform-none lg:flex-row lg:h-auto lg:w-auto lg:bg-transparent lg:shadow-none lg:gap-10 lg:max-w-[998px] ml-auto">
-                    {{ range .Site.Menus.main }}
-                    <li>
-                        <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                            href="{{ .URL }}"{{ if .Params.target }} target="{{ .Params.target }}"{{ end }}>{{ .Name }}</a>
-                    </li>
-                    {{ end }}
-                </ul>
-            </div>
-        </nav>
+      <nav class="relative z-50">
+        <div class="flex justify-between items-center max-w-[998px] mx-auto">
+          <a href="/">
+            <img class="max-w-[96px] sm:max-w-[80px] md:max-w-[145px] lg:hidden"
+              src="/img/png/podcast-logo.png" alt="podcast-logo" />
+          </a>
+          <button id="menu-button" class="lg:hidden focus:outline-none z-[99] relative size-[25px]">
+            <svg id="icon-hamburger" class="absolute inset-0 w-full h-full transition-opacity duration-200" width="25"
+              height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="25" height="3" fill="white" />
+              <rect y="7" width="25" height="3" fill="white" />
+              <rect y="14" width="25" height="3" fill="white" />
+            </svg>
+            <svg id="icon-close"
+              class="absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-200"
+              width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="3" y1="3" x2="22" y2="22" stroke="black" stroke-width="3" stroke-linecap="round" />
+              <line x1="3" y1="22" x2="22" y2="3" stroke="black" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="flex justify-between items-center">
+          <a href="/">
+            <img class="max-w-[145px] hidden lg:block" src="/img/png/podcast-logo.png" alt="podcast-logo" />
+          </a>
+          <ul id="menu-list"
+            class="fixed top-0 right-0 h-full w-full bg-white transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col gap-6 items-center justify-center lg:static lg:transform-none lg:flex-row lg:h-auto lg:w-auto lg:bg-transparent lg:shadow-none lg:gap-10 lg:max-w-[998px] ml-auto">
+            <li>
+              <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black lg:text-white uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white lg:hover:bg-white hover:bg-dark-black hover:text-white lg:hover:text-dark-black rounded-full transition-all duration-300 ease-linear"
+                href="/#podcast">Gdzie słuchać</a>
+            </li>
+            <li>
+              <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black lg:text-white uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white lg:hover:bg-white hover:bg-dark-black hover:text-white lg:hover:text-dark-black rounded-full transition-all duration-300 ease-linear"
+                href="/#oh-we">O nas</a>
+            </li>
+            <li>
+              <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black lg:text-white uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white lg:hover:bg-white hover:bg-dark-black hover:text-white lg:hover:text-dark-black rounded-full transition-all duration-300 ease-linear"
+                href="/szkolenia/">Szkolenia</a>
+            </li>
+            <li>
+              <a target="_blank"
+                class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black lg:text-white uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white lg:hover:bg-white hover:bg-dark-black hover:text-white lg:hover:text-dark-black rounded-full transition-all duration-300 ease-linear"
+                href="http://bettersoftwaredesign.pl/wspolpraca/bezplatne-konsultacje/">Bezpłatna Konsultacja</a>
+            </li>
+            <li>
+              <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black lg:text-white uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white lg:hover:bg-white hover:bg-dark-black hover:text-white lg:hover:text-dark-black rounded-full transition-all duration-300 ease-linear"
+                href="/kontakt/">Kontakt</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <button id="backToTopBtn"
-        class="hidden fixed bottom-6 right-4 md:right-6 z-50 bg-dark-black border border-white text-white text-3xl size-10 md:size-[50px] rounded-full shadow-md hover:scale-110 transition duration-300 min-[2600px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,35%)]">
-        ↑
+      class="hidden fixed bottom-6 right-4 md:right-6 z-50 bg-dark-black border border-white text-white text-3xl size-10 md:size-[50px] rounded-full shadow-md hover:scale-110 transition duration-300 min-[2600px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,35%)]">
+      ↑
     </button>
-</header>
+  </header>

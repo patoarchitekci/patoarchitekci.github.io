@@ -6,12 +6,9 @@ photo_alt: "Łukasz Kałużny - Technology Advisor"
 
 # Bio
 bio_short: "Technology Advisor i Managing Partner w Protopia. Microsoft Azure MVP i ekspert w dziedzinie chmury publicznej."
-bio_long: |
-  Łukasz to mieszanka inżyniera, architekta, konsultanta, i do tego geeka z krwi i kości. Jego pasją jest chmura publiczna i nowoczesna architektura w IT – tak, te wszystkie chmury, które dla innych są tylko mglistym snem. 
-  
-  A wiecie co? Łukasz widział Kubernetes, zanim stał się cool. W 2014 wołał do świata: "Uczcie się tego!", a świat jeszcze nie wiedział, jak bardzo ma rację. Łukasz to nie tylko Microsoft MVP w kategorii Azure, to prawdziwy wymiatacz w świecie IT. 
-  
-  Współtwórca popularnego podcastu "Patoarchitekci", gdzie wraz z Szymonem Wardą przedstawia zaawansowane tematy technologiczne w przystępny sposób.
+bio_paragraph1: "- Azure MVP i architekt, który widział Kubernetes zanim stał się cool. Chaos w systemach? On to uporządkuje."
+bio_paragraph2: "Od lat pomaga firmom budować skalowalne systemy i uczy, jak nie zginąć pod lawiną mikrousług."
+bio_paragraph3: "Po tym szkoleniu architektura przestanie być dla Ciebie czarną magią, a stanie się narzędziem do budowania systemów."
 
 # Kontakt i social media
 email: "lukasz@protopia.tech"
