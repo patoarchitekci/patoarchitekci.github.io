@@ -25,6 +25,11 @@ title = "PatoArchitekci"
     privacyPolicy = "/polityka-prywatnosci/"
     terms = "/regulamin/"
     
+  # Consultation
+  [params.consultation]
+    url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
+    title = "Bezpłatna Konsultacja"
+    
   # Footer
   [params.footer]
     copyright = "© Protopia 2025"
@@ -54,7 +59,7 @@ title = "PatoArchitekci"
     weight = 3
   [[menu.main]]
     name = "Bezpłatna Konsultacja"
-    url = "https://bettersoftwaredesign.pl/wspolpraca/bezplatne-konsultacje"
+    url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
     weight = 4
     [menu.main.params]
       target = "_blank"
