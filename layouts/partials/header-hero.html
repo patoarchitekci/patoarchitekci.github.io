@@ -4,13 +4,14 @@
         <div class="absolute w-full h-full left-0 top-0 z-[1]" style="background: #ff4405"></div>
 
         <div class="absolute w-full h-full left-0 top-0 z-[2]" style="
-              background: url('{{ .Site.BaseURL }}img/gif/herobg.gif');
-              mix-blend-mode: overlay;
-              background-size: cover;
-              background-position: center;
-            "></div>
+            background: url('{{ .Site.BaseURL }}img/gif/herobg.gif');
+            mix-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+          "></div>
 
-        <div class="absolute w-full h-full left-0 top-0 z-[3]" style="background: #ff4405; mix-blend-mode: plus-lighter">
+        <div class="absolute w-full h-full left-0 top-0 z-[3]"
+            style="background: #ff4405; mix-blend-mode: plus-lighter">
         </div>
         <div class="px-[30px] max-md:hidden relative z-20">
             <div class="max-w-[998px] w-full py-3.5 bg-white mx-auto rounded-b-[15px]">
@@ -23,8 +24,8 @@
         <nav class="mt-[74px] lg:mt-[138px] px-[30px] relative z-50">
             <div class="flex justify-end max-w-[998px] mx-auto">
                 <button id="menu-button" class="lg:hidden focus:outline-none z-[99] relative w-[25px] h-[25px]">
-                    <svg id="icon-hamburger" class="absolute inset-0 w-full h-full transition-opacity duration-200" width="25"
-                        height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="icon-hamburger" class="absolute inset-0 w-full h-full transition-opacity duration-200"
+                        width="25" height="17" viewBox="0 0 25 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="25" height="3" fill="white" />
                         <rect y="7" width="25" height="3" fill="white" />
                         <rect y="14" width="25" height="3" fill="white" />
@@ -39,11 +40,101 @@
             </div>
             <ul id="menu-list"
                 class="fixed top-0 right-0 h-full w-full bg-white transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col gap-6 items-center justify-center lg:static lg:transform-none lg:flex-row lg:h-auto lg:w-auto lg:bg-transparent lg:shadow-none lg:gap-10 lg:max-w-[998px] mx-auto">
-                {{ range .Site.Menus.main }}
                 <li>
                     <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="{{ .URL }}"{{ if .Params.target }} target="{{ .Params.target }}"{{ end }}>{{ .Name }}</a>
+                        href="#podcast">Gdzie słuchać</a>
                 </li>
-                {{ end }}
+                <li>
+                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
+                        href="#oh-we">O nas</a>
+                </li>
+                <li>
+                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
+                        href="/all-trainings.html">Szkolenia</a>
+                </li>
+                <li>
+                    <a target="_blank"
+                        class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
+                        href="{{ .Site.Params.consultation.url }}">{{ .Site.Params.consultation.title }}</a>
+                </li>
+                <li>
+                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
+                        href="/contact.html">Kontakt</a>
+                </li>
             </ul>
         </nav>
+        <img width="800" height="267"
+            class="max-w-[800px] max-h-[267px] mx-auto h-full w-full object-cover mt-[134px] max-lg:px-4 max-md:hidden relative z-20"
+            src="{{ .Site.BaseURL }}img/webp/hero-icon.webp" alt="hero-icon" />
+        <img src="{{ .Site.BaseURL }}img/webp/hero-icon-mobile.webp" width="250" height="363" alt="hero-icon"
+            class="mx-auto md:hidden mt-[133px] relative z-20" />
+        <div class="flex justify-center pt-[120px] lg:pt-[161px] relative z-20">
+            <button
+                class="lg:py-[8.5px] py-[6px] px-[25px] lg:px-[36.5px] border-[2px] border-dark-black rounded-full text-[17.23px] lg:text-2xl font-medium leading-100 text-dark-black uppercase hover:bg-dark-black hover:text-white transition-all duration-300">
+                Bezpłatna Konsultacja
+            </button>
+        </div>
+        <p
+            class="font-medium text-[9px] md:text-[11px] leading-100 text-dark-black pt-4 pb-[70px] lg:pt-10 text-center uppercase lg:pb-9 relative z-20">
+            Powered by Protopia.tech
+        </p>
+    </div>
+    <div class="relative z-20">
+        <div
+            class="absolute group bottom-[47px] right-6 lg:right-[47px] max-md:hidden min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]">
+            <div
+                class="flex flex-col group-hover:opacity-100 opacity-0 transition-all duration-300 gap-[9px] items-center justify-center">
+                <a target="_blank" href="https://tiktok.com"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.2778 3.91667C16.3286 2.83268 15.8054 1.44083 15.8056 0H11.5139V17.2222C11.4815 18.1544 11.0882 19.0376 10.4171 19.6854C9.74597 20.3332 8.84944 20.695 7.91667 20.6944C5.94444 20.6944 4.30556 19.0833 4.30556 17.0833C4.30556 14.6944 6.61111 12.9028 8.98611 13.6389V9.25C4.19445 8.61111 0 12.3333 0 17.0833C0 21.7083 3.83333 25 7.90278 25C12.2639 25 15.8056 21.4583 15.8056 17.0833V8.34722C17.5458 9.59701 19.6352 10.2676 21.7778 10.2639V5.97222C21.7778 5.97222 19.1667 6.09722 17.2778 3.91667Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+                <a target="_blank" href="https://discord.com/invite/78zPcEaP22"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="31" height="24" viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M26.26 2.00996C24.2232 1.05745 22.0731 0.381713 19.8644 0C19.5622 0.551901 19.2887 1.11973 19.0452 1.70112C16.6925 1.33898 14.3 1.33898 11.9474 1.70112C11.7037 1.11979 11.4303 0.551968 11.1282 0C8.91809 0.384937 6.76653 1.06228 4.72775 2.01494C0.680249 8.132 -0.416965 14.0971 0.131642 19.9776C2.50196 21.7665 5.15502 23.127 7.9755 24C8.61059 23.1275 9.17256 22.2018 9.65545 21.2329C8.73827 20.883 7.85302 20.4512 7.00995 19.9427C7.23183 19.7783 7.44884 19.609 7.65853 19.4446C10.1116 20.623 12.7891 21.234 15.4999 21.234C18.2108 21.234 20.8882 20.623 23.3414 19.4446C23.5535 19.6214 23.7705 19.7908 23.9899 19.9427C23.1452 20.4521 22.2584 20.8846 21.3396 21.2354C21.8219 22.2039 22.3839 23.1287 23.0195 24C25.8424 23.1305 28.4975 21.7707 30.8682 19.9801C31.5119 13.1606 29.7686 7.25031 26.26 2.00996ZM10.3504 16.3611C8.82157 16.3611 7.55856 14.944 7.55856 13.2005C7.55856 11.457 8.77769 10.0274 10.3455 10.0274C11.9133 10.0274 13.1665 11.457 13.1397 13.2005C13.1129 14.944 11.9084 16.3611 10.3504 16.3611ZM20.6495 16.3611C19.1183 16.3611 17.8602 14.944 17.8602 13.2005C17.8602 11.457 19.0793 10.0274 20.6495 10.0274C22.2198 10.0274 23.4633 11.457 23.4365 13.2005C23.4096 14.944 22.2076 16.3611 20.6495 16.3611Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+                <a target="_blank" href="https://www.linkedin.com/company/patoarchitekci/"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M22.2222 0C22.9589 0 23.6655 0.292658 24.1864 0.813592C24.7073 1.33453 25 2.04107 25 2.77778V22.2222C25 22.9589 24.7073 23.6655 24.1864 24.1864C23.6655 24.7073 22.9589 25 22.2222 25H2.77778C2.04107 25 1.33453 24.7073 0.813592 24.1864C0.292658 23.6655 0 22.9589 0 22.2222V2.77778C0 2.04107 0.292658 1.33453 0.813592 0.813592C1.33453 0.292658 2.04107 0 2.77778 0H22.2222ZM21.5278 21.5278V14.1667C21.5278 12.9658 21.0507 11.8142 20.2016 10.965C19.3525 10.1159 18.2008 9.63889 17 9.63889C15.8194 9.63889 14.4444 10.3611 13.7778 11.4444V9.90278H9.90278V21.5278H13.7778V14.6806C13.7778 13.6111 14.6389 12.7361 15.7083 12.7361C16.224 12.7361 16.7186 12.941 17.0833 13.3056C17.4479 13.6703 17.6528 14.1649 17.6528 14.6806V21.5278H21.5278ZM5.38889 7.72222C6.00773 7.72222 6.60122 7.47639 7.03881 7.03881C7.47639 6.60122 7.72222 6.00773 7.72222 5.38889C7.72222 4.09722 6.68056 3.04167 5.38889 3.04167C4.76637 3.04167 4.16934 3.28896 3.72915 3.72915C3.28896 4.16934 3.04167 4.76637 3.04167 5.38889C3.04167 6.68056 4.09722 7.72222 5.38889 7.72222ZM7.31944 21.5278V9.90278H3.47222V21.5278H7.31944Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+                <a target="_blank" href="https://www.facebook.com/patoarchitekci/"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M25 12.5C25 5.6 19.4 0 12.5 0C5.6 0 0 5.6 0 12.5C0 18.55 4.3 23.5875 10 24.75V16.25H7.5V12.5H10V9.375C10 6.9625 11.9625 5 14.375 5H17.5V8.75H15C14.3125 8.75 13.75 9.3125 13.75 10V12.5H17.5V16.25H13.75V24.9375C20.0625 24.3125 25 18.9875 25 12.5Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+                <a target="_blank" href="https://x.com/patoarchitekci"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.6875 0H23.5214L15.1464 9.59643L25 22.6571H17.2857L11.2393 14.7375L4.32857 22.6571H0.491071L9.44821 12.3893L0 0.00178569H7.91071L13.3679 7.23929L19.6875 0ZM18.3393 20.3571H20.4643L6.75 2.18036H4.47143L18.3393 20.3571Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+                <a target="_blank" href="https://www.instagram.com/"
+                    class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.25 0H17.75C21.75 0 25 3.25 25 7.25V17.75C25 19.6728 24.2362 21.5169 22.8765 22.8765C21.5169 24.2362 19.6728 25 17.75 25H7.25C3.25 25 0 21.75 0 17.75V7.25C0 5.32718 0.763837 3.48311 2.12348 2.12348C3.48311 0.763837 5.32718 0 7.25 0ZM7 2.5C5.80653 2.5 4.66193 2.97411 3.81802 3.81802C2.97411 4.66193 2.5 5.80653 2.5 7V18C2.5 20.4875 4.5125 22.5 7 22.5H18C19.1935 22.5 20.3381 22.0259 21.182 21.182C22.0259 20.3381 22.5 19.1935 22.5 18V7C22.5 4.5125 20.4875 2.5 18 2.5H7ZM19.0625 4.375C19.4769 4.375 19.8743 4.53962 20.1674 4.83265C20.4604 5.12567 20.625 5.5231 20.625 5.9375C20.625 6.3519 20.4604 6.74933 20.1674 7.04235C19.8743 7.33538 19.4769 7.5 19.0625 7.5C18.6481 7.5 18.2507 7.33538 17.9576 7.04235C17.6646 6.74933 17.5 6.3519 17.5 5.9375C17.5 5.5231 17.6646 5.12567 17.9576 4.83265C18.2507 4.53962 18.6481 4.375 19.0625 4.375ZM12.5 6.25C14.1576 6.25 15.7473 6.90848 16.9194 8.08058C18.0915 9.25268 18.75 10.8424 18.75 12.5C18.75 14.1576 18.0915 15.7473 16.9194 16.9194C15.7473 18.0915 14.1576 18.75 12.5 18.75C10.8424 18.75 9.25268 18.0915 8.08058 16.9194C6.90848 15.7473 6.25 14.1576 6.25 12.5C6.25 10.8424 6.90848 9.25268 8.08058 8.08058C9.25268 6.90848 10.8424 6.25 12.5 6.25ZM12.5 8.75C11.5054 8.75 10.5516 9.14509 9.84835 9.84835C9.14509 10.5516 8.75 11.5054 8.75 12.5C8.75 13.4946 9.14509 14.4484 9.84835 15.1517C10.5516 15.8549 11.5054 16.25 12.5 16.25C13.4946 16.25 14.4484 15.8549 15.1517 15.1517C15.8549 14.4484 16.25 13.4946 16.25 12.5C16.25 11.5054 15.8549 10.5516 15.1517 9.84835C14.4484 9.14509 13.4946 8.75 12.5 8.75Z"
+                            fill="CurrentColor" />
+                    </svg>
+                </a>
+            </div>
+            <img src="{{ .Site.BaseURL }}img/svg/hero-bottom-icon.svg" alt="hero-bottom-icon"
+                class="max-w-[60px] lg:max-w-[80px] mt-[9px] md:bottom-[45px] md:right-[45px]" />
+        </div>
+    </div>
+</header>

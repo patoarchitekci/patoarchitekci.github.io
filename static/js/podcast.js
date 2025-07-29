@@ -9,7 +9,7 @@ podcastData.forEach((data, index) => {
         <div class="relative video-wrapper max-w-max" data-index="${index}">
             <img width="400" height="300" src="${data.thumbnail}" alt="thumbnail"
                 class="md:rounded-[30px] rounded-2xl lg:max-w-[400px] md:max-w-[300px] max-w-[330px] xl:h-[300px] lg:h-[330px] md:h-[265px] h-[195px]" />
-            <img width="69" height="69" src="/assets/images/svg/play-btn.svg" alt="play"
+            <img width="69" height="69" src="/img/svg/play-btn.svg" alt="play"
                 class="rounded-full cursor-pointer sm:max-w-[69px] sm:h-[69px] max-sm:size-11 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 play-button" />
         </div>
         <div class="mb-0 max-lg:max-w-[550px]">
@@ -21,7 +21,7 @@ podcastData.forEach((data, index) => {
             <a href="/podcast.html">
             <button class="bg-white font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
                 <div class="bg-orange sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
-                    <img width="23" height="22" src="/assets/images/svg/arrow-icon.svg" class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+                    <img width="23" height="22" src="/img/svg/arrow-icon.svg" class="rounded-full lg:w-[22px] lg:h-5 size-4" />
                 </div>
                 Obejrzyj Podcast
             </button>
@@ -44,7 +44,7 @@ document.addEventListener("click", function (e) {
             currentPlayingVideo.innerHTML = `
         <img width="400" height="300" src="${currentData.thumbnail}" alt="thumbnail"
             class="md:rounded-[30px] rounded-2xl lg:max-w-[400px] md:max-w-[300px] max-w-[330px] xl:h-[300px] lg:h-[330px] md:h-[265px] h-[195px]" />
-        <img width="69" height="69" src="/assets/images/svg/play-btn.svg" alt="play"
+        <img width="69" height="69" src="/img/svg/play-btn.svg" alt="play"
             class="rounded-full cursor-pointer sm:max-w-[69px] sm:h-[69px] max-sm:size-11 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 play-button" />
         `;
             currentPlayingVideo.classList.remove("iframe-loading", "iframe-loaded");

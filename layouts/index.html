@@ -1,0 +1,463 @@
+{{ define "main" }}
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero">
+    <div class="bg-yellow pt-[111px] max-[400px]:pb-[100px] pb-[130px] sm:pb-[170px] md:pt-28 md:pb-[200px] lg:pt-[239px] lg:pb-[375px] relative max-lg:px-[30px] min-[2100px]:pb-[440px]">
+      <p
+        class="xl:max-w-[1201px] lg:mx-auto font-tomorrow font-medium text-xl sm:text-2xl md:text-3xl xl:text-5xl !leading-[113%] text-dark-black uppercase sm:max-w-[623px] lg:max-w-[769px]">
+        <span class="font-tomorrow uppercase font-semibold block">Patoarchitekci to podcast,</span>
+        który rozkłada IT na czynniki pierwsze, bez zbędnego żargonu i BS.
+        Prowadzą go Łukasz Kałużny i Szymon Warda – eksperci, którzy z humorem
+        i szczerością biorą na warsztat najtrudniejsze tematy technologiczne.
+      </p>
+      <img src="{{ .Site.BaseURL }}img/webp/cloud-1.webp" alt="cloud-1"
+        class="absolute bottom-[-1px] left-0 w-full max-h-[297px]" />
+       <img src="{{ .Site.BaseURL }}img/svg/top-right-ellipse.svg" alt="top-right-ellipse"
+        class="absolute top-[5%] lg:top-[8%] right-[8%] size-[41px] sm:size-[60px] lg:size-[105px] animate-float2 max-lg:hidden min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]
+" />
+      <img src="{{ .Site.BaseURL }}img/svg/top-right-ellipse.svg" alt="top-right-ellipse"
+        class="absolute top-[5%] lg:top-[8%] left-[5%] min size-[41px] sm:size-[60px] lg:size-[105px] lg:hidden animate-float2" />
+      <img src="{{ .Site.BaseURL }}img/svg/bottom-left-ellipse.svg" alt="bottom-left-ellipse"
+        class="size-[41px] sm:size-[60px] lg:size-[105px] absolute bottom-[17%] lg:bottom-[22%] min-[2100px]:bottom-[29%] right-[5%] lg:left-[8%] animate-float2 min-[2100px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,39%)]" />
+    </div>
+  </section>
+
+  <!-- ===== ABOUT PODCAST ===== -->
+  <section id="about-podcast" class="sm:pt-[64px] pt-10 relative overflow-x-clip">
+    <img src="{{ .Site.BaseURL }}img/png/talking-bottom-layer.png" alt="bottom-layer"
+      class="absolute bottom-[-2px] w-full max-h-[297px]" />
+    <img width="105" height="103" src="{{ .Site.BaseURL }}img/svg/top-right-ellipse.svg" alt="ellipse"
+      class="absolute xl:right-[120px] right-[100px] size-[105px] animate-float2 top-[89px] lg:block hidden min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]" />
+    <img src="{{ .Site.BaseURL }}img/svg/cross.svg" alt="ellipse" class="absolute right-[-62px] top-[212px] md:block hidden animate-float2 min-[2100px]:!right-[clamp(40px,39vw,23%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]" />
+    <div class="mx-auto max-w-[1536px]">
+      <p
+        class="font-tomorrow font-medium sm:text-2xl text-xs !leading-150 md:!leading-120 max-w-[614px] text-dark-black text-center mx-auto uppercase mb-0 px-[30px]">
+        Stworzyliśmy ten podcast, bo sami szukaliśmy miejsca, które łączy
+        wiedzę, praktykę i dystans do branży IT.
+      </p>
+      <p
+        class="font-tomorrow font-medium sm:text-2xl text-xs !leading-150 md:!leading-120 max-w-[592px] text-dark-black text-center mx-auto uppercase sm:mt-12 mt-5 sm:mb-8 mb-1 px-[30px]">
+        <span class="font-semibold">Każdy odcinek to dawka trendów,</span>
+        innowacji i konkretnych rozwiązań.
+      </p>
+      <img src="{{ .Site.BaseURL }}img/webp/two-people.webp" alt="two-people" class="max-sm:hidden" />
+      <img src="{{ .Site.BaseURL }}img/webp/two-people-sm.webp" alt="two-people" class="sm:hidden w-full" />
+    </div>
+  </section>
+
+  <!-- ===== LATEST EPISODES ===== -->
+  <section id="latest-episodes"
+    class="bg-dark-black md:pt-[22px] pt-10 lg:pb-[301px] sm:pb-48 pb-36 max-[450px]:pb-24 -mt-[1px] relative overflow-x-clip ">
+    <img src="{{ .Site.BaseURL }}img/png/podcast-top-ellipse.png"
+      class="absolute bottom-[-11px] z-[1] max-h-[297px] w-full" />
+    <div class="xl:px-[100px] lg:px-7 px-[30px] mx-auto max-w-[1536px]">
+      <p
+        class="font-medium lg:text-custom-6xl sm:text-5xl text-4xl md:!leading-[74%] !leading-100 text-white font-tomorrow sm:mb-[30px] mb-7 md:ps-[50px]">
+        ODCINKI
+      </p>
+      <!-- Episodes list - last 5 episodes -->
+      {{ range first 5 (where .Site.RegularPages "Type" "episodes") }}
+      <div class="flex flex-col md:flex-row sm:gap-[30px] gap-5 md:py-10 lg:py-[50px] py-7 md:items-center">
+        <div class="relative video-wrapper max-w-max">
+          <a href="{{ .Permalink }}" class="block relative">
+            <img width="400" height="300" src="{{ .Params.og_landscape }}" alt="thumbnail"
+              class="md:rounded-[30px] rounded-2xl lg:max-w-[400px] md:max-w-[300px] max-w-[330px] xl:h-[300px] lg:h-[330px] md:h-[265px] h-[195px]" />
+            <img width="69" height="69" src="{{ $.Site.BaseURL }}img/svg/play-btn.svg" alt="play"
+              class="rounded-full cursor-pointer sm:max-w-[69px] sm:h-[69px] max-sm:size-11 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 play-button hover:scale-110 transition-transform duration-200" />
+          </a>
+        </div>
+        <div class="mb-0 max-lg:max-w-[550px]">
+          <a href="{{ .Permalink }}" class="block">
+            <h2 class="font-tomorrow font-semibold lg:text-4xl custom-md:text-custom-3xl sm:text-2xl text-xl !leading-119 text-orange lg:mb-5 mb-2.5 uppercase hover:text-orange-400 transition-colors duration-200 cursor-pointer">{{ .Title }}</h2>
+          </a>
+          <div class="font-normal lg:text-base sm:text-sm text-xs text-white sm:!leading-119 !leading-125 xl:mb-9 lg:mb-7 mb-4 max-w-[805px] [&>p]:m-0">{{ .Params.intro | markdownify | truncate 200 | safeHTML }}</div>
+          <div class="flex flex-wrap items-center gap-1 lg:mb-10 mb-5">
+            {{ range .Params.tags }}
+            <span class="font-normal sm:text-sm text-custom-xs sm:!leading-100 leading-120 text-orange">{{ . }}</span>
+            {{ end }}
+          </div>
+          <a href="{{ .Permalink }}">
+            <button class="bg-white font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+              <div class="bg-orange sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+                <img width="23" height="22" src="{{ $.Site.BaseURL }}img/svg/arrow-icon.svg" class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+              </div>
+              Obejrzyj Podcast
+            </button>
+          </a>
+        </div>
+      </div>
+      {{ end }}
+      <a href="/odcinki/">
+        <button
+          class="font-semibold sm:text-2xl lg:mt-5 text-lg md:!leading-72 !leading-110 text-white border-2 border-solid border-white rounded-full py-3 sm:px-[66px] px-10 uppercase max-md:mx-auto hover:bg-white hover:text-dark-black transition-all duration-300">
+          Wszystkie Odcinki
+        </button>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== SUBSCRIBE PODCAST ===== -->
+  <section id="subscribe-podcast" class="md:pt-[102px] sm:pt-20 pt-10 md:pb-[147px] sm:pb-24 pb-[45px] relative">
+    <img src="{{ .Site.BaseURL }}img/svg/one-star.svg"
+      class="absolute top-[-10%] md:top-[-19%] z-10 right-[100px] sm:right-[156px] md:right-[206px] lg:right-[306px] size-[28px] sm:size-[50px] lg:size-[74px] animate-float1 min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]" />
+    <img src="{{ .Site.BaseURL }}img/svg/cross.svg" width="105" height="105"
+      class="absolute lg:top-0 z-10 bottom-[6%] xl:right-[145px] lg:right-[100px] max-lg:left-[30px] max-lg:size-12 animate-float2 min-[2100px]:!right-[clamp(40px,39vw,23%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]" />
+    <div class="px-[30px] mx-auto max-w-[1210px]">
+      <h2
+        class="font-tomorrow font-semibold lg:text-custom-4xl sm:text-4xl text-2xl sm:!leading-72 !leading-110 text-dark-black text-center xl:mb-[95px] md:mb-20 sm:mb-16 mb-8">
+        SUBSKRYBUJ PODCAST
+      </h2>
+      <div class="flex flex-wrap items-center justify-center xl:gap-[50px] lg:gap-5 gap-7">
+        <a href="https://www.youtube.com/c/PatoArchitekci/videos" target="_blank"
+          class="sm:border-2 border-[1.12px] border-solid border-dark-black flex justify-center sm:rounded-[30px] rounded-2xl sm:py-7 py-4 px-9 xl:min-w-[350px] sm:min-w-[300px] min-w-[196px] w-fit group bg-white z-10">
+          <svg class="max-lg:w-[135px] max-sm:w-[86px] max-sm:h-[23px]" width="152" height="40" viewBox="0 0 177 40"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M55.1344 6.18276C54.8111 4.98762 54.1802 3.89806 53.3047 3.02261C52.4292 2.14716 51.3396 1.51638 50.1444 1.1931C45.7689 0 28.1607 0 28.1607 0C28.1607 0 10.5517 0.0362069 6.17686 1.22931C4.98176 1.55264 3.89223 2.18345 3.01678 3.05889C2.14134 3.93433 1.51054 5.02387 1.1872 6.21897C-0.136245 13.9931 -0.649693 25.8383 1.22341 33.301C1.54674 34.4961 2.17755 35.5857 3.05299 36.4611C3.92843 37.3366 5.01797 37.9674 6.21307 38.2907C10.5882 39.4838 28.1969 39.4838 28.1969 39.4838C28.1969 39.4838 45.8055 39.4838 50.1807 38.2907C51.3758 37.9674 52.4653 37.3366 53.3407 36.4611C54.2162 35.5857 54.847 34.4961 55.1703 33.301C56.5658 25.5162 56.9962 13.6783 55.1341 6.1831"
+              fill="#FF0000" class="group-hover:fill-black transition-all ease-linear duration-300" />
+            <path d="M22.5562 28.203L37.1637 19.7423L22.5562 11.2812V28.203Z" fill="white" />
+            <path
+              d="M169.392 11.4619C171.308 11.4619 172.754 11.8233 173.767 12.5102C174.779 13.1973 175.503 14.2822 175.937 15.7647C176.37 17.2471 176.551 19.2716 176.551 21.875V26.1057H167.259V27.4071L167.403 30.9868C167.512 31.7823 167.693 32.3609 167.982 32.7223C168.271 33.084 168.741 33.2647 169.356 33.2647C170.188 33.2647 170.766 32.9395 171.055 32.2888C171.381 31.6378 171.525 30.553 171.561 29.0705L176.37 29.3599C176.407 29.5768 176.407 29.8661 176.407 30.2274C176.407 32.5054 175.792 34.205 174.526 35.3257C173.261 36.4464 171.525 37.025 169.247 37.025C166.499 37.025 164.583 36.1574 163.498 34.4581C162.414 32.7585 161.835 30.0826 161.835 26.5033V22.1281C161.958 15.9816 163.039 11.4799 169.392 11.4619ZM102.537 11.9319V30.0468C102.537 31.1316 102.645 31.9271 102.898 32.3971C103.412 33.4023 104.742 33.1454 105.466 32.6502C105.883 32.3679 106.219 31.9816 106.442 31.5295V11.9316H111.974V36.6271H107.635L107.165 33.5899H107.057C105.863 35.8678 104.091 37.0247 101.741 37.0247C98.1241 37.0157 97.239 34.4095 97.0283 31.7626L97.0145 31.5761C96.9884 31.1752 96.9731 30.7736 96.9686 30.3719V11.9319H102.537ZM131.065 11.9319V30.0468C131.065 31.1316 131.173 31.9271 131.427 32.3971C131.94 33.4023 133.271 33.1454 133.994 32.6502C134.411 32.3679 134.748 31.9816 134.97 31.5295V11.9316H140.502V36.6271H136.163L135.693 33.5899H135.585C134.392 35.8678 132.62 37.0247 130.27 37.0247C126.652 37.0157 125.767 34.4095 125.557 31.7626L125.543 31.5761C125.517 31.1752 125.501 30.7736 125.497 30.3719V11.9319H131.065ZM86.4828 11.4619C88.2907 11.4619 89.7731 11.8233 90.8579 12.5826C91.9424 13.3419 92.7741 14.4992 93.2803 16.0899C93.7865 17.6809 94.0396 19.814 94.0396 22.4537V26.033C94.0396 28.6726 93.7865 30.7699 93.2803 32.3605C92.7741 33.9519 91.9786 35.1088 90.8579 35.8681C89.7372 36.5912 88.2183 36.9888 86.3383 36.9888C84.3855 37.025 82.8669 36.6274 81.7462 35.9043C80.6255 35.145 79.8296 33.9878 79.36 32.3971C78.8896 30.8061 78.6728 28.7088 78.6728 26.0695V22.4895C78.6728 19.8499 78.9259 17.6805 79.4683 16.0895C80.0107 14.4626 80.8421 13.3054 81.9993 12.5826C83.1562 11.8592 84.6386 11.4616 86.4828 11.4616M149.18 1.55469V14.5712H149.216C149.722 13.6312 150.373 12.8719 151.277 12.2933C152.122 11.7259 153.116 11.4238 154.133 11.4257C155.471 11.4257 156.484 11.7871 157.243 12.474C158.002 13.1974 158.545 14.3181 158.87 15.873C159.186 17.3792 159.365 19.4623 159.376 22.0892L159.376 22.3454V26.2502C159.376 29.9019 158.906 32.614 158.038 34.3495C157.135 36.085 155.761 36.953 153.88 36.953C152.832 36.953 151.892 36.6999 151.024 36.2299C150.257 35.7824 149.621 35.1412 149.179 34.3706L149.108 34.2409H148.999L148.421 36.5912H143.829V1.55503L149.18 1.55469ZM127.051 2.8202V7.30331H121.556V36.6271H116.132V7.30365H110.6V2.82055L127.051 2.8202ZM67.4276 2.8202L67.431 2.834C67.4838 3.06883 68.2148 6.31883 69.019 10.1054L69.0824 10.4054L69.1783 10.8588L69.2424 11.1633L69.2745 11.3161L69.3386 11.6223L69.3707 11.7757L69.4345 12.083L69.5276 12.5323C70.0707 15.1543 70.589 17.784 70.899 19.6695H71.0438C71.3407 17.9781 71.7721 15.8137 72.2321 13.6037L72.3528 13.0264C72.4132 12.7372 72.4741 12.4485 72.5355 12.1602L72.63 11.713C73.2546 8.78429 73.898 5.85963 74.56 2.93917L74.5703 2.89262L74.5869 2.8202H80.119L73.719 25.6357V36.5912H68.2593V25.6716H68.2231L61.8955 2.81986L67.4276 2.8202ZM86.3741 15.2943C85.6148 15.2943 85.1086 15.6923 84.7834 16.524C84.4583 17.3557 84.3134 18.6209 84.3134 20.393V28.0943C84.3134 29.9023 84.4579 31.2399 84.7472 32.0357C85.0367 32.8311 85.579 33.2288 86.3741 33.2288C87.1334 33.2288 87.6759 32.8311 88.0014 32.0357C88.3269 31.2399 88.4714 29.9023 88.4714 28.0943V20.3926C88.4714 18.6209 88.3265 17.3192 88.0014 16.5237C87.6759 15.6923 87.1334 15.2943 86.3741 15.2943ZM150.156 16.0178C149.716 16.4247 149.402 16.9264 149.216 17.5537L149.18 17.6809V31.7099C149.628 32.4692 150.265 32.9754 151.386 33.0116C151.964 33.0116 152.434 32.7947 152.796 32.3609C153.157 31.9271 153.41 31.2039 153.555 30.1912C153.694 29.2195 153.766 27.8811 153.772 26.1761V22.743C153.772 20.7906 153.699 19.3081 153.591 18.2595C153.446 17.2109 153.266 16.4516 152.94 16.0178C152.311 15.1137 150.952 15.1247 150.156 16.0178ZM169.284 15.1861C168.669 15.2222 168.235 15.403 167.982 15.7285C167.693 16.0899 167.512 16.6323 167.403 17.4278C167.297 18.2071 167.26 20.9312 167.259 21.0402V22.8154H171.308V21.2499V21.2799C171.306 21.8271 171.294 20.9623 171.27 19.9006L171.266 19.7578C171.243 18.8247 171.21 17.7843 171.164 17.4278C171.055 16.5961 170.874 16.0174 170.585 15.6923C170.296 15.3668 169.862 15.1861 169.283 15.1861"
+              fill="#282828" class="group-hover:fill-black transition-all ease-linear duration-300" />
+          </svg>
+        </a>
+        <a href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J" target="_blank"
+          class="sm:border-2 border-[1.12px] border-solid border-dark-black flex justify-center sm:rounded-[30px] rounded-2xl sm:py-7 py-4 px-9 xl:min-w-[350px] sm:min-w-[300px] min-w-[196px] w-fit group bg-white z-10">
+          <svg class="max-sm:max-w-[99px] max-sm:h-[23px]" width="126" height="40" viewBox="0 0 126 40" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.488 0C8.72536 0 0 8.91575 0 19.9135C0 30.9118 8.72536 39.8268 19.488 39.8268C30.2518 39.8268 38.9762 30.9118 38.9762 19.9135C38.9762 8.9165 30.2518 0.001 19.4877 0.001L19.488 0ZM28.4252 28.721C28.342 28.8603 28.2328 28.9814 28.1038 29.0775C27.9747 29.1735 27.8284 29.2426 27.6732 29.2809C27.518 29.3191 27.3569 29.3257 27.1992 29.3002C27.0416 29.2747 26.8903 29.2178 26.7542 29.1325C22.1787 26.2765 16.4185 25.6297 9.63499 27.2135C9.32088 27.2865 8.99126 27.2291 8.71858 27.0538C8.44589 26.8786 8.25244 26.5999 8.18076 26.279C8.1451 26.1201 8.14046 25.9556 8.16708 25.7949C8.19371 25.6341 8.25109 25.4804 8.33594 25.3423C8.42079 25.2043 8.53145 25.0847 8.66157 24.9904C8.7917 24.8961 8.93875 24.8289 9.0943 24.7927C16.5179 23.0595 22.8855 23.8057 28.0225 27.0138C28.1587 27.0988 28.2772 27.2105 28.3711 27.3423C28.4651 27.4742 28.5327 27.6237 28.5701 27.7823C28.6074 27.9408 28.6139 28.1054 28.589 28.2665C28.5641 28.4276 28.5083 28.5822 28.4249 28.7213M30.8103 23.299C30.3702 24.0295 29.4349 24.2602 28.7202 23.8107C23.4822 20.5207 15.4969 19.5677 9.30103 21.4897C8.91535 21.609 8.49914 21.567 8.14369 21.3731C7.78825 21.1791 7.52258 20.8491 7.40496 20.4552C7.2887 20.0612 7.33005 19.6361 7.51996 19.2732C7.70986 18.9103 8.03283 18.639 8.41808 18.519C15.4957 16.3245 24.2942 17.3875 30.3098 21.1647C31.0242 21.6142 31.25 22.5702 30.8101 23.2992M31.0146 17.653C24.7346 13.8405 14.3715 13.49 8.37477 15.35C7.41181 15.6485 6.39356 15.093 6.10193 14.109C5.96163 13.6363 6.01077 13.126 6.23856 12.6903C6.46634 12.2546 6.85412 11.9291 7.31664 11.7855C14.2005 9.65 25.6442 10.0625 32.8755 14.4493C33.0816 14.5738 33.2616 14.7387 33.4053 14.9345C33.5489 15.1303 33.6533 15.3531 33.7125 15.5902C33.7718 15.8273 33.7846 16.074 33.7504 16.3162C33.7162 16.5583 33.6355 16.7912 33.513 17.0015C33.0012 17.8865 31.8795 18.1782 31.0161 17.6528L31.0146 17.653ZM53.0198 18.3835C49.6549 17.5635 49.0569 16.9883 49.0569 15.779C49.0569 14.6365 50.1087 13.8678 51.6747 13.8678C53.1921 13.8678 54.6955 14.4517 56.2732 15.6535C56.3197 15.6897 56.3802 15.7042 56.4384 15.6947C56.4676 15.6903 56.4957 15.6799 56.5209 15.6641C56.5461 15.6484 56.568 15.6276 56.5852 15.603L58.228 13.2365C58.2605 13.1896 58.2743 13.1318 58.2665 13.0749C58.2587 13.018 58.23 12.9663 58.1862 12.9303C56.3082 11.391 54.1952 10.6427 51.7236 10.6427C48.091 10.6427 45.5522 12.8705 45.5522 16.0583C45.5522 19.4765 47.7419 20.687 51.526 21.6213C54.7444 22.379 55.2888 23.0138 55.2888 24.1488C55.2888 25.4067 54.1903 26.189 52.4219 26.189C50.4578 26.189 48.8543 25.5115 47.0625 23.9275C47.0178 23.8889 46.9604 23.8694 46.902 23.873C46.8729 23.8752 46.8446 23.8832 46.8186 23.8966C46.7926 23.91 46.7695 23.9286 46.7506 23.9513L44.9076 26.1912C44.8706 26.2362 44.8521 26.294 44.856 26.3526C44.8599 26.4112 44.886 26.4659 44.9286 26.5053C47.0136 28.4078 49.578 29.4112 52.3473 29.4112C56.2617 29.4112 58.7912 27.2257 58.7912 23.842C58.7981 20.9867 57.1251 19.4055 53.0269 18.3867L53.0198 18.3835ZM67.6482 14.9925C65.9518 14.9925 64.5602 15.6755 63.4106 17.075V15.5C63.4106 15.3755 63.3127 15.2743 63.1918 15.2743H60.1782C60.12 15.2746 60.0643 15.2986 60.0233 15.3409C59.9823 15.3831 59.9593 15.4402 59.9595 15.4998V33.002C59.9595 33.1255 60.0573 33.2277 60.1782 33.2277H63.1918C63.2501 33.2274 63.3058 33.2034 63.3468 33.1611C63.3878 33.1187 63.4108 33.0615 63.4106 33.002V27.4778C64.5602 28.7928 65.9518 29.4373 67.648 29.4373C70.8016 29.4373 73.9943 26.9572 73.9943 22.2157C73.999 17.4732 70.806 14.9923 67.6504 14.9923L67.6482 14.9925ZM70.4896 22.2157C70.4896 24.629 69.0352 26.315 66.95 26.315C64.8905 26.315 63.3359 24.553 63.3359 22.2157C63.3359 19.8783 64.8905 18.1165 66.95 18.1165C69.0002 18.1165 70.4896 19.84 70.4896 22.2157ZM82.1741 14.9923C78.1133 14.9923 74.9321 18.1873 74.9321 22.2673C74.9321 26.303 78.0923 29.4632 82.1252 29.4632C86.1999 29.4632 89.3904 26.2792 89.3904 22.2155C89.3904 18.1655 86.2209 14.993 82.1741 14.993V14.9923ZM82.1741 26.3385C80.0145 26.3385 78.3856 24.5645 78.3856 22.2143C78.3856 19.8533 79.9587 18.1397 82.1252 18.1397C84.2987 18.1397 85.9369 19.913 85.9369 22.2658C85.9369 24.6265 84.3545 26.3385 82.1741 26.3385ZM98.0612 15.274H94.7452V11.81C94.7452 11.6858 94.6473 11.5845 94.5265 11.5845H91.513C91.4545 11.5846 91.3984 11.6084 91.357 11.6507C91.3155 11.6929 91.2921 11.7502 91.2919 11.81V15.2738H89.8445C89.7863 15.2741 89.7306 15.2981 89.6896 15.3404C89.6486 15.3826 89.6257 15.4397 89.6258 15.4993V18.1453C89.6256 18.2048 89.6485 18.262 89.6895 18.3043C89.7305 18.3466 89.7862 18.3706 89.8445 18.371H91.2919V25.2185C91.2919 27.984 92.6394 29.387 95.2993 29.387C96.379 29.387 97.2749 29.1585 98.1197 28.6688C98.1539 28.6496 98.1823 28.6214 98.202 28.587C98.2217 28.5527 98.2319 28.5135 98.2315 28.4737V25.953C98.2312 25.9149 98.2215 25.8774 98.2032 25.8442C98.1849 25.8109 98.1586 25.783 98.1268 25.763C98.0951 25.7421 98.0586 25.7302 98.0209 25.7285C97.9833 25.7268 97.9459 25.7353 97.9125 25.7533C97.3331 26.0508 96.7724 26.1885 96.1439 26.1885C95.1782 26.1885 94.7454 25.739 94.7454 24.7355V18.3725H98.0615C98.1198 18.3721 98.1755 18.3481 98.2165 18.3058C98.2575 18.2635 98.2804 18.2063 98.2802 18.1467V15.5007C98.2812 15.4712 98.2763 15.4418 98.2659 15.4143C98.2554 15.3867 98.2396 15.3617 98.2194 15.3406C98.1992 15.3194 98.1749 15.3028 98.1482 15.2915C98.1215 15.2802 98.0928 15.2746 98.0639 15.275L98.0612 15.274ZM109.613 15.2875V14.862C109.613 13.6105 110.083 13.0525 111.135 13.0525C111.764 13.0525 112.268 13.18 112.834 13.3725C112.867 13.3839 112.902 13.387 112.937 13.3816C112.971 13.3761 113.004 13.3624 113.032 13.3414C113.061 13.3204 113.084 13.2928 113.099 13.2609C113.115 13.229 113.123 13.1937 113.123 13.158L113.122 10.5638C113.123 10.5153 113.108 10.4679 113.08 10.4289C113.052 10.3899 113.012 10.3613 112.967 10.3475C112.371 10.166 111.608 9.98 110.463 9.98C107.682 9.98 106.208 11.5813 106.208 14.609V15.2605H104.761C104.703 15.2606 104.646 15.2844 104.605 15.3267C104.564 15.3689 104.54 15.4262 104.54 15.486V18.1455C104.54 18.2698 104.64 18.3713 104.761 18.3713H106.208V28.9305C106.208 29.0565 106.309 29.1565 106.43 29.1565H109.441C109.564 29.1565 109.662 29.0565 109.662 28.9305V18.3717H112.476L116.785 28.9303C116.297 30.0385 115.815 30.2595 115.158 30.2595C114.628 30.2595 114.067 30.098 113.497 29.777C113.443 29.7491 113.381 29.7431 113.323 29.7603C113.294 29.7702 113.267 29.7861 113.245 29.807C113.223 29.8278 113.205 29.8532 113.192 29.8815L112.171 32.1715C112.147 32.2235 112.144 32.2827 112.162 32.3371C112.179 32.3914 112.217 32.4368 112.266 32.464C113.332 33.0537 114.293 33.3058 115.482 33.3058C117.707 33.3058 118.938 32.2453 120.02 29.3965L125.247 15.5955C125.26 15.5614 125.265 15.5243 125.261 15.4877C125.257 15.4511 125.244 15.4161 125.224 15.386C125.204 15.3558 125.177 15.3311 125.146 15.314C125.115 15.2969 125.08 15.288 125.044 15.288H121.907C121.861 15.2877 121.816 15.3021 121.779 15.3293C121.741 15.3564 121.713 15.3948 121.698 15.4392L118.484 24.8165L114.965 15.433C114.95 15.3905 114.922 15.3539 114.885 15.3281C114.848 15.3022 114.805 15.2882 114.761 15.288H109.613V15.2875ZM102.916 15.274H99.902C99.8435 15.2743 99.7875 15.2981 99.7462 15.3403C99.7048 15.3825 99.6814 15.4398 99.6811 15.4995V28.9305C99.6811 29.0565 99.7812 29.1565 99.902 29.1565H102.916C103.037 29.1565 103.137 29.0565 103.137 28.9305V15.5005C103.137 15.4708 103.131 15.4414 103.12 15.4139C103.109 15.3865 103.093 15.3615 103.072 15.3406C103.052 15.3196 103.027 15.303 103 15.2917C102.974 15.2804 102.945 15.2746 102.916 15.2747V15.274ZM101.426 9.158C100.232 9.158 99.2644 10.1455 99.2644 11.365C99.2644 11.6551 99.3203 11.9424 99.4289 12.2104C99.5376 12.4784 99.6968 12.7219 99.8975 12.9271C100.098 13.1322 100.337 13.2949 100.599 13.4059C100.861 13.5169 101.142 13.574 101.426 13.574C102.62 13.574 103.586 12.5855 103.586 11.365C103.586 10.7798 103.358 10.2185 102.953 9.80465C102.548 9.39079 101.999 9.1582 101.426 9.158Z"
+              fill="#1ED760" class="group-hover:fill-black transition-all ease-linear duration-300" />
+          </svg>
+        </a>
+        <a href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604" target="_blank"
+          class="sm:border-2 border-[1.12px] border-solid border-dark-black flex justify-center sm:rounded-[30px] rounded-2xl sm:py-7 py-4 px-9 xl:min-w-[350px] sm:min-w-[300px] min-w-[196px] w-fit group bg-white z-10">
+          <svg class="max-sm:w-[120px] sm:max-sm:max-w-[99px] max-sm:h-[23px]" width="214" height="40"
+            viewBox="0 0 214 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M57.7212 21.8648H51.1997L49.6346 26.489H46.8716L53.0486 9.38035H55.9174L62.0944 26.489H59.2844L57.7212 21.8648ZM51.8748 19.7313H57.0442L54.4951 12.2259H54.4239L51.8748 19.7313ZM75.7445 20.2532C75.7445 24.1297 73.6684 26.6194 70.5391 26.6194C68.76 26.6194 67.351 25.8248 66.6147 24.4362H66.5554V30.6136H63.994V14.0136H66.4719V16.0896H66.5179C67.2291 14.7499 68.7472 13.8855 70.4902 13.8855C73.658 13.8855 75.7445 16.388 75.7445 20.2532ZM73.1133 20.2532C73.1133 17.7273 71.8091 16.0678 69.8175 16.0678C67.8615 16.0678 66.5449 17.7634 66.5449 20.2532C66.5449 22.7667 67.8615 24.4513 69.8175 24.4513C71.8091 24.4494 73.1133 22.8003 73.1133 20.2532ZM89.5701 20.2532C89.5701 24.1297 87.4945 26.6194 84.3647 26.6194C82.5856 26.6194 81.1761 25.8248 80.4403 24.4362H80.3815V30.6136H77.8201V14.0136H80.2975V16.0896H80.3435C81.0547 14.7499 82.5728 13.8855 84.3163 13.8855C87.4822 13.8855 89.5701 16.388 89.5701 20.2532ZM86.9375 20.2532C86.9375 17.7273 85.6333 16.0678 83.6417 16.0678C81.6857 16.0678 80.3691 17.7634 80.3691 20.2532C80.3691 22.7667 81.6857 24.4513 83.6417 24.4513C85.6329 24.4494 86.9375 22.8003 86.9375 20.2532ZM91.7387 9.38035H94.3001V26.489H91.7387V9.38035ZM108.155 22.8255C107.811 25.0904 105.606 26.6432 102.783 26.6432C99.1553 26.6432 96.9028 24.2118 96.9028 20.3125C96.9028 16.4004 99.1681 13.8617 102.676 13.8617C106.127 13.8617 108.296 16.2324 108.296 20.0155V20.8927H99.4855V21.0464C99.4855 23.1804 100.825 24.5794 102.841 24.5794C104.262 24.5794 105.377 23.9039 105.722 22.825L108.155 22.8255ZM99.4998 19.1027H105.736C105.677 17.1931 104.456 15.9378 102.678 15.9378C100.909 15.9378 99.6283 17.2164 99.4998 19.1027ZM122.894 9.38035C126.214 9.38035 128.527 11.6685 128.527 14.9999C128.527 18.3436 126.167 20.6427 122.813 20.6427H119.137V26.4871H116.48V9.37988L122.894 9.38035ZM119.136 18.4153H122.184C124.495 18.4153 125.811 17.1704 125.811 15.0127C125.811 12.8546 124.495 11.622 122.196 11.622H119.138V18.4153H119.136ZM129.727 20.2532C129.727 16.3287 132.038 13.8617 135.643 13.8617C139.258 13.8617 141.558 16.3268 141.558 20.2532C141.558 24.1899 139.27 26.6446 135.643 26.6446C132.015 26.6451 129.727 24.188 129.727 20.2532ZM138.951 20.2532C138.951 17.5613 137.719 15.9734 135.643 15.9734C133.568 15.9734 132.335 17.5736 132.335 20.2532C132.335 22.9555 133.568 24.5329 135.643 24.5329C137.719 24.5329 138.951 22.9555 138.951 20.2532ZM143.333 20.2532C143.333 16.4004 145.455 13.8874 148.549 13.8874C150.339 13.8874 151.75 14.7157 152.461 16.0915H152.507V9.38083H155.08V26.489H152.59V24.3678H152.544C151.807 25.7897 150.385 26.6204 148.571 26.6204C145.455 26.6194 143.333 24.1064 143.333 20.2532ZM145.951 20.2532C145.951 22.8146 147.256 24.4513 149.248 24.4513C151.216 24.4513 152.531 22.7913 152.531 20.2532C152.531 17.7402 151.214 16.0678 149.248 16.0678C147.256 16.0659 145.951 17.715 145.951 20.2532ZM166.193 18.308C165.968 16.992 164.936 16.0076 163.253 16.0076C161.284 16.0076 159.981 17.6557 159.981 20.2518C159.981 22.9076 161.297 24.5078 163.276 24.5078C164.866 24.5078 165.909 23.7131 166.193 22.268H168.66C168.375 24.8883 166.277 26.6427 163.253 26.6427C159.697 26.6427 157.373 24.2118 157.373 20.2518C157.373 16.3752 159.696 13.8603 163.23 13.8603C166.431 13.8603 168.422 15.8752 168.637 18.3061H166.194L166.193 18.308ZM170.28 22.9199C170.28 20.739 171.953 19.4585 175.059 19.2687L178.378 19.0794V18.1311C178.378 16.7197 177.442 15.962 175.816 15.962C174.476 15.962 173.493 16.6495 173.29 17.716H170.895C170.966 15.4871 173.053 13.8627 175.888 13.8627C178.946 13.8627 180.925 15.4634 180.925 17.9408V26.4899H178.473V24.4395H178.413C177.713 25.7792 176.159 26.6683 174.477 26.6683C171.999 26.6678 170.28 25.1364 170.28 22.9199ZM178.377 21.8178V20.8571L175.389 21.0464C173.729 21.1408 172.853 21.7818 172.853 22.8606C172.853 23.9039 173.765 24.6397 175.189 24.6397C177.002 24.6387 178.377 23.4309 178.377 21.8178ZM188.415 13.8727C191.176 13.8727 193.155 15.4013 193.216 17.6073H190.809C190.701 16.5057 189.766 15.8282 188.342 15.8282C186.956 15.8282 186.031 16.4678 186.031 17.4413C186.031 18.188 186.648 18.6866 187.939 19.0064L190.038 19.4922C192.551 20.0957 193.499 21.0208 193.499 22.8468C193.499 25.0994 191.365 26.6403 188.317 26.6403C185.377 26.6403 183.398 25.135 183.209 22.8573H185.745C185.924 24.0538 186.885 24.6952 188.437 24.6952C189.966 24.6952 190.929 24.0661 190.929 23.0717C190.929 22.2998 190.454 21.8857 189.15 21.5526L186.922 21.008C184.669 20.4614 183.53 19.3129 183.53 17.5817C183.529 15.3809 185.508 13.8727 188.415 13.8727ZM199.164 11.0646V14.0155H201.535V16.0431H199.164V22.9204C199.164 23.9883 199.639 24.4855 200.683 24.4855C200.944 24.4855 201.358 24.4494 201.524 24.4262V26.4411C201.24 26.5127 200.67 26.5587 200.102 26.5587C197.577 26.5587 196.592 25.6108 196.592 23.1917V16.0431H194.777V14.0155H196.592V11.0646H199.164ZM208.405 13.8727C211.167 13.8727 213.146 15.4013 213.206 17.6073H210.8C210.692 16.5057 209.757 15.8282 208.334 15.8282C206.947 15.8282 206.022 16.4678 206.022 17.4413C206.022 18.188 206.638 18.6866 207.93 19.0064L210.028 19.4922C212.541 20.0957 213.49 21.0208 213.49 22.8468C213.49 25.0994 211.355 26.6403 208.308 26.6403C205.368 26.6403 203.389 25.135 203.2 22.8573H205.736C205.915 24.0538 206.876 24.6952 208.428 24.6952C209.957 24.6952 210.92 24.0661 210.92 23.0717C210.92 22.2998 210.445 21.8857 209.141 21.5526L206.912 21.008C204.659 20.4614 203.522 19.3129 203.522 17.5817C203.519 15.3809 205.498 13.8727 208.405 13.8727Z"
+              fill="#3C4043" class="group-hover:fill-black transition-all ease-linear duration-300" />
+            <path
+              d="M39.2096 34.6694C38.2271 36.9974 36.2558 38.7655 33.8349 39.4905C32.5506 39.871 30.9698 40 29.0015 40H11.0014C9.03301 40 7.45176 39.871 6.16797 39.4905C3.74462 38.7693 1.77244 37.0002 0.793235 34.6694C0.00901445 32.6796 0 30.4214 0 28.9996V10.9995C0 9.57765 0.00759044 7.31987 0.791336 5.33014C1.77387 3.00167 3.74509 1.23398 6.16607 0.508584C7.45081 0.128097 9.03111 0 10.9995 0H29C30.9684 0 32.5492 0.128097 33.8334 0.508584C36.2568 1.22971 38.229 2.9993 39.2082 5.33014C39.991 7.31987 39.9995 9.57765 39.9995 10.9995V28.9991C40.0014 30.4214 39.9919 32.6796 39.2096 34.6694Z"
+              fill="url(#paint0_linear_1149_573)"
+              class="group-hover:fill-black transition-all ease-linear duration-300" />
+            <path
+              d="M22.9014 22.9911C22.3008 22.3582 21.2476 21.9507 20.0027 21.9507C18.7578 21.9507 17.7036 22.3563 17.1035 22.9911C16.796 23.3 16.6077 23.7084 16.5731 24.1425C16.4711 25.0767 16.528 25.8827 16.6376 27.1689C16.741 28.3948 16.9393 30.0306 17.1984 31.6953C17.3824 32.88 17.5324 33.5195 17.668 33.9783C17.8882 34.7198 18.7132 35.3697 20.0027 35.3697C21.2922 35.3697 22.1157 34.7212 22.3373 33.9783C22.473 33.5204 22.6234 32.8814 22.807 31.6953C23.066 30.0306 23.2643 28.3962 23.3682 27.1689C23.4769 25.8827 23.5338 25.0776 23.4323 24.1425C23.3976 23.708 23.2098 23.3 22.9014 22.9911ZM16.7315 17.3512C16.7315 19.1597 18.1975 20.6256 20.0055 20.6256C21.8135 20.6256 23.2795 19.1602 23.2795 17.3512C23.2795 15.5432 21.8135 14.0772 20.0055 14.0772C18.1975 14.0772 16.7315 15.5432 16.7315 17.3512ZM19.9647 4.4317C12.309 4.45305 6.03519 10.6642 5.94031 18.3199C5.86345 24.5216 9.82203 29.8271 15.3505 31.7703C15.4492 31.8049 15.5573 31.7532 15.592 31.6541C15.6019 31.6256 15.6048 31.5952 15.601 31.5649C15.5274 31.0833 15.4596 30.6004 15.397 30.1241C15.3761 29.9561 15.2679 29.8119 15.1133 29.7436C10.6001 27.7742 7.69899 23.3014 7.74122 18.3774C7.80574 11.7169 13.245 6.28622 19.9059 6.23261C26.7153 6.17757 32.2741 11.7022 32.2741 18.4988C32.2684 23.3801 29.3744 27.7942 24.9001 29.7455C24.7455 29.8138 24.6378 29.958 24.616 30.1259C24.5529 30.607 24.485 31.0867 24.4124 31.5658C24.3963 31.6683 24.4665 31.7641 24.5685 31.7798C24.5998 31.785 24.6311 31.7817 24.6601 31.7708C30.1349 29.8456 34.0717 24.6226 34.0717 18.4974C34.0726 10.7282 27.7405 4.40987 19.9647 4.4317ZM19.7114 10.8853C23.9228 10.7235 27.4677 14.006 27.6295 18.2175C27.6333 18.3124 27.6352 18.4072 27.6352 18.5016C27.6361 20.6076 26.7637 22.6187 25.2251 24.0571C25.0999 24.1753 25.033 24.3423 25.041 24.515C25.0695 25.0382 25.0591 25.5473 25.0249 26.1204C25.0192 26.2229 25.0975 26.3106 25.2 26.3163C25.2403 26.3192 25.2806 26.3073 25.3143 26.2855C27.8904 24.5311 29.4328 21.6172 29.4332 18.5007C29.428 13.292 25.2014 9.07345 19.9932 9.0782C19.875 9.0782 19.756 9.08056 19.6374 9.08578C14.6517 9.2784 10.6509 13.3888 10.5882 18.3792C10.5484 21.5389 12.095 24.5088 14.7072 26.2874C14.7911 26.3448 14.9055 26.3235 14.9629 26.2395C14.9861 26.2053 14.9975 26.1641 14.9951 26.1228C14.9572 25.5881 14.9515 25.0511 14.9785 24.5154C14.988 24.3427 14.9207 24.1753 14.7945 24.0576C13.2037 22.5713 12.3275 20.4729 12.3887 18.2972C12.5101 14.2888 15.7053 11.0546 19.7114 10.8853Z"
+              fill="white" />
+            <defs>
+              <linearGradient id="paint0_linear_1149_573" x1="20.0009" y1="0.0011544" x2="20.0009" y2="39.9978"
+                gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F452FF" />
+                <stop offset="1" stop-color="#832BC1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOSTS SECTION ===== -->
+  <section id="hosts" class="bg-orange relative overflow-hidden pb-0 min-[1299.08px]:pb-[204px]">
+    <img src="{{ .Site.BaseURL }}img/png/bottom-layer.png" alt="bottom-layer"
+      class="absolute bottom-[-1px] z-[1] max-h-[297px] w-full pointer-events-none" />
+    <img src="{{ .Site.BaseURL }}img/svg/right-half-flower.svg" alt="right-half-flower"
+      class="absolute end-0 lg:top-16 top-[5%] max-w-[50px] sm:max-w-[80px] lg:max-w-[100px] xl:max-w-[303px] pointer-events-none min-[2800px]:!right-[clamp(40px,39vw,32%)] min-[4000px]:!right-[clamp(40px,39vw,32%)]" />
+    <div class="max-w-[1536px] mx-auto relative pt-12 sm:pt-20 lg:pt-24 min-[1300px]:pt-[170px]">
+      <img src="{{ .Site.BaseURL }}img/svg/rotate-arrow.svg" alt="rotate-arrow"
+        class="absolute left-[31%] top-[11%] hidden min-[1300px]:block pointer-events-none" />
+      <img src="{{ .Site.BaseURL }}img/webp/oh-we-two-boys.webp" alt="oh-we-two-boys"
+        class="max-[1360px]:w-[947px] w-[987px] absolute end-[-9%] min-[1600px]:end-0 top-[19%] hidden min-[1300px]:block" />
+      <div class="ps-[30px] lg:ps-12 xl:ps-[100px]">
+        <h2
+          class="uppercase text-dark-black text-4xl leading-74 sm:text-5xl lg:text-custom-6xl font-semibold font-tomorrow">
+          O nas
+        </h2>
+        <h3
+          class="text-custom-2xl sm:text-4xl lg:text-custom-4xl uppercase font-semibold font-tomorrow text-white leading-[48px] pt-4 sm:pt-12 xl:pt-[85px]">
+          Łukasz Kałużny
+        </h3>
+        <p
+          class="text-dark-black font-medium sm:text-xl !leading-120 max-w-[900px] min-[1300px]:max-w-[420px] sm:pt-5 lg:pt-[35px] pe-7 lg:pe-0">
+          Inżynier, architekt i współzałożyciel Protopia. Specjalista od
+          Microsoft Azure z tytułem MVP od 2012 roku. Uwielbia wyzwania i
+          najnowsze technologie. Łukasz pomaga firmom przekształcać
+          technologię w realne korzyści biznesowe. Jego motto: zero bullshitu,
+          same konkrety. Zawsze z porządną dawką humoru.
+        </p>
+        <div class="flex gap-2 sm:gap-3 pb-7 pt-3 sm:pt-5 lg:py-9">
+          <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+            <img src="{{ .Site.BaseURL }}img/svg/linkedin.svg" alt="linkedin"
+              class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+          </a>
+          <a href="https://x.com/patoarchitekci" target="_blank">
+            <img src="{{ .Site.BaseURL }}img/svg/twitter.svg" alt="twitter"
+              class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+          </a>
+        </div>
+        <h3
+          class="text-custom-2xl sm:text-4xl lg:text-custom-4xl uppercase font-semibold font-tomorrow text-white sm:pt-4">
+          Szymon Warda
+        </h3>
+        <p
+          class="text-dark-black font-medium sm:text-xl !leading-120 max-w-[900px] min-[1300px]:max-w-[426px] sm:pt-5 lg:pt-[35px] pe-7 lg:pe-0">
+          Managing Partner i Doradca Technologiczny w Protopia, Blogger @
+          IndexOutOfRange, Autor @ Pluralsight, Ambasador @ Neo4j. Szymon
+          prowadzi organizacje przez wyzwania najnowszych technologii,
+          oferując pragmatyczne, dopasowane rozwiązania. Jego wiedza
+          techniczna idzie w parze ze świetną komunikacją. Praca z nim to
+          jedyne w swoim rodzaju doświadczenie.
+        </p>
+        <div class="flex gap-2 sm:gap-3 pt-3 sm:pt-5 lg:pt-9">
+          <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+            <img src="{{ .Site.BaseURL }}img/svg/linkedin.svg" alt="linkedin"
+              class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+          </a>
+          <a href="https://x.com/patoarchitekci" target="_blank">
+            <img src="{{ .Site.BaseURL }}img/svg/twitter.svg" alt="twitter"
+              class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
+          </a>
+        </div>
+        <a target="_blank" href="{{ .Site.Params.consultation.url }}">
+          <button
+            class="bg-white font-semibold lg:text-xl mt-8 sm:mt-[65px] sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+            <div
+              class="bg-orange sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+              <img width="23" height="22" src="{{ .Site.BaseURL }}img/svg/arrow-icon.svg"
+                class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+            </div>
+            {{ .Site.Params.consultation.title }}
+          </button>
+        </a>
+
+         <img src="{{ .Site.BaseURL }}img/webp/oh-we-two-boys.webp" alt="oh-we-two-boys"
+        class="w-[400px] sm:w-[900px] object-contain h-[400px] sm:h-[700px] md:h-[900px] mt-8 sm:mt-14 mx-auto hidden max-[1299px]:block" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES SECTION ===== -->
+  <section id="services"
+    class="bg-dark-black mt-[-1px] pt-10 sm:pt-16 pb-16 md:pb-24 xl:pb-[140px] relative px-[30px] lg:px-12 xl:px-[100px]">
+    <div class="flex justify-between max-w-[1200px] mx-auto">
+      <h2 class="text-white text-4xl sm:text-5xl lg:text-custom-6xl font-medium font-tomorrow"> USŁUGI </h2>
+      <img src="{{ .Site.BaseURL }}img/svg/faq-top-arrow.svg" alt="faq-top-arrow"
+        class="w-[50px] sm:h-[50px] lg:w-[80px] lg:h-[80px] xl:w-[130px] xl:h-[130px]" />
+    </div>
+    <div class="pt-14 sm:pt-[93px]">
+      <div class="max-w-[1200px] 2xl:mx-auto max-lg:mx-auto flex flex-col gap-0 faq-container">
+        <div>
+          <div
+            class="bg-white faq-button hover:bg-orange transition-colors ease-linear duration-300 cursor-pointer group rounded-full p-3 ps-4 sm:ps-6 lg:py-[7.5px] lg:ps-11 lg:pe-[7px] flex justify-between items-center">
+            <p class="text-xl sm:text-2xl md:text-4xl lg:text-custom-4xl uppercase font-semibold text-dark-black"> Szkolenia
+              otwarte</p>
+            <img src="{{ .Site.BaseURL }}img/svg/faq-arrow.svg" alt="faq-arrow"
+              class="group-hover:rotate-90 transition-all ease-linear duration-300 size-10 sm:size-12 md:size-[60px] lg:size-[75px]" />
+          </div>
+          <div
+            class="mt-8 faq-content transition-max-height max-h-0 md:mt-[45px] max-w-[1130px] w-full mx-auto flex flex-col gap-6 faq-bottom">
+            {{- range $index, $training := .Site.Data.trainings -}}
+            {{- if $training.active -}}
+            <a href="/szkolenia/{{ $training.id }}/"
+              class="w-full border border-solid border-white rounded-full p-[5px_5px_5px_16px] sm:p-[4px_5px_4px_25px] flex items-center justify-between hover:border-orange transition-all duration-300 group">
+              <p class="uppercase text-base sm:text-xl lg:text-2xl font-semibold text-orange group-hover:text-white transition-all duration-300">{{ $training.title }}</p>
+              <img width="35" height="34" src="{{ .Site.BaseURL }}img/svg/orange-faq-arrow.svg" alt="faq-arrow"
+                class="size-[35px] group-hover:rotate-12 transition-all duration-300" />
+            </a>
+            {{- end -}}
+            {{- end -}}
+            <a href="/szkolenia/">
+              <button
+                class="bg-white mt-3 md:mt-[21px] w-max font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+                <div
+                  class="bg-orange sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+                  <img width="23" height="22" src="{{ .Site.BaseURL }}img/svg/arrow-icon.svg"
+                    class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+                </div>
+                Poznaj naszą ofertę szkoleń
+              </button>
+            </a>
+          </div>
+          <div></div>
+        </div>
+        <div class="flex flex-col gap-6 sm:gap-9 lg:gap-[45px]">
+          <div
+            class="bg-white hover:bg-yellow faq-button transition-colors ease-linear duration-300 cursor-pointer group rounded-full p-3 ps-4 sm:ps-6 lg:py-[7.5px] lg:ps-11 lg:pe-[7px] flex justify-between items-center">
+            <p
+              class="text-xl sm:text-2xl md:text-4xl lg:text-custom-4xl lg:text-custom-4xl uppercase font-semibold text-dark-black">
+              Szkolenia dla firm</p>
+            <img src="{{ .Site.BaseURL }}img/svg/faq-arrow.svg" alt="faq-arrow"
+              class="group-hover:rotate-90 transition-all ease-linear duration-300 size-10 sm:size-12 md:size-[60px] lg:size-[75px]" />
+          </div>
+          <div
+            class="pl-4 sm:pl-6 faq-content transition-max-height max-h-0 lg:pl-[50px] flex flex-col gap-6 sm:gap-9 lg:gap-[45px] max-w-[1100px] faq-bottom">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white font-medium leading-[120%]">
+              Indywidualne szkolenia z Azure, Kubernetes i więcej. Warsztaty
+              dopasowane do potrzeb Twojego zespołu – 90% praktyki, 10%
+              teorii. Skontaktuj się z nami, a stworzymy szkolenie idealnie
+              dopasowane do Twoich specjalistów.
+            </p>
+            <button
+              class="bg-white w-max font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+              <div
+                class="bg-yellow sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+                <img width="23" height="22" src="{{ .Site.BaseURL }}img/svg/arrow-icon.svg"
+                  class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+              </div>
+              Skontaktuj się z nami
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col gap-6 sm:gap-9 lg:gap-[45px]">
+          <div
+            class="bg-white hover:bg-skyblue faq-button transition-colors ease-linear duration-300 cursor-pointer group rounded-full p-3 ps-4 sm:ps-6 lg:py-[7.5px] lg:ps-11 lg:pe-[7px] flex justify-between items-center">
+            <p class="text-xl sm:text-2xl md:text-4xl lg:text-custom-4xl uppercase font-semibold text-dark-black">
+              Konsultacje
+            </p>
+            <img src="{{ .Site.BaseURL }}img/svg/faq-arrow.svg" alt="faq-arrow"
+              class="group-hover:rotate-90 transition-all ease-linear duration-300 size-10 sm:size-12 md:size-[60px] lg:size-[75px]" />
+          </div>
+          <div
+            class="pl-4 sm:pl-6 faq-content transition-max-height max-h-0 lg:pl-[50px] flex flex-col gap-6 sm:gap-9 lg:gap-[45px] max-w-[1100px] faq-bottom">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white font-medium leading-[120%]">
+              Masz problem, który wymaga szybkiego rozwiązania i potrzebujesz
+              natychmiastowej pomocy?
+            </p>
+            <button
+              class="bg-white w-max font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+              <div
+                class="bg-skyblue sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+                <img width="23" height="22" src="{{ .Site.BaseURL }}img/svg/arrow-icon.svg"
+                  class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+              </div>
+              Wykup konsultację
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col gap-6 sm:gap-9 lg:gap-[45px] mb-0">
+          <div
+            class="bg-white hover:bg-pink faq-button transition-colors ease-linear duration-300 cursor-pointer group rounded-full p-3 ps-4 sm:ps-6 lg:py-[7.5px] lg:ps-11 lg:pe-[7px] flex justify-between items-center">
+            <p class="text-xl sm:text-2xl md:text-4xl lg:text-custom-4xl uppercase font-semibold text-dark-black">
+              Doradztwo
+            </p>
+            <img src="{{ .Site.BaseURL }}img/svg/faq-arrow.svg" alt="faq-arrow"
+              class="group-hover:rotate-90 transition-all ease-linear duration-300 size-10 sm:size-12 md:size-[60px] lg:size-[75px]" />
+          </div>
+          <div
+            class="pl-4 sm:pl-6 faq-content transition-max-height max-h-0 lg:pl-[50px] flex flex-col gap-6 sm:gap-9 lg:gap-[45px] max-w-[1100px] faq-bottom">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white font-medium leading-[120%]">
+              Poprowadzimy Twój projekt IT od A do Z. Z nami unikniesz błędów
+              i zoptymalizujesz działania. Doradzamy w planowaniu, wdrażaniu i
+              bezpieczeństwie chmury, zapewniając najlepsze rozwiązania dla
+              Twojej firmy.
+            </p>
+            <button
+              class="bg-white w-max font-semibold lg:text-xl sm:text-lg text-custom-base leading-100 text-dark-black flex items-center sm:gap-3 gap-2.5 sm:py-[5px] py-[3.75px] sm:ps-[5px] ps-[3.75px] sm:pe-[28px] pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 group">
+              <div
+                class="bg-pink sm:size-[36px] size-7 flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+                <img width="23" height="22" src="{{ .Site.BaseURL }}img/svg/arrow-icon.svg"
+                  class="rounded-full lg:w-[22px] lg:h-5 size-4" />
+              </div>
+              Wykup konsultację
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPONSOR SECTION ===== -->
+  <section id="sponsor" class="pt-[30px] sm:pt-[60px] md:pt-[90px] max-[470px]:pb-[100px] pb-[140px] sm:pb-[170px] md:pb-52 lg:pb-64 xl:pb-72 bg-orange relative">
+    <img src="{{ .Site.BaseURL }}img/png/protopia-bottom-layer.png" alt="bottom-layer"
+      class="absolute bottom-0 z-[1] w-full max-h-[297px] pointer-events-none" />
+
+    <div class="max-w-[1920px] mx-auto xl:px-[119px] px-[30px] mx-auto">
+      <div class="flex gap-[14px] sm:gap-5 2xl:justify-center">
+        <div class="max-w-[100px] sm:max-w-[225px] md:2mx-auto sm:mx-0">
+          <img src="{{ .Site.BaseURL }}img/webp/prototopia.webp" alt="prototopia" />
+        </div>
+        <div>
+          <h2
+            class="lg:text-4xl max-sm:max-w-[300px] custom-md:text-custom-3xl max-custom-md:max-w-[600px] sm:text-2xl text-sm text-white uppercase leading-100 sm:!leading-120 max-w-[800px] !font-semibold">
+            Słuchasz Patoarchitektów dzięki firmie Protopia.
+          </h2>
+          <p
+            class="text-[10px] max-sm:max-w-[300px] sm:text-base lg:text-xl mt-[10px] sm:mt-[17px] mb-0 sm:mb-[51px] text-white uppercase">
+            Doradzamy, szkolimy i wdrażamy innowacje, które napędzają rozwój
+            firm.
+          </p>
+          <a target="_blank" href="https://protopia.tech/">
+            <button
+              class="text-dark-black border-2 border-dark-black rounded-[30px] px-[17px] sm:px-[44.1px] py-[3.5px] sm:py-[4.5px] text-[13.33px] sm:text-base md:text-xl lg:text-2xl font-medium uppercase hidden sm:block hover:bg-dark-black hover:text-white transition-all duration-300 ease-linear">
+              Poznaj naszą ofertę
+            </button>
+          </a>
+        </div>
+      </div>
+      <a target="_blank" href="https://protopia.tech/">
+        <button class="text-dark-black border border-dark-black rounded-[30px] px-[21.96px] sm:px-[44.1px] py-[4.9px] sm:py-[5.5px] max-sm:leading-100 text-[13.33px] sm:text-base md:text-xl lg:text-2xl font-medium
+        mx-auto flex justify-center items-center 
+        uppercase block sm:hidden mt-[30px]">
+          Poznaj naszą ofertę
+        </button>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER SECTION ===== -->
+  <section id="newsletter" class="pt-10 sm:pt-[103px] sm:pb-[103px] pb-[32px] sm:pb-[103px] bg-white relative -mt-[2px]">
+    <img src="{{ .Site.BaseURL }}img/svg/star-icon.svg" alt="star-icon"
+      class="absolute z-[1] -top-[12%] max-lg:hidden right-[20%] animate-float1 min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]" />
+    <img src="{{ .Site.BaseURL }}img/svg/contact-right-animal-icon.svg" alt="contact-right-animal"
+      class="absolute right-0 bottom-[-2%] sm:bottom-[-3%] md:bottom-[-8%] lg:bottom-[-4%] w-full h-full max-w-[100px] max-h-[144px] sm:max-w-[200.23px] sm:max-h-[288.03px] md:max-w-[301.23px] md:max-h-[436.03px] pointer-events-none min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)] min-[2100px]:bottom-[-1%] min-[4000px]:bottom-[7%]" />
+    <div class="max-w-[1140px] relative mx-auto xl:px-0 px-4 md:px-6 mx-auto">
+      <div class="text-center mb-24 md:mb-52">
+        <h2
+          class="text-2xl md:text-4xl lg:text-custom-4xl font-bold font-tomorrow uppercase text-dark-black mb-4 sm:mb-8 leading-125">
+          ZAPISZ SIĘ DO NEWSLETTERA
+        </h2>
+        <p
+          class="text-xs sm:text-base text-dark-black mb-12 sm:mb-[67px] max-w-[282px] sm:max-w-[584px] leading-120 font-medium mx-auto">
+          Wypełnij poniższy formularz, aby być na bieżąco ze wszystkimi
+          odcinkami Patoarchitektów <br class="sm:hidden block" />
+          i uzyskać dostęp do dodatkowych materiałów.
+        </p>
+        <img
+          class="max-w-[58px] max-h-[21.21px] sm:max-w-[80px] sm:max-h-[31.31px] md:max-w-[120px] md:max-h-[41.41px] lg:max-w-[177px] lg:max-h-[64px] w-full h-full absolute top-[55%] sm:left-[5%] sm:top-[45%]"
+          src="{{ .Site.BaseURL }}img/svg/input-arrow.svg" alt="input-arrow-svg" />
+        <form id="emailForm" class="flex flex-col gap-14 sm:gap-[93px] mx-auto mb-8 items-center max-w-[500px]">
+          <input type="email" id="emailInput" placeholder="Adres e-mail" required
+            class="flex-1 px-4 py-[6px] border-b-2 border-orange text-grey placeholder-grey focus:outline-none focus:border-orange text-xs sm:text-sm md:text-base lg:text-2xl max-w-[237px] sm:max-w-full text-center font-medium w-full" />
+          <div>
+            <button type="submit"
+              class="bg-orange text-[17.23px] sm:text-2xl text-dark-black uppercase px-[71.5px] sm:px-[111px] py-[2.1px] sm:py-[6.5px] rounded-full font-bold hover:bg-dark-black hover:text-orange transition-all duration-300 ease-linear">
+              Zapisz się
+            </button>
+          </div>
+        </form>
+        <p id="errorMsg" class="text-red-500 font-medium mt-2 hidden">
+          Wprowadź poprawny adres e-mail.
+        </p>
+        <div id="successMsg" class="px-4 w-full left-[50%] hidden translate-x-[-50%] top-0 absolute ">
+          <div
+            class="max-w-[1192px] w-full h-[257px] max-[411px]:h-[286px] sm:h-[378px] max-md:px-5 flex flex-col items-center justify-center mx-auto bg-white shadow-[1px_0px_17px_#a884844f] rounded-[30px] md:rounded-[56px] lg:p-[109px_224px_86px_471px]">
+            <img class="absolute top-[2%] xl:top-[7px] max-lg:hidden left-[20%] xl:left-[280px] size-[174px]"
+              src="{{ .Site.BaseURL }}img/svg/red-flower.svg" alt="">
+            <img
+              class="absolute max-md:top-[10%] md:bottom-[127px] left-[6%] md:left-[20%] lg:left-[230px] size-[40px] md:size-[50px]"
+              src="{{ .Site.BaseURL }}img/svg/red-star.svg" alt="">
+            <img class="absolute bottom-8 right-[37px] max-md:hidden size-[102px]"
+              src="{{ .Site.BaseURL }}img/svg/red-flower.svg" alt="">
+            <p class="max-w-[497px] text-center text-red font-semibold font-tomorrow text-2xl md:text-4xl">Dziękujemy
+              <br> za subskrypcję!
+            </p>
+            <p class="md:text-sm text-xs text-red font-medium max-w-[353px] text-center mx-auto pt-5 md:pt-[34px]">
+              Sprawdź
+              skrzynkę
+              pocztową i potwierdź e-mail!
+              PS. Jeśli wiadomość nie dotarła, sprawdź folder Spam lub Oferty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

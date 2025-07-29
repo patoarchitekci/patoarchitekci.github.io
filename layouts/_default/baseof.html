@@ -5,7 +5,11 @@
 </head>
 <body>
     {{ block "header" . }}
-        {{ partial "header-dark.html" . }}
+        {{ if .IsHome }}
+            {{ partial "header-hero.html" . }}
+        {{ else }}
+            {{ partial "header-dark.html" . }}
+        {{ end }}
     {{ end }}
     
     {{ block "main" . }}{{ end }}

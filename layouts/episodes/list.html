@@ -41,7 +41,7 @@
         <!-- Episodes list -->
         {{ $paginator := .Paginate (where .Site.RegularPages "Type" "episodes") }}
         {{ range $paginator.Pages }}
-        <div class="flex flex-col md:flex-row sm:gap-[30px] gap-5 lg:py-[20px] py-[27.5px] md:items-center justify-center">
+        <div class="flex flex-col md:flex-row sm:gap-[30px] gap-5 lg:py-[20px] py-[27.5px] md:items-center">
             <div class="relative video-wrapper md:max-w-max max-w-[330px]">
                 <a href="{{ .Permalink }}" class="block relative">
                     <img src="{{ .Params.og_landscape }}" alt="thumbnail"
