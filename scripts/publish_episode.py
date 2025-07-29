@@ -4,11 +4,13 @@ import argparse
 import logging
 import os
 import sys
+from io import BytesIO
 
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader
 from pyairtable import Api
 import requests
+from PIL import Image
 
 # --- Configuration ---
 # Load environment variables from .env file
@@ -186,8 +188,8 @@ def save_markdown_file(content: str, episode_fields: dict) -> str | None:
         logger.error(f"Error saving markdown file: {e}", exc_info=True)
         return None
 
-def download_and_save_image(attachment_list: list, target_dir: str, base_filename: str) -> str | None:
-    """Downloads an image from an Airtable attachment field structure and saves it."""
+def download_and_save_image(attachment_list: list, target_dir: str, base_filename: str, quality: int = 85) -> str | None:
+    """Downloads an image from an Airtable attachment field structure, converts to WebP, and saves it."""
     if not attachment_list or not isinstance(attachment_list, list):
         logger.warning(f"No attachment data provided or invalid format for '{base_filename}'. Skipping download.")
         return None
@@ -202,37 +204,29 @@ def download_and_save_image(attachment_list: list, target_dir: str, base_filenam
             logger.warning(f"No URL found in attachment data for '{base_filename}'. Skipping download.")
             return None
 
-        # Try to get extension from Airtable filename, otherwise parse URL or default
-        if airtable_filename:
-            file_extension = os.path.splitext(airtable_filename)[-1]
-            logger.info(f"Using extension '{file_extension}' from Airtable filename '{airtable_filename}'.")
-        else:
-            logger.warning(f"No filename found in Airtable data for '{base_filename}'. Trying to parse URL.")
-            file_extension = os.path.splitext(image_url.split('?')[0])[-1] 
-            if not file_extension in ['.jpg', '.jpeg', '.png', '.gif']:
-                logger.warning(f"Could not determine valid image extension for {base_filename} from URL. Defaulting to .jpg")
-                file_extension = '.jpg'
-            
-        # Ensure extension starts with a dot
-        if not file_extension.startswith('.'):
-            file_extension = '.' + file_extension
-            
-        filename = f"{base_filename}{file_extension}"
+        # Always use .webp extension for output
+        filename = f"{base_filename}.webp"
         filepath = os.path.join(target_dir, filename)
 
-        logger.info(f"Downloading image from {image_url} to {filepath}...")
+        logger.info(f"Downloading image from {image_url} and converting to WebP: {filepath}...")
         
         # Ensure the target directory exists
         os.makedirs(target_dir, exist_ok=True)
 
-        response = requests.get(image_url, stream=True)
+        # Download image to memory
+        response = requests.get(image_url)
         response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
 
-        with open(filepath, 'wb') as f:
-            for chunk in response.iter_content(chunk_size=8192):
-                f.write(chunk)
+        # Convert to WebP using PIL
+        with Image.open(BytesIO(response.content)) as img:
+            # Convert RGBA/P mode to RGB for WebP compatibility
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+            
+            # Save as WebP
+            img.save(filepath, format="WEBP", quality=quality, optimize=True)
                 
-        logger.info(f"Image '{filename}' saved successfully.")
+        logger.info(f"Image '{filename}' converted to WebP and saved successfully.")
         return filepath
         
     except (IndexError, TypeError, KeyError) as e:
@@ -244,12 +238,20 @@ def download_and_save_image(attachment_list: list, target_dir: str, base_filenam
     except Exception as e:
         # Add filepath to error message if it was defined
         err_filepath = filepath if 'filepath' in locals() else "target path"
-        logger.error(f"Error saving image {image_url} to {err_filepath}: {e}", exc_info=True)
+        logger.error(f"Error processing image {image_url} to {err_filepath}: {e}", exc_info=True)
         return None
 
 # --- Markdown Generation ---
 
 TEMPLATE_FILENAME = "podcast_post_hugo.md.j2"  # Updated for Hugo format
+
+def clean_control_characters(text: str) -> str:
+    """Remove control characters that cause YAML parsing issues."""
+    if not text:
+        return text
+    # Remove control characters except tab, LF, CR
+    cleaned = ''.join(char for char in text if ord(char) >= 32 or char in '\t\n\r')
+    return cleaned
 
 def render_markdown(context: dict) -> str | None:
     """Renders the Markdown content using the Jinja template file and context."""
@@ -311,6 +313,12 @@ def main():
     logger.info(f"Fetched {len(tag_names)} tag names.")
 
     # 4. Prepare Template Context for Hugo
+    # Clean control characters from text fields
+    text_fields = ['title', 'intro', 'description', 'newsletter', 'transcription']
+    for field in text_fields:
+        if field in episode_fields and episode_fields[field]:
+            episode_fields[field] = clean_control_characters(episode_fields[field])
+    
     # Add links data directly to episode fields for template access
     episode_fields['links'] = links_data
     

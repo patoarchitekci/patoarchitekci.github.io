@@ -1,5 +1,5 @@
 ---
-title: '#{{ episode.episode_number }} {{ episode.title | escape }}'
+title: '#{{ episode.episode_number }} {{ episode.title | replace("\n", " ") | replace("\r", " ") | escape }}'
 date: {{ episode.date }}T08:00:00+02:00
 episode: "{{ episode.episode_number }}"
 tags: [{{ tags | map('tojson') | join(', ') }}]
@@ -16,8 +16,8 @@ youtube_id: "{{ episode.youtube_id | default('', true) }}"
 youtube_url: "{{ episode.youtube_embed_url | default('', true) }}"
 
 # Social media images (poprawione nazwy)
-og_landscape: "{{ episode.og_landscape_path | default('/img/' + episode.episode_number|string + '-landscape.jpg', true) }}"
-og_square: "{{ episode.og_square_path | default('/img/' + episode.episode_number|string + '-square.jpg', true) }}"
+og_landscape: "{{ episode.og_landscape_path | default('/img/' + episode.episode_number|string + '-landscape.webp', true) }}"
+og_square: "{{ episode.og_square_path | default('/img/' + episode.episode_number|string + '-square.webp', true) }}"
 
 # Intro for episode
 intro: |

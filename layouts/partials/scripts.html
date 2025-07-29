@@ -16,5 +16,7 @@
   {{ end }}
 {{ end }}
 {{ if eq .Type "episodes" }}
+  {{ if eq .Layout "single" }}
 <script src="{{ .Site.BaseURL }}js/podcast.js"></script>
+  {{ end }}
 {{ end }}
