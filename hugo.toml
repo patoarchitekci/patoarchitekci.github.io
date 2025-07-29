@@ -64,8 +64,8 @@ title = "PatoArchitekci"
     weight = 5
 
 [permalinks]
-  episodes = "/:filename/"
-  trainings = "/szkolenia/:filename/"
+  episodes = "/:contentbasename/"
+  trainings = "/szkolenia/:contentbasename/"
 
 [markup]
   [markup.goldmark]

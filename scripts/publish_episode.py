@@ -55,6 +55,52 @@ def fetch_episode_data(api: Api, episode_number: int) -> dict | None:
         logger.error(f"Error fetching episode data from Airtable: {e}", exc_info=True)
         return None
 
+def fetch_linked_links(api: Api, record_ids: list[str]) -> list[dict]:
+    """Fetches link records with title and url fields for Hugo format."""
+    if not record_ids:
+        logger.info("No link record IDs provided, skipping fetch.")
+        return []
+
+    logger.info(f"Fetching {len(record_ids)} link records for Hugo format...")
+    links = []
+    try:
+        # Get the links table
+        links_table = api.table(AIRTABLE_BASE_ID, LINKS_TABLE_NAME)
+        
+        # Construct an OR formula to fetch records by ID
+        id_conditions = [f"RECORD_ID()='{rec_id}'" for rec_id in record_ids]
+        formula = f"OR({ ', '.join(id_conditions) })"
+        logger.debug(f"Using formula for fetching link records: {formula}")
+
+        # Use table.all() with the constructed formula
+        records = links_table.all(formula=formula)
+        
+        if len(records) != len(record_ids):
+             logger.warning(f"Fetched {len(records)} link records, but {len(record_ids)} IDs were provided. Some records might be missing.")
+
+        for record in records:
+            try:
+                fields = record.get('fields', {})
+                title = fields.get('name') or fields.get('title') or fields.get('Name')  # Try common field names
+                url = fields.get('url') or fields.get('URL') or fields.get('link')      # Try common field names
+                
+                if title and url:
+                    links.append({
+                        'title': title,
+                        'url': url
+                    })
+                else:
+                    logger.warning(f"Link record {record['id']} missing title or url fields. Title: {title}, URL: {url}")
+            except KeyError:
+                 logger.warning(f"Link record {record.get('id', '[Unknown ID]')} missing 'fields' key.")
+                    
+        logger.info(f"Successfully extracted {len(links)} link structures from {len(record_ids)} linked records.")
+        return links
+        
+    except Exception as e:
+        logger.error(f"Error fetching link data from Airtable: {e}", exc_info=True)
+        return [] # Return empty list on error
+
 def fetch_linked_data(api: Api, table_name: str, record_ids: list[str], field_to_extract: str) -> list:
     """Fetches records from a specified table by IDs and extracts a given field."""
     if not record_ids:
@@ -110,26 +156,25 @@ def update_airtable_published_flag(api: Api, record_id: str):
         return False
 
 # --- File Operations ---
-POSTS_DIR = "_posts"
-ASSETS_IMG_DIR = "assets/img"
+POSTS_DIR = "../content/episodes"  # Hugo episodes directory (relative to scripts/)
+ASSETS_IMG_DIR = "../static/img"   # Hugo static assets directory (relative to scripts/)
 
 def save_markdown_file(content: str, episode_fields: dict) -> str | None:
-    """Saves the markdown content to the correct file in the _posts directory."""
+    """Saves the markdown content to the correct file in the content/episodes directory."""
     try:
         episode_number = episode_fields.get('episode_number')
-        publish_date = episode_fields.get('date') # Expecting YYYY-MM-DD format
         
-        if not episode_number or not publish_date:
-            logger.error("Episode number or date missing in episode data. Cannot determine filename.")
+        if not episode_number:
+            logger.error("Episode number missing in episode data. Cannot determine filename.")
             return None
 
-        filename = f"{publish_date}-{episode_number}.md"
+        filename = f"{episode_number}.md"  # Hugo format: just episode number
         # Assume the script is run from the repository root
         filepath = os.path.join(POSTS_DIR, filename)
 
         logger.info(f"Saving markdown file to: {filepath}")
         
-        # Ensure the _posts directory exists
+        # Ensure the content/episodes directory exists
         os.makedirs(POSTS_DIR, exist_ok=True)
 
         with open(filepath, 'w', encoding='utf-8') as f:
@@ -204,7 +249,7 @@ def download_and_save_image(attachment_list: list, target_dir: str, base_filenam
 
 # --- Markdown Generation ---
 
-TEMPLATE_FILENAME = "podcast_post.md.j2"
+TEMPLATE_FILENAME = "podcast_post_hugo.md.j2"  # Updated for Hugo format
 
 def render_markdown(context: dict) -> str | None:
     """Renders the Markdown content using the Jinja template file and context."""
@@ -255,23 +300,54 @@ def main():
         
     episode_fields = episode_data.get('fields', {})
         
-    # Fetch linked links (markdown field)
+    # Fetch linked links (Hugo format with title and url)
     link_ids = episode_fields.get('links', [])
-    link_markdowns = fetch_linked_data(airtable_api, LINKS_TABLE_NAME, link_ids, 'markdown')
-    # Combine link markdowns into a single string
-    links_content = "\n\n".join(link_markdowns) # Separate links by double newline
-    logger.info(f"Combined markdown content for {len(link_markdowns)} links.")
+    links_data = fetch_linked_links(airtable_api, link_ids)
+    logger.info(f"Fetched {len(links_data)} link structures for Hugo format.")
 
     # TODO: Fetch linked tags
     tag_ids = episode_fields.get('tags', [])
     tag_names = fetch_linked_data(airtable_api, TAGS_TABLE_NAME, tag_ids, 'Name') # Assuming the field is 'Name' based on blueprint analysis
     logger.info(f"Fetched {len(tag_names)} tag names.")
 
-    # 4. Prepare Template Context
+    # 4. Prepare Template Context for Hugo
+    # Add links data directly to episode fields for template access
+    episode_fields['links'] = links_data
+    
+    # Create YouTube embed URL from youtube_id if available  
+    youtube_id = episode_fields.get('youtube_id', '')
+    if youtube_id:
+        episode_fields['youtube_embed_url'] = f"https://www.youtube.com/embed/{youtube_id}?enablejsapi=1"
+        logger.info(f"Created YouTube embed URL for ID: {youtube_id}")
+    else:
+        logger.warning("No youtube_id found in episode data")
+    
+    # Download and save images BEFORE rendering template (template needs the paths)
+    episode_num = episode_fields.get('episode_number')
+    if episode_num:
+        # Square Image (og_square)
+        og_square_list = episode_fields.get('og_square', [])
+        square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
+        if square_filepath:
+            # Extract just the filename with extension for Hugo path
+            square_filename = os.path.basename(square_filepath)
+            episode_fields['og_square_path'] = f"/img/{square_filename}"
+            logger.info(f"Set og_square_path to: /img/{square_filename}")
+
+        # Landscape Image (og_landscape) - pobieramy z og_portrait w Airtable
+        og_portrait_list = episode_fields.get('og_portrait', [])
+        landscape_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-landscape")
+        if landscape_filepath:
+            # Extract just the filename with extension for Hugo path
+            landscape_filename = os.path.basename(landscape_filepath)
+            episode_fields['og_landscape_path'] = f"/img/{landscape_filename}"
+            logger.info(f"Set og_landscape_path to: /img/{landscape_filename}")
+    else:
+        logger.error("Cannot download images, episode number is missing.")
+    
     template_context = {
-        "episode": episode_fields,      # Pass the whole fields dictionary
-        "links_markdown": links_content, # Pass the combined links string
-        "tags": tag_names                # Pass the list of tag names
+        "episode": episode_fields,      # Pass the whole fields dictionary (now with links, youtube_id, and image paths)
+        "tags": tag_names               # Pass the list of tag names
     }
     logger.info("Prepared context dictionary for Jinja template.")
     # Example: Access title in template via {{ episode.title }}
@@ -287,21 +363,6 @@ def main():
     if not markdown_filepath:
         logger.error("Failed to save markdown file. Exiting.")
         sys.exit(1)
-        
-    # Download and save images
-    episode_num = episode_fields.get('episode_number')
-    if episode_num:
-        # Square Image (og_square)
-        og_square_list = episode_fields.get('og_square', [])
-        square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
-        # Warning logged within download_and_save_image if og_square_list is empty/invalid
-
-        # Portrait Image (og_portrait)
-        og_portrait_list = episode_fields.get('og_portrait', [])
-        portrait_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-portrait")
-        # Warning logged within download_and_save_image if og_portrait_list is empty/invalid
-    else:
-        logger.error("Cannot download images, episode number is missing.")
         
 
     # 7. Update Airtable

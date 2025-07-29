@@ -1,0 +1,71 @@
+---
+title: '#{{ episode.episode_number }} {{ episode.title | escape }}'
+date: {{ episode.date }}T08:00:00+02:00
+episode: "{{ episode.episode_number }}"
+tags: [{{ tags | map('tojson') | join(', ') }}]
+description: "{{ episode.description | default('', true) | escape }}"
+
+# Jekyll compatibility fields (zachowane dla innych systemów)  
+spreaker: {{ episode.spreaker_id | default('', true) }}
+apple: "{{ episode.apple_id | default('', true) }}"
+spotify: "{{ episode.spotify_url | default('', true) }}"
+youtube: "{{ episode.youtube_url | default('', true) }}"
+
+# Hugo fields  
+youtube_id: "{{ episode.youtube_id | default('', true) }}"
+youtube_url: "{{ episode.youtube_embed_url | default('', true) }}"
+
+# Social media images (poprawione nazwy)
+og_landscape: "{{ episode.og_landscape_path | default('/img/' + episode.episode_number|string + '-landscape.jpg', true) }}"
+og_square: "{{ episode.og_square_path | default('/img/' + episode.episode_number|string + '-square.jpg', true) }}"
+
+# Intro for episode
+intro: |
+  {{ episode.intro | replace('\n', '\n  ') | default('', true) }}
+
+# Links for the episode
+links:
+{% for link in episode.links | default([], true) %}
+  - title: "{{ link.title | escape }}"
+    url: "{{ link.url }}"
+{% endfor %}
+
+# Newsletter content (zachowane dla kompatybilności)
+newsletter: |
+  Cześć! 👋 ✨
+  
+  {{ episode.intro | replace('\n', '\n  ') | default('', true) }}
+  
+  {{ episode.newsletter | replace('\n', '\n  ') | default('', true) }}
+  
+  ## Odcinek na stronie i materiały do niego ⬇️
+  
+  ➡️ [Odsłuchaj na stronie](https://patoarchitekci.io/{{ episode.episode_number }})
+  ➡️ [Spotify]({{ episode.spotify_url | default('#', true) }})
+  ➡️ [Apple Podcasts]({{ episode.apple_id | default('#', true) }})
+  ➡️ [YouTube]({{ episode.youtube_url | default('#', true) }})
+  
+  ## Short & Sweet
+  
+  {% if episode['Link_Name (from Szymon_Link)'] and episode['Link (from Szymon_Link)'] %}
+  
+  ### Szymon poleca: [{{ episode['Link_Name (from Szymon_Link)'] | first | escape }}]({{ episode['Link (from Szymon_Link)'] | first }})
+  
+  {{ episode['Link_Comment (from Szymon_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
+  {% endif %}
+  {% if episode['Link_Name (from Lukasz_Link)'] and episode['Link (from Lukasz_Link)'] %}
+
+  ### Łukasz poleca: [{{ episode['Link_Name (from Lukasz_Link)'] | first | escape }}]({{ episode['Link (from Lukasz_Link)'] | first }})
+  
+  {{ episode['Link_Comment (from Lukasz_Link)'] | first | replace('\n', '\n  ') | default('', true) }}
+  {% endif %}
+
+  ### 🤝 Dołącz do Discord 👉 [https://discord.gg/78zPcEaP22](https://discord.gg/78zPcEaP22)
+  
+  ### 🏢 Patron odcinka
+  Słuchasz Patoarchitektów dzięki PROTOPII – firmie, w której Łukasz i Szymon działają na co dzień, wspierając zespoły IT na każdym etapie: od projektowania, przez wdrożenia i migracje, aż po optymalizację i zabezpieczenia. Oferujemy też mentoring i szkolenia dostosowane do potrzeb każdej firmy, niezależnie od wielkości. Sprawdź nas: [protopia.tech](https://protopia.tech/)
+  
+  PS. Masz pytania? Pisz śmiało po drugiej stronie to nie bot na bazie GPT czy Claude 😎
+---
+
+{{ episode.transcription | default('Transkrypcja wkrótce.', true) }}
