@@ -157,6 +157,16 @@ def fix_airtable_paragraphs(text):
     
     return '\n'.join(result)
 
+def lower_headers_level(text):
+    """Modyfikuje nagłówki o jeden poziom niżej (# -> ##, ## -> ###, itd.)"""
+    if not text:
+        return text
+    
+    # Znajdź wszystkie nagłówki i dodaj jeden dodatkowy #
+    text = re.sub(r'^(#{1,6})\s*(.+)$', r'#\1 \2', text, flags=re.MULTILINE)
+    
+    return text
+
 def fetch_links_data(api: Api, lukasz_link_ids: list, szymon_link_ids: list) -> dict:
     """Pobiera dane linków dla Łukasza i Szymona"""
     links = {'lukasz': None, 'szymon': None}
@@ -246,6 +256,8 @@ def process_link_data(link_record: dict, person: str, newsletter_date: str) -> d
     
     # Napraw paragrafy z Airtable
     comment_fixed = fix_airtable_paragraphs(comment)
+    # Obniż poziomy nagłówków
+    comment_fixed = lower_headers_level(comment_fixed)
     logger.info(f"FIXED Link_Comment:\n{repr(comment_fixed)}")
     
     return {
@@ -471,6 +483,10 @@ def main():
     # Napraw paragrafy w polach newslettera
     newsletter_fields['Intro'] = fix_airtable_paragraphs(raw_intro)
     newsletter_fields['Recommended_Episode_Description'] = fix_airtable_paragraphs(raw_episode_desc)
+    
+    # Obniż poziomy nagłówków
+    newsletter_fields['Intro'] = lower_headers_level(newsletter_fields['Intro'])
+    newsletter_fields['Recommended_Episode_Description'] = lower_headers_level(newsletter_fields['Recommended_Episode_Description'])
     
     logger.info(f"FIXED Newsletter Intro:\n{repr(newsletter_fields['Intro'])}")
     logger.info(f"FIXED Newsletter Recommended_Episode_Description:\n{repr(newsletter_fields['Recommended_Episode_Description'])}")
