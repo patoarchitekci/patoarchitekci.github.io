@@ -388,7 +388,8 @@ def save_social_posts(posts: list) -> list:
             # Front matter
             front_matter = f"""---
 layout: post
-title: "{post['title']}"
+title: |
+  {post['title']}
 date: {post['date']} 08:00:00 +0200
 person: {post['person']}
 person_name: {post['person_name']}
