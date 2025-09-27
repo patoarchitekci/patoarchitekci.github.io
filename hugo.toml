@@ -35,6 +35,7 @@ title = "Patoarchitekci"
   [params.consultation]
     url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
     title = "Bezpłatna Konsultacja"
+    purchaseUrl = "https://cart.easy.tools/checkout/patoarchitekci/szybkie-konsultacje"
     
   # Footer
   [params.footer]
