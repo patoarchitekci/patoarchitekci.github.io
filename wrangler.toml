@@ -1,6 +1,0 @@
-name = "patoarchitekci-io"
-compatibility_date = "2024-07-23"
-pages_build_output_dir = "./_site"
-
-[vars]
-JEKYLL_ENV = "production"
