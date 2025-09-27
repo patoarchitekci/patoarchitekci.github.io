@@ -1,6 +1,6 @@
 baseURL = "https://patoarchitekci.io/"
 languageCode = "pl-PL"
-title = "PatoArchitekci"
+title = "Patoarchitekci"
 
 [params]
   description = "Stworzyliśmy ten podcast, bo sami szukaliśmy miejsca, które łączy wiedzę, praktykę i dystans do branży IT."
