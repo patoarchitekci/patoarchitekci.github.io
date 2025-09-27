@@ -65,27 +65,62 @@ const emailInput = document.getElementById("emailInput");
 const errorMsg = document.getElementById("errorMsg");
 const successMsg = document.getElementById("successMsg");
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+if (form) {
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-    const email = emailInput.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(email)) {
-        errorMsg.classList.remove("hidden");
-        successMsg.classList.add("hidden");
-        emailInput.classList.add("border-red-500");
-    } else {
-        errorMsg.classList.add("hidden");
-        successMsg.classList.remove("hidden");
-        emailInput.classList.remove("border-red-500");
-
-        console.log("Email submitted:", email);
-
-        setTimeout(() => {
-            emailInput.value = "";
+        if (!emailRegex.test(email)) {
+            errorMsg.textContent = "Wprowadź poprawny adres e-mail.";
+            errorMsg.classList.remove("hidden");
             successMsg.classList.add("hidden");
-        }, 4000);
-    }
-});
+            emailInput.classList.add("border-red-500");
+            return;
+        }
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = "Zapisywanie...";
+        submitButton.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                errorMsg.classList.add("hidden");
+                successMsg.classList.remove("hidden");
+                emailInput.classList.remove("border-red-500");
+                emailInput.value = "";
+
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
+
+                setTimeout(() => {
+                    successMsg.classList.add("hidden");
+                }, 5000);
+            } else {
+                errorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
+                errorMsg.classList.remove("hidden");
+                successMsg.classList.add("hidden");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            errorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
+            errorMsg.classList.remove("hidden");
+            successMsg.classList.add("hidden");
+        } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
+    });
+}
 
