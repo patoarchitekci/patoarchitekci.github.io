@@ -1,6 +1,6 @@
   {{ define "main" }}
   <!-- ===== NASZE SECTION ===== -->
-  <section
+  <section id="trainings-list"
     class="bg-dark-black min-h-screen max-xl:px-[30px] -mt-2 pb-[76px] sm:pb-[120px] md:pb-[200px] lg:pb-[250px] xl:pb-[297px] relative">
     <img src="/img/webp/white-flower-vector.webp" alt="white-flower-vector"
       class="max-w-14 sm:max-w-[140px] lg:max-w-[180px] xl:max-w-[213px] w-full xl:h-[213px] pointer-events-none absolute bottom-[3%] md:bottom-[1.3%] sm:bottom-0 md:bottom-[3%] xl:bottom-[4%] right-[15%] min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,36%)]">
@@ -140,7 +140,7 @@
     </div>
   </section>
   <!-- ===== POZNAJ PROWADZQCYCH ===== -->
-  <section
+  <section id="instructors"
     class="pb-[190px] min-[420px]:!pb-[290px] min-[500px]:!pb-[390px] min-[576px]:!pb-[190px] xl:!pb-[297px] pt-[44px] sm:pt-16 md:pt-20 xl:pt-[102px] bg-orange relative">
     <img src="/img/webp/white-cloud-vector.webp" alt="white-cloud-vector"
       class="w-full absolute bottom-0 left-0 xl:h-[297px] pointer-events-none z-[1]">
@@ -211,7 +211,7 @@
     </div>
   </section>
   <!-- ========= WE TRAINED PEOPLE ========= -->
-  <section class="bg-white pt-10 md:pt-[59px] pb-[22px] sm:pb-[50px] relative z-10">
+  <section id="clients" class="bg-white pt-10 md:pt-[59px] pb-[22px] sm:pb-[50px] relative z-10">
     <div class="max-w-[1206px] mx-auto max-sm:px-[40px] max-xl:px-7">
       <h2
         class="uppercase max-lg:text-center font-tomorrow font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-dark-black xl:!leading-[73%]">
@@ -251,7 +251,7 @@
   </section>
 
   <!-- ===== TESTIMONIALS SECTION ===== -->
-  <section class="bg-white md:pb-[60px] pt-[100px] sm:pt-[140px] md:pt-[200px] xl:pt-[292px] pb-[31px] relative">
+  <section id="testimonials" class="bg-white md:pb-[60px] pt-[100px] sm:pt-[140px] md:pt-[200px] xl:pt-[292px] pb-[31px] relative">
     <img class="absolute top-0 w-full max-h-[231px]" src="/img/png/yellow-layer.png" alt="yellow-layer">
     <img
       class="max-lg:hidden z-10 absolute top-[20%] xl:top-[241px] right-[122px] size-20 xl:size-[105px] animate-float2"
@@ -333,7 +333,7 @@
   </section>
 
   <!-- ===== TRAINING SECTION ===== -->
-  <section
+  <section id="coordinator"
     class="lg:pb-[110px] lg:pt-[105px] md:py-[60px] py-10 xl:px-[120px] md:px-10 px-[30px] bg-yellowdark relative">
     <img
       class="absolute xl:top-[66px] top-8 right-5 xl:right-[97px] max-md:hidden size-[60px] lg:size-[74px] animate-float1 min-[2100px]:!right-[clamp(40px,39vw,22%)] min-[4000px]:!right-[clamp(40px,39vw,35%)]"
@@ -359,19 +359,29 @@
         <img class="lg:w-[327px] lg:h-[325px] rounded-full sm:size-[250px] size-[170px]" src="/img/png/trainer-img.png"
           alt="trainer-img">
       </div>
-      <button
-        class="bg-white mt-[25px] max-[385px]:text-xl lg:mt-[7px] font-semibold text-2xl tracking-[0.3px] leading-100 text-dark-black flex items-center gap-[39px] py-1 pl-[5px] pr-[60px] rounded-full transition-all ease-linear duration-300 group">
-        <div
-          class="bg-dark-black size-[37px] flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px]  transition-all ease-linear duration-300">
-          <img src="/img/svg/mail-icon.svg" class="w-[22px] h-[17px]" />
-        </div>
-        Pisz do Mikołaja
-      </button>
+      <div class="flex flex-col gap-3 max-w-fit">
+        <a href="mailto:mikolaj.szczerbicki@protopia.tech?cc=szkolenia@patoarchitekci.io&subject=Zapytanie%20o%20szkolenie%20dla%20firmy&body=Dzień%20dobry,%0A%0AChciałbym%20zapytać%20o%20szkolenie%20dla%20mojej%20firmy.%0A%0ANazwa%20firmy:%20%0ALiczba%20uczestników:%20%0APreferowany%20termin:%20%0APreferowana%20ilość%20dni%20szkoleniowych:%20%0AForma%20szkolenia:%20online%20/%20na%20miejscu%0ATematyka%20szkolenia:%20%0A%0APozdrawiam"
+          class="bg-white mt-[25px] max-[385px]:text-xl lg:mt-[7px] font-semibold text-2xl tracking-[0.3px] leading-100 text-dark-black flex items-center gap-[39px] py-1 pl-[5px] pr-[60px] rounded-full transition-all ease-linear duration-300 group">
+          <div
+            class="bg-dark-black size-[37px] min-w-[37px] flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+            <img src="/img/svg/mail-icon.svg" class="w-[22px] h-[17px]" />
+          </div>
+          Pisz do Mikołaja
+        </a>
+        <a href="tel:+48667013893"
+          class="bg-white max-[385px]:text-xl font-semibold text-2xl tracking-[0.3px] leading-100 text-dark-black flex items-center gap-[39px] py-1 pl-[5px] pr-[60px] rounded-full transition-all ease-linear duration-300 group">
+          <div
+            class="bg-dark-black size-[37px] min-w-[37px] flex justify-center items-center rounded-full group-hover:max-w-[48px] group-hover:w-[48px] transition-all ease-linear duration-300">
+            <img src="/img/svg/call-icon-black.svg" class="size-[30px] sm:size-[38px]" />
+          </div>
+          +48 667 013 893
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- =====TALKING PEOPLE ===== -->
-  <section class="sm:pt-[105px] pt-10 pb-[130px] sm:pb-[210px] lg:pb-[265px] relative overflow-x-clip">
+  <section id="why-us" class="sm:pt-[105px] pt-10 pb-[130px] sm:pb-[210px] lg:pb-[265px] relative overflow-x-clip">
     <div class="mx-auto max-w-[1536px]">
       <h2
         class="uppercase text-yellow text-2xl leading-74 sm:text-5xl lg:text-custom-6xl font-semibold font-tomorrow text-center">
