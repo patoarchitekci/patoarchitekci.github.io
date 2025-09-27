@@ -71,6 +71,7 @@ if (form) {
     console.log('[INIT] Inicjalizacja newslettera...');
     let turnstileToken = null;
     let turnstileWidgetId = null;
+    let pendingSubmit = false;
 
     // Render invisible Turnstile when ready
     window.onloadTurnstileCallback = function() {
@@ -81,11 +82,17 @@ if (form) {
                 callback: function(token) {
                     console.log('[TURNSTILE] ✅ Token otrzymany:', token.substring(0, 20) + '...');
                     turnstileToken = token;
-                    // Automatycznie wyślij formularz po weryfikacji
-                    submitForm();
+
+                    // Jeśli user już kliknął submit i czeka na token
+                    if (pendingSubmit) {
+                        console.log('[TURNSTILE] Formularz czekał na token, wysyłanie...');
+                        pendingSubmit = false;
+                        submitForm();
+                    }
                 },
                 'error-callback': function() {
                     console.error('[TURNSTILE] ❌ Błąd weryfikacji');
+                    pendingSubmit = false; // Reset flag
                     errorMsg.textContent = "Weryfikacja nie powiodła się. Spróbuj ponownie.";
                     errorMsg.classList.remove("hidden");
                     const submitButton = form.querySelector('button[type="submit"]');
@@ -197,9 +204,12 @@ if (form) {
 
             if (window.turnstile && turnstileWidgetId !== null) {
                 console.log('[TURNSTILE] Wykonywanie challenge...');
+                pendingSubmit = true; // Oznacz że czekamy na token
                 window.turnstile.execute(turnstileWidgetId);
             } else {
                 console.error('[TURNSTILE] ❌ Widget nie zainicjowany!');
+                submitButton.textContent = "Zapisz się";
+                submitButton.disabled = false;
             }
         }
     });
