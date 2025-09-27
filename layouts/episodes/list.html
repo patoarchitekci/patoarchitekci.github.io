@@ -45,7 +45,7 @@
             <div class="relative video-wrapper md:max-w-max max-w-[330px]">
                 <a href="{{ .Permalink }}" class="block relative">
                     <img src="{{ .Params.og_landscape }}" alt="thumbnail"
-                        class="video-thumbnail rounded-[30px] md:max-w-[260px] max-md:max-w-[330px] max-md:w-full h-[195px]" />
+                        class="video-thumbnail rounded-[30px] md:max-w-[260px] max-md:max-w-[330px] max-md:w-full h-[195px] object-cover object-center" />
                     <img src="{{ $.Site.BaseURL }}img/svg/play-btn.svg" alt="play"
                         class="rounded-full cursor-pointer max-w-[44px] h-[44px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 play-button hover:scale-110 transition-transform duration-200" />
                 </a>

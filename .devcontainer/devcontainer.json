@@ -1,7 +1,0 @@
-{
-    "image": "mcr.microsoft.com/devcontainers/universal:2",
-    "postCreateCommand": "bundle install",
-    "features": {
-        "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {}
-    }
-}

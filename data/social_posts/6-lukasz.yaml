@@ -1,0 +1,58 @@
+"title": |-
+  💡 Mój setup MCP - realnie działający w 2025 od Łukasz
+"date": |-
+  2025-07-25
+"datetime": |-
+  2025-07-25T08:00:00+02:00
+"person": |-
+  lukasz
+"person_name": |-
+  Łukasz
+"newsletter_id": !!int |-
+  6
+"original_link": |-
+  https://kaluzny.io/moj-setup-mcp-realnie-dzialajacy-w-2025/
+"image_url": |-
+  /img/mail/2025-07-25-lukasz.jpg
+"image_ext": |-
+  jpg
+"content": |-
+  💡 Mój setup MCP - realnie działający w 2025 od Łukasz
+
+  Po ostatnich dyskusjach na discordach Patoarchitekci i Order of Devs o MCP oraz narzędziach AI, postanowiłem spisać z czego realnie korzystam na codzień.
+
+  Spoiler alert: drastycznie ograniczyłem liczbę narzędzi do tego co naprawdę działa 🎯
+
+  Główny stack (bez bzdur):
+
+  🔸 Claude Desktop + Claude Code w subskrypcji Max - to moja podstawa
+
+  🔸 ChatGPT jako wyszukiwarka (darmowy wystarczy)
+
+  🔸 GitHub Copilot okazjonalnie (mam za darmo jako MVP)
+
+  I tyle. Nie potrzebuję 15 różnych narzędzi AI żeby być produktywny.
+
+  MCP które faktycznie używam:
+
+  Z gotowych: Filesystem MCP (dostęp do plików), context7 (aktualna dokumentacja), Terraform MCP (bezpośrednio z registry), Browser MCP, mem0 (pamięć między narzędziami), Sequential Thinking (żeby jego mać agent lepiej trzymał zaplanowanego todo...), Azure MCP.
+
+  Moje customowe: Serwer do zarządzania podcastem i newsletterem, serwer M365 (kalendarz, maile, czaty), serwer ClickUp dopasowany pod potrzeby Protopia.
+
+  MCP jako "szybki klej" - mój ulubiony use case
+
+  Najlepsze zastosowanie MCP? Jednorazowe automatyzacje nudnych tasków. Dziś np. potrzebowałem przemigrować stare odcinki Pato z markdown do Airtable. 5 min roboty na vibe coding MCP, 5 min na test i prompt. Po migracji kod do kosza.
+
+  To jest właśnie siła MCP - szybkie rozwiązanie konkretnego problemu, nie budowanie kolejnej warstwy abstrakcji.
+
+  Przestroga (bo muszę)
+
+  Przez boom i linkedinowych szmanów AI jest masa MCP które są szczerze zupełnie do dupy, dziurawe, i totalnie chujowe w działaniu. Przykład? Świeża podatność CVE-2025-6514 w mcp-remote - pełne RCE na Windows przez spreparowany URL autoryzacji.
+
+  Radzę zachować sporo ostrożności, bo potem będzie płacz jak z dodatkami do przeglądarek - kopia krypto albo kradzież tokenów OAuth.
+
+  P.S. Polecam też posłuchać #152 Vibe Coding 2025H1 gdzie dzielę się jak używamy narzędzi AI oraz #160 z aktualizacją, że porzucam Cursora.
+
+  🔗 https://kaluzny.io/moj-setup-mcp-realnie-dzialajacy-w-2025/
+
+  📬 To fragment z ostatniego newslettera Patoarchitekci! Zapisz się na https://patoarchitekci.io/

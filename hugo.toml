@@ -47,11 +47,11 @@ title = "PatoArchitekci"
 [menu]
   [[menu.main]]
     name = "Gdzie słuchać"
-    url = "/#podcast"
+    url = "/#subscribe-podcast"
     weight = 1
   [[menu.main]]
     name = "O nas"
-    url = "/#oh-we"
+    url = "/#hosts"
     weight = 2
   [[menu.main]]
     name = "Szkolenia"
@@ -76,3 +76,25 @@ title = "PatoArchitekci"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "newsletter-rss", "social-rss"]
+
+[outputFormats]
+  [outputFormats.newsletter-rss]
+    name = "RSS"
+    mediaType = "application/rss+xml"
+    baseName = "newsletter"
+    path = ""
+    
+  [outputFormats.social-rss]
+    name = "RSS"
+    mediaType = "application/rss+xml"
+    baseName = "social"
+    path = ""
+    
+  [outputFormats.debug-rss]
+    name = "RSS"
+    mediaType = "application/rss+xml"
+    baseName = "debug"
+    path = ""

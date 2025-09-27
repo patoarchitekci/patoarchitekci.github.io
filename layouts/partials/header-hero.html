@@ -40,27 +40,12 @@
             </div>
             <ul id="menu-list"
                 class="fixed top-0 right-0 h-full w-full bg-white transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col gap-6 items-center justify-center lg:static lg:transform-none lg:flex-row lg:h-auto lg:w-auto lg:bg-transparent lg:shadow-none lg:gap-10 lg:max-w-[998px] mx-auto">
+                {{ range .Site.Menus.main }}
                 <li>
                     <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="#podcast">Gdzie słuchać</a>
+                        href="{{ .URL }}"{{ with .Params.target }} target="{{ . }}"{{ end }}>{{ .Name }}</a>
                 </li>
-                <li>
-                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="#oh-we">O nas</a>
-                </li>
-                <li>
-                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="/all-trainings.html">Szkolenia</a>
-                </li>
-                <li>
-                    <a target="_blank"
-                        class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="{{ .Site.Params.consultation.url }}">{{ .Site.Params.consultation.title }}</a>
-                </li>
-                <li>
-                    <a class="font-semibold text-sm sm:text-xl lg:text-sm leading-100 text-dark-black uppercase py-1.5 px-2.5 hover:bg-dark-black hover:text-white rounded-full transition-all duration-300 ease-linear"
-                        href="/contact.html">Kontakt</a>
-                </li>
+                {{ end }}
             </ul>
         </nav>
         <img width="800" height="267"
@@ -69,10 +54,10 @@
         <img src="{{ .Site.BaseURL }}img/webp/hero-icon-mobile.webp" width="250" height="363" alt="hero-icon"
             class="mx-auto md:hidden mt-[133px] relative z-20" />
         <div class="flex justify-center pt-[120px] lg:pt-[161px] relative z-20">
-            <button
-                class="lg:py-[8.5px] py-[6px] px-[25px] lg:px-[36.5px] border-[2px] border-dark-black rounded-full text-[17.23px] lg:text-2xl font-medium leading-100 text-dark-black uppercase hover:bg-dark-black hover:text-white transition-all duration-300">
+            <a href="{{ .Site.Params.consultation.url }}"
+                class="lg:py-[8.5px] py-[6px] px-[25px] lg:px-[36.5px] border-[2px] border-dark-black rounded-full text-[17.23px] lg:text-2xl font-medium leading-100 text-dark-black uppercase hover:bg-dark-black hover:text-white transition-all duration-300 inline-block">
                 Bezpłatna Konsultacja
-            </button>
+            </a>
         </div>
         <p
             class="font-medium text-[9px] md:text-[11px] leading-100 text-dark-black pt-4 pb-[70px] lg:pt-10 text-center uppercase lg:pb-9 relative z-20">
@@ -84,7 +69,8 @@
             class="absolute group bottom-[47px] right-6 lg:right-[47px] max-md:hidden min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]">
             <div
                 class="flex flex-col group-hover:opacity-100 opacity-0 transition-all duration-300 gap-[9px] items-center justify-center">
-                <a target="_blank" href="https://tiktok.com"
+                {{ with .Site.Params.social.tiktok }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -92,7 +78,9 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
-                <a target="_blank" href="https://discord.com/invite/78zPcEaP22"
+                {{ end }}
+                {{ with .Site.Params.social.discord }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="31" height="24" viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -100,7 +88,9 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
-                <a target="_blank" href="https://www.linkedin.com/company/patoarchitekci/"
+                {{ end }}
+                {{ with .Site.Params.social.linkedin }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -108,7 +98,9 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
-                <a target="_blank" href="https://www.facebook.com/patoarchitekci/"
+                {{ end }}
+                {{ with .Site.Params.social.facebook }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -116,7 +108,9 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
-                <a target="_blank" href="https://x.com/patoarchitekci"
+                {{ end }}
+                {{ with .Site.Params.social.twitter }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -124,7 +118,9 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
-                <a target="_blank" href="https://www.instagram.com/"
+                {{ end }}
+                {{ with .Site.Params.social.instagram }}
+                <a target="_blank" href="{{ . }}"
                     class="bg-white text-orange hover:text-white hover:bg-dark-black duration-300 transition-all w-[51px] h-[51px] rounded-full flex group items-center justify-center">
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -132,6 +128,7 @@
                             fill="CurrentColor" />
                     </svg>
                 </a>
+                {{ end }}
             </div>
             <img src="{{ .Site.BaseURL }}img/svg/hero-bottom-icon.svg" alt="hero-bottom-icon"
                 class="max-w-[60px] lg:max-w-[80px] mt-[9px] md:bottom-[45px] md:right-[45px]" />

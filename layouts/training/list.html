@@ -88,8 +88,8 @@
           </div>
         </a>
         {{- else -}}
-        <div
-          class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative {{ $hiddenClass }} card">
+        <div onclick="window.location.href='/szkolenia/{{ $training.id }}/'" style="cursor: pointer;"
+          class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative {{ $hiddenClass }} card cursor-pointer">
           <div class="flex flex-col justify-between w-full">
             <div
               class="flex max-[576px]:flex-col justify-between items-start w-full gap-2.5 sm:gap-[30px] max-sm:mb-[10px]">

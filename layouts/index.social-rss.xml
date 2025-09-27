@@ -1,0 +1,45 @@
+{{- $social_posts := .Site.Data.social_posts -}}
+{{- $sorted_posts := slice -}}
+
+{{- range $key, $post := $social_posts -}}
+  {{- $sorted_posts = $sorted_posts | append $post -}}
+{{- end -}}
+
+{{- $sorted_posts = sort $sorted_posts "date" "desc" -}}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:media="http://search.yahoo.com/mrss/">
+    
+  <channel>
+    <title>Patoarchitekci Social Media Posts</title>
+    <description>Automatyczne posty na social media z linków z newslettera</description>
+    <link>{{ .Site.BaseURL }}/social</link>
+    <atom:link href="{{ .Site.BaseURL }}/social.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 MST" }}</lastBuildDate>
+    <language>pl-PL</language>
+    
+    {{- range $sorted_posts -}}
+    <item>
+      <title>{{ .title | htmlEscape }}</title>
+      <link>{{ .original_link }}</link>
+      <guid isPermaLink="false">{{ $.Site.BaseURL }}/social/{{ .newsletter_id }}-{{ .person }}</guid>
+      <pubDate>{{ .datetime | dateFormat "Mon, 02 Jan 2006 15:04:05 MST" }}</pubDate>
+      
+      <description><![CDATA[
+        {{ .content }}
+      ]]></description>
+      
+      <content:encoded><![CDATA[
+        {{ .content }}
+      ]]></content:encoded>
+      
+      {{- if .image_url -}}
+      <media:content url="{{ $.Site.BaseURL }}{{ .image_url }}" type="image/{{ .image_ext }}" />
+      {{- end -}}
+    </item>
+    {{- end -}}
+  </channel>
+</rss>

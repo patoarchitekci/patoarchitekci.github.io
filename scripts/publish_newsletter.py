@@ -7,6 +7,7 @@ import os
 import random
 import re
 import sys
+import yaml
 
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader
@@ -172,9 +173,9 @@ def fetch_links_data(api: Api, lukasz_link_ids: list, szymon_link_ids: list) -> 
     return links
 
 # --- File Operations ---
-NEWSLETTERS_DIR = "_newsletters"
-ASSETS_IMG_DIR = "assets/img/mail"
-SOCIAL_POSTS_DIR = "_social_posts"
+NEWSLETTERS_DIR = "data/newsletters"
+ASSETS_IMG_DIR = "static/img/mail"
+SOCIAL_POSTS_DIR = "data/social_posts"
 
 def download_and_save_image(attachment_list: list, target_dir: str, base_filename: str) -> str | None:
     """Pobiera obrazek z Airtable i zapisuje z nazwą YYYY-MM-DD-person.ext"""
@@ -256,9 +257,11 @@ def process_link_data(link_record: dict, person: str, newsletter_date: str) -> d
         'image_ext': image_ext
     }
 
-def save_markdown_file(content: str, newsletter_fields: dict) -> str | None:
-    """Zapisuje plik markdown newslettera"""
+def save_newsletter_yaml(newsletter_fields: dict, links: dict, recommended_episode: dict, link_order: list) -> str | None:
+    """Zapisuje newsletter jako YAML file dla Hugo"""
     try:
+        import yaml
+        
         newsletter_id = newsletter_fields.get('Id')
         newsletter_date = newsletter_fields.get('Date')
         
@@ -266,20 +269,66 @@ def save_markdown_file(content: str, newsletter_fields: dict) -> str | None:
             logger.error("Newsletter ID or date missing. Cannot determine filename.")
             return None
 
-        filename = f"{newsletter_date}-{newsletter_id}.md"
+        newsletter_data = {
+            'id': newsletter_id,
+            'title': f"Pato Summer Short Mail #{newsletter_id} 🌞🏖️",
+            'date': newsletter_date,
+            'datetime': f"{newsletter_date}T08:00:00+02:00",
+            'intro': newsletter_fields.get('Intro', ''),
+            'recommended_episode': {
+                'number': recommended_episode.get('episode_number'),
+                'title': recommended_episode.get('title'),
+                'description': newsletter_fields.get('Recommended_Episode_Description', ''),
+                'spotify_url': recommended_episode.get('spotify_url'),
+                'apple_id': recommended_episode.get('apple_id'), 
+                'youtube_url': recommended_episode.get('youtube_url')
+            } if recommended_episode else None,
+            'links': {},
+            'link_order': link_order
+        }
+        
+        # Process links
+        for person in ['lukasz', 'szymon']:
+            if links.get(person):
+                newsletter_data['links'][person] = {
+                    'name': links[person]['name'],
+                    'url': links[person]['url'],
+                    'comment': links[person]['comment'],
+                    'image': f"/img/mail/{newsletter_date}-{person}.{links[person]['image_ext']}" if links[person]['image_ext'] else None,
+                    'image_ext': links[person]['image_ext']
+                }
+
+        filename = f"{newsletter_id}.yaml"
         filepath = os.path.join(NEWSLETTERS_DIR, filename)
 
-        logger.info(f"Saving newsletter file to: {filepath}")
+        logger.info(f"Saving newsletter YAML to: {filepath}")
         
         os.makedirs(NEWSLETTERS_DIR, exist_ok=True)
 
         with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(content)
+            # Custom representer for multiline strings - ensures better formatting
+            def represent_literal_str(dumper, data):
+                if isinstance(data, str) and '\n' in data:
+                    # Use literal block style for multiline strings
+                    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+                return dumper.represent_scalar('tag:yaml.org,2002:str', data)
             
-        logger.info("Newsletter file saved successfully.")
+            # Save original representer
+            original_representer = yaml.representer.SafeRepresenter.represent_str
+            
+            try:
+                # Temporarily replace string representer
+                yaml.add_representer(str, represent_literal_str, Dumper=yaml.SafeDumper)
+                yaml.dump(newsletter_data, f, default_flow_style=False, allow_unicode=True, 
+                         indent=2, sort_keys=False, Dumper=yaml.SafeDumper)
+            finally:
+                # Restore original representer
+                yaml.representer.SafeRepresenter.represent_str = original_representer
+            
+        logger.info("Newsletter YAML saved successfully.")
         return filepath
     except Exception as e:
-        logger.error(f"Error saving newsletter file: {e}", exc_info=True)
+        logger.error(f"Error saving newsletter YAML: {e}", exc_info=True)
         return None
 
 def clean_markdown_for_social(text: str) -> str:
@@ -357,8 +406,9 @@ def generate_social_posts(links: dict, newsletter_fields: dict) -> list:
     logger.info(f"Generated {len(posts)} social media posts")
     return posts
 
-def save_social_posts(posts: list) -> list:
-    """Zapisuje posty social media do plików markdown"""
+def save_social_posts_yaml(posts: list) -> list:
+    """Zapisuje posty social media jako YAML files dla Hugo"""
+    import yaml
     saved_files = []
     
     if not posts:
@@ -367,46 +417,38 @@ def save_social_posts(posts: list) -> list:
     
     os.makedirs(SOCIAL_POSTS_DIR, exist_ok=True)
     
-    for i, post in enumerate(posts, 1):
+    for post in posts:
         try:
-            # Nazwa pliku: YYYY-MM-DD-newsletter-ID-person-N.md
-            filename = f"{post['date']}-{post['newsletter_id']}-{post['person']}-{i}.md"
+            # Nazwa pliku: newsletter-ID-person.yaml
+            filename = f"{post['newsletter_id']}-{post['person']}.yaml"
             filepath = os.path.join(SOCIAL_POSTS_DIR, filename)
             
-            # Front matter
-            front_matter = f"""---
-layout: post
-title: "{post['title']}"
-date: {post['date']} 08:00:00 +0200
-person: {post['person']}
-person_name: {post['person_name']}
-newsletter_id: {post['newsletter_id']}
-original_link: {post['original_link']}
-"""
+            post_data = {
+                'title': post['title'],
+                'date': post['date'],
+                'datetime': f"{post['date']}T08:00:00+02:00",
+                'person': post['person'],
+                'person_name': post['person_name'],
+                'newsletter_id': post['newsletter_id'],
+                'original_link': post['original_link'],
+                'image_url': f"/img/mail/{post['date']}-{post['person']}.{post['image_ext']}" if post['image_ext'] else None,
+                'image_ext': post['image_ext'],
+                'content': post['content']
+            }
             
-            if post['image_url']:
-                front_matter += f"""image_url: {post['image_url']}
-image_ext: {post['image_ext']}
-"""
-            
-            front_matter += "---\n\n"
-            
-            # Pełna treść pliku
-            full_content = front_matter + post['content']
-            
-            logger.info(f"Saving social post to: {filepath}")
+            logger.info(f"Saving social post YAML to: {filepath}")
             
             with open(filepath, 'w', encoding='utf-8') as f:
-                f.write(full_content)
+                yaml.dump(post_data, f, default_flow_style=False, allow_unicode=True, indent=2, sort_keys=False, default_style='|')
                 
             saved_files.append(filepath)
-            logger.info(f"Social post saved: {filename}")
+            logger.info(f"Social post YAML saved: {filename}")
             
         except Exception as e:
-            logger.error(f"Error saving social post {i}: {e}", exc_info=True)
+            logger.error(f"Error saving social post YAML {post.get('person', 'unknown')}: {e}", exc_info=True)
             continue
     
-    logger.info(f"Successfully saved {len(saved_files)} social posts")
+    logger.info(f"Successfully saved {len(saved_files)} social post YAMLs")
     return saved_files
 
 # --- Markdown Generation ---
@@ -509,34 +551,19 @@ def main():
                 'spotify_id': episode_fields.get('spotify_id')
             }
 
-    # Przygotuj kontekst dla template
-    template_context = {
-        "newsletter": newsletter_fields,
-        "links": links,
-        "link_order": link_order,
-        "recommended_episode": recommended_episode,
-        "site_url": "https://patoarchitekci.io"
-    }
-
-    # Renderuj markdown
-    markdown_content = render_markdown(template_context)
-    if not markdown_content:
-        logger.error("Failed to render newsletter content.")
-        sys.exit(1)
-        
-    # Zapisz plik
-    markdown_filepath = save_markdown_file(markdown_content, newsletter_fields)
-    if not markdown_filepath:
-        logger.error("Failed to save newsletter file.")
+    # Zapisz newsletter jako YAML
+    newsletter_filepath = save_newsletter_yaml(newsletter_fields, links, recommended_episode, link_order)
+    if not newsletter_filepath:
+        logger.error("Failed to save newsletter YAML.")
         sys.exit(1)
 
-    # Generuj posty social media
+    # Generuj i zapisz posty social media jako YAML
     social_posts = generate_social_posts(links, newsletter_fields)
     if social_posts:
-        saved_social_files = save_social_posts(social_posts)
-        logger.info(f"Generated {len(saved_social_files)} social media posts")
+        saved_social_files = save_social_posts_yaml(social_posts)
+        logger.info(f"Generated {len(saved_social_files)} social media YAML files")
 
-    logger.info(f"Successfully processed newsletter #{args.newsletter_id}.")
+    logger.info(f"Successfully processed newsletter #{args.newsletter_id} for Hugo.")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,105 @@
+id: 6
+title: 'Pato Summer Short Mail #6 🌞🏖️'
+date: '2025-07-25'
+datetime: '2025-07-25T08:00:00+02:00'
+intro: "Cześć! \U0001F44B\n\n**Praktyczność ponad hype** - to motto tego piątkowego\
+  \ newslettera! \U0001F3AF\n\nDziś mamy dla Was **trzy dawki rzeczywistości**: Łukasz\
+  \ tnie przez AI-buzzwordy i pokazuje swój **realny setup MCP** (spoiler: drastycznie\
+  \ ograniczył liczbę narzędzi), Szymon alarmuje o **zmianach podatkowych w USA**,\
+  \ które uderzą w polskich programistów, a w polecanym odcinku **rozbijamy na czynniki\
+  \ pierwsze 30+ pojęć LLM-owych** \U0001F916\n\n**Wspólny mianownik?** _Przestań\
+  \ teoretyzować, zacznij działać._ \n\nCzy to wybór narzędzi AI, zrozumienie embeddings,\
+  \ czy planowanie kariery w kontekście globalnych zmian - **liczy się to, co naprawdę\
+  \ działa**, nie to co brzmi najciekawiej na LinkedIn \U0001F4C8\n\nDobrego weekendu\
+  \ i miłego słuchania! \U0001F3A7\n"
+recommended_episode:
+  number: 136
+  title: |
+    Prosto i praktycznie wyjaśniamy: AI
+  description: |
+    **"Jestem DevOpsem i nie do końca rozumiem czym są te embeddingi, RAG-i..."** 🤔 Znasz to uczucie? Wszędzie słyszysz o AI, ale terminologia brzmi jak zaklęcia? Szymon i Łukasz przygotowali **praktyczny słownik 30+ pojęć LLM-owych** – nie teoretyczny podręcznik, tylko codzienne doświadczenie z Protopii!
+
+    **Z naszej rozmowy dowiesz się:**
+
+    - **Podstawy**: Czym są tokeny, context window i dlaczego model generuje odpowiedź "token po tokenie"
+
+    - **Prompt Engineering**: Różnice między Zero-Shot ("zrób to") a Few-Shot ("oto 3 przykłady") – i dlaczego drugi podejście działa lepiej
+
+    - **RAG w praktyce**: Jak embeddingi zamieniają tekst na wektory liczbowe i czemu hybrid search to połączenie dwóch światów
+
+    - **Zaawansowane techniki**: Function Calling, Structured Output i jak AI Agents to "małe mrówki z jednym zadaniem"
+
+    **Lifehack od Łukasza:** _"Wrzucam swój prompt do Claude'a i proszę go o rozbudowanie. Meta prompt engineering!"_
+
+    **Przykład z życia:** Jak Claude generuje rozdziały na YouTube w 3 krokach – od transkrypcji przez grupowanie po znaczniki czasowe.
+
+    _"Proszę nie rzucajcie kamieniami, to uproszczenie"_ – ale właśnie o to chodzi! **Praktyka zamiast teorii** 🎯
+
+    Sprawdź, czy po tym odcinku przestaniesz się gubić w gąszczu AI-buzzwordów!
+  spotify_url: https://open.spotify.com/episode/2CWGR7E8xj0ThLLP8ycFD3
+  apple_id: https://podcasts.apple.com/pl/podcast/prosto-i-praktycznie-wyja%C5%9Bniamy-ai/id1477067604?i=1000683426413&uo=4
+  youtube_url: https://www.youtube.com/watch?v=KBM5z113x_4
+links:
+  lukasz:
+    name: Mój setup MCP - realnie działający w 2025
+    url: https://kaluzny.io/moj-setup-mcp-realnie-dzialajacy-w-2025/
+    comment: |
+      Po ostatnich dyskusjach na discordach **Patoarchitekci** i **Order of Devs** o MCP oraz narzędziach AI, postanowiłem spisać z czego **realnie** korzystam na codzień.
+
+      **Spoiler alert:** drastycznie ograniczyłem liczbę narzędzi do tego co naprawdę działa 🎯
+      ## Główny stack (bez bzdur):
+      - **Claude Desktop + Claude Code** w subskrypcji Max - to moja podstawa
+
+      - **ChatGPT** jako wyszukiwarka (darmowy wystarczy)
+
+      - **GitHub Copilot** okazjonalnie (mam za darmo jako MVP)
+
+      I tyle. Nie potrzebuję 15 różnych narzędzi AI żeby być produktywny.
+      ## MCP które faktycznie używam:
+      **Z gotowych:** Filesystem MCP (dostęp do plików), context7 (aktualna dokumentacja), Terraform MCP (bezpośrednio z registry), Browser MCP, mem0 (pamięć między narzędziami), Sequential Thinking (żeby jego mać agent lepiej trzymał zaplanowanego todo...), Azure MCP.
+
+      **Moje customowe:** Serwer do zarządzania podcastem i newsletterem, serwer M365 (kalendarz, maile, czaty), serwer ClickUp dopasowany pod potrzeby Protopia.
+      ## MCP jako "szybki klej" - mój ulubiony use case
+
+      Najlepsze zastosowanie MCP? **Jednorazowe automatyzacje nudnych tasków**. Dziś np. potrzebowałem przemigrować stare odcinki Pato z markdown do Airtable. **5 min roboty** na vibe coding MCP, 5 min na test i prompt. Po migracji kod do kosza.
+
+      To jest właśnie siła MCP - szybkie rozwiązanie konkretnego problemu, nie budowanie kolejnej warstwy abstrakcji.
+      ## Przestroga (bo muszę)
+
+      Przez boom i linkedinowych szmanów AI jest masa MCP które są **szczerze zupełnie do dupy, dziurawe, i totalnie chujowe w działaniu**. Przykład? Świeża podatność CVE-2025-6514 w mcp-remote - pełne RCE na Windows przez spreparowany URL autoryzacji.
+
+      Radzę zachować sporo ostrożności, bo potem będzie płacz jak z dodatkami do przeglądarek - kopia krypto albo kradzież tokenów OAuth.
+
+      _P.S. Polecam też posłuchać [#152 Vibe Coding 2025H1](https://patoarchitekci.io/152/) gdzie dzielę się jak używamy narzędzi AI oraz [#160](https://patoarchitekci.io/160/) z aktualizacją, że porzucam Cursora._
+    image: /img/mail/2025-07-25-lukasz.jpg
+    image_ext: jpg
+  szymon:
+    name: Zmiany w amerykańskim prawie podatkowym które dotkną także nas
+    url: https://newsletter.pragmaticengineer.com/p/the-pulse-section-174-is-reversed
+    comment: |
+      Niestety, ale nie najlepsze wieści.
+
+      USA wycofały się z kontrowersyjnych przepisów Section 174, które zmuszały firmy do amortyzowania kosztów pracy programistów nawet przez 15 lat. Od teraz — dla zespołów w USA — znów można wrzucać wynagrodzenia devów bezpośrednio w koszty.
+
+      Dla developerów **spoza USA (czytaj: Polska)** nic się nie zmienia — nadal 15-letnia amortyzacja. Czyli: jesteś droższy podatkowo → mniej atrakcyjny.
+      ### Co to oznacza?
+
+      - 🔥 Offshore (PL, UA, IN) staje się mniej opłacalny dla firm z USA
+
+      - 🧾 Wzrost znaczenia lokalnych zespołów i nearshoringu
+
+      - 💼 Możliwa zmiana form współpracy: kontrakty zamiast etatów
+
+      - 🧭 Obserwuj, jak zachowają się duzi gracze — będą kombinować
+      ### TL;DR
+
+      🇺🇸 USA: zyskuje.
+
+       🌍 My: zostajemy na uboczu.
+
+       👷 Masz klientów z USA? Sprawdź, czy nie planują zmian.
+    image: /img/mail/2025-07-25-szymon.jpg
+    image_ext: jpg
+link_order:
+- lukasz
+- szymon
