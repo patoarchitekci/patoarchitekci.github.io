@@ -34,7 +34,7 @@ tailwind.config = {
         187: "187%",
       },
       backgroundImage: {
-        hero: "url('./assets/images/gif/herobg.gif')",
+        hero: "url('/img/webp/herobg.webp')",
       },
       screens: {
         "custom-md": "992px",

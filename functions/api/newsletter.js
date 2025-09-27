@@ -46,6 +46,11 @@ export async function onRequestPost(context) {
     }
 
     console.log('[API] Calling MailerLite API...');
+    console.log('[API] Group ID from env:', env.MAILERLITE_GROUP_ID);
+
+    const groupId = parseInt(env.MAILERLITE_GROUP_ID || '111804268882691280');
+    console.log('[API] Parsed Group ID:', groupId);
+
     const mailerliteResponse = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
       headers: {
@@ -55,7 +60,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         email: email,
-        groups: [parseInt(env.MAILERLITE_GROUP_ID)],
+        groups: [groupId],
         status: 'unconfirmed',
         fields: {
           source: 'newsletter_website'
