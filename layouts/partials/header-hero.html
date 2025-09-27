@@ -13,14 +13,16 @@
         <div class="absolute w-full h-full left-0 top-0 z-[3]"
             style="background: #ff4405; mix-blend-mode: plus-lighter">
         </div>
+        {{ if .Site.Params.trainingBanner.enabled }}
         <div class="px-[30px] max-md:hidden relative z-20">
             <div class="max-w-[998px] w-full py-3.5 bg-white mx-auto rounded-b-[15px]">
                 <p class="uppercase font-bold text-base clr-dark-black leading-100 text-center">
-                    Do najbliższego szkolenia
-                    <span class="text-orange">zostały 3 dni! 👉 Zapisz się teraz!</span>
+                    {{ .Site.Params.trainingBanner.text }}
+                    <span class="text-orange">{{ .Site.Params.trainingBanner.highlight }}</span>
                 </p>
             </div>
         </div>
+        {{ end }}
         <nav class="mt-[74px] lg:mt-[138px] px-[30px] relative z-50">
             <div class="flex justify-end max-w-[998px] mx-auto">
                 <button id="menu-button" class="lg:hidden focus:outline-none z-[99] relative w-[25px] h-[25px]">

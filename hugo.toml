@@ -25,6 +25,12 @@ title = "PatoArchitekci"
     privacyPolicy = "/polityka-prywatnosci/"
     terms = "/regulamin/"
     
+  # Training banner
+  [params.trainingBanner]
+    enabled = false
+    text = "Do najbliższego szkolenia"
+    highlight = "zostały 3 dni! 👉 Zapisz się teraz!"
+
   # Consultation
   [params.consultation]
     url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
@@ -47,7 +53,7 @@ title = "PatoArchitekci"
 [menu]
   [[menu.main]]
     name = "Gdzie słuchać"
-    url = "/#subscribe-podcast"
+    url = "/#platforms"
     weight = 1
   [[menu.main]]
     name = "O nas"
