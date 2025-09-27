@@ -46,7 +46,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         email: email,
-        groups: [env.MAILERLITE_GROUP_ID],
+        groups: [parseInt(env.MAILERLITE_GROUP_ID)],
         status: 'unconfirmed',
         fields: {
           source: 'newsletter_website'
