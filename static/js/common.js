@@ -65,21 +65,27 @@ const emailInput = document.getElementById("emailInput");
 const errorMsg = document.getElementById("errorMsg");
 const successMsg = document.getElementById("successMsg");
 
+console.log('[INIT] Newsletter form:', form ? 'found' : 'not found');
+
 if (form) {
+    console.log('[INIT] Inicjalizacja newslettera...');
     let turnstileToken = null;
     let turnstileWidgetId = null;
 
     // Render invisible Turnstile when ready
     window.onloadTurnstileCallback = function() {
+        console.log('[TURNSTILE] Inicjalizacja widgetu...');
         if (window.turnstile) {
             turnstileWidgetId = window.turnstile.render('#turnstile-container', {
                 sitekey: '0x4AAAAAAB3rTpbU6V5I845R',
                 callback: function(token) {
+                    console.log('[TURNSTILE] ✅ Token otrzymany:', token.substring(0, 20) + '...');
                     turnstileToken = token;
                     // Automatycznie wyślij formularz po weryfikacji
                     submitForm();
                 },
                 'error-callback': function() {
+                    console.error('[TURNSTILE] ❌ Błąd weryfikacji');
                     errorMsg.textContent = "Weryfikacja nie powiodła się. Spróbuj ponownie.";
                     errorMsg.classList.remove("hidden");
                     const submitButton = form.querySelector('button[type="submit"]');
@@ -89,6 +95,9 @@ if (form) {
                 size: 'invisible',
                 appearance: 'interaction-only'
             });
+            console.log('[TURNSTILE] Widget zainicjowany, ID:', turnstileWidgetId);
+        } else {
+            console.error('[TURNSTILE] ❌ Biblioteka nie załadowana');
         }
     };
 
@@ -99,6 +108,7 @@ if (form) {
     }
 
     async function submitForm() {
+        console.log('[NEWSLETTER] Wysyłanie formularza...');
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         submitButton.textContent = "Zapisywanie...";
@@ -107,6 +117,8 @@ if (form) {
         try {
             const formData = new FormData(form);
             formData.append('cf-turnstile-response', turnstileToken);
+            console.log('[NEWSLETTER] Email:', formData.get('email'));
+            console.log('[NEWSLETTER] Token Turnstile:', turnstileToken ? 'obecny' : 'brak');
 
             const response = await fetch('/api/newsletter', {
                 method: 'POST',
@@ -114,8 +126,10 @@ if (form) {
             });
 
             const data = await response.json();
+            console.log('[API] Odpowiedź:', data);
 
             if (data.success) {
+                console.log('[NEWSLETTER] ✅ Sukces! Użytkownik zapisany');
                 errorMsg.classList.add("hidden");
                 successMsg.classList.remove("hidden");
                 emailInput.classList.remove("border-red-500");
@@ -130,6 +144,7 @@ if (form) {
                     successMsg.classList.add("hidden");
                 }, 5000);
             } else {
+                console.error('[NEWSLETTER] ❌ Błąd:', data.error);
                 errorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
                 errorMsg.classList.remove("hidden");
                 successMsg.classList.add("hidden");
@@ -139,7 +154,7 @@ if (form) {
                 turnstileToken = null;
             }
         } catch (error) {
-            console.error("Error:", error);
+            console.error("[NEWSLETTER] ❌ Błąd połączenia:", error);
             errorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
             errorMsg.classList.remove("hidden");
             successMsg.classList.add("hidden");
@@ -151,11 +166,13 @@ if (form) {
 
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
+        console.log('[FORM] Submit kliknięty');
 
         const email = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
+            console.log('[FORM] ❌ Email niepoprawny:', email);
             errorMsg.textContent = "Wprowadź poprawny adres e-mail.";
             errorMsg.classList.remove("hidden");
             successMsg.classList.add("hidden");
@@ -163,20 +180,26 @@ if (form) {
             return;
         }
 
+        console.log('[FORM] ✅ Email poprawny:', email);
         errorMsg.classList.add("hidden");
         emailInput.classList.remove("border-red-500");
 
         // Jeśli już mamy token, wyślij od razu
         if (turnstileToken) {
+            console.log('[FORM] Token już istnieje, wysyłanie...');
             submitForm();
         } else {
             // Uruchom Turnstile challenge
+            console.log('[FORM] Brak tokena, uruchamiam Turnstile...');
             const submitButton = form.querySelector('button[type="submit"]');
             submitButton.textContent = "Weryfikacja...";
             submitButton.disabled = true;
 
             if (window.turnstile && turnstileWidgetId !== null) {
+                console.log('[TURNSTILE] Wykonywanie challenge...');
                 window.turnstile.execute(turnstileWidgetId);
+            } else {
+                console.error('[TURNSTILE] ❌ Widget nie zainicjowany!');
             }
         }
     });

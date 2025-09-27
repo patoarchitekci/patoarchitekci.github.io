@@ -2,11 +2,16 @@ export async function onRequestPost(context) {
   const { request, env } = context;
 
   try {
+    console.log('[API] Newsletter request received');
     const formData = await request.formData();
     const email = formData.get('email');
     const turnstileResponse = formData.get('cf-turnstile-response');
 
+    console.log('[API] Email:', email);
+    console.log('[API] Turnstile token:', turnstileResponse ? 'present' : 'missing');
+
     if (!email || !turnstileResponse) {
+      console.error('[API] Missing required data');
       return new Response(JSON.stringify({
         success: false,
         error: 'Brak wymaganych danych'
@@ -16,6 +21,7 @@ export async function onRequestPost(context) {
       });
     }
 
+    console.log('[API] Verifying Turnstile...');
     const turnstileVerify = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -26,8 +32,10 @@ export async function onRequestPost(context) {
     });
 
     const turnstileResult = await turnstileVerify.json();
+    console.log('[API] Turnstile result:', turnstileResult);
 
     if (!turnstileResult.success) {
+      console.error('[API] Turnstile verification failed');
       return new Response(JSON.stringify({
         success: false,
         error: 'Weryfikacja Turnstile nie powiodła się'
@@ -37,6 +45,7 @@ export async function onRequestPost(context) {
       });
     }
 
+    console.log('[API] Calling MailerLite API...');
     const mailerliteResponse = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
       headers: {
@@ -55,9 +64,11 @@ export async function onRequestPost(context) {
     });
 
     const mailerliteData = await mailerliteResponse.json();
+    console.log('[API] MailerLite response status:', mailerliteResponse.status);
+    console.log('[API] MailerLite data:', mailerliteData);
 
     if (!mailerliteResponse.ok) {
-      console.error('MailerLite error:', mailerliteData);
+      console.error('[API] MailerLite error:', mailerliteData);
       return new Response(JSON.stringify({
         success: false,
         error: mailerliteData.message || 'Błąd podczas zapisywania do newslettera'
@@ -67,6 +78,7 @@ export async function onRequestPost(context) {
       });
     }
 
+    console.log('[API] ✅ Success! Subscriber added');
     return new Response(JSON.stringify({
       success: true,
       message: 'Sprawdź swoją skrzynkę pocztową i potwierdź subskrypcję!'

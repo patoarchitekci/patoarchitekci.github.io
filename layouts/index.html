@@ -406,7 +406,7 @@
   </section>
 
   <!-- ===== NEWSLETTER SECTION ===== -->
-  <section id="newsletter" class="pt-10 sm:pt-[103px] sm:pb-[103px] pb-[32px] sm:pb-[103px] bg-white relative -mt-[2px]">
+  <section id="newsletter" class="pt-10 sm:pt-[103px] sm:pb-[103px] pb-[32px] sm:pb-[103px] bg-white relative -mt-[2px] overflow-visible">
     <img src="{{ .Site.BaseURL }}img/svg/star-icon.svg" alt="star-icon"
       class="absolute z-[1] -top-[12%] max-lg:hidden right-[20%] animate-float1 min-[2100px]:!right-[clamp(40px,39vw,26%)] min-[4000px]:!right-[clamp(40px,39vw,39%)]" />
     <img src="{{ .Site.BaseURL }}img/svg/contact-right-animal-icon.svg" alt="contact-right-animal"
@@ -426,16 +426,16 @@
         <img
           class="max-w-[58px] max-h-[21.21px] sm:max-w-[80px] sm:max-h-[31.31px] md:max-w-[120px] md:max-h-[41.41px] lg:max-w-[177px] lg:max-h-[64px] w-full h-full absolute top-[55%] sm:left-[5%] sm:top-[45%]"
           src="{{ .Site.BaseURL }}img/svg/input-arrow.svg" alt="input-arrow-svg" />
-        <form id="emailForm" class="flex flex-col gap-14 sm:gap-[93px] mx-auto mb-8 items-center max-w-[500px]" action="/api/newsletter" method="POST">
+        <form id="emailForm" class="flex flex-col gap-14 sm:gap-[93px] mx-auto mb-8 items-center max-w-[500px] relative" action="/api/newsletter" method="POST">
           <input type="email" id="emailInput" name="email" placeholder="Adres e-mail" required
             class="flex-1 px-4 py-[6px] border-b-2 border-orange text-grey placeholder-grey focus:outline-none focus:border-orange text-xs sm:text-sm md:text-base lg:text-2xl max-w-[237px] sm:max-w-full text-center font-medium w-full" />
-          <div id="turnstile-container"></div>
           <div>
             <button type="submit" id="newsletter-submit"
               class="bg-orange text-[17.23px] sm:text-2xl text-dark-black uppercase px-[71.5px] sm:px-[111px] py-[2.1px] sm:py-[6.5px] rounded-full font-bold hover:bg-dark-black hover:text-orange transition-all duration-300 ease-linear">
               Zapisz się
             </button>
           </div>
+          <div id="turnstile-container" class="absolute -top-20"></div>
         </form>
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
         <p id="errorMsg" class="text-red-500 font-medium mt-2 hidden">
