@@ -441,9 +441,13 @@
         <p id="errorMsg" class="text-red-500 font-medium mt-2 hidden">
           Wprowadź poprawny adres e-mail.
         </p>
-        <div id="successMsg" class="px-4 w-full left-[50%] hidden translate-x-[-50%] top-0 absolute ">
+        <div id="successMsg" class="px-4 w-full left-[50%] hidden translate-x-[-50%] top-0 absolute z-50">
           <div
-            class="max-w-[1192px] w-full h-[257px] max-[411px]:h-[286px] sm:h-[378px] max-md:px-5 flex flex-col items-center justify-center mx-auto bg-white shadow-[1px_0px_17px_#a884844f] rounded-[30px] md:rounded-[56px] lg:p-[109px_224px_86px_471px]">
+            class="max-w-[1192px] w-full h-[257px] max-[411px]:h-[286px] sm:h-[378px] max-md:px-5 flex flex-col items-center justify-center mx-auto bg-white shadow-[1px_0px_17px_#a884844f] rounded-[30px] md:rounded-[56px] lg:p-[109px_224px_86px_471px] relative">
+            <button onclick="document.getElementById('successMsg').classList.add('hidden')"
+              class="absolute top-4 right-4 text-red hover:text-dark-black transition-colors text-2xl font-bold z-10">
+              ×
+            </button>
             <img class="absolute top-[2%] xl:top-[7px] max-lg:hidden left-[20%] xl:left-[280px] size-[174px]"
               src="{{ .Site.BaseURL }}img/svg/red-flower.svg" alt="">
             <img

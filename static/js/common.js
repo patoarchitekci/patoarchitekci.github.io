@@ -149,7 +149,7 @@ if (form) {
 
                 setTimeout(() => {
                     successMsg.classList.add("hidden");
-                }, 5000);
+                }, 15000); // 15 sekund zamiast 5
             } else {
                 console.error('[NEWSLETTER] ❌ Błąd:', data.error);
                 errorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
