@@ -66,6 +66,89 @@ const errorMsg = document.getElementById("errorMsg");
 const successMsg = document.getElementById("successMsg");
 
 if (form) {
+    let turnstileToken = null;
+    let turnstileWidgetId = null;
+
+    // Render invisible Turnstile when ready
+    window.onloadTurnstileCallback = function() {
+        if (window.turnstile) {
+            turnstileWidgetId = window.turnstile.render('#turnstile-container', {
+                sitekey: '0x4AAAAAAB3rTpbU6V5I845R',
+                callback: function(token) {
+                    turnstileToken = token;
+                    // Automatycznie wyślij formularz po weryfikacji
+                    submitForm();
+                },
+                'error-callback': function() {
+                    errorMsg.textContent = "Weryfikacja nie powiodła się. Spróbuj ponownie.";
+                    errorMsg.classList.remove("hidden");
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    submitButton.textContent = "Zapisz się";
+                    submitButton.disabled = false;
+                },
+                size: 'invisible',
+                appearance: 'interaction-only'
+            });
+        }
+    };
+
+    // Dodaj callback do script tag
+    const turnstileScript = document.querySelector('script[src*="turnstile"]');
+    if (turnstileScript) {
+        turnstileScript.setAttribute('data-callback', 'onloadTurnstileCallback');
+    }
+
+    async function submitForm() {
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = "Zapisywanie...";
+        submitButton.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+            formData.append('cf-turnstile-response', turnstileToken);
+
+            const response = await fetch('/api/newsletter', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                errorMsg.classList.add("hidden");
+                successMsg.classList.remove("hidden");
+                emailInput.classList.remove("border-red-500");
+                emailInput.value = "";
+
+                if (window.turnstile && turnstileWidgetId !== null) {
+                    window.turnstile.reset(turnstileWidgetId);
+                }
+                turnstileToken = null;
+
+                setTimeout(() => {
+                    successMsg.classList.add("hidden");
+                }, 5000);
+            } else {
+                errorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
+                errorMsg.classList.remove("hidden");
+                successMsg.classList.add("hidden");
+                if (window.turnstile && turnstileWidgetId !== null) {
+                    window.turnstile.reset(turnstileWidgetId);
+                }
+                turnstileToken = null;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            errorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
+            errorMsg.classList.remove("hidden");
+            successMsg.classList.add("hidden");
+        } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
+    }
+
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
@@ -80,46 +163,21 @@ if (form) {
             return;
         }
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        submitButton.textContent = "Zapisywanie...";
-        submitButton.disabled = true;
+        errorMsg.classList.add("hidden");
+        emailInput.classList.remove("border-red-500");
 
-        try {
-            const formData = new FormData(form);
-            const response = await fetch('/api/newsletter', {
-                method: 'POST',
-                body: formData
-            });
+        // Jeśli już mamy token, wyślij od razu
+        if (turnstileToken) {
+            submitForm();
+        } else {
+            // Uruchom Turnstile challenge
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.textContent = "Weryfikacja...";
+            submitButton.disabled = true;
 
-            const data = await response.json();
-
-            if (data.success) {
-                errorMsg.classList.add("hidden");
-                successMsg.classList.remove("hidden");
-                emailInput.classList.remove("border-red-500");
-                emailInput.value = "";
-
-                if (window.turnstile) {
-                    window.turnstile.reset();
-                }
-
-                setTimeout(() => {
-                    successMsg.classList.add("hidden");
-                }, 5000);
-            } else {
-                errorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
-                errorMsg.classList.remove("hidden");
-                successMsg.classList.add("hidden");
+            if (window.turnstile && turnstileWidgetId !== null) {
+                window.turnstile.execute(turnstileWidgetId);
             }
-        } catch (error) {
-            console.error("Error:", error);
-            errorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
-            errorMsg.classList.remove("hidden");
-            successMsg.classList.add("hidden");
-        } finally {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
         }
     });
 }

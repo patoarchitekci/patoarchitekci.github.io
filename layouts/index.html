@@ -429,15 +429,15 @@
         <form id="emailForm" class="flex flex-col gap-14 sm:gap-[93px] mx-auto mb-8 items-center max-w-[500px]" action="/api/newsletter" method="POST">
           <input type="email" id="emailInput" name="email" placeholder="Adres e-mail" required
             class="flex-1 px-4 py-[6px] border-b-2 border-orange text-grey placeholder-grey focus:outline-none focus:border-orange text-xs sm:text-sm md:text-base lg:text-2xl max-w-[237px] sm:max-w-full text-center font-medium w-full" />
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAB3rTpbU6V5I845R"></div>
+          <div id="turnstile-container"></div>
           <div>
-            <button type="submit"
+            <button type="submit" id="newsletter-submit"
               class="bg-orange text-[17.23px] sm:text-2xl text-dark-black uppercase px-[71.5px] sm:px-[111px] py-[2.1px] sm:py-[6.5px] rounded-full font-bold hover:bg-dark-black hover:text-orange transition-all duration-300 ease-linear">
               Zapisz się
             </button>
           </div>
         </form>
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
         <p id="errorMsg" class="text-red-500 font-medium mt-2 hidden">
           Wprowadź poprawny adres e-mail.
         </p>
