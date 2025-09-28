@@ -7,7 +7,7 @@ title = "Patoarchitekci"
   
   # Social media
   [params.social]
-    tiktok = "https://tiktok.com/patoarchitekci_"
+    tiktok = "https://www.tiktok.com/@patoarchitekci_"
     discord = "https://discord.com/invite/78zPcEaP22"
     linkedin = "https://www.linkedin.com/company/patoarchitekci/"
     facebook = "https://www.facebook.com/patoarchitekci/"
@@ -36,6 +36,7 @@ title = "Patoarchitekci"
     url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
     title = "Bezpłatna Konsultacja"
     purchaseUrl = "https://cart.easy.tools/checkout/patoarchitekci/szybkie-konsultacje"
+    advisoryUrl = "https://protopia.tech/doradztwo"
     
   # Footer
   [params.footer]
