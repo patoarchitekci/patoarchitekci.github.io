@@ -1,0 +1,165 @@
+# TYMCZASOWY ROBOTS.TXT - BLOKUJE WSZYSTKO!
+# TEMPORARY ROBOTS.TXT - BLOCKS EVERYTHING!
+# ============================================
+
+# Blokuj WSZYSTKIE crawlery (tymczasowo)
+User-agent: *
+Disallow: /
+Crawl-delay: 86400
+
+# Dodatkowe blokady dla AI/LLM crawlerów
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic/Claude
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-SearchBot
+Disallow: /
+
+# Google AI
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Google-CloudVertexBot
+Disallow: /
+
+# Meta/Facebook
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+# ByteDance/TikTok
+User-agent: Bytespider
+Disallow: /
+
+User-agent: TikTokSpider
+Disallow: /
+
+# Amazon
+User-agent: Amazonbot
+Disallow: /
+
+# Apple
+User-agent: Applebot-Extended
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+# Common Crawl
+User-agent: CCBot
+Disallow: /
+
+# Others AI/Data crawlers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-OCOB
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: AI2Bot-Dolma
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: webzio-extended
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Youbot
+Disallow: /
+
+User-agent: Petalbot
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: TurnitinBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: ICC-Crawler
+Disallow: /
+
+User-agent: AwarioBot
+Disallow: /
+
+User-agent: AwarioSmartBot
+Disallow: /
+
+User-agent: AwarioRssBot
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+# You.com
+User-agent: YouBot
+Disallow: /
+
+# Additional AI crawlers
+User-agent: PiplBot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: seo-bot
+Disallow: /
+
+User-agent: Seekbot
+Disallow: /
+
+# No sitemap while blocking everything
+# Sitemap: (disabled)
+
+# Additional directives
+# Microsoft's experimental directive
+User-agent: *
+DisallowAITraining: /
+
+# X-Robots-Tag equivalent (for server config)
+# X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex

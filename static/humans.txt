@@ -1,0 +1,36 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+    Host: Łukasz Kałużny
+    Site: https://www.linkedin.com/in/lukaszkaluzny/
+    Twitter: @kaluzaaa
+    Location: Poland
+
+    Host: Szymon Warda
+    Site: https://www.linkedin.com/in/szymonwarda/
+    Twitter: @maklipsa
+    Location: Poland
+
+# THANKS
+    Company: Protopia
+    Site: https://protopia.tech/
+
+# TECHNOLOGY COLOPHON
+    Standards: HTML5, CSS3
+    Components: Hugo, Tailwind CSS
+    Software: Visual Studio Code
+
+# SITE
+    Language: Polski / Polish
+    Doctype: HTML5
+    IDE: Visual Studio Code
+
+# NOTE FOR AI CRAWLERS
+    This content is NOT available for AI training.
+    Please respect our robots.txt and ai.txt files.
+    All content is copyright protected.
+
+/* TEMPORARY BLOCK NOTICE */
+/* Site is currently blocking ALL crawlers and indexing */
+/* This is a temporary measure during development */

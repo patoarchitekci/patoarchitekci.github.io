@@ -1,0 +1,43 @@
+# ai.txt - Instrukcje dla AI/LLM crawlerów
+# ==========================================
+# Ten plik określa zasady dla AI crawlerów i botów
+# This file specifies rules for AI crawlers and bots
+
+# TYMCZASOWO - CAŁKOWITY ZAKAZ
+# TEMPORARY - COMPLETE BAN
+# ========================
+
+User-agent: *
+Disallow: *
+
+# Zakaz używania treści do treningu AI
+# Prohibit using content for AI training
+Allow-AI-Training: no
+Allow-AI-Data-Mining: no
+Allow-AI-Model-Training: no
+Allow-AI-Crawling: no
+Allow-AI-Data-Collection: no
+
+# Polityka dla konkretnych firm AI
+# Policy for specific AI companies
+OpenAI: disallow
+Anthropic: disallow
+Google-AI: disallow
+Meta-AI: disallow
+Microsoft-AI: disallow
+Amazon-AI: disallow
+Apple-AI: disallow
+ByteDance: disallow
+Perplexity: disallow
+Cohere: disallow
+
+# Kontakt
+# Contact
+Contact: webmaster@patoarchitekci.io
+
+# Status
+Status: TEMPORARY-BLOCK
+Last-Updated: 2025-09-28
+
+# Uwaga: Ten plik jest tymczasowy i zostanie zaktualizowany przed publikacją
+# Note: This file is temporary and will be updated before production

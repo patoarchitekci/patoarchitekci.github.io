@@ -6,6 +6,35 @@
 <meta name="title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Title }}{{ end }}" />
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
 
+<!-- ===== TYMCZASOWE BLOKOWANIE INDEKSOWANIA / TEMPORARY BLOCKING ===== -->
+<!-- USUŃ TE TAGI PRZED PUBLIKACJĄ! / REMOVE BEFORE PRODUCTION! -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noydir" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-snippet:0, max-image-preview:none, max-video-preview:0" />
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="slurp" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="duckduckbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="baiduspider" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="yandexbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+
+<!-- Block AI/LLM crawlers -->
+<meta name="GPTBot" content="noindex, nofollow" />
+<meta name="ChatGPT-User" content="noindex, nofollow" />
+<meta name="ClaudeBot" content="noindex, nofollow" />
+<meta name="Claude-Web" content="noindex, nofollow" />
+<meta name="anthropic-ai" content="noindex, nofollow" />
+<meta name="CCBot" content="noindex, nofollow" />
+<meta name="Google-Extended" content="noindex, nofollow" />
+<meta name="FacebookBot" content="noindex, nofollow" />
+<meta name="Meta-ExternalAgent" content="noindex, nofollow" />
+<meta name="Bytespider" content="noindex, nofollow" />
+<meta name="PerplexityBot" content="noindex, nofollow" />
+<meta name="Amazonbot" content="noindex, nofollow" />
+<meta name="Applebot-Extended" content="noindex, nofollow" />
+
+<!-- Additional AI Training Prevention -->
+<meta name="ai" content="noai, noimageai, notextai" />
+<meta name="X-Robots-Tag" content="noai, noimageai" />
+
 <!-- ===== Open Graph / Facebook ===== -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ .Permalink }}" />

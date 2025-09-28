@@ -1,0 +1,8 @@
+# Security Policy
+Contact: webmaster@patoarchitekci.io
+Expires: 2026-01-01T00:00:00.000Z
+Preferred-Languages: pl, en
+
+# AI Crawling Policy
+# This website does not consent to AI/ML crawling or data collection
+# Zobacz/See: /robots.txt and /ai.txt
