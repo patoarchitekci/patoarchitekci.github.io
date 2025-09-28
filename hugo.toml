@@ -31,8 +31,8 @@ title = "Patoarchitekci"
     
   # Legal
   [params.legal]
-    privacyPolicy = "/polityka-prywatnosci/"
-    terms = "/regulamin/"
+    privacyPolicy = "https://app.easy.tools/policies/otwarte-pato"
+    terms = "https://app.easy.tools/terms/otwarte-pato"
     
   # Training banner
   [params.trainingBanner]
