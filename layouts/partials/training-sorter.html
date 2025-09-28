@@ -1,0 +1,46 @@
+{{- /*
+  Partial: training-sorter.html
+  Description: Sorts trainings - future by closest date first, then past by most recent first
+  Context: Map of all trainings
+  Returns: Sorted slice of trainings
+*/ -}}
+
+{{- $today := now.Format "2006-01-02" -}}
+{{- $futureTrainings := slice -}}
+{{- $pastTrainings := slice -}}
+
+{{- /* Separate trainings into future and past */ -}}
+{{- range . -}}
+  {{- if .dates -}}
+    {{- $firstDate := index .dates 0 -}}
+
+    {{- if gt $firstDate $today -}}
+      {{- $futureTrainings = $futureTrainings | append . -}}
+    {{- else -}}
+      {{- $pastTrainings = $pastTrainings | append . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- /* Trainings without dates go to the end */ -}}
+    {{- $pastTrainings = $pastTrainings | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Sort future trainings ascending (closest first) */ -}}
+{{- $sortedFuture := slice -}}
+{{- if $futureTrainings -}}
+  {{- $sortedFuture = sort $futureTrainings "dates" "asc" -}}
+{{- end -}}
+
+{{- /* Sort past trainings descending (most recent first) */ -}}
+{{- $sortedPast := slice -}}
+{{- if $pastTrainings -}}
+  {{- $sortedPast = sort $pastTrainings "dates" "desc" -}}
+{{- end -}}
+
+{{- /* Combine: future first, then past */ -}}
+{{- $allSorted := $sortedFuture -}}
+{{- range $sortedPast -}}
+  {{- $allSorted = $allSorted | append . -}}
+{{- end -}}
+
+{{- return $allSorted -}}

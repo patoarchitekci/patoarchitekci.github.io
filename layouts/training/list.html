@@ -37,7 +37,8 @@
         </div>
       </div>
       <div id="card-container" class="pt-12 lg:pt-[75px] flex flex-col gap-5 md:gap-[30px] pb-[15px] md:pb-[66px]">
-        {{- range $index, $training := .Site.Data.trainings -}}
+        {{- $sortedTrainings := partial "training-sorter.html" .Site.Data.trainings -}}
+        {{- range $index, $training := $sortedTrainings -}}
         {{- $hiddenClass := "" -}}
         {{- if gt $index 2 -}}{{ $hiddenClass = "hidden sm:flex" }}{{- end -}}
         {{- $isFirstCard := eq $index 0 -}}
@@ -53,16 +54,8 @@
                   {{ $training.title | upper }}</p>
                 <p
                   class="text-xs sm:text-base md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
-                  DATA:
                   <span class="text-white">
-                    {{- if $training.dates -}}
-                      {{- range $dateIndex, $date := $training.dates -}}
-                        {{- dateFormat "02.01.2006" $date -}}
-                        {{- if ne $dateIndex (sub (len $training.dates) 1) -}}, {{ end -}}
-                      {{- end -}}
-                    {{- else -}}
-                      w drodze
-                    {{- end -}}
+                    {{- partial "training-date-display.html" $training -}}
                   </span>
                 </p>
               </div>
@@ -97,17 +90,9 @@
                 class="text-orange group-hover:text-black transition-all ease-linear duration-300 text-xl sm:text-2xl md:text-3xl uppercase xl:text-4xl max-sm:pb-8 font-semibold max-w-[650px] w-full">
                 {{ $training.title }}</p>
               <p
-                class="text-xs sm:text-base uppercase md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
-                DATA:
+                class="text-xs sm:text-base md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
                 <span class="text-white">
-                  {{- if $training.dates -}}
-                    {{- range $dateIndex, $date := $training.dates -}}
-                      {{- dateFormat "02.01.2006" $date -}}
-                      {{- if ne $dateIndex (sub (len $training.dates) 1) -}}, {{ end -}}
-                    {{- end -}}
-                  {{- else -}}
-                    w drodze
-                  {{- end -}}
+                  {{- partial "training-date-display.html" $training -}}
                 </span>
               </p>
             </div>
@@ -171,11 +156,11 @@
                   prosty sposób</span></li>
             </ul>
             <div class="flex gap-2 max-md:pl-6 sm:gap-3">
-              <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+              <a href="{{ .Site.Params.hosts.lukasz.linkedin }}" target="_blank">
                 <img src="/img/svg/linkedin.svg" alt="linkedin"
                   class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
               </a>
-              <a href="https://x.com/patoarchitekci" target="_blank">
+              <a href="{{ .Site.Params.hosts.lukasz.twitter }}" target="_blank">
                 <img src="/img/svg/twitter.svg" alt="twitter"
                   class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
               </a>
@@ -196,11 +181,11 @@
                   kodu</span></li>
             </ul>
             <div class="flex gap-2 max-md:pl-6 sm:gap-3">
-              <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank">
+              <a href="{{ .Site.Params.hosts.szymon.linkedin }}" target="_blank">
                 <img src="/img/svg/linkedin.svg" alt="linkedin"
                   class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
               </a>
-              <a href="https://x.com/patoarchitekci" target="_blank">
+              <a href="{{ .Site.Params.hosts.szymon.twitter }}" target="_blank">
                 <img src="/img/svg/twitter.svg" alt="twitter"
                   class="size-7 sm:size-11 hover:scale-110 duration-300 transition-all ease-in-out" />
               </a>

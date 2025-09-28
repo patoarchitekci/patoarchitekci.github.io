@@ -1,0 +1,24 @@
+{{- /*
+  Partial: training-date-display.html
+  Description: Displays training dates with "DATA:" prefix or "Nowy termin w drodze" for past trainings
+  Context: Training object with .dates array
+*/ -}}
+
+{{- $today := now.Format "2006-01-02" -}}
+{{- if .dates -}}
+  {{- $firstDate := index .dates 0 -}}
+
+  {{- if gt $firstDate $today -}}
+    {{- /* Future training - show actual dates with DATA: prefix */ -}}
+    DATA: {{- range $dateIndex, $date := .dates -}}
+      {{- dateFormat "02.01.2006" (time $date) -}}
+      {{- if ne $dateIndex (sub (len $.dates) 1) -}}, {{ end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- /* Past training - show only "Nowy termin w drodze" without DATA: */ -}}
+    Nowy termin w drodze
+  {{- end -}}
+{{- else -}}
+  {{- /* No dates specified */ -}}
+  Termin w przygotowaniu
+{{- end -}}
