@@ -16,7 +16,7 @@ title = "Patoarchitekci"
     
   # Podcast platforms
   [params.podcast]
-    youtube = "https://www.youtube.com/c/PatoArchitekci/videos"
+    youtube = "https://www.youtube.com/@Patoarchitekci"
     spotify = "https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"
     apple = "https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604"
     
