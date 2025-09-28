@@ -37,8 +37,15 @@
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         {{- $intro := .Params.intro | markdownify -}}
-        {{- $intro = replace $intro "<p>" `<p class="text-xs sm:text-sm md:text-base lg:text-xl text-white mb-2 sm:mb-3 last:mb-0 leading-[130%] tracking-[0.1px] sm:leading-120 max-[425px]:max-w-[330px]">` -}}
-        {{ $intro | safeHTML }}
+        {{- if $intro -}}
+            {{- if not (strings.Contains $intro "<p>") -}}
+                <p class="text-xs sm:text-sm md:text-base lg:text-xl text-white mb-2 sm:mb-3 last:mb-0 leading-[130%] tracking-[0.1px] sm:leading-120 max-[425px]:max-w-[330px]">{{ $intro | safeHTML }}</p>
+            {{- else -}}
+                {{- $intro = replace $intro "<p>" `<p class="text-xs sm:text-sm md:text-base lg:text-xl text-white mb-2 sm:mb-3 last:mb-0 leading-[130%] tracking-[0.1px] sm:leading-120 max-[425px]:max-w-[330px]">` -}}
+                {{- $intro = replace $intro "<strong>" `<strong class="text-white font-bold">` -}}
+                {{ $intro | safeHTML }}
+            {{- end -}}
+        {{- end -}}
         <a target="_blank" href="https://discord.com/invite/78zPcEaP22">
             <button class="group text-white font-semibold text-xs min-[450px]:text-[18px] sm:text-[24px] lg:text-custom-3xl leading-100 rounded-[30px] max-[600px]:rounded-[14px] relative flex items-center justify-center gap-[5px] max-[600px]:gap-[2px] w-full h-full min-h-[106px] max-w-[1200px]
                 max-[992px]:min-h-[80px] max-[600px]:min-h-[40px]
