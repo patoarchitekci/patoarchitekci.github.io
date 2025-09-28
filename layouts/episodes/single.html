@@ -107,9 +107,9 @@
         <button id="readMoreBtn"
             class="text-orange mx-auto flex mt-[10px] sm:mt-[33px] text-[10px] sm:text-xs md:text-sm lg:text-base relative z-[10]">↓ rozwiń transkrypcję</button>
     </div>
-    <img class="absolute lg:bottom-[108px] md:bottom-[10px] bottom-[5rem] left-0 w-full h-[69px] sm:h-[300px] lg:h-[300px]"
+    <img id="readBottomLayer" class="absolute lg:bottom-[108px] md:bottom-[10px] bottom-[5rem] left-0 w-full h-[69px] sm:h-[300px] lg:h-[300px]"
         src="/images/png/read-bottom-layer.png" alt="read-bottom-layer">
-    <img class="sm:-bottom-[20px] bottom-0 absolute w-full left-0 max-h-[297px]"
+    <img id="podcastTopEllipse" class="sm:-bottom-[20px] bottom-0 absolute w-full left-0 max-h-[297px]"
         src="/images/png/podcast-top-ellipse.png" alt="poadcast">
 
 </section>
@@ -308,22 +308,43 @@
     const btn = document.getElementById("readMoreBtn");
     const textContainer = document.getElementById("textContainer");
     const fadeOverlay = document.getElementById("fadeOverlay");
+    const readBottomLayer = document.getElementById("readBottomLayer");
+    const podcastTopEllipse = document.getElementById("podcastTopEllipse");
 
-    let expanded = false;
+    // Sprawdź długość tekstu
+    const textLength = textContainer.textContent.trim().length;
+    const MIN_TEXT_LENGTH = 300; // Minimalna długość do pokazania rozwijania
 
-    btn.addEventListener("click", () => {
-        expanded = !expanded;
+    if (textLength < MIN_TEXT_LENGTH) {
+        // Dla krótkiego tekstu - ukryj wszystko
+        btn.style.display = "none";
+        textContainer.classList.remove("collapsed");
+        textContainer.style.maxHeight = "none";
+        textContainer.style.overflow = "visible";
 
-        if (expanded) {
-            textContainer.classList.remove("collapsed");
-            fadeOverlay.style.display = "none";
-            btn.innerHTML = "↑ zwiń transkrypcję";
-        } else {
-            textContainer.classList.add("collapsed");
-            fadeOverlay.style.display = "block";
-            btn.innerHTML = "↓ rozwiń transkrypcję";
-        }
-    });
+        // Ukryj tylko górny gradient (związany z rozwijaniem)
+        if (readBottomLayer) readBottomLayer.style.display = "none";
+        // podcastTopEllipse zostaje zawsze widoczny!
+    } else {
+        // Dla długiego tekstu - zachowaj normalną funkcjonalność
+        let expanded = false;
+
+        btn.addEventListener("click", () => {
+            expanded = !expanded;
+
+            if (expanded) {
+                textContainer.classList.remove("collapsed");
+                btn.innerHTML = "↑ zwiń transkrypcję";
+                // Ukryj gradient przy rozwinięciu
+                if (readBottomLayer) readBottomLayer.style.display = "none";
+            } else {
+                textContainer.classList.add("collapsed");
+                btn.innerHTML = "↓ rozwiń transkrypcję";
+                // Pokaż gradient przy zwinięciu
+                if (readBottomLayer) readBottomLayer.style.display = "block";
+            }
+        });
+    }
     const readMoreText = document.getElementById("readMoreText");
     const extraText = document.getElementById("extraText");
 
