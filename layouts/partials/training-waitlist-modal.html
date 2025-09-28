@@ -1,0 +1,73 @@
+{{- /*
+  Partial: training-waitlist-modal.html
+  Description: Modal for training waitlist signup
+  Context: Training object
+*/ -}}
+
+<!-- Training Waitlist Modal -->
+<div id="training-waitlist-modal" class="fixed inset-0 z-[9999] hidden">
+  <!-- Background overlay -->
+  <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+
+  <!-- Modal content -->
+  <div class="fixed inset-0 flex items-center justify-center p-4">
+    <div class="bg-white rounded-[30px] md:rounded-[56px] max-w-[600px] w-full max-h-[90vh] overflow-y-auto relative shadow-[1px_0px_17px_#a884844f] p-8 md:p-12">
+      <!-- Close button -->
+      <button id="modal-close" class="absolute top-4 right-4 text-red hover:text-dark-black transition-colors text-2xl font-bold z-10">
+        ×
+      </button>
+
+      <!-- Content -->
+      <div class="text-center">
+        <h3 class="text-2xl md:text-4xl font-bold font-tomorrow uppercase text-dark-black mb-4">
+          LISTA OCZEKUJĄCYCH
+        </h3>
+        <p class="text-sm md:text-base text-dark-black mb-8 max-w-[400px] leading-120 font-medium mx-auto">
+          Zapisz się na listę oczekujących na szkolenie<br>
+          <strong class="text-orange">{{ .title }}</strong><br>
+          Powiadomimy Cię, gdy pojawi się nowy termin.
+        </p>
+
+        <!-- Form -->
+        <form id="waitlistForm" class="flex flex-col gap-8 mx-auto items-center max-w-[400px]" action="/api/training-waitlist" method="POST">
+          <input type="hidden" name="training_name" value="{{ .title }}">
+          <input
+            type="email"
+            id="waitlistEmailInput"
+            name="email"
+            placeholder="Adres e-mail"
+            required
+            class="flex-1 px-4 py-[6px] border-b-2 border-orange text-dark-black placeholder-grey focus:outline-none focus:border-orange text-sm md:text-base lg:text-xl max-w-full text-center font-medium w-full"
+          />
+          <div>
+            <button
+              type="submit"
+              id="waitlist-submit"
+              class="bg-orange text-base md:text-xl text-dark-black uppercase px-16 md:px-20 py-2 md:py-3 rounded-full font-bold hover:bg-dark-black hover:text-orange transition-all duration-300 ease-linear whitespace-nowrap"
+            >
+              Rezerwuj
+            </button>
+          </div>
+          <div id="waitlist-turnstile-container"></div>
+        </form>
+
+        <!-- Error message -->
+        <p id="waitlistErrorMsg" class="text-red text-sm font-medium mt-4 hidden">
+          Wprowadź poprawny adres e-mail.
+        </p>
+
+        <!-- Success message -->
+        <div id="waitlistSuccessMsg" class="hidden mt-6">
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <p class="text-green-600 font-semibold text-lg mb-2">
+              ✓ Zostałeś zapisany na listę oczekujących!
+            </p>
+            <p class="text-green-600 text-sm">
+              Powiadomimy Cię mailowo o nowym terminie szkolenia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

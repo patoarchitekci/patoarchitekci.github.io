@@ -1,219 +1,252 @@
 {{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 {{ define "main" }}
-  {{ $trainingId := index (split (trim .RelPermalink "/") "/") 1 }}
-  {{ $training := index .Site.Data.trainings $trainingId }}
-  <div class="flex relative">
-    <div class="w-full">
-      <!-- ======= TRAINING HERO SECTION ======= -->
-      <section
-        class="bg-dark-black overflow-x-clip pt-10 sm:pt-[50px] pb-[64px] md:pb-20 lg:pb-[115px] px-[30px] xl:px-0">
-        <div class="max-w-[1200px] mx-auto">
-          <div class="flex flex-col gap-[15px] md:gap-[30px] mb-[34px] md:mb-12 xl:mb-[35px]">
-            <h1
-              class="uppercase font-tomorrow font-semibold max-sm:!leading-none text-custom-4xl sm:text-5xl xl:text-custom-6xl text-orange xl:!leading-[48px]">
-              {{ $training.title }}</h1>
-            <p class="text-[10px] sm:text-base font-normal text-white !leading-125">
-              {{ range $training.tags }}{{ . }} {{ end }}
-            </p>
-            <p class="text-orange text-xl lg:text-2xl font-medium uppercase pt-[18px] lg:pt-0"><span
-                class="font-normal normal-case">Prowadzący:</span>
-              {{ $training.instructor }}</p>
-          </div>
-          <div class="flex gap-5 relative">
-            <div>
-              <div class="w-full max-w-[775px] flex flex-col gap-[15px] md:gap-6 lg:mt-5">
-                {{ range $training.description }}
-                <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white font-normal !leading-110">{{ . }}</p>
-                {{ end }}
+{{ $trainingId := index (split (trim .RelPermalink "/") "/") 1 }}
+{{ $training := index .Site.Data.trainings $trainingId }}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $isTrainingPast := false -}}
+{{- if $training.dates -}}
+{{- $firstDate := index $training.dates 0 -}}
+{{- $isTrainingPast = le $firstDate $today -}}
+{{- end -}}
+<div class="flex relative" data-training-past="{{ $isTrainingPast }}">
+  <div class="w-full">
+    <!-- ======= TRAINING TITLE SECTION ======= -->
+    <section class="bg-dark-black overflow-x-clip pt-10 sm:pt-[50px] pb-[15px] md:pb-[30px] px-[30px] xl:px-0">
+      <div class="max-w-[1200px] mx-auto">
+        <h1
+          class="uppercase font-tomorrow font-semibold max-sm:!leading-none text-custom-4xl sm:text-5xl xl:text-custom-6xl text-orange xl:!leading-[48px]">
+          {{ $training.title }}</h1>
+      </div>
+    </section>
+    <div class="flex relative">
+      <div class="w-full">
+        <!-- ======= TRAINING HERO SECTION ======= -->
+        <section class="bg-dark-black overflow-x-clip pt-0 pb-[64px] md:pb-20 lg:pb-[115px] px-[30px] xl:px-0">
+          <div class="max-w-[1200px] mx-auto">
+            <div class="flex flex-col gap-[15px] md:gap-[30px] mb-[34px] md:mb-12 xl:mb-[35px]">
+              <p class="text-[10px] sm:text-base font-normal text-white !leading-125">
+                {{ range $training.tags }}{{ . }} {{ end }}
+              </p>
+              <p class="text-orange text-xl lg:text-2xl font-medium uppercase pt-[18px] lg:pt-0"><span
+                  class="font-normal normal-case">Prowadzący:</span>
+                {{ $training.instructor }}</p>
+            </div>
+            <div class="flex gap-5 relative">
+              <div>
+                <div class="w-full max-w-[775px] flex flex-col gap-[15px] md:gap-6 lg:mt-5">
+                  {{ range $training.description }}
+                  <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white font-normal !leading-110">{{ . }}</p>
+                  {{ end }}
+                </div>
+                <button
+                  class="bg-white font-bold lg:text-custom-2xl mt-10 sm:mt-[55px] sm:text-lg text-[22.15px] leading-100 text-dark-black p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] uppercase hover:bg-orange transition-all ease-linear duration-300 max-sm:h-[46px] max-sm:w-[291px]">
+                  Zapisz się
+                </button>
               </div>
-              <button
-                class="bg-white font-bold lg:text-custom-2xl mt-10 sm:mt-[55px] sm:text-lg text-[22.15px] leading-100 text-dark-black p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] uppercase hover:bg-orange transition-all ease-linear duration-300 max-sm:h-[46px] max-sm:w-[291px]">
-                Zapisz się
-              </button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- ==== SKILLS YOU WILL GAIN ==== -->
-      <section
-        class="pt-10 sm:pt-14 lg:pt-[71px] pb-[80px] min-[576px]:pb-[120px] md:pb-[170px] min-[992px]:pb-[277px] bg-white px-[30px] 2xl:px-0 relative">
-        <img src="/img/png/yellow-layer-two.png" alt="yellow-layer-two"
-          class="absolute w-full bottom-[-1px] left-0 xl:h-[232px]">
-        <div class="max-w-[1200px] mx-auto">
-          <p
-            class="text-2xl sm:text-custom-2xl lg:text-custom-3xl text-dark-black font-tomorrow font-semibold mb-6 sm:mb-8 lg:mb-10 !leading-120">
-            UMIEJĘTNOŚCI, KTÓRE ZDOBĘDZIESZ</p>
-          <div class="flex flex-col gap-[35px] md:gap-[57px]">
-            <div class="md:space-y-4 space-y-2.5 space-x-3">
-              {{ range $training.skills }}
-              <div class="flex items-center gap-2.5 sm:gap-7 md:gap-12 !ml-0">
-                <img src="/img/svg/red-check-icon.svg" alt="red-check-icon" class="size-5 sm:size-7 lg:size-[35px]">
-                <p class="text-base md:text-lg lg:text-2xl text-dark-black !leading-none font-medium">{{ . }}</p>
-              </div>
-              {{ end }}
-            </div>
-            <div class="flex flex-col">
-              <h3
-                class="text-dark-black font-semibold font-tomorrow text-2xl sm:text-custom-2xl max-lg:pb-3 max-md:pb-[5px] lg:text-custom-3xl xl:text-4xl !leading-120 lg:!leading-187">
-                PROGRAM SZKOLENIA</h3>
-              <div class="space-y-4">
-                {{ range $training.modules }}
-                <div class="flex flex-col min-[840px]:flex-row max-lg:py-2.5 gap-[15px] min-[840px]:gap-2 !mt-2.5 lg:!mt-10">
-                  <p class="text-orange font-extrabold text-xl md:text-2xl leading-100 w-[136px] uppercase">Moduł {{ .number }}</p>
-                  <p class="text-dark-black text-sm sm:text-base md:text-xl font-medium max-lg:!leading-100 lg:!leading-none max-w-[648px]"><strong>{{ .title }}:</strong> {{ .description }}</p>
+        <!-- ==== SKILLS YOU WILL GAIN ==== -->
+        <section
+          class="pt-10 sm:pt-14 lg:pt-[71px] pb-[80px] min-[576px]:pb-[120px] md:pb-[170px] min-[992px]:pb-[277px] bg-white px-[30px] 2xl:px-0 relative">
+          <img src="/img/png/yellow-layer-two.png" alt="yellow-layer-two"
+            class="absolute w-full bottom-[-1px] left-0 xl:h-[232px]">
+          <div class="max-w-[1200px] mx-auto">
+            <p
+              class="text-2xl sm:text-custom-2xl lg:text-custom-3xl text-dark-black font-tomorrow font-semibold mb-6 sm:mb-8 lg:mb-10 !leading-120">
+              UMIEJĘTNOŚCI, KTÓRE ZDOBĘDZIESZ</p>
+            <div class="flex flex-col gap-[35px] md:gap-[57px]">
+              <div class="md:space-y-4 space-y-2.5 space-x-3 max-w-[775px]">
+                {{ range $training.skills }}
+                <div class="flex items-center gap-2.5 sm:gap-7 md:gap-12 !ml-0">
+                  <img src="/img/svg/red-check-icon.svg" alt="red-check-icon" class="size-5 sm:size-7 lg:size-[35px]">
+                  <p class="text-base md:text-lg lg:text-2xl text-dark-black !leading-none font-medium">{{ . }}</p>
                 </div>
                 {{ end }}
               </div>
+              <div class="flex flex-col">
+                <h3
+                  class="text-dark-black font-semibold font-tomorrow text-2xl sm:text-custom-2xl max-lg:pb-3 max-md:pb-[5px] lg:text-custom-3xl xl:text-4xl !leading-120 lg:!leading-187">
+                  PROGRAM SZKOLENIA</h3>
+                <div class="space-y-4">
+                  {{ range $training.modules }}
+                  <div
+                    class="flex flex-col min-[840px]:flex-row max-lg:py-2.5 gap-[15px] min-[840px]:gap-2 !mt-2.5 lg:!mt-10">
+                    <p class="text-orange font-extrabold text-xl md:text-2xl leading-100 w-[136px] uppercase">Moduł {{
+                      .number }}</p>
+                    <p
+                      class="text-dark-black text-sm sm:text-base md:text-xl font-medium max-lg:!leading-100 lg:!leading-none max-w-[648px]">
+                      <strong>{{ .title }}:</strong> {{ .description }}
+                    </p>
+                  </div>
+                  {{ end }}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- ===== TRENER SECTION ===== -->
-      {{ range $key, $instructor := .Site.Data.instructors }}
+        <!-- ===== TRENER SECTION ===== -->
+        {{ range $key, $instructor := .Site.Data.instructors }}
         {{ if eq $instructor.name $training.instructor }}
-      <section
-        class="pt-5 pb-[166px] md:pb-0 bg-yellowdark px-[30px] max-md:overflow-hidden md:overflow-x-clip relative">
-        <img
-          class="absolute bottom-[13%] left-[10%] size-[60px] md:top-[-20%] xl:top-[-40%] lg:size-[105px] md:left-[26%] animate-float2 z-10 min-[2100px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,35%)]"
-          src="/img/svg/top-left-ellipse.svg" alt="top-left-ellipse">
-        <img
-          class="absolute lg:h-[60px] lg:w-8 h-[40px] w-6 left-[50%] lg:left-[40%] top-0 max-md:hidden lg:top-[-12%] xl:top-[-20%]"
-          src="/img/svg/light-img.svg" alt="light-img">
-        <div class="max-w-[1200px] mx-auto">
-          <div class="flex max-w-[791px] relative">
-            <div class="max-lg:pb-[50px] max-md:pb-0">
-              <h3 class="md:text-4xl text-2xl text-dark-black font-semibold uppercase font-tomorrow leading-100">TRENER
-              </h3>
-              <p
-                class="text-2xl max-md:hidden text-dark-black font-semibold font-tomorrow uppercase leading-[145%] pt-5 ml-[190px] relative whitespace-nowrap">
-                {{ $instructor.name }}
-                <span><img class="absolute top-0 min-w-[286px] left-[-37px] pointer-events-none"
-                    src="/img/svg/white-circle.svg" alt="white circle"></span>
-              </p>
-              <p class="font-medium text-dark-black md:text-xl !leading-[120%] pt-[30px] md:pt-[46px] max-w-[386px]">
-                <span class="font-bold">{{ $instructor.name }}</span>
-                {{ $instructor.bio_paragraph1 }}
-              </p>
-              <p class="font-medium text-dark-black md:text-xl !leading-[120%] pt-2.5 max-w-[386px]">{{ $instructor.bio_paragraph2 }}</p>
-              <p
-                class="md:hidden text-dark-black font-semibold font-tomorrow uppercase pl-5 leading-[145%] pt-10 relative">
-                {{ $instructor.name }}
-                <img class="absolute top-8 max-md:hidden md:max-w-[184px] left-0 h-[38px] pointer-events-none"
-                  src="/img/svg/white-circle.svg" alt="white circle">
-                <img class="absolute top-8 md:hidden min-w-[190px] left-0 h-[38px] pointer-events-none"
-                  src="/img/png/small-white-line.png" alt="white circle">
-              </p>
-              <p
-                class="font-medium text-dark-black md:text-xl leading-110 pt-10 max-w-[210px] md:pt-2.5 md:max-w-[386px]">
-                {{ $instructor.bio_paragraph3 }}</p>
+        <section
+          class="pt-5 pb-[166px] md:pb-0 bg-yellowdark px-[30px] max-md:overflow-hidden md:overflow-x-clip relative">
+          <img
+            class="absolute bottom-[13%] left-[10%] size-[60px] md:top-[-20%] xl:top-[-40%] lg:size-[105px] md:left-[26%] animate-float2 z-10 min-[2100px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,35%)]"
+            src="/img/svg/top-left-ellipse.svg" alt="top-left-ellipse">
+          <img
+            class="absolute lg:h-[60px] lg:w-8 h-[40px] w-6 left-[50%] lg:left-[40%] top-0 max-md:hidden lg:top-[-12%] xl:top-[-20%]"
+            src="/img/svg/light-img.svg" alt="light-img">
+          <div class="max-w-[1200px] mx-auto">
+            <div class="flex max-w-[791px] relative">
+              <div class="max-lg:pb-[50px] max-md:pb-0">
+                <h3 class="md:text-4xl text-2xl text-dark-black font-semibold uppercase font-tomorrow leading-100">
+                  TRENER
+                </h3>
+                <p
+                  class="text-2xl max-md:hidden text-dark-black font-semibold font-tomorrow uppercase leading-[145%] pt-5 ml-[190px] relative whitespace-nowrap">
+                  {{ $instructor.name }}
+                  <span><img class="absolute top-0 min-w-[286px] left-[-37px] pointer-events-none"
+                      src="/img/svg/white-circle.svg" alt="white circle"></span>
+                </p>
+                <p class="font-medium text-dark-black md:text-xl !leading-[120%] pt-[30px] md:pt-[46px] max-w-[386px]">
+                  <span class="font-bold">{{ $instructor.name }}</span>
+                  {{ $instructor.bio_paragraph1 }}
+                </p>
+                <p class="font-medium text-dark-black md:text-xl !leading-[120%] pt-2.5 max-w-[386px]">{{
+                  $instructor.bio_paragraph2 }}</p>
+                <p
+                  class="md:hidden text-dark-black font-semibold font-tomorrow uppercase pl-5 leading-[145%] pt-10 relative">
+                  {{ $instructor.name }}
+                  <img class="absolute top-8 max-md:hidden md:max-w-[184px] left-0 h-[38px] pointer-events-none"
+                    src="/img/svg/white-circle.svg" alt="white circle">
+                  <img class="absolute top-8 md:hidden min-w-[190px] left-0 h-[38px] pointer-events-none"
+                    src="/img/png/small-white-line.png" alt="white circle">
+                </p>
+                <p
+                  class="font-medium text-dark-black md:text-xl leading-110 pt-10 max-w-[210px] md:pt-2.5 md:max-w-[386px]">
+                  {{ $instructor.bio_paragraph3 }}</p>
+              </div>
+              <img
+                class="lg:max-w-[383px] lg:max-h-[465px] h-[352px] sm:h-[385px] lg:h-[468px] max-w-[300px] object-cover max-lg:absolute md:bottom-0 md:right-0 bottom-[-49%] right-[-110px]"
+                src="{{ $instructor.photo }}" alt="{{ $instructor.photo_alt }}">
             </div>
-            <img
-              class="lg:max-w-[383px] lg:max-h-[465px] h-[352px] sm:h-[385px] lg:h-[468px] max-w-[300px] object-cover max-lg:absolute md:bottom-0 md:right-0 bottom-[-49%] right-[-110px]"
-              src="{{ $instructor.photo }}" alt="{{ $instructor.photo_alt }}">
           </div>
-        </div>
-      </section>
+        </section>
         {{ end }}
-      {{ end }}
+        {{ end }}
 
-      <!-- ===== DLACZEGO SECTION ===== -->
-      <section class="bg-dark-black pt-10 pb-[60px] lg:pt-[68px] lg:pb-[89px] px-[30px]">
-        <div class="max-w-[1200px] mx-auto">
-          <h3
-            class="uppercase font-semibold font-tomorrow text-2xl md:text-4xl lg:text-custom-4xl text-red leading-100 lg:pb-[55px] pb-[34px] md:pb-10 !leading-110 lg:!leading-[88%]">
-            DLACZEGO WARTO SKORZYSTAĆ</h3>
-          <div class="flex flex-col md:gap-5 gap-[25px]">
-            {{ range $training.benefits }}
-            <div class="flex items-start lg:items-center lg:gap-[41px] md:gap-5 gap-[15px]">
-              <button>
-                <img src="/img/svg/right-arrow-red.svg" alt="Thumbnail" class="lg:size-[50px] max-lg:min-w-[35px] size-[35px]">
-              </button>
-              <p class="font-medium max-md:text-sm !leading-110 md:!leading-125 max-w-[701px] text-white"><span class='uppercase'>{{ .title }}.</span> {{ .description }}</p>
+        <!-- ===== DLACZEGO SECTION ===== -->
+        <section class="bg-dark-black pt-10 pb-[60px] lg:pt-[68px] lg:pb-[89px] px-[30px]">
+          <div class="max-w-[1200px] mx-auto">
+            <h3
+              class="uppercase font-semibold font-tomorrow text-2xl md:text-4xl lg:text-custom-4xl text-red leading-100 lg:pb-[55px] pb-[34px] md:pb-10 !leading-110 lg:!leading-[88%]">
+              DLACZEGO WARTO SKORZYSTAĆ</h3>
+            <div class="flex flex-col md:gap-5 gap-[25px]">
+              {{ range $training.benefits }}
+              <div class="flex items-start lg:items-center lg:gap-[41px] md:gap-5 gap-[15px]">
+                <button>
+                  <img src="/img/svg/right-arrow-red.svg" alt="Thumbnail"
+                    class="lg:size-[50px] max-lg:min-w-[35px] size-[35px]">
+                </button>
+                <p class="font-medium max-md:text-sm !leading-110 md:!leading-125 max-w-[701px] text-white"><span
+                    class='uppercase'>{{ .title }}.</span> {{ .description }}</p>
+              </div>
+              {{ end }}
             </div>
-            {{ end }}
+            <p
+              class="lg:text-2xl max-md:pr-3 text-xl font-bold uppercase text-white max-w-[796px] lg:pt-[46px] pt-[42px] !leading-[115%] md:!leading-[120%]">
+              <span class="text-red">To szkolenie to nasz bestseller, a liczba miejsc jest ograniczona.</span> Są
+              jeszcze
+              wolne miejsca, ale nie gwarantujemy, że zaraz nie znikną.
+            </p>
           </div>
-          <p
-            class="lg:text-2xl max-md:pr-3 text-xl font-bold uppercase text-white max-w-[796px] lg:pt-[46px] pt-[42px] !leading-[115%] md:!leading-[120%]">
-            <span class="text-red">To szkolenie to nasz bestseller, a liczba miejsc jest ograniczona.</span> Są jeszcze
-            wolne miejsca, ale nie gwarantujemy, że zaraz nie znikną.
-          </p>
-        </div>
-      </section>
+        </section>
 
-      <!-- ===== TRAINING INFO MOBILE ===== -->
-      <section>
-        <div class="py-[45px] px-7 bg-orange flex flex-col gap-6 w-full min-[1400px]:hidden">
-          <div>
-            <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black pb-2.5">
-              <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-                <img src="/img/svg/price-icon.svg" alt="price-icon"
-                  class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
-                <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Cena</p>
+        <!-- ===== TRAINING INFO MOBILE ===== -->
+        <section>
+          <div class="py-[45px] px-7 bg-orange flex flex-col gap-6 w-full min-[1400px]:hidden">
+            <div>
+              <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black pb-2.5">
+                <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+                  <img src="/img/svg/price-icon.svg" alt="price-icon"
+                    class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
+                  <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Cena</p>
+                </div>
+                <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+                  <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                    Cena
+                  </p>
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{ $training.price_net
+                    }}
+                    {{ $training.currency }} netto</p>
+                  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
+                    $training.price_gross }} {{ $training.currency }} brutto
+                  </p>
+                </div>
               </div>
-              <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-                <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Cena
-                </p>
-                <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{ $training.price_net }} {{ $training.currency }} netto</p>
-                <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{ $training.price_gross }} {{ $training.currency }} brutto
-                </p>
-              </div>
-            </div>
 
-            <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
-              <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-                <img src="/img/svg/calendar-icon.svg" alt="calendar-icon"
-                  class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
-                <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Termin</p>
-              </div>
-              <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-                <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-                  Termin
-                </p>
-                <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
-                  <span class="block">
-                    {{- range $index, $date := $training.dates -}}
+              <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
+                <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+                  <img src="/img/svg/calendar-icon.svg" alt="calendar-icon"
+                    class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
+                  <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Termin</p>
+                </div>
+                <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+                  <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                    Termin
+                  </p>
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
+                    <span class="block">
+                      {{- range $index, $date := $training.dates -}}
                       {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
-                    {{- end }}
-                  </span>
-                </p>
-                <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+                      {{- end }}
+                    </span>
+                  </p>
+                  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
+                    $training.time
+                    }}</p>
+                </div>
               </div>
-            </div>
 
-            <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
-              <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-                <img src="/img/svg/location-icon.svg" alt="location-icon"
-                  class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
-                <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Lokalizacja</p>
+              <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
+                <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+                  <img src="/img/svg/location-icon.svg" alt="location-icon"
+                    class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
+                  <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Lokalizacja</p>
+                </div>
+                <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+                  <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                    Lokalizacja
+                  </p>
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{
+                    $training.location.type }}</p>
+                  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
+                    $training.location.platform }}</p>
+                </div>
               </div>
-              <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-                <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-                  Lokalizacja
-                </p>
-                <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{ $training.location.type }}</p>
-                <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{ $training.location.platform }}</p>
-              </div>
-            </div>
 
-            <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
-              <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-                <img src="/img/svg/contact-number-icon.svg" alt="location-icon"
-                  class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
-                <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Liczba miejsc</p>
+              <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
+                <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+                  <img src="/img/svg/contact-number-icon.svg" alt="location-icon"
+                    class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
+                  <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Liczba miejsc
+                  </p>
+                </div>
+                <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+                  <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                    Liczba
+                    miejsc
+                  </p>
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{
+                    $training.participants.max }}</p>
+                  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
+                    $training.participants.availability_note }}</p>
+                </div>
               </div>
-              <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-                <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-                  Liczba
-                  miejsc
-                </p>
-                <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{ $training.participants.max }}</p>
-                <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{ $training.participants.availability_note }}</p>
-              </div>
-            </div>
 
-            <!-- <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
+              <!-- <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
               <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
                 <img src="/img/svg/guarantee-icon.svg" alt="guarantee-icon"
                   class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
@@ -229,150 +262,181 @@
               </div>
             </div> -->
 
-            <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
-              <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-                <img src="/img/svg/certificate-icon.svg" alt="certificate-icon"
-                  class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
-                <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Certyfikat</p>
-              </div>
-              <div class="max-w-[248px] w-full flex flex-col gap-[15px] sm:gap-[5px]">
-                <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-                  Certyfikat</p>
-                <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ .Site.Params.trainings.certificate.description }}</p>
+              <div class="flex items-start gap-[60px] sm:justify-between w-full border-b border-dark-black py-2.5">
+                <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+                  <img src="/img/svg/certificate-icon.svg" alt="certificate-icon"
+                    class="max-sm:min-w-[45px] h-[45px] sm:w-7 sm:h-7">
+                  <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white max-sm:hidden">Certyfikat</p>
+                </div>
+                <div class="max-w-[248px] w-full flex flex-col gap-[15px] sm:gap-[5px]">
+                  <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                    Certyfikat</p>
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{
+                    .Site.Params.trainings.certificate.description }}</p>
+                </div>
               </div>
             </div>
+            <p class="md:mt-3 mt-1.5 uppercase font-tomorrow text-white font-semibold leading-110 text-base">Masz
+              pytania?
+              <br class="sm:hidden"> Chcesz zorganizować
+              to <span class="sm:block">szkolenie w formule zamkniętej? <br class="sm:hidden"></span>
+              Skontaktuj się z naszym koordynatorem:
+            </p>
+            <div class="flex flex-col">
+              <p class="text-dark-black font-semibold text-[13px] md:text-sm !leading-120">{{
+                .Site.Params.trainings.coordinator.name }}</p>
+              <a class="text-dark-black !inline-block w-max font-medium text-[13px] md:text-sm !leading-120"
+                href="tel:{{ .Site.Params.trainings.coordinator.phone }}">{{ .Site.Params.trainings.coordinator.phone
+                }}</a>
+              <a class="text-dark-black !inline-block w-max font-medium text-[13px] md:text-sm !leading-120"
+                href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email
+                }}</a>
+            </div>
+            <button
+              class="bg-white font-bold uppercase lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
+              Zapisz się
+            </button>
           </div>
-          <p class="md:mt-3 mt-1.5 uppercase font-tomorrow text-white font-semibold leading-110 text-base">Masz pytania?
-            <br class="sm:hidden"> Chcesz zorganizować
-            to <span class="sm:block">szkolenie w formule zamkniętej? <br class="sm:hidden"></span>
-            Skontaktuj się z naszym koordynatorem:
-          </p>
-          <div class="flex flex-col">
-            <p class="text-dark-black font-semibold text-[13px] md:text-sm !leading-120">{{ .Site.Params.trainings.coordinator.name }}</p>
-            <a class="text-dark-black !inline-block w-max font-medium text-[13px] md:text-sm !leading-120"
-              href="tel:{{ .Site.Params.trainings.coordinator.phone }}">{{ .Site.Params.trainings.coordinator.phone }}</a>
-            <a class="text-dark-black !inline-block w-max font-medium text-[13px] md:text-sm !leading-120"
-              href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email }}</a>
-          </div>
-          <button
-            class="bg-white font-bold uppercase lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
-            Zapisz się
-          </button>
-        </div>
-      </section>
+        </section>
 
-      <!-- ===== FAQ SECTION ===== -->
-      <section
-        class="lg:pt-[85px] md:pt-[60px] pt-[40px] sm:pb-[160px] pb-[100px] md:pb-[220px] lg:pb-[326px] relative px-[30px]">
-        <img class="absolute left-7 max-md:min-w-[76px] max-md:max-w-[88px] max-md:h-20 md:left-12 top-2.5 min-[2100px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,36%)]"
-          src="/img/svg/rounded-red-arrow.svg" alt="rounded-red-arrow">
-        <div class="max-w-[1200px] mx-auto ">
-          <div class="max-w-[800px]">
-            <h3
-              class="uppercase text-center font-semibold font-tomorrow text-red text-[26.4px] md:text-custom-4xl lg:text-custom-6xl leading-100 pb-[33px] md:pb-[50px] lg:pb-[60px]">
-              FAQ
-            </h3>
-            <div class="md:space-y-6 space-y-4">
-              {{ range $training.faq }}
-              <div class="flex flex-col space-y-[5px] md:space-y-4 group">
-                <div class="flex items-start md:gap-[37px] gap-5 cursor-pointer faq-toggle">
-                  <div class="md:size-[45px] size-[35px] min-w-[35px] md:min-w-[45px] bg-red text-white rounded-md flex items-center justify-center text-2xl font-bold transition-all overflow-hidden">
-                    <div class="icon transition-transform duration-500 relative h-5 w-5 md:h-[25px] md:w-[25px]">
-                      <span class="bg-white absolute top-0 left-[50%] translate-x-[-50%] h-5 w-[3px] md:h-[25px] md:w-[5px]"></span>
-                      <span class="bg-white absolute left-0 top-[50%] translate-y-[-50%] w-5 h-[3px] md:w-[25px] md:h-[5px]"></span>
+        <!-- ===== FAQ SECTION ===== -->
+        <section
+          class="lg:pt-[85px] md:pt-[60px] pt-[40px] sm:pb-[160px] pb-[100px] md:pb-[220px] lg:pb-[326px] relative px-[30px]">
+          <img
+            class="absolute left-7 max-md:min-w-[76px] max-md:max-w-[88px] max-md:h-20 md:left-12 top-2.5 min-[2100px]:!left-[clamp(40px,39vw,26%)] min-[4000px]:!left-[clamp(40px,39vw,36%)]"
+            src="/img/svg/rounded-red-arrow.svg" alt="rounded-red-arrow">
+          <div class="max-w-[1200px] mx-auto ">
+            <div class="max-w-[800px]">
+              <h3
+                class="uppercase text-center font-semibold font-tomorrow text-red text-[26.4px] md:text-custom-4xl lg:text-custom-6xl leading-100 pb-[33px] md:pb-[50px] lg:pb-[60px]">
+                FAQ
+              </h3>
+              <div class="md:space-y-6 space-y-4">
+                {{ range $training.faq }}
+                <div class="flex flex-col space-y-[5px] md:space-y-4 group">
+                  <div class="flex items-start md:gap-[37px] gap-5 cursor-pointer faq-toggle">
+                    <div
+                      class="md:size-[45px] size-[35px] min-w-[35px] md:min-w-[45px] bg-red text-white rounded-md flex items-center justify-center text-2xl font-bold transition-all overflow-hidden">
+                      <div class="icon transition-transform duration-500 relative h-5 w-5 md:h-[25px] md:w-[25px]">
+                        <span
+                          class="bg-white absolute top-0 left-[50%] translate-x-[-50%] h-5 w-[3px] md:h-[25px] md:w-[5px]"></span>
+                        <span
+                          class="bg-white absolute left-0 top-[50%] translate-y-[-50%] w-5 h-[3px] md:w-[25px] md:h-[5px]"></span>
+                      </div>
                     </div>
+                    <p
+                      class="font-bold text-xs md:text-lg lg:text-xl text-dark-black leading-110 md:leading-100 transition-all duration-300 question uppercase">
+                      {{ .question }}</p>
                   </div>
-                  <p class="font-bold text-xs md:text-lg lg:text-xl text-dark-black leading-110 md:leading-100 transition-all duration-300 question uppercase">{{ .question }}</p>
+                  <div
+                    class="faq-answer md:pl-[82px] pl-[55px] max-w-[799px] leading-100 text-xs md:text-lg lg:text-xl font-medium text-dark-black overflow-hidden transition-all duration-500 ease-in-out"
+                    style="height: 0;">
+                    <div class="content py-2">{{ .answer }}</div>
+                  </div>
                 </div>
-                <div class="faq-answer md:pl-[82px] pl-[55px] max-w-[799px] leading-100 text-xs md:text-lg lg:text-xl font-medium text-dark-black overflow-hidden transition-all duration-500 ease-in-out" style="height: 0;">
-                  <div class="content py-2">{{ .answer }}</div>
-                </div>
-              </div>
-              {{ end }}
-              
-              {{ range .Site.Data.general_faq.general_faq }}
-              <div class="flex flex-col space-y-[5px] md:space-y-4 group">
-                <div class="flex items-start md:gap-[37px] gap-5 cursor-pointer faq-toggle">
-                  <div class="md:size-[45px] size-[35px] min-w-[35px] md:min-w-[45px] bg-red text-white rounded-md flex items-center justify-center text-2xl font-bold transition-all overflow-hidden">
-                    <div class="icon transition-transform duration-500 relative h-5 w-5 md:h-[25px] md:w-[25px]">
-                      <span class="bg-white absolute top-0 left-[50%] translate-x-[-50%] h-5 w-[3px] md:h-[25px] md:w-[5px]"></span>
-                      <span class="bg-white absolute left-0 top-[50%] translate-y-[-50%] w-5 h-[3px] md:w-[25px] md:h-[5px]"></span>
+                {{ end }}
+
+                {{ range .Site.Data.general_faq.general_faq }}
+                <div class="flex flex-col space-y-[5px] md:space-y-4 group">
+                  <div class="flex items-start md:gap-[37px] gap-5 cursor-pointer faq-toggle">
+                    <div
+                      class="md:size-[45px] size-[35px] min-w-[35px] md:min-w-[45px] bg-red text-white rounded-md flex items-center justify-center text-2xl font-bold transition-all overflow-hidden">
+                      <div class="icon transition-transform duration-500 relative h-5 w-5 md:h-[25px] md:w-[25px]">
+                        <span
+                          class="bg-white absolute top-0 left-[50%] translate-x-[-50%] h-5 w-[3px] md:h-[25px] md:w-[5px]"></span>
+                        <span
+                          class="bg-white absolute left-0 top-[50%] translate-y-[-50%] w-5 h-[3px] md:w-[25px] md:h-[5px]"></span>
+                      </div>
                     </div>
+                    <p
+                      class="font-bold text-xs md:text-lg lg:text-xl text-dark-black leading-110 md:leading-100 transition-all duration-300 question uppercase">
+                      {{ .question }}</p>
                   </div>
-                  <p class="font-bold text-xs md:text-lg lg:text-xl text-dark-black leading-110 md:leading-100 transition-all duration-300 question uppercase">{{ .question }}</p>
+                  <div
+                    class="faq-answer md:pl-[82px] pl-[55px] max-w-[799px] leading-100 text-xs md:text-lg lg:text-xl font-medium text-dark-black overflow-hidden transition-all duration-500 ease-in-out"
+                    style="height: 0;">
+                    <div class="content py-2">{{ .answer }}</div>
+                  </div>
                 </div>
-                <div class="faq-answer md:pl-[82px] pl-[55px] max-w-[799px] leading-100 text-xs md:text-lg lg:text-xl font-medium text-dark-black overflow-hidden transition-all duration-500 ease-in-out" style="height: 0;">
-                  <div class="content py-2">{{ .answer }}</div>
-                </div>
+                {{ end }}
               </div>
-              {{ end }}
             </div>
           </div>
-        </div>
-      </section>
-    </div>
-    
-    <!-- ===== TRAINING INFO SIDEBAR ===== -->
-    <div class="right-0 sticky top-0 h-max w-0 -right-[9%] max-[1399px]:hidden min-[2100px]:!right-[clamp(40px,39vw,16%)] min-[3000px]:!right-[clamp(40px,39vw,26%)] min-[4500px]:!right-[clamp(40px,39vw,34%)] min-[7000px]:!right-[clamp(40px,39vw,42%)] z-[999]">
+        </section>
+      </div>
+      <!-- ===== TRAINING INFO SIDEBAR ===== -->
       <div
-        class="p-10 bg-orange h-max flex flex-col  translate-x-[-100%] max-w-[507px] !min-w-[507px] right-0 gap-6 w-full relative z-[100] max-lg:hidden">
-        <div class="flex items-start justify-between w-full border-b border-dark-black pb-2.5">
-          <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-            <img src="/img/svg/price-icon.svg" alt="price-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
-            <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Cena</p>
+        class="right-0 sticky top-0 h-max w-0 -right-[9%] max-[1399px]:hidden min-[2100px]:!right-[clamp(40px,39vw,16%)] min-[3000px]:!right-[clamp(40px,39vw,26%)] min-[4500px]:!right-[clamp(40px,39vw,34%)] min-[7000px]:!right-[clamp(40px,39vw,42%)] z-[999]">
+        <div
+          class="p-10 bg-orange h-max flex flex-col  translate-x-[-100%] max-w-[507px] !min-w-[507px] right-0 gap-6 w-full relative z-[100] max-lg:hidden">
+          <div class="flex items-start justify-between w-full border-b border-dark-black pb-2.5">
+            <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+              <img src="/img/svg/price-icon.svg" alt="price-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
+              <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Cena</p>
+            </div>
+            <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+              <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Cena
+              </p>
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ $training.price_net }}
+                {{
+                $training.currency }} netto</p>
+              <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.price_gross }} {{
+                $training.currency }} brutto</p>
+            </div>
           </div>
-          <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-            <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Cena
-            </p>
-            <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ $training.price_net }} {{ $training.currency }} netto</p>
-            <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.price_gross }} {{ $training.currency }} brutto</p>
-          </div>
-        </div>
-        <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
-          <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-            <img src="/img/svg/calendar-icon.svg" alt="calendar-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
-            <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Termin</p>
-          </div>
-          <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-            <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
-            </p>
-            <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
-              <span class="block">
-                {{- range $index, $date := $training.dates -}}
+          <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
+            <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+              <img src="/img/svg/calendar-icon.svg" alt="calendar-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
+              <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Termin</p>
+            </div>
+            <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+              <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
+              </p>
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
+                <span class="block">
+                  {{- range $index, $date := $training.dates -}}
                   {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
-                {{- end }}
-              </span>
-            </p>
-            <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+                  {{- end }}
+                </span>
+              </p>
+              <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+            </div>
           </div>
-        </div>
-        <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
-          <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-            <img src="/img/svg/location-icon.svg" alt="location-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
-            <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Lokalizacja</p>
+          <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
+            <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+              <img src="/img/svg/location-icon.svg" alt="location-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
+              <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Lokalizacja</p>
+            </div>
+            <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+              <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                Lokalizacja
+              </p>
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ $training.location.type
+                }}
+              </p>
+              <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.location.platform
+                }}
+              </p>
+            </div>
           </div>
-          <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-            <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-              Lokalizacja
-            </p>
-            <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ $training.location.type }}</p>
-            <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.location.platform }}</p>
+          <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
+            <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+              <img src="/img/svg/contact-number-icon.svg" alt="contact-number-icon"
+                class="w-[45px] h-[45px] sm:w-7 sm:h-7">
+              <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Liczba miejsc</p>
+            </div>
+            <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
+              <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Liczba
+                miejsc
+              </p>
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{
+                $training.participants.max
+                }}</p>
+              <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{
+                $training.participants.availability_note }}</p>
+            </div>
           </div>
-        </div>
-        <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
-          <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-            <img src="/img/svg/contact-number-icon.svg" alt="contact-number-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
-            <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Liczba miejsc</p>
-          </div>
-          <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
-            <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Liczba
-              miejsc
-            </p>
-            <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{ $training.participants.max }}</p>
-            <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.participants.availability_note }}</p>
-          </div>
-        </div>
-        <!-- <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
+          <!-- <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
           <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
             <img src="/img/svg/guarantee-icon.svg" alt="guarantee-icon"
               class="w-[45px] h-[45px] sm:w-7 sm:h-7">
@@ -386,33 +450,48 @@
             <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">jeśli kurs Ci nie podejdzie</p>
           </div>
         </div> -->
-        <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
-          <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
-            <img src="/img/svg/certificate-icon.svg" alt="certificate-icon"
-              class="w-[45px] h-[45px] sm:w-7 sm:h-7">
-            <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Certyfikat</p>
+          <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
+            <div class="flex gap-2 items-center sm:w-full max-w-[140px]">
+              <img src="/img/svg/certificate-icon.svg" alt="certificate-icon" class="w-[45px] h-[45px] sm:w-7 sm:h-7">
+              <p class="uppercase font-tomorrow font-semibold fs-custom-lg text-white">Certyfikat</p>
+            </div>
+            <div class="max-w-[248px] w-full flex flex-col gap-7 sm:gap-[5px]">
+              <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
+                Certyfikat</p>
+              <p class="font-bold text-dark-black text-sm sm:text-[15px] uppercase !leading-120">{{
+                .Site.Params.trainings.certificate.description }}</p>
+            </div>
           </div>
-          <div class="max-w-[248px] w-full flex flex-col gap-7 sm:gap-[5px]">
-            <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
-              Certyfikat</p>
-            <p class="font-bold text-dark-black text-sm sm:text-[15px] uppercase !leading-120">{{ .Site.Params.trainings.certificate.description }}</p>
+          <p class="mt-3 uppercase font-tomorrow text-white !leading-120 font-semibold text-base">Masz pytania? Chcesz
+            zorganizować
+            to <span class="block">szkolenie w formule zamkniętej?</span>
+            Skontaktuj się z naszym koordynatorem:</p>
+          <div class="flex flex-col">
+            <p class="text-dark-black font-semibold text-sm !leading-120">{{ .Site.Params.trainings.coordinator.name }}
+            </p>
+            <a class="text-dark-black !inline-block w-max font-medium text-sm !leading-120"
+              href="tel:{{ .Site.Params.trainings.coordinator.phone }}">{{ .Site.Params.trainings.coordinator.phone
+              }}</a>
+            <a class="text-dark-black !inline-block w-max font-medium text-sm !leading-120"
+              href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email
+              }}</a>
           </div>
+          <button
+            class="bg-white uppercase font-bold lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
+            Zapisz się
+          </button>
         </div>
-        <p class="mt-3 uppercase font-tomorrow text-white !leading-120 font-semibold text-base">Masz pytania? Chcesz
-          zorganizować
-          to <span class="block">szkolenie w formule zamkniętej?</span>
-          Skontaktuj się z naszym koordynatorem:</p>
-        <div class="flex flex-col">
-          <p class="text-dark-black font-semibold text-sm !leading-120">{{ .Site.Params.trainings.coordinator.name }}</p>
-          <a class="text-dark-black !inline-block w-max font-medium text-sm !leading-120" href="tel:{{ .Site.Params.trainings.coordinator.phone }}">{{ .Site.Params.trainings.coordinator.phone }}</a>
-          <a class="text-dark-black !inline-block w-max font-medium text-sm !leading-120"
-            href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email }}</a>
-        </div>
-        <button
-          class="bg-white uppercase font-bold lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
-          Zapisz się
-        </button>
       </div>
     </div>
   </div>
+
+  {{- /* Include waitlist modal */ -}}
+  {{- partial "training-waitlist-modal.html" $training -}}
+
+
+
+</div>
+
+{{- /* Include Turnstile script if not already present */ -}}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {{ end }}
