@@ -392,6 +392,9 @@
             <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
               </p>
+              {{- if $isTrainingPast -}}
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">Nowy termin w drodze</p>
+              {{- else -}}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
                 <span class="block">
                   {{- range $index, $date := $training.dates -}}
@@ -400,6 +403,7 @@
                 </span>
               </p>
               <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+              {{- end -}}
             </div>
           </div>
           <div class="flex items-start justify-between w-full border-b border-dark-black py-2.5">
