@@ -13,6 +13,15 @@ title = "Patoarchitekci"
     facebook = "https://www.facebook.com/patoarchitekci/"
     twitter = "https://x.com/patoarchitekci"
     instagram = "https://www.instagram.com/patoarchitekci"
+
+  # Host profiles
+  [params.hosts]
+    [params.hosts.lukasz]
+      linkedin = "https://www.linkedin.com/in/lukaszkaluzny/"
+      twitter = "https://x.com/kaluzaaa"
+    [params.hosts.szymon]
+      linkedin = "https://www.linkedin.com/in/szymonwarda/"
+      twitter = "https://x.com/maklipsa"
     
   # Podcast platforms
   [params.podcast]
