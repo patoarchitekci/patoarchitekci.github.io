@@ -1,0 +1,131 @@
+id: "kubernetes-the-hard-way"
+title: "Kubernetes the Hard Way"
+active: true
+featured: false
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#Kubernetes"
+  - "#Infrastructure"
+  - "#Cloud"
+  - "#Advanced"
+
+# Treść
+description:
+  - "Kubernetes bez ściemy! Łukasz pokaże Ci, jak to działa od środka. Zapomnij o narzędziach i gotowych rozwiązaniach. Tutaj liczy się tylko Twoja wiedza i kreatywność."
+  - "Będzie się działo! Rozpoczniemy od przygotowania środowiska i instalacji narzędzi klienckich. Następnie utworzysz własny Urząd Certyfikacji i wygenerujesz certyfikaty TLS dla wszystkich komponentów klastra. Skonfigurujesz Load Balancer i przygotowajesz pliki uwierzytelniające oraz klucze szyfrowania danych."
+  - "Ręcznie uruchomisz klaster etcd, następnie Control Plane Kubernetes z API Server, Scheduler i Controller Manager. Skonfigurujesz węzły robocze z kubelet, kube-proxy i containerd. Zbudujesz sieć klastra z routingiem dla Podów i wdrożysz CoreDNS."
+  - "Na koniec przetestujesz wszystko kompleksowymi testami funkcjonalności i zasymulujemy awarie węzłów, sprawdzając wysoką dostępność klastra. To intensywne szkolenie dla tych, którzy chcą naprawdę zrozumieć, jak każdy element Kubernetes współpracuje ze sobą."
+
+skills:
+  - "Szczegółowa architektura klastra Kubernetes"
+  - "Szyfrowanie komunikacji i danych at-rest w klastrze"
+  - "Przygotowanie plików konfiguracyjnych, kluczy i certyfikatów"
+  - "Architektura i uruchomienie klastra etcd"
+  - "Instalacja i konfiguracja control plane (API server, scheduler, controller manager)"
+  - "Uruchomienie węzłów Kubernetes i konfiguracja kubelet"
+  - "Konfiguracja sieci w Kubernetes (CNI) od podstaw"
+  - "Uruchomienie usługi DNS i niezbędnych dodatków klastra"
+  - "Testy funkcjonalności, wysokiej dostępności i symulacje awarii"
+  - "Deep troubleshooting i techniki debugowania klastra"
+
+modules:
+  - number: 1
+    title: "Instalacja narzędzi klienckich"
+    description: "Przygotowanie środowiska pracy - instalacja kubectl, cfssl i innych niezbędnych narzędzi"
+  - number: 2
+    title: "Konfiguracja Network Load Balancer"
+    description: "Przygotowanie Load Balancera dla API Server zapewniającego wysoką dostępność"
+  - number: 3
+    title: "Urząd Certyfikacji i generowanie certyfikatów TLS"
+    description: "Utworzenie własnego CA (Certificate Authority) i wygenerowanie certyfikatów TLS dla wszystkich komponentów"
+  - number: 4
+    title: "Pliki konfiguracyjne Kubernetes do uwierzytelniania"
+    description: "Generowanie kubeconfig dla kubelet, kube-proxy, scheduler, controller manager i admina"
+  - number: 5
+    title: "Klucz i konfiguracja szyfrowania danych"
+    description: "Generowanie klucza i konfiguracji do szyfrowania danych at-rest w etcd"
+  - number: 6
+    title: "Uruchomienie klastra etcd"
+    description: "Bootstrapping klastra etcd - rozproszonej bazy danych będącej sercem Kubernetes"
+  - number: 7
+    title: "Uruchomienie Control Plane Kubernetes"
+    description: "Ręczna konfiguracja i uruchomienie API Server, Scheduler i Controller Manager"
+  - number: 8
+    title: "Uruchomienie węzłów roboczych Kubernetes"
+    description: "Konfiguracja i uruchomienie kubelet, kube-proxy, containerd i runc na worker nodes"
+  - number: 9
+    title: "Konfiguracja kubectl do zdalnego dostępu"
+    description: "Przygotowanie konfiguracji kubectl do zarządzania klastrem z zewnątrz"
+  - number: 10
+    title: "Routing sieciowy dla Podów"
+    description: "Konfiguracja tras sieciowych zapewniających komunikację między Podami na różnych węzłach"
+  - number: 11
+    title: "Wdrożenie dodatku DNS w klastrze"
+    description: "Instalacja CoreDNS jako usługi DNS w klastrze dla service discovery"
+  - number: 12
+    title: "Smoke Test - test funkcjonalności"
+    description: "Kompleksowe testy sprawdzające poprawność działania wszystkich komponentów klastra"
+  - number: 13
+    title: "Testy wysokiej dostępności"
+    description: "Symulacje awarii węzłów control plane i testowanie mechanizmów wysokiej dostępności"
+  - number: 14
+    title: "Podsumowanie i najlepsze praktyki"
+    description: "Podsumowanie, omówienie najlepszych praktyk i sesja pytań i odpowiedzi"
+
+benefits:
+  - title: "Głęboka wiedza od środka"
+    description: "Nauczysz się detali działania Kubernetes poprzez ręczne postawianie klastra - zrozumiesz dokładnie jak działa każdy komponent"
+  - title: "Hands-on approach"
+    description: "Wszystko budujemy ręcznie - żadnych gotowych skryptów ani narzędzi. Dostępne będzie całe środowisko z maszynami wirtualnymi online"
+  - title: "Troubleshooting master"
+    description: "Nauczysz się konfiguracji sieci, zarządzania certyfikatami, a także technik troubleshootingu i zabezpieczeń na najniższym poziomie"
+  - title: "Production insights"
+    description: "Głębokie zrozumienie procesów i najlepszych praktyk, które będą kluczowe przy rozbudowie i zarządzaniu własnymi klastrami Kubernetes"
+  - title: "Managed Kubernetes demystified"
+    description: "Zrozumiesz jak managed Kubernetes (AKS, EKS, GKE) działa pod spodem i dlaczego niektóre decyzje projektowe zostały podjęte"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/kubernetes-the-hard-way"
+
+dates:
+  - "2025-12-16"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "1 spotkanie trwające 7.5 godziny z przerwami"
+
+participants:
+  max: 12
+  availability_note: "Mała grupa ze względu na zaawansowany charakter"
+
+# Prerequisites
+prerequisites:
+  - "Bardzo dobra znajomość Kubernetes (Deployment, Services, podstawowe koncepty)"
+  - "Doświadczenie w zarządzaniu klastrami Kubernetes"
+  - "Znajomość systemów Linux i podstaw administracji"
+  - "Podstawy networking (sieci komputerowe) i security"
+  - "Visual Studio Code z pluginem Remote Development oraz klient SSH"
+
+# FAQ
+faq:
+  - question: "Czy to szkolenie dla początkujących w Kubernetes?"
+    answer: "Absolutnie nie. To zaawansowane szkolenie wymagające bardzo dobrej znajomości Kubernetes i doświadczenia w zarządzaniu klastrami."
+  - question: "Dlaczego miałbym ręcznie instalować Kubernetes?"
+    answer: "To najlepsza metoda żeby naprawdę zrozumieć jak działa Kubernetes od środka. Pomoże Ci w diagnozowaniu problemów w klastrach produkcyjnych i zrozumieniu, dlaczego pewne decyzje architektoniczne zostały podjęte."
+  - question: "Czy będziemy używać managed Kubernetes?"
+    answer: "Nie, wszystko instalujemy ręcznie na czystych VM-kach. To jest istota 'the hard way' - bez narzędzi i gotowych rozwiązań."
+  - question: "Jakie środowisko będzie dostępne?"
+    answer: "Dostępne będzie całe środowisko z maszynami wirtualnymi online. Jeżeli chcesz, możesz również uruchomić je lokalnie - wymagany Visual Studio Code z pluginem Remote Development i klient SSH."
+  - question: "Czy to szkolenie pomoże mi zrozumieć AKS, EKS czy GKE?"
+    answer: "Tak! Zrozumiesz jak managed Kubernetes działa pod spodem, co znacznie ułatwi pracę z AKS, EKS, GKE i troubleshooting tych platform."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

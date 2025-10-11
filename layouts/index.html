@@ -252,7 +252,8 @@
           </div>
           <div
             class="mt-8 faq-content transition-max-height max-h-0 md:mt-[45px] max-w-[1130px] w-full mx-auto flex flex-col gap-6 faq-bottom">
-            {{- range $index, $training := .Site.Data.trainings -}}
+            {{- $sortedTrainings := partial "training-sorter.html" .Site.Data.trainings -}}
+            {{- range $index, $training := $sortedTrainings -}}
             {{- if $training.active -}}
             <a href="/szkolenia/{{ $training.id }}/"
               class="w-full border border-solid border-white rounded-full p-[5px_5px_5px_16px] sm:p-[4px_5px_4px_25px] flex items-center justify-between hover:border-orange transition-all duration-300 group">

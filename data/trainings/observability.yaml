@@ -1,0 +1,116 @@
+id: "observability"
+title: "Observability"
+active: true
+featured: false
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#Observability"
+  - "#Monitoring"
+  - "#DevOps"
+  - "#SRE"
+
+# Treść
+description:
+  - "Naucz się, jak monitorować systemy tak, by nie zbankrutować – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu."
+  - "Szymon pokieruje Cię przez labirynt narzędzi i technik, które pomogą Ci zachować przejrzystość operacji bez obciążania zasobów. Dowiesz się, jak implementować inteligentne systemy monitorujące, które automatycznie adaptują się do zmieniających się warunków i potrzeb twojego środowiska IT."
+
+skills:
+  - "Cele monitorowania i różnice między APM a Open Telemetry"
+  - "Przegląd różnych rozwiązań APM na rynku"
+  - "Implementacja Open Telemetry w systemach"
+  - "Debugger APM na przykładzie Application Insights"
+  - "Prometheus - metryki, architektura, składnia i wdrożenia"
+  - "Grafana - dashboardy, Alert Manager, źródła danych"
+  - "Tempo - distributed tracing i integracja z innymi usługami"
+  - "Loki - logi, korelacje z tracingiem i dobre praktyki"
+  - "Pixie i eBPF - nowa generacja Service Meshy"
+  - "Tracing, profilowanie bazy danych i monitoring wydajności"
+  - "Cost optimization - efektywne monitorowanie bez bankructwa"
+
+modules:
+  - number: 1
+    title: "Cele monitorowania"
+    description: "Fundamenty monitorowania systemów i definicja celów observability"
+  - number: 2
+    title: "Debugger APM vs. Open Telemetry"
+    description: "Porównanie różnych podejść do monitorowania aplikacji"
+  - number: 3
+    title: "Omówienie różnych APM"
+    description: "Przegląd dostępnych na rynku rozwiązań Application Performance Monitoring"
+  - number: 4
+    title: "Omówienie Open Telemetry"
+    description: "Standardy i implementacja Open Telemetry w systemach"
+  - number: 5
+    title: "Debugger APM - Application Insights"
+    description: "Praktyczne wdrożenie i użycie Application Insights jako przykładu APM"
+  - number: 6
+    title: "Open Source monitoring - Prometheus"
+    description: "Architektura, ograniczenia, składnia, wdrożenia i dobre praktyki metryk"
+  - number: 7
+    title: "Grafana"
+    description: "Dashboardy, Alert Manager, źródła danych, organizacja i wdrożenia"
+  - number: 8
+    title: "Tempo - tracing"
+    description: "Distributed tracing, architektura, składnia, wdrożenia i integracja"
+  - number: 9
+    title: "Loki - logi"
+    description: "Architektura logów, korelacje z tracingiem, wdrożenia i dobre praktyki"
+  - number: 10
+    title: "Pixie - nowa generacja Service Meshy"
+    description: "eBPF, tracing, profilowanie bazy danych i monitoring wydajności"
+
+benefits:
+  - title: "Cost-effective monitoring"
+    description: "Naucz się monitorować systemy efektywnie bez rujnowania budżetu"
+  - title: "Przejrzystość operacji"
+    description: "Techniki zachowania przejrzystości bez obciążania zasobów"
+  - title: "Open Source stack"
+    description: "Prometheus, Grafana, Tempo, Loki - kompleksowe rozwiązanie monitoringu"
+  - title: "Nowa generacja narzędzi"
+    description: "Pixie i eBPF - przyszłość observability i Service Meshy"
+  - title: "Praktyczne wdrożenia"
+    description: "Inteligentne systemy monitorujące adaptujące się do zmiennych warunków"
+
+# Organizacja
+price_net: 2764.22
+price_gross: 3398.99
+currency: "PLN"
+
+dates:
+  - "2025-05-19"
+  - "2025-05-20"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "2 spotkania, każde trwające 7.5 godziny"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Doświadczenie w budowie systemów rozproszonych"
+  - "Podstawowa znajomość monitoringu"
+  - "Znajomość podstaw devops/SRE"
+
+# FAQ
+faq:
+  - question: "Czy to szkolenie o Prometheus i Grafana?"
+    answer: "Nie tylko. Omówimy cały stack: Prometheus, Grafana, Tempo, Loki, a także APM (Application Insights) i nowe rozwiązania jak Pixie z eBPF."
+  - question: "Czy muszę znać OpenTelemetry?"
+    answer: "Nie, poznamy OpenTelemetry podczas szkolenia oraz porównamy je z klasycznymi rozwiązaniami APM."
+  - question: "Co to jest Pixie i eBPF?"
+    answer: "Pixie to nowa generacja Service Meshy wykorzystująca technologię eBPF do tracing, profilowania bazy danych i monitoringu wydajności. Omówimy to szczegółowo na szkoleniu."
+  - question: "Jak to szkolenie pomoże mi zoptymalizować koszty monitoringu?"
+    answer: "Skupimy się na efektywnych rozwiązaniach i technikach, które pozwolą Ci zachować przejrzystość operacji bez obciążania budżetu i zasobów."
+  - question: "Czy omówimy zarówno rozwiązania komercyjne jak i Open Source?"
+    answer: "Tak, porównamy różne APM (w tym Application Insights) z Open Source stackiem (Prometheus, Grafana, Tempo, Loki)."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

@@ -1,0 +1,126 @@
+id: "github-actions-w-praktyce"
+title: "GitHub Actions w Praktyce"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#GitHub"
+  - "#CI/CD"
+  - "#Automation"
+  - "#DevOps"
+
+# Treść
+description:
+  - "Intensywne, dwudniowe szkolenie w formie praktycznego warsztatu (90% praktyki). Poznasz nie tylko podstawy, ale również zaawansowane techniki budowania pipeline'ów, zarządzania sekretami, tworzenia własnych akcji i wdrażania wielośrodowiskowych konfiguracji. Szkolenie skupia się na realnych przypadkach użycia GitHub Actions, z którymi spotkasz się w codziennej pracy deweloperskiej."
+  - "Szymon pokaże Ci nie tylko 'jak zrobić', ale także 'dlaczego tak robić i jak nie robić' - dzięki czemu unikniesz typowych pułapek i błędów popełnianych przez początkujących użytkowników GitHub Actions."
+  - "GitHub Actions to potężne narzędzie do automatyzacji procesów CI/CD bezpośrednio w Twoim repozytorium. Podczas tego praktycznego warsztatu nauczysz się, jak budować, testować i deployować aplikacje oraz jak zintegrować Actions z różnymi narzędziami i platformami."
+
+skills:
+  - "Architektura i zasady działania GitHub Actions"
+  - "Struktura i składnia workflow, triggery i konfiguracja"
+  - "Zarządzanie uprawnieniami (Permissions) i bezpieczne przechowywanie danych (Secrets)"
+  - "Zmienne (Variables i Configuration variables)"
+  - "Joby - struktura, przekazywanie danych i uruchomienia warunkowe"
+  - "Strategie matrix, artefakty i cache zależności"
+  - "Tworzenie własnych akcji (JavaScript, Docker, Composite)"
+  - "Tokeny i zarządzanie dostępami (Classic, Fine-grained, GITHUB_TOKEN)"
+  - "Szablony i współdzielenie workflow (Template i Reusable workflows)"
+  - "GitHub Packages i automatyzacja releaseów"
+  - "Środowiska i reguły wdrażania (Environments i protection rules)"
+  - "Uruchamianie na własnych maszynach (Self-hosted Runners)"
+  - "Integracja z chmurą Microsoft Azure (OpenID Connect)"
+  - "GitHub Advanced Security (Code Scanning, Secret Scanning, Dependabot)"
+
+modules:
+  - number: 1
+    title: "Podstawy GitHub Actions"
+    description: "Architektura i zasady działania, struktura workflow, triggery i konfiguracja"
+  - number: 2
+    title: "Bezpieczeństwo i dane"
+    description: "Zarządzanie uprawnieniami, Secrets, Variables i Configuration variables"
+  - number: 3
+    title: "Joby i optymalizacja"
+    description: "Struktura jobów, przekazywanie danych, uruchomienia warunkowe, strategie matrix"
+  - number: 4
+    title: "Artefakty i cache"
+    description: "Przechowywanie i współdzielenie danych między jobami, optymalizacja wydajności"
+  - number: 5
+    title: "Własne akcje"
+    description: "Tworzenie własnych akcji w JavaScript, Docker i Composite"
+  - number: 6
+    title: "Tokeny i dostępy"
+    description: "Classic, Fine-grained, GITHUB_TOKEN - zarządzanie dostępami i uprawnieniami"
+  - number: 7
+    title: "Szablony i reużywalność"
+    description: "Template workflows, Reusable workflows, współdzielenie konfiguracji"
+  - number: 8
+    title: "Packages i releasy"
+    description: "GitHub Packages, automatyzacja procesów releaseowych"
+  - number: 9
+    title: "Środowiska i deployment"
+    description: "Environments, protection rules, wielośrodowiskowe wdrożenia"
+  - number: 10
+    title: "Self-hosted Runners"
+    description: "Konfiguracja i zarządzanie własnymi maszynami do uruchamiania workflow"
+  - number: 11
+    title: "Integracja z Azure"
+    description: "OpenID Connect, bezpieczna integracja z Microsoft Azure"
+  - number: 12
+    title: "GitHub Advanced Security"
+    description: "Code Scanning, Secret Scanning, Dependabot - bezpieczeństwo w CI/CD"
+
+benefits:
+  - title: "90% praktyki"
+    description: "Intensywne warsztaty z naciskiem na realne przykłady i zadania praktyczne"
+  - title: "Doświadczony ekspert"
+    description: "Szymon Warda - współprowadzący Patoarchitekci, ekspert DevOps z wieloletnim doświadczeniem"
+  - title: "Dlaczego i jak nie robić"
+    description: "Nie tylko 'jak zrobić', ale także unikanie pułapek i błędów początkujących"
+  - title: "Od podstaw do advanced"
+    description: "Pełne spektrum - od architektury przez własne akcje po GitHub Advanced Security"
+  - title: "Realne przypadki użycia"
+    description: "Scenariusze z codziennej pracy deweloperskiej i projektów produkcyjnych"
+
+# Organizacja
+price_net: 2764.22
+price_gross: 3398.99
+currency: "PLN"
+
+dates:
+  - "2025-06-16"
+  - "2025-06-17"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "2 spotkania, każde trwające 7.5 godziny - intensywny warsztaty (90% praktyki)"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość GitHub lub innego systemu kontroli wersji"
+  - "Konto GitHub (może być darmowe)"
+  - "Edytor z dobrym kolorowaniem składni YAML, polecamy Visual Studio Code"
+
+# FAQ
+faq:
+  - question: "Czy potrzebuję wcześniejszego doświadczenia z GitHub Actions?"
+    answer: "Nie, szkolenie zaczyna się od podstaw. Wystarczy podstawowa znajomość GitHub lub innego systemu kontroli wersji."
+  - question: "Czy mogę używać własnego konta GitHub?"
+    answer: "Tak, będziemy pracować na prawdziwych repozytoriach GitHub. Wystarczy darmowe konto."
+  - question: "Jak wygląda format szkolenia?"
+    answer: "To intensywny, dwudniowy warsztat gdzie 90% czasu to praktyka. Teoria stanowi tylko 10% - reszta to konkretne przykłady i zadania."
+  - question: "Czy omówimy integrację z chmurą?"
+    answer: "Tak, omówimy integrację z Microsoft Azure używając OpenID Connect oraz inne scenariusze integracji z chmurą."
+  - question: "Czy nauczę się tworzyć własne akcje?"
+    answer: "Tak, poznasz tworzenie własnych akcji w trzech formatach: JavaScript, Docker i Composite."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

@@ -69,9 +69,10 @@ benefits:
     description: "Praktyczne wskazówki dotyczące wyboru technologii i podejmowania decyzji architektonicznych"
 
 # Organizacja
-price_net: 3999
-price_gross: 4918.77
+price_net: 2763.40
+price_gross: 3398.99
 currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/architektura-101"
 
 dates:
   - "2025-11-25"
@@ -86,7 +87,7 @@ location:
   details: "4 spotkania, każde trwające 4 godziny"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji i dyskusji"
 
 # Prerequisites
@@ -100,11 +101,9 @@ faq:
   - question: "Czy to szkolenie z DDD lub Domain-Driven Design?"
     answer: "Nie, to nie jest szkolenie z DDD. Skupiamy się na architekturze systemów poza kodem i wymaganiami biznesowymi."
   - question: "Jak wyglądają architecture kata?"
-    answer: "To praktyczne ćwiczenia polegające na projektowaniu architektury dla konkretnych przypadków użycia, seguito de grupowych dyskusji i analizy rozwiązań."
+    answer: "To praktyczne ćwiczenia polegające na projektowaniu architektury dla konkretnych przypadków użycia, po których następują grupowe dyskusje i analiza rozwiązań."
   - question: "Czy szkolenie jest odpowiednie dla początkujących?"
     answer: "Szkolenie jest skierowane do osób z podstawowym doświadczeniem w IT, które chcą pogłębić wiedzę o architekturze systemów."
-  - question: "Czy otrzymam materiały po szkoleniu?"
-    answer: "Tak, szkolenie jest nagrywane i materiały będą dostępne na naszej platformie dla uczestników."
   - question: "Dlaczego szkolenie jest podzielone na 4 dni?"
     answer: "Format 4 x 4 godziny pozwala na lepsze przyswojenie materiału i daje czas na przemyślenie omawianych zagadnień między sesjami."
 

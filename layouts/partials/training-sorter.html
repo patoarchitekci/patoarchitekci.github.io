@@ -9,32 +9,35 @@
 {{- $futureTrainings := slice -}}
 {{- $pastTrainings := slice -}}
 
-{{- /* Separate trainings into future and past */ -}}
+{{- /* Separate trainings into future and past, adding firstDate field for sorting */ -}}
 {{- range . -}}
   {{- if .dates -}}
     {{- $firstDate := index .dates 0 -}}
+    {{- /* Add firstDate field to training object for proper sorting */ -}}
+    {{- $training := merge . (dict "firstDate" $firstDate) -}}
 
     {{- if gt $firstDate $today -}}
-      {{- $futureTrainings = $futureTrainings | append . -}}
+      {{- $futureTrainings = $futureTrainings | append $training -}}
     {{- else -}}
-      {{- $pastTrainings = $pastTrainings | append . -}}
+      {{- $pastTrainings = $pastTrainings | append $training -}}
     {{- end -}}
   {{- else -}}
     {{- /* Trainings without dates go to the end */ -}}
-    {{- $pastTrainings = $pastTrainings | append . -}}
+    {{- $training := merge . (dict "firstDate" "") -}}
+    {{- $pastTrainings = $pastTrainings | append $training -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* Sort future trainings ascending (closest first) */ -}}
+{{- /* Sort future trainings by firstDate ascending (closest first) */ -}}
 {{- $sortedFuture := slice -}}
 {{- if $futureTrainings -}}
-  {{- $sortedFuture = sort $futureTrainings "dates" "asc" -}}
+  {{- $sortedFuture = sort $futureTrainings "firstDate" "asc" -}}
 {{- end -}}
 
-{{- /* Sort past trainings descending (most recent first) */ -}}
+{{- /* Sort past trainings by firstDate descending (most recent first) */ -}}
 {{- $sortedPast := slice -}}
 {{- if $pastTrainings -}}
-  {{- $sortedPast = sort $pastTrainings "dates" "desc" -}}
+  {{- $sortedPast = sort $pastTrainings "firstDate" "desc" -}}
 {{- end -}}
 
 {{- /* Combine: future first, then past */ -}}

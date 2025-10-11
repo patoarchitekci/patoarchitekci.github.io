@@ -42,7 +42,7 @@ title = "Patoarchitekci"
 
   # Consultation
   [params.consultation]
-    url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
+    url = "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
     title = "Bezpłatna Konsultacja"
     purchaseUrl = "https://cart.easy.tools/checkout/patoarchitekci/szybkie-konsultacje"
     advisoryUrl = "https://protopia.tech/doradztwo"
@@ -76,7 +76,7 @@ title = "Patoarchitekci"
     weight = 3
   [[menu.main]]
     name = "Bezpłatna Konsultacja"
-    url = "https://outlook.office365.com/book/Spotkania@protopia.tech/s/rWrePx6FFEWNFvm6Dnv48w2"
+    url = "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
     weight = 4
     [menu.main.params]
       target = "_blank"

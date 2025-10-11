@@ -15,9 +15,10 @@ tags:
 
 # Treść
 description:
+  - "Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. Szymon pokaże, jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów."
+  - "Dowiesz się, jak projektować bazy danych, które są nie tylko wydajne, ale również łatwe w utrzymaniu i rozbudowie. Szymon podzieli się sprawdzonymi technikami normalizacji, denormalizacji, oraz projektowania schematów, które pomogą Ci wyeliminować redundancję i zapewnić integralność danych w twoich aplikacjach."
   - "Chcesz wiedzieć, jak prawdziwy ninja baz danych wykręca NoSQL na lewą stronę? Szymon pokaże Ci, jak zamienić ograniczenia w atuty i zaprezentuje triki, dzięki którym skalowanie horyzontalne może być prostsze niż zrobienie kawy."
-  - "Skupimy się na zaawansowanych aspektach modelowania danych i projektowaniu baz NoSQL. Przeanalizujemy różne typy baz, takie jak key-value, wide table, document, full-text search, i graph, ucząc, jak wykorzystać ich unikalne cechy."
-  - "Zajmiemy się także skalowaniem horyzontalnym i doborem klucza partycji, a także omówimy, kiedy stosować NoSQL, a kiedy lepiej się wstrzymać. Szkolenie zakończymy na omówieniu projektowania rozwiązań dla dużego ruchu internetowego i obsługi dużych zbiorów danych."
+  - "Spodziewaj się krwistego mięsa - skupimy się na zaawansowanych aspektach modelowania danych i projektowaniu baz NoSQL. Przeanalizujemy różne typy baz, takie jak key-value, wide table, document, full-text search, i graph, ucząc, jak wykorzystać ich unikalne cechy."
 
 skills:
   - "Typy baz NoSQL i jak zamienić ich ograniczenia w plusy"
@@ -73,18 +74,18 @@ benefits:
     description: "Poznanie najczęstszych błędów i sposób ich unikania"
 
 # Organizacja
-price_net: 1999
-price_gross: 2458.77
+price_net: 1462.60
+price_gross: 1799.00
 currency: "PLN"
 
 dates:
-  - "2024-10-15"
+  - "2024-12-15"
 time: "9:30 – 17:00"
 
 location:
   type: "online"
   platform: "Microsoft Teams"
-  details: "Szkolenie jest nagrywane i materiały będą dostępne na platformie"
+  details: "Jednodniowe szkolenie trwające 7.5 godziny"
 
 participants:
   max: 20
@@ -102,8 +103,6 @@ faq:
     answer: "Nie, szkolenie skupia się wyłącznie na bazach NoSQL i ich modelowaniu. Omówimy kiedy wybrać NoSQL zamiast SQL."
   - question: "Czy potrzebuję doświadczenia z konkretnymi bazami NoSQL?"
     answer: "Nie, szkolenie obejmuje różne typy baz NoSQL. Podstawowa znajomość baz danych jest wystarczająca."
-  - question: "Czy szkolenie jest nagrywane?"
-    answer: "Tak, szkolenie jest nagrywane i materiały będą dostępne na naszej platformie dla uczestników."
   - question: "Jakie konkretne bazy będą omawiane?"
     answer: "Omówimy różne typy: MongoDB (document), Redis (key-value), Cassandra (wide table), Elasticsearch (full-text), Neo4j (graph) i inne."
   - question: "Czy otrzymam praktyczne przykłady kodu?"

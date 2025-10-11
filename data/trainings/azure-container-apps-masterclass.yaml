@@ -1,0 +1,127 @@
+id: "azure-container-apps-masterclass"
+title: "Azure Container Apps Masterclass"
+active: true
+featured: false
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#Azure"
+  - "#Containers"
+  - "#Cloud"
+  - "#Kubernetes"
+  - "#Serverless"
+
+# Treść
+description:
+  - "Zanurz się w konteneryzację z Azure! Łukasz pokaże Ci, jak zarządzać, optymalizować i zabezpieczać kontenery z wykorzystaniem Azure Container Apps."
+  - "Zaczniesz od stworzenia i wdrożenia pierwszej prostej aplikacji. Następnie przejdziesz przez architekturę Container Apps - plany, środowiska (environments) i zarządzanie nimi. Nauczysz się konfigurować logi, monitorowanie i zapewniać niezawodność swoich aplikacji."
+  - "Zagłębisz się w networking - od podstaw konfiguracji sieci, przez firewalle i różnice między dostępem wewnętrznym a zewnętrznym, po konfigurację DNS, certyfikatów i połączenia z firmą. Poznasz zarządzanie kosztami (billing), limity zasobów i Infrastructure as Code."
+  - "W drugiej części dowiesz się jak zarządzać aplikacjami - limity CPU i pamięci, tożsamości, skalowanie, joby i volumeny. Nauczysz się konfigurować sekrety, zmienne środowiskowe, porty i komunikację między usługami. Na koniec wystawisz aplikację na świat przez Ingress i Azure Front Door."
+
+skills:
+  - "Tworzenie i wdrażanie pierwszej aplikacji na Azure Container Apps"
+  - "Architektura Container Apps - plany, środowiska i zarządzanie nimi"
+  - "Logi, monitorowanie i zapewnienie niezawodności aplikacji"
+  - "Konfiguracja sieci - firewalle, Internal vs External, DNS Suffix, UDR"
+  - "Zarządzanie DNS i certyfikatami dla środowiska"
+  - "Billing, limity zasobów (quotas) i optymalizacja kosztów"
+  - "Infrastructure as Code (IaC) - sposoby stawiania środowiska"
+  - "Zarządzanie aplikacjami - CPU, pamięć, tożsamości, skalowanie"
+  - "Wdrożenie aplikacji - repliki, joby, volumeny"
+  - "Bezpieczeństwo - sekrety, zmienne środowiskowe, porty, komunikacja między usługami"
+  - "Wystawienie aplikacji na świat - Ingress, Azure Front Door"
+  - "Połączenie z siecią firmową i zaawansowane scenariusze sieciowe"
+
+modules:
+  - number: 1
+    title: "Wprowadzenie"
+    description: "Przegląd kursu i słownik pojęć - fundamenty Azure Container Apps"
+  - number: 2
+    title: "Pierwsza prosta aplikacja"
+    description: "Tworzenie i wdrażanie pierwszej aplikacji na Azure Container Apps od zera"
+  - number: 3
+    title: "Architektura Container Apps"
+    description: "Przegląd architektury, plany i zarządzanie planami, środowiska (Environments)"
+  - number: 4
+    title: "Logi i monitorowanie"
+    description: "Zarządzanie logami i zapewnienie niezawodności w Azure Container Apps"
+  - number: 5
+    title: "Networking"
+    description: "Podstawy konfiguracji sieci, firewalle, Internal vs External, DNS Suffix, UDR i połączenie z firmą"
+  - number: 6
+    title: "DNS i certyfikaty"
+    description: "Zarządzanie DNS i konfiguracja certyfikatów dla środowiska"
+  - number: 7
+    title: "Billing i limity"
+    description: "Zarządzanie kosztami i limity zasobów (Quotas)"
+  - number: 8
+    title: "Infrastructure as Code"
+    description: "Sposoby stawiania środowiska z wykorzystaniem IaC"
+  - number: 9
+    title: "Zarządzanie zasobami"
+    description: "Zarządzanie aplikacjami, limity CPU i pamięci, tożsamość, skalowanie"
+  - number: 10
+    title: "Wdrożenie i zarządzanie aplikacjami"
+    description: "Jedna kontra wiele replik, joby i ich zastosowanie, zarządzanie volumenami"
+  - number: 11
+    title: "Bezpieczeństwo i konfiguracja"
+    description: "Sekrety, zmienne środowiskowe, porty, komunikacja między usługami (Ingress)"
+  - number: 12
+    title: "Wystawienie aplikacji na świat"
+    description: "Konfiguracja Ingress, wystawienie przez Azure Front Door, komunikacja z Container Apps"
+  - number: 13
+    title: "Podsumowanie i Q&A"
+    description: "Podsumowanie głównych tematów i sesja pytań i odpowiedzi"
+
+benefits:
+  - title: "Dwóch ekspertów"
+    description: "Łukasz Kałużny i Szymon Warda - połączona wiedza i doświadczenie z prawdziwych wdrożeń"
+  - title: "Od zera do production"
+    description: "Kompleksowe podejście - od pierwszej aplikacji, przez networking i bezpieczeństwo, po wystawienie na świat"
+  - title: "Praktyczne scenariusze"
+    description: "Rzeczywiste case studies z wdrożeń - billing, skalowanie, networking, połączenie z firmą"
+  - title: "Kiedy Container Apps?"
+    description: "Zrozumiesz kiedy wybierać Container Apps, a kiedy AKS lub App Service"
+  - title: "Infrastructure as Code"
+    description: "Poznasz najlepsze praktyki automatyzacji i zarządzania środowiskami"
+
+# Organizacja
+price_net: 2764.22
+price_gross: 3398.99
+currency: "PLN"
+
+dates:
+  - "2024-09-24"
+  - "2024-09-25"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "2 spotkania, każde trwające 4 godziny"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Azure"
+  - "Doświadczenie z kontenerami (Docker)"
+  - "Podstawy Kubernetes (mile widziane)"
+
+# FAQ
+faq:
+  - question: "Czy to szkolenie o Kubernetes?"
+    answer: "Nie, Container Apps to managed service który abstrahuje Kubernetes. Szkolenie koncentruje się na Container Apps, ale porównujemy też z AKS i App Service."
+  - question: "Czy potrzebuję doświadczenia z Kubernetes?"
+    answer: "Nie jest wymagane, ale podstawowa znajomość pomoże w zrozumieniu konceptów."
+  - question: "Czy będziemy stawiać prawdziwe środowiska?"
+    answer: "Tak! Od pierwszej aplikacji, przez pełną konfigurację networking, bezpieczeństwa, aż po wystawienie aplikacji przez Azure Front Door."
+  - question: "Czy poznamy koszty i billing?"
+    answer: "Tak, jeden z modułów to zarządzanie kosztami, limity zasobów i optymalizacja wydatków w Container Apps."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

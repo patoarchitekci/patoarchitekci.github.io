@@ -38,10 +38,17 @@
                   <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white font-normal !leading-110">{{ . }}</p>
                   {{ end }}
                 </div>
+                {{ if $training.purchase_url }}
+                <a href="{{ $training.purchase_url }}" target="_blank"
+                  class="bg-white font-bold lg:text-custom-2xl mt-10 sm:mt-[55px] sm:text-lg text-[22.15px] leading-100 text-dark-black p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] uppercase hover:bg-orange transition-all ease-linear duration-300 max-sm:h-[46px] max-sm:w-[291px] flex items-center justify-center">
+                  Zapisz się
+                </a>
+                {{ else }}
                 <button
                   class="bg-white font-bold lg:text-custom-2xl mt-10 sm:mt-[55px] sm:text-lg text-[22.15px] leading-100 text-dark-black p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] uppercase hover:bg-orange transition-all ease-linear duration-300 max-sm:h-[46px] max-sm:w-[291px]">
                   Zapisz się
                 </button>
+                {{ end }}
               </div>
             </div>
           </div>
@@ -292,10 +299,17 @@
                 href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email
                 }}</a>
             </div>
+            {{ if $training.purchase_url }}
+            <a href="{{ $training.purchase_url }}" target="_blank"
+              class="bg-white font-bold uppercase lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white flex items-center justify-center">
+              Zapisz się
+            </a>
+            {{ else }}
             <button
               class="bg-white font-bold uppercase lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
               Zapisz się
             </button>
+            {{ end }}
           </div>
         </section>
 
@@ -480,10 +494,17 @@
               href="mailto:{{ .Site.Params.trainings.coordinator.email }}">{{ .Site.Params.trainings.coordinator.email
               }}</a>
           </div>
+          {{ if $training.purchase_url }}
+          <a href="{{ $training.purchase_url }}" target="_blank"
+            class="bg-white uppercase font-bold lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white flex items-center justify-center">
+            Zapisz się
+          </a>
+          {{ else }}
           <button
             class="bg-white uppercase font-bold lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white">
             Zapisz się
           </button>
+          {{ end }}
         </div>
       </div>
     </div>

@@ -1,0 +1,152 @@
+id: "azure-aks-masterclass"
+title: "Azure AKS Masterclass"
+active: true
+featured: false
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#Azure"
+  - "#Kubernetes"
+  - "#AKS"
+  - "#Cloud"
+  - "#Containers"
+
+# Treść
+description:
+  - "Zgłębisz tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes Service (AKS). Łukasz przeprowadzi Cię przez konfigurację, zarządzanie i skalowanie aplikacji w środowisku AKS."
+  - "Nauczysz się, jak efektywnie wykorzystywać funkcje AKS do automatyzacji deploymentu, monitoringu oraz zarządzania usługami. Odkryjesz najlepsze praktyki związane z bezpieczeństwem, siecią i zarządzaniem tożsamością w kontenerach, co sprawi, że Twoje aplikacje będą zarówno wydajne, jak i bezpieczne."
+
+skills:
+  - "Przegląd architektury AKS i najważniejsze pojęcia"
+  - "AKS Automatic - automatyzacja zarządzania klastrem"
+  - "Wysoka dostępność i availability zones"
+  - "RBAC i integracja z Azure AD w AKS"
+  - "Workload Identity - zarządzanie tożsamościami obciążeń"
+  - "Opcje skalowania, autoskaler, pule węzłów"
+  - "Koszty i optymalizacja wydajności"
+  - "Aktualizacje i podniesienia wersji klastrów"
+  - "Azure Kubernetes Fleet Manager - zarządzanie flotą klastrów"
+  - "Karpenter AKS - Node autoprovisioning"
+  - "Monitorowanie wydajności i stanu klastrów"
+  - "Azure Policy i Defender for Cloud w AKS"
+  - "Koncepcje sieciowe - sterowniki, sieci wirtualne Azure"
+  - "Load Balancer - konfiguracja i zarządzanie"
+  - "Klaster prywatny i Azure Firewall"
+  - "Polityki sieciowe - segmentacja ruchu"
+  - "Ingress, Azure App Gateway/WAF, Application Gateway for Containers"
+  - "Integracja z Azure FrontDoor"
+
+modules:
+  - number: 1
+    title: "Przegląd architektury AKS i najważniejsze pojęcia"
+    description: "Omówienie architektury AKS i najważniejszych pojęć związanych z AKS"
+  - number: 2
+    title: "AKS Automatic"
+    description: "Automatyzacja zarządzania klastrem AKS"
+  - number: 3
+    title: "Wysoka dostępność i availability zones"
+    description: "Zapewnienie wysokiej dostępności i konfiguracja stref dostępności"
+  - number: 4
+    title: "RBAC i integracja z Azure AD w AKS"
+    description: "Role-Based Access Control (RBAC) i integracja z Azure Active Directory"
+  - number: 5
+    title: "Workload Identity"
+    description: "Zarządzanie tożsamościami obciążeń w AKS"
+  - number: 6
+    title: "Opcje skalowania, autoskaler, pule węzłów"
+    description: "Ręczne i automatyczne skalowanie klastrów, konfiguracja autoskalera, zarządzanie pulami węzłów"
+  - number: 7
+    title: "Koszty i optymalizacja"
+    description: "Zarządzanie kosztami i optymalizacja wydajności"
+  - number: 8
+    title: "Aktualizacje i podniesienia wersji"
+    description: "Proces aktualizacji klastrów AKS i zarządzanie podniesieniami wersji"
+  - number: 9
+    title: "Azure Kubernetes Fleet Manager"
+    description: "Zarządzanie flotą klastrów AKS"
+  - number: 10
+    title: "Karpenter AKS - Node autoprovisioning"
+    description: "Automatyczne dostarczanie węzłów z Karpenter AKS"
+  - number: 11
+    title: "Monitorowanie AKS"
+    description: "Monitorowanie wydajności i stanu klastrów AKS"
+  - number: 12
+    title: "Azure Policy, Defender for Cloud w AKS"
+    description: "Zasady polityki Azure i integracja z Defender for Cloud w AKS"
+  - number: 13
+    title: "Koncepcje sieciowe w Azure AKS"
+    description: "Podstawowe koncepcje sieciowe, przegląd sterowników sieciowych, sieci wirtualne Azure"
+  - number: 14
+    title: "Load Balancer"
+    description: "Konfiguracja i zarządzanie Load Balancerem"
+  - number: 15
+    title: "Klaster prywatny i Azure Firewall"
+    description: "Tworzenie prywatnego klastra i integracja z Azure Firewall"
+  - number: 16
+    title: "Polityki sieciowe (segmentacja ruchu)"
+    description: "Zarządzanie politykami sieciowymi i segmentacja ruchu sieciowego"
+  - number: 17
+    title: "Ingress, Azure App Gateway/WAF, Application Gateway for Containers"
+    description: "Konfiguracja Ingress, integracja z Azure App Gateway/WAF, Application Gateway for Containers"
+  - number: 18
+    title: "Integracja z Azure FrontDoor"
+    description: "Wystawienie aplikacji na świat przez Azure FrontDoor"
+  - number: 19
+    title: "Sesja Q&A"
+    description: "Sesja pytań i odpowiedzi"
+
+benefits:
+  - title: "Kompleksowe zarządzanie AKS"
+    description: "Konfiguracja, zarządzanie i skalowanie aplikacji w środowisku AKS"
+  - title: "Automatyzacja i efektywność"
+    description: "Wykorzystanie funkcji AKS do automatyzacji deploymentu, monitoringu i zarządzania"
+  - title: "Bezpieczeństwo i tożsamość"
+    description: "Best practices związane z RBAC, Azure AD, Workload Identity i Defender for Cloud"
+  - title: "Networking w AKS"
+    description: "Od koncepcji sieciowych przez Load Balancer, Firewall, Ingress po Azure FrontDoor"
+  - title: "Nowoczesne narzędzia"
+    description: "AKS Automatic, Fleet Manager, Karpenter, Application Gateway for Containers"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2024-11-14"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Jednodniowe szkolenie trwające 7.5 godziny"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Solidna znajomość Kubernetes"
+  - "Podstawowa znajomość Azure"
+  - "Doświadczenie w zarządzaniu klastrami Kubernetes (mile widziane)"
+
+# FAQ
+faq:
+  - question: "Czy to szkolenie o podstawach Kubernetes?"
+    answer: "Nie, to zaawansowane szkolenie o AKS. Wymagana jest solidna znajomość Kubernetes."
+  - question: "Czy będziemy pracować na prawdziwych klastrach?"
+    answer: "Tak, podczas warsztatów będziemy konfigurować i zarządzać klastrami AKS w prawdziwym środowisku Azure."
+  - question: "Co to jest AKS Automatic?"
+    answer: "AKS Automatic to nowa funkcja automatyzacji zarządzania klastrem AKS. Omówimy ją szczegółowo na szkoleniu."
+  - question: "Czy omówimy zarządzanie kosztami?"
+    answer: "Tak, jeden z modułów poświęcony jest zarządzaniu kosztami i optymalizacji wydajności klastrów AKS."
+  - question: "Co to jest Karpenter AKS?"
+    answer: "Karpenter to rozwiązanie do automatycznego dostarczania węzłów (node autoprovisioning) w AKS. Poznasz jego możliwości podczas szkolenia."
+  - question: "Czy omówimy aspekty bezpieczeństwa?"
+    answer: "Tak, kompleksowo - od RBAC i Azure AD, przez Workload Identity, Azure Policy, po Defender for Cloud i polityki sieciowe."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

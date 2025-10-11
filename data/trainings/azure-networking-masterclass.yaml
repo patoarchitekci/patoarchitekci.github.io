@@ -1,0 +1,130 @@
+id: "azure-networking-masterclass"
+title: "Azure Networking Masterclass"
+active: true
+featured: false
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#Azure"
+  - "#Networking"
+  - "#Cloud"
+  - "#Infrastructure"
+
+# Treść
+description:
+  - "Zdobądź głębokie zrozumienie sieci w Azure. Od teorii do praktycznych zastosowań – wszystko, co musisz wiedzieć, by skutecznie zarządzać siecią."
+  - "W tym kursie nauczysz się konfigurować, zarządzać i optymalizować sieć w Azure, wykorzystując najnowsze narzędzia i technologie."
+  - "Kurs obejmuje tematy takie jak wirtualne sieci, subnety, VPN, routingu oraz zaawansowane funkcje bezpieczeństwa, które są kluczowe dla każdego administratora, DevOps i architekta rozwiązań w chmurze."
+
+skills:
+  - "Wprowadzenie do Azure Networking - podstawowe pojęcia i koncepcje sieciowe"
+  - "Virtual Networks (VNet) - tworzenie, zarządzanie, subnety i adresowanie IP"
+  - "Network Security Groups (NSG) - konfiguracja i zasady ruchu"
+  - "Azure Firewall - wprowadzenie i zarządzanie regułami zapory"
+  - "Load Balancing - Load Balancer i Application Gateway"
+  - "Virtual Network Peering - konfiguracja i zarządzanie połączeniami"
+  - "ExpressRoute i VPN Gateway - konfiguracja połączeń hybrydowych"
+  - "DNS w Azure - Private DNS vs Public DNS"
+  - "Network Watcher - monitorowanie, diagnostyka i flow logs"
+  - "Azure Virtual Network Manager - zarządzanie na dużą skalę"
+  - "Routing i BGP - Border Gateway Protocol w Azure"
+  - "Private Endpoints - konfiguracja i zarządzanie"
+  - "Azure IPAM - zarządzanie adresami IP"
+
+modules:
+  - number: 1
+    title: "Wprowadzenie do Azure Networking"
+    description: "Przegląd kursu, podstawowe pojęcia i koncepcje sieciowe w Azure"
+  - number: 2
+    title: "Virtual Networks (VNet)"
+    description: "Tworzenie i zarządzanie sieciami wirtualnymi, subnety, adresowanie IP i zarządzanie przestrzenią adresową"
+  - number: 3
+    title: "Network Security Groups (NSG)"
+    description: "Konfiguracja i zarządzanie grupami zabezpieczeń sieciowych, zasady ruchu przychodzącego i wychodzącego"
+  - number: 4
+    title: "Azure Firewall"
+    description: "Wprowadzenie do Azure Firewall, konfiguracja i zarządzanie regułami zapory"
+  - number: 5
+    title: "Load Balancing"
+    description: "Przegląd opcji równoważenia obciążenia (Load Balancer, Application Gateway), konfiguracja i zarządzanie"
+  - number: 6
+    title: "Virtual Network Peering"
+    description: "Konfiguracja peeringu sieci wirtualnych, zarządzanie połączeniami między sieciami"
+  - number: 7
+    title: "ExpressRoute i VPN Gateway"
+    description: "Wprowadzenie do ExpressRoute, konfiguracja i zarządzanie połączeniami VPN Gateway"
+  - number: 8
+    title: "DNS w Azure"
+    description: "Konfiguracja i zarządzanie DNS, Private DNS vs Public DNS"
+  - number: 9
+    title: "Network Watcher"
+    description: "Monitorowanie i diagnostyka sieci w Azure, narzędzia do analizy i virtual network flow logs"
+  - number: 10
+    title: "Azure Virtual Network Manager"
+    description: "Zarządzanie sieciami wirtualnymi na dużą skalę"
+  - number: 11
+    title: "Zarządzanie routingiem i BGP"
+    description: "Konfiguracja routingu sieciowego, Border Gateway Protocol (BGP) w Azure"
+  - number: 12
+    title: "Private Endpoints"
+    description: "Konfiguracja i zarządzanie Private Endpoints"
+  - number: 13
+    title: "Azure IPAM"
+    description: "IP Address Management - zarządzanie adresami IP w Azure"
+  - number: 14
+    title: "Sesja Q&A"
+    description: "Sesja pytań i odpowiedzi"
+
+benefits:
+  - title: "Głębokie zrozumienie sieci"
+    description: "Od teorii do praktycznych zastosowań - wszystko, co musisz wiedzieć o Azure Networking"
+  - title: "Kompleksowy zakres"
+    description: "VNet, subnety, VPN, routing, bezpieczeństwo - pełny obraz sieci w Azure"
+  - title: "Praktyczne umiejętności"
+    description: "Konfiguracja, zarządzanie i optymalizacja sieci wykorzystując najnowsze narzędzia"
+  - title: "Dla administratorów i architektów"
+    description: "Kluczowe tematy dla każdego administratora, DevOps i architekta rozwiązań w chmurze"
+  - title: "Zaawansowane funkcje"
+    description: "Network Watcher, Virtual Network Manager, BGP, Private Endpoints, Azure IPAM"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2024-10-22"
+time: "9:00 – 13:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Format do ustalenia"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Azure"
+  - "Podstawowa wiedza o sieciach komputerowych"
+  - "Doświadczenie w pracy z infrastrukturą chmurową (mile widziane)"
+
+# FAQ
+faq:
+  - question: "Czy potrzebuję certyfikatu Azure?"
+    answer: "Nie, wystarczy podstawowa znajomość Azure. Szkolenie przygotuje Cię do pracy z sieciami w praktyce."
+  - question: "Czy będziemy pracować na prawdziwej subskrypcji Azure?"
+    answer: "Tak, podczas warsztatów będziemy konfigurować i testować rozwiązania sieciowe w Azure."
+  - question: "Czy omówimy zarówno podstawy jak i zaawansowane tematy?"
+    answer: "Tak, zaczniemy od podstawowych pojęć i przejdziemy przez pełny zakres - od VNet i NSG po zaawansowane funkcje jak BGP, Private Endpoints i Azure IPAM."
+  - question: "Co to jest Azure Virtual Network Manager?"
+    answer: "To nowe narzędzie do zarządzania sieciami wirtualnymi na dużą skalę w Azure. Omówimy je szczegółowo na szkoleniu."
+  - question: "Czy poznamy narzędzia do troubleshootingu?"
+    answer: "Tak, dedykowany moduł poświęcony Network Watcher - monitorowaniu, diagnostyce i virtual network flow logs."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

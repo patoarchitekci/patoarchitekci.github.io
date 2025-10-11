@@ -15,8 +15,9 @@ tags:
 
 # Treść
 description:
-  - "Model Context Protocol (MCP) to nowy standard komunikacji między modelami AI a zewnętrznymi źródłami danych i narzędziami, który ma szansę stać się kolejnym kluczowym protokołem w świecie technologii - obok HTTP API, REST API, GraphQL czy starszego SOAP."
-  - "Podczas tego intensywnego szkolenia nauczysz się praktycznej implementacji MCP w rzeczywistych zastosowaniach biznesowych. Jako inżynier otrzymasz konkretne narzędzia do tworzenia interoperacyjnych rozwiązań, które będą gotowe do współpracy z najnowszymi modelami AI, takimi jak Claude czy GPT."
+  - "Podczas tego intensywnego szkolenia nauczysz się praktycznej implementacji Model Context Protocol (MCP) w rzeczywistych zastosowaniach biznesowych. MCP to nowy standard komunikacji między modelami AI a zewnętrznymi źródłami danych i narzędziami, który ma szansę stać się kluczowym protokołem w świecie technologii. Zdobędziesz konkretne narzędzia do tworzenia interoperacyjnych rozwiązań gotowych do współpracy z najnowszymi modelami AI."
+  - "Model Context Protocol to kolejny kluczowy protokół w świecie technologii - obok HTTP API, REST API, GraphQL czy starszego SOAP. Wszystko wskazuje na to, że MCP będzie 'new normal' w ekosystemie AI, dlatego warto poznać go już teraz."
+  - "Warsztaty poprowadzi Łukasz Kałużny - Technology Advisor i Managing Partner w Protopia, który specjalizuje się w pragmatycznym podejściu do technologii bleeding-edge, pomagając organizacjom wdrażać najnowsze technologie bez niepotrzebnego hypu. Współprowadzi także popularny podcast Patoarchitekci."
   - "MCP to nie tylko kolejna abstrakcja nad HTTP - to fundamentalnie inne podejście do projektowania API, które wymaga zrozumienia specyfiki wymiany danych z systemami AI. Podczas warsztatów zbudujesz działające implementacje, poznasz rozwiązania typowych problemów technicznych i opanujesz wzorce projektowe specyficzne dla tego protokołu."
 
 skills:
@@ -46,7 +47,7 @@ modules:
     description: "Różnice między STDIO, SSE i Streamable HTTP oraz implementacja odpowiedniego dla danego zastosowania"
   - number: 5
     title: "Tworzenie pierwszego serwera MCP"
-    description: "Budowa od podstaw własnego serwera MCP w wybranym języku programowania"
+    description: "Budowa od podstaw własnego serwera MCP w wybranym języku programowania i definicja podstawowych narzędzi"
   - number: 6
     title: "Komunikacja JSON-RPC"
     description: "Warstwy komunikacji w MCP i skuteczna obsługa żądań, odpowiedzi i powiadomień"
@@ -54,8 +55,14 @@ modules:
     title: "Bezpieczeństwo serwerów MCP"
     description: "Najlepsze praktyki uwierzytelniania, autoryzacji i ochrony przed zagrożeniami z wykorzystaniem OAuth 2.0"
   - number: 8
-    title: "Testowanie i integracja"
-    description: "Używanie MCP Inspector, debugowanie serwerów i integracja z agentami AI takimi jak Claude Desktop"
+    title: "Testowanie serwerów MCP"
+    description: "Używanie MCP Inspector i innych narzędzi do testowania i debugowania serwerów"
+  - number: 9
+    title: "Integracja z agentami AI"
+    description: "Testowanie serwera z różnymi agentami AI, takimi jak Claude Desktop, i szczegóły procesu integracji"
+  - number: 10
+    title: "Najlepsze praktyki MCP"
+    description: "Projektowanie narzędzi zorientowanych na użytkownika, ograniczanie uprawnień i tworzenie niezawodnych rozwiązań"
 
 benefits:
   - title: "Praktyczna wiedza"
@@ -70,8 +77,8 @@ benefits:
     description: "Znajomość technologii, która dopiero zyskuje na popularności"
 
 # Organizacja
-price_net: 1999
-price_gross: 2458.77
+price_net: 1462.60
+price_gross: 1799.00
 currency: "PLN"
 
 dates:
@@ -103,10 +110,10 @@ faq:
     answer: "Nie, całe szkolenie będzie prowadzone w środowisku GitHub Codespaces. Wszystkie narzędzia będą już przygotowane."
   - question: "W jakich językach będziemy programować?"
     answer: "Kod będziemy pisać głównie w TypeScript, z elementami Pythona dla implementacji agenta w oparciu o OpenAI Agents SDK."
-  - question: "Czy otrzymam materiały po szkoleniu?"
-    answer: "Tak, otrzymasz dostęp do wszystkich przykładów kodu i materiałów szkoleniowych."
-  - question: "Czy szkolenie jest nagrywane?"
-    answer: "Tak, uczestnicy otrzymują dostęp do nagrania na 30 dni po szkoleniu."
+  - question: "Czy MCP stanie się standardem w ekosystemie AI?"
+    answer: "Wszystko wskazuje na to, że MCP będzie 'new normal' w ekosystemie AI - to kolejny kluczowy protokół obok HTTP API, REST API i GraphQL. Dlatego warto poznać go już teraz."
+  - question: "Jak się przygotować do szkolenia?"
+    answer: "Załóż konto na GitHub, opcjonalnie konto na OpenAI, przygotuj podstawową wiedzę z TypeScript i Python oraz zarezerwuj sobie cały dzień bez rozpraszaczy."
 
 # Meta dla Hugo
 layout: "training"
