@@ -10,7 +10,7 @@ window.onloadContactTurnstileCallback = function() {
     console.log('[CONTACT TURNSTILE] Inicjalizacja widgetu...');
     if (window.turnstile) {
         contactTurnstileWidgetId = window.turnstile.render('#contact-turnstile-container', {
-            sitekey: '0x4AAAAAAAz0vPdHzF5s7fgU',
+            sitekey: '0x4AAAAAAB3rTpbU6V5I845R',
             callback: function(token) {
                 console.log('[CONTACT TURNSTILE] ✅ Token otrzymany');
                 contactTurnstileToken = token;
