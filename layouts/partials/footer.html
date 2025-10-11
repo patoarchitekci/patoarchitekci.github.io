@@ -125,16 +125,16 @@
               </li>
             </ul>
           </div>
-          <ul class="text-white text-xs sm:text-base flex flex-col max-sm:max-w-[130px] font-bold">
+          <ul class="text-white text-xs sm:text-base flex flex-col font-bold">
             {{ range .Site.Menus.main }}
             {{ if .Params.target }}
-            <li class="hover:text-orange duration-300 leading-180 sm:leading-200 transition-all ease-in-out uppercase">
+            <li class="hover:text-orange duration-300 leading-180 sm:leading-200 transition-all ease-in-out uppercase whitespace-nowrap">
               <a href="{{ .URL }}" target="{{ .Params.target }}" class="block">{{ .Name }}</a>
             </li>
             {{ else }}
             <a href="{{ .URL }}">
               <li
-                class="hover:text-orange duration-300 leading-180 sm:leading-200 transition-all ease-in-out uppercase">
+                class="hover:text-orange duration-300 leading-180 sm:leading-200 transition-all ease-in-out uppercase whitespace-nowrap">
                 {{ .Name }}
               </li>
             </a>
