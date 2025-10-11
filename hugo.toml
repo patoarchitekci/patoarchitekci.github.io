@@ -69,27 +69,31 @@ enableGitInfo = true
 
 [menu]
   [[menu.main]]
+    name = "Odcinki"
+    url = "/odcinki/"
+    weight = 1
+  [[menu.main]]
     name = "Gdzie słuchać"
     url = "/#platforms"
-    weight = 1
+    weight = 2
   [[menu.main]]
     name = "O nas"
     url = "/#hosts"
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = "Szkolenia"
     url = "/szkolenia/"
-    weight = 3
+    weight = 4
   [[menu.main]]
     name = "Bezpłatna Konsultacja"
     url = "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
-    weight = 4
+    weight = 5
     [menu.main.params]
       target = "_blank"
   [[menu.main]]
     name = "Kontakt"
     url = "/kontakt/"
-    weight = 5
+    weight = 6
 
 [permalinks]
   episodes = "/:contentbasename/"
