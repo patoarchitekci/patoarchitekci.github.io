@@ -1,7 +1,7 @@
 # Ogólne FAQ dla wszystkich szkoleń
 general_faq:
   - question: "Jakie są metody płatności?"
-    answer: "Akceptujemy płatności przelewem bankowym, kartą płatniczą oraz PayU. Faktury wystawiamy przed szkoleniem."
+    answer: "Płatność BLIK, kartą płatniczą (Stripe) lub przelewem bankowym przez Tpay. Faktury są wysyłane automatycznie po opłaceniu."
   - question: "Czy mogę anulować uczestnictwo?"
     answer: "Tak, możesz anulować uczestnictwo do 7 dni przed rozpoczęciem szkolenia z pełnym zwrotem środków. W przypadku anulacji w krótszym terminie możesz wziąć udział w innym szkoleniu lub następnym terminie tego samego szkolenia."
   - question: "Czy otrzymam certyfikat ukończenia?"
