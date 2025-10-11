@@ -35,20 +35,7 @@ window.onloadContactTurnstileCallback = function() {
     }
 };
 
-// Dodaj callback do script tag (tak jak w newsletter)
-const turnstileScript = document.querySelector('script[src*="turnstile"]');
-if (turnstileScript) {
-    turnstileScript.setAttribute('data-callback', 'onloadContactTurnstileCallback');
-    console.log('[CONTACT TURNSTILE] Callback dodany do script taga');
-} else {
-    console.warn('[CONTACT TURNSTILE] Script tag nie znaleziony');
-}
-
-// Jeśli Turnstile już załadowany, wywołaj callback
-if (window.turnstile) {
-    console.log('[CONTACT TURNSTILE] Turnstile już załadowany, wywołuję callback...');
-    window.onloadContactTurnstileCallback();
-}
+// Turnstile will call onloadContactTurnstileCallback when loaded (via ?onload= parameter)
 
 // Form handling - INSIDE DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {

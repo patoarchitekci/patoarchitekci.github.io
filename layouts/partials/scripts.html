@@ -7,7 +7,7 @@
 {{ end }}
 {{ if eq .Type "contact" }}
 <script src="{{ .Site.BaseURL }}js/contact.js"></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadContactTurnstileCallback" async defer></script>
 {{ end }}
 {{ if eq .Type "training" }}
   {{ if eq .Layout "list" }}
