@@ -28,9 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 'error-callback': function() {
                     console.error('[CONTACT TURNSTILE] ❌ Błąd weryfikacji');
+                    pendingSubmit = false;
                 },
-                theme: 'light',
-                size: 'invisible'
+                size: 'invisible',
+                appearance: 'interaction-only'
             });
             console.log('[CONTACT TURNSTILE] Widget zainicjowany, ID:', contactTurnstileWidgetId);
         } else {
@@ -38,8 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Call callback if Turnstile already loaded
+    // Dodaj callback do script tag (tak jak w newsletter)
+    const turnstileScript = document.querySelector('script[src*="turnstile"]');
+    if (turnstileScript) {
+        turnstileScript.setAttribute('data-callback', 'onloadContactTurnstileCallback');
+        console.log('[CONTACT TURNSTILE] Callback dodany do script taga');
+    } else {
+        console.warn('[CONTACT TURNSTILE] Script tag nie znaleziony');
+    }
+
+    // Jeśli Turnstile już załadowany, wywołaj callback
     if (window.turnstile) {
+        console.log('[CONTACT TURNSTILE] Turnstile już załadowany, wywołuję callback...');
         window.onloadContactTurnstileCallback();
     }
 
@@ -167,20 +178,31 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         console.log('[CONTACT FORM] Submit triggered');
+        console.log('[CONTACT FORM] Dane formularza:', {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            message: document.getElementById('message').value,
+            consent: consentCheckbox.checked
+        });
 
         let isValid = true;
+        const validationErrors = [];
 
         // Validate all fields
         fields.forEach(({ id, errorId, validate, optional }) => {
             const input = document.getElementById(id);
             const error = document.getElementById(errorId);
+            const value = input.value;
 
-            if (!optional && !validate(input.value)) {
+            if (!optional && !validate(value)) {
                 error.classList.remove("hidden");
                 isValid = false;
-            } else if (optional && input.value.trim().length > 0 && !validate(input.value)) {
+                validationErrors.push(`${id}: niepoprawna wartość "${value}"`);
+            } else if (optional && value.trim().length > 0 && !validate(value)) {
                 error.classList.remove("hidden");
                 isValid = false;
+                validationErrors.push(`${id}: niepoprawna wartość "${value}"`);
             } else {
                 error.classList.add("hidden");
             }
@@ -190,14 +212,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!consentCheckbox.checked) {
             errorConsent.classList.remove("hidden");
             isValid = false;
+            validationErrors.push('consent: nie zaznaczona zgoda RODO');
         } else {
             errorConsent.classList.add("hidden");
         }
 
         if (!isValid) {
-            console.log('[CONTACT FORM] ❌ Walidacja nie przeszła');
+            console.log('[CONTACT FORM] ❌ Walidacja nie przeszła:');
+            validationErrors.forEach(err => console.log('  - ' + err));
             return;
         }
+
+        console.log('[CONTACT FORM] ✅ Walidacja przeszła pomyślnie');
 
         // Check if Turnstile token is ready
         if (contactTurnstileToken) {
