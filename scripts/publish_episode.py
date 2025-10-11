@@ -236,6 +236,7 @@ def main():
     """Main function to publish a podcast episode."""
     parser = argparse.ArgumentParser(description="Publish a podcast episode from Airtable to GitHub Pages.")
     parser.add_argument("--episode-number", type=int, required=True, help="The episode number to publish.")
+    parser.add_argument("--no-images", action="store_true", help="Skip downloading and processing images.")
     args = parser.parse_args()
 
     logger.info(f"Starting publishing process for episode #{args.episode_number}...")
@@ -284,7 +285,7 @@ def main():
 
     # 4. Prepare Template Context for Hugo
     # Clean control characters from text fields
-    text_fields = ['title', 'intro', 'description', 'newsletter', 'transcription']
+    text_fields = ['title', 'intro', 'description', 'transcription']
     for field in text_fields:
         if field in episode_fields and episode_fields[field]:
             episode_fields[field] = clean_control_characters(episode_fields[field])
@@ -301,27 +302,30 @@ def main():
         logger.warning("No youtube_id found in episode data")
     
     # Download and save images BEFORE rendering template (template needs the paths)
-    episode_num = episode_fields.get('episode_number')
-    if episode_num:
-        # Square Image (og_square)
-        og_square_list = episode_fields.get('og_square', [])
-        square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
-        if square_filepath:
-            # Extract just the filename with extension for Hugo path
-            square_filename = os.path.basename(square_filepath)
-            episode_fields['og_square_path'] = f"/img/{square_filename}"
-            logger.info(f"Set og_square_path to: /img/{square_filename}")
+    if not args.no_images:
+        episode_num = episode_fields.get('episode_number')
+        if episode_num:
+            # Square Image (og_square)
+            og_square_list = episode_fields.get('og_square', [])
+            square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
+            if square_filepath:
+                # Extract just the filename with extension for Hugo path
+                square_filename = os.path.basename(square_filepath)
+                episode_fields['og_square_path'] = f"/img/{square_filename}"
+                logger.info(f"Set og_square_path to: /img/{square_filename}")
 
-        # Landscape Image (og_landscape) - pobieramy z og_portrait w Airtable
-        og_portrait_list = episode_fields.get('og_portrait', [])
-        landscape_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-landscape")
-        if landscape_filepath:
-            # Extract just the filename with extension for Hugo path
-            landscape_filename = os.path.basename(landscape_filepath)
-            episode_fields['og_landscape_path'] = f"/img/{landscape_filename}"
-            logger.info(f"Set og_landscape_path to: /img/{landscape_filename}")
+            # Landscape Image (og_landscape) - pobieramy z og_portrait w Airtable
+            og_portrait_list = episode_fields.get('og_portrait', [])
+            landscape_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-landscape")
+            if landscape_filepath:
+                # Extract just the filename with extension for Hugo path
+                landscape_filename = os.path.basename(landscape_filepath)
+                episode_fields['og_landscape_path'] = f"/img/{landscape_filename}"
+                logger.info(f"Set og_landscape_path to: /img/{landscape_filename}")
+        else:
+            logger.error("Cannot download images, episode number is missing.")
     else:
-        logger.error("Cannot download images, episode number is missing.")
+        logger.info("Skipping image download (--no-images flag set).")
     
     template_context = {
         "episode": episode_fields,      # Pass the whole fields dictionary (now with links, youtube_id, and image paths)

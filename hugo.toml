@@ -1,6 +1,12 @@
 baseURL = "https://patoarchitekci.io/"
 languageCode = "pl-PL"
 title = "Patoarchitekci"
+enableGitInfo = true
+
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = [":git", "lastmod", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
 
 [params]
   description = "Stworzyliśmy ten podcast, bo sami szukaliśmy miejsca, które łączy wiedzę, praktykę i dystans do branży IT."

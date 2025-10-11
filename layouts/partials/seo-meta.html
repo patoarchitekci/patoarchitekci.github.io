@@ -8,6 +8,14 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ .Permalink }}">
 
+<!-- Date meta tags -->
+{{ if .Date }}
+<meta property="datePublished" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ end }}
+{{ if ne .Date .Lastmod }}
+<meta property="dateModified" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ end }}
+
 <!-- Additional SEO tags -->
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
