@@ -123,6 +123,15 @@ export async function onRequestPost(context) {
       console.log('[Training Waitlist] Using existing group with ID:', groupId);
     }
 
+    // Format date for MailerLite (Y-m-d H:i:s)
+    const formatMailerLiteDate = (date) => {
+      const pad = (n) => n.toString().padStart(2, '0');
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    };
+
+    const now = new Date();
+    const optedInAt = formatMailerLiteDate(now);
+
     // Add/update subscriber with all collected data
     console.log('[Training Waitlist] Adding subscriber to group...');
     const subscriberResponse = await fetch(
@@ -149,9 +158,9 @@ export async function onRequestPost(context) {
             signup_language: cfData.language.split(',')[0], // Get primary language
             signup_referer: cfData.referer,
             signup_user_agent: cfData.userAgent.substring(0, 255), // Limit to 255 chars
-            signup_date: new Date().toISOString()
+            signup_date: optedInAt
           },
-          opted_in_at: new Date().toISOString(),
+          opted_in_at: optedInAt,
           optin_ip: cfData.ip
         })
       }
