@@ -1,0 +1,13 @@
+<!-- SEO Meta Tags -->
+<meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
+{{ if .Params.seo_keywords }}
+<meta name="keywords" content="{{ .Params.seo_keywords }}">
+{{ end }}
+<meta name="author" content="{{ .Site.Params.author | default "PatoArchitekci" }}">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- Additional SEO tags -->
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">

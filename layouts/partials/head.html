@@ -6,6 +6,12 @@
 <meta name="title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Title }}{{ end }}" />
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
 
+<!-- ===== SEO Meta Tags (for episodes) ===== -->
+{{ partial "seo-meta.html" . }}
+
+<!-- ===== Social Media Meta Tags (for episodes) ===== -->
+{{ partial "social-meta.html" . }}
+
 <!-- ===== TYMCZASOWE BLOKOWANIE INDEKSOWANIA / TEMPORARY BLOCKING ===== -->
 <!-- USUŃ TE TAGI PRZED PUBLIKACJĄ! / REMOVE BEFORE PRODUCTION! -->
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noydir" />

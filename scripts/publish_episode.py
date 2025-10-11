@@ -20,7 +20,6 @@ AIRTABLE_API_KEY = os.getenv("AIRTABLE_API_KEY")
 AIRTABLE_BASE_ID = os.getenv("AIRTABLE_BASE_ID")
 EPISODES_TABLE_NAME = os.getenv("EPISODES_TABLE_NAME", "episodes")
 LINKS_TABLE_NAME = os.getenv("LINKS_TABLE_NAME", "links")
-TAGS_TABLE_NAME = os.getenv("TAGS_TABLE_NAME", "tags")
 # Field name/ID for the checkbox indicating the episode is published
 # It's recommended to use the Field ID (e.g., fld1kRM6VC3ouCqGi) for stability
 IS_PUBLISHED_FIELD = os.getenv("IS_PUBLISHED_FIELD", "is_published")
@@ -103,46 +102,6 @@ def fetch_linked_links(api: Api, record_ids: list[str]) -> list[dict]:
         logger.error(f"Error fetching link data from Airtable: {e}", exc_info=True)
         return [] # Return empty list on error
 
-def fetch_linked_data(api: Api, table_name: str, record_ids: list[str], field_to_extract: str) -> list:
-    """Fetches records from a specified table by IDs and extracts a given field."""
-    if not record_ids:
-        logger.info(f"No record IDs provided for table '{table_name}', skipping fetch.")
-        return []
-
-    logger.info(f"Fetching {len(record_ids)} linked records from table '{table_name}'...")
-    extracted_data = []
-    try:
-        # Get the table object first
-        target_table = api.table(AIRTABLE_BASE_ID, table_name)
-        
-        # Construct an OR formula to fetch records by ID
-        # Formula: OR(RECORD_ID()='rec1', RECORD_ID()='rec2', ...)
-        id_conditions = [f"RECORD_ID()='{rec_id}'" for rec_id in record_ids]
-        formula = f"OR({ ', '.join(id_conditions) })"
-        logger.debug(f"Using formula for fetching linked records: {formula}")
-
-        # Use table.all() with the constructed formula
-        records = target_table.all(formula=formula)
-        
-        if len(records) != len(record_ids):
-             logger.warning(f"Fetched {len(records)} records, but {len(record_ids)} IDs were provided. Some records might be missing or duplicated in the result.")
-
-        for record in records:
-            try:
-                if field_value := record.get('fields', {}).get(field_to_extract):
-                    extracted_data.append(field_value)
-                else:
-                    logger.warning(f"Field '{field_to_extract}' not found or empty in record {record['id']} from table '{table_name}'.")
-            except KeyError:
-                 logger.warning(f"Record {record.get('id', '[Unknown ID]')} from '{table_name}' missing 'fields' key or field '{field_to_extract}'.")
-                    
-        logger.info(f"Successfully extracted '{field_to_extract}' field from {len(extracted_data)}/{len(record_ids)} linked records in '{table_name}'.")
-        return extracted_data
-        
-    except Exception as e:
-        logger.error(f"Error fetching linked data from Airtable table '{table_name}': {e}", exc_info=True)
-        return [] # Return empty list on error to allow processing to potentially continue
-
 def update_airtable_published_flag(api: Api, record_id: str):
     """Updates the 'is_published' flag for the given record ID in Airtable."""
     logger.info(f"Updating '{IS_PUBLISHED_FIELD}' flag for record {record_id}...")
@@ -158,8 +117,8 @@ def update_airtable_published_flag(api: Api, record_id: str):
         return False
 
 # --- File Operations ---
-POSTS_DIR = "../content/episodes"  # Hugo episodes directory (relative to scripts/)
-ASSETS_IMG_DIR = "../static/img"   # Hugo static assets directory (relative to scripts/)
+POSTS_DIR = "content/episodes"  # Hugo episodes directory (relative to repo root)
+ASSETS_IMG_DIR = "static/img"   # Hugo static assets directory (relative to repo root)
 
 def save_markdown_file(content: str, episode_fields: dict) -> str | None:
     """Saves the markdown content to the correct file in the content/episodes directory."""
@@ -307,10 +266,21 @@ def main():
     links_data = fetch_linked_links(airtable_api, link_ids)
     logger.info(f"Fetched {len(links_data)} link structures for Hugo format.")
 
-    # TODO: Fetch linked tags
-    tag_ids = episode_fields.get('tags', [])
-    tag_names = fetch_linked_data(airtable_api, TAGS_TABLE_NAME, tag_ids, 'Name') # Assuming the field is 'Name' based on blueprint analysis
-    logger.info(f"Fetched {len(tag_names)} tag names.")
+    # Parse meta_seo JSON field
+    import json
+    meta_seo_raw = episode_fields.get('meta_seo', '{}')
+    try:
+        meta_seo = json.loads(meta_seo_raw) if isinstance(meta_seo_raw, str) else meta_seo_raw
+        logger.info(f"Parsed meta_seo JSON successfully.")
+    except json.JSONDecodeError as e:
+        logger.error(f"Error parsing meta_seo JSON: {e}. Using empty dict.")
+        meta_seo = {}
+
+    # Extract SEO data from meta_seo
+    seo_description = meta_seo.get('description', episode_fields.get('description', ''))
+    seo_keywords = meta_seo.get('keywords', '')
+    tag_names = meta_seo.get('tags', [])
+    logger.info(f"Extracted {len(tag_names)} tags from meta_seo.")
 
     # 4. Prepare Template Context for Hugo
     # Clean control characters from text fields
@@ -355,7 +325,9 @@ def main():
     
     template_context = {
         "episode": episode_fields,      # Pass the whole fields dictionary (now with links, youtube_id, and image paths)
-        "tags": tag_names               # Pass the list of tag names
+        "tags": tag_names,              # Pass the list of tag names from meta_seo
+        "seo_description": seo_description,  # SEO description from meta_seo
+        "seo_keywords": seo_keywords     # SEO keywords from meta_seo
     }
     logger.info("Prepared context dictionary for Jinja template.")
     # Example: Access title in template via {{ episode.title }}

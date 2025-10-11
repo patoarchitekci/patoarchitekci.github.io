@@ -9,7 +9,7 @@
             {{ .Title }}</h3>
         <p
             class="text-white text-[10px] sm:text-xs md:text-sm lg:text-base leading-100 pt-[15px] md:pt-[25px] lg:pt-[43px] pb-[30px] sm:pb-[39px]">
-            {{ range .Params.tags }}{{ . }} {{ end }}</p>
+            {{ range .Params.tags }}#{{ . }} {{ end }}</p>
 
     </div>
 </section>
@@ -78,7 +78,7 @@
                 </span>
             </button>
         </a>
-        <p
+        <p id="links-section"
             class="py-[8.5px] px-[28px] max-sm:max-w-[420px] text-white text-center sm:text-left border-2 font-semibold text-sm sm:text-base md:text-xl lg:text-2xl mt-[30px] sm:mt-[51px] uppercase leading-100 rounded-[50px]">
             Linki i ciekawe znaleziska
         </p>
@@ -342,6 +342,11 @@
                 btn.innerHTML = "↓ rozwiń transkrypcję";
                 // Pokaż gradient przy zwinięciu
                 if (readBottomLayer) readBottomLayer.style.display = "block";
+                // Scroll do sekcji linków
+                const linksSection = document.getElementById("links-section");
+                if (linksSection) {
+                    linksSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
             }
         });
     }

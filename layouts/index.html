@@ -72,7 +72,7 @@
           <div class="font-normal lg:text-base sm:text-sm text-xs text-white sm:!leading-119 !leading-125 xl:mb-9 lg:mb-7 mb-4 max-w-[805px] [&>p]:m-0">{{ .Params.intro | markdownify | truncate 200 | safeHTML }}</div>
           <div class="flex flex-wrap items-center gap-1 lg:mb-10 mb-5">
             {{ range .Params.tags }}
-            <span class="font-normal sm:text-sm text-custom-xs sm:!leading-100 leading-120 text-orange">{{ . }}</span>
+            <span class="font-normal sm:text-sm text-custom-xs sm:!leading-100 leading-120 text-orange">#{{ . }}</span>
             {{ end }}
           </div>
           <a href="{{ .Permalink }}">

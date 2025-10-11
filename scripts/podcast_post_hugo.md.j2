@@ -3,7 +3,8 @@ title: '#{{ episode.episode_number }} {{ episode.title | replace("\n", " ") | re
 date: {{ episode.date }}T08:00:00+02:00
 episode: "{{ episode.episode_number }}"
 tags: [{{ tags | map('tojson') | join(', ') }}]
-description: "{{ episode.description | default('', true) | escape }}"
+description: "{{ seo_description | default(episode.description, true) | escape }}"
+seo_keywords: "{{ seo_keywords | default('', true) | escape }}"
 
 # Jekyll compatibility fields (zachowane dla innych systemów)  
 spreaker: {{ episode.spreaker_id | default('', true) }}
