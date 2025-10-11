@@ -1,58 +1,62 @@
 // CONTACT FORM SCRIPT
+
+// Turnstile initialization - MUST BE OUTSIDE DOMContentLoaded!
+let contactTurnstileToken = null;
+let contactTurnstileWidgetId = null;
+let pendingSubmit = false;
+
+// Initialize Turnstile when script loads
+window.onloadContactTurnstileCallback = function() {
+    console.log('[CONTACT TURNSTILE] Inicjalizacja widgetu...');
+    if (window.turnstile) {
+        contactTurnstileWidgetId = window.turnstile.render('#contact-turnstile-container', {
+            sitekey: '0x4AAAAAAAz0vPdHzF5s7fgU',
+            callback: function(token) {
+                console.log('[CONTACT TURNSTILE] ✅ Token otrzymany');
+                contactTurnstileToken = token;
+
+                // If form was submitted while waiting for token
+                if (pendingSubmit) {
+                    console.log('[CONTACT TURNSTILE] Formularz czekał na token, wysyłanie...');
+                    submitContactForm();
+                    pendingSubmit = false;
+                }
+            },
+            'error-callback': function() {
+                console.error('[CONTACT TURNSTILE] ❌ Błąd weryfikacji');
+                pendingSubmit = false;
+            },
+            size: 'invisible',
+            appearance: 'interaction-only'
+        });
+        console.log('[CONTACT TURNSTILE] Widget zainicjowany, ID:', contactTurnstileWidgetId);
+    } else {
+        console.error('[CONTACT TURNSTILE] ❌ Biblioteka nie załadowana');
+    }
+};
+
+// Dodaj callback do script tag (tak jak w newsletter)
+const turnstileScript = document.querySelector('script[src*="turnstile"]');
+if (turnstileScript) {
+    turnstileScript.setAttribute('data-callback', 'onloadContactTurnstileCallback');
+    console.log('[CONTACT TURNSTILE] Callback dodany do script taga');
+} else {
+    console.warn('[CONTACT TURNSTILE] Script tag nie znaleziony');
+}
+
+// Jeśli Turnstile już załadowany, wywołaj callback
+if (window.turnstile) {
+    console.log('[CONTACT TURNSTILE] Turnstile już załadowany, wywołuję callback...');
+    window.onloadContactTurnstileCallback();
+}
+
+// Form handling - INSIDE DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
     const formwrapper = document.getElementById("formwrapper");
     const successMsg = document.getElementById("successMsg");
-
-    // Turnstile
-    let contactTurnstileToken = null;
-    let contactTurnstileWidgetId = null;
-    let pendingSubmit = false;
-
-    // Initialize Turnstile when script loads
-    window.onloadContactTurnstileCallback = function() {
-        console.log('[CONTACT TURNSTILE] Inicjalizacja widgetu...');
-        if (window.turnstile) {
-            contactTurnstileWidgetId = window.turnstile.render('#contact-turnstile-container', {
-                sitekey: '0x4AAAAAAAz0vPdHzF5s7fgU',
-                callback: function(token) {
-                    console.log('[CONTACT TURNSTILE] ✅ Token otrzymany');
-                    contactTurnstileToken = token;
-
-                    // If form was submitted while waiting for token
-                    if (pendingSubmit) {
-                        console.log('[CONTACT TURNSTILE] Formularz czekał na token, wysyłanie...');
-                        submitForm();
-                        pendingSubmit = false;
-                    }
-                },
-                'error-callback': function() {
-                    console.error('[CONTACT TURNSTILE] ❌ Błąd weryfikacji');
-                    pendingSubmit = false;
-                },
-                size: 'invisible',
-                appearance: 'interaction-only'
-            });
-            console.log('[CONTACT TURNSTILE] Widget zainicjowany, ID:', contactTurnstileWidgetId);
-        } else {
-            console.error('[CONTACT TURNSTILE] ❌ Biblioteka nie załadowana');
-        }
-    };
-
-    // Dodaj callback do script tag (tak jak w newsletter)
-    const turnstileScript = document.querySelector('script[src*="turnstile"]');
-    if (turnstileScript) {
-        turnstileScript.setAttribute('data-callback', 'onloadContactTurnstileCallback');
-        console.log('[CONTACT TURNSTILE] Callback dodany do script taga');
-    } else {
-        console.warn('[CONTACT TURNSTILE] Script tag nie znaleziony');
-    }
-
-    // Jeśli Turnstile już załadowany, wywołaj callback
-    if (window.turnstile) {
-        console.log('[CONTACT TURNSTILE] Turnstile już załadowany, wywołuję callback...');
-        window.onloadContactTurnstileCallback();
-    }
+    const consentCheckbox = document.getElementById("consent-toggle");
+    const errorConsent = document.getElementById("error-consent");
 
     // Validation fields
     const fields = [
@@ -79,9 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     ];
 
-    const consentCheckbox = document.getElementById("consent-toggle");
-    const errorConsent = document.getElementById("error-consent");
-
     // Real-time validation
     fields.forEach(({ id, errorId, validate }) => {
         const input = document.getElementById(id);
@@ -101,77 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
             errorConsent.classList.add("hidden");
         }
     });
-
-    // Submit function
-    async function submitForm() {
-        console.log('[CONTACT FORM] Wysyłanie formularza...');
-
-        const formData = new FormData();
-        formData.append('name', document.getElementById('name').value);
-        formData.append('email', document.getElementById('email').value);
-        formData.append('phone', document.getElementById('phone').value);
-        formData.append('message', document.getElementById('message').value);
-        formData.append('consent', consentCheckbox.checked ? 'true' : 'false');
-        formData.append('cf-turnstile-response', contactTurnstileToken);
-
-        console.log('[CONTACT FORM] Token Turnstile:', contactTurnstileToken ? 'obecny' : 'brak');
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-            console.log('[CONTACT FORM] Odpowiedź:', data);
-
-            if (response.ok && data.success) {
-                // Success - show modal
-                console.log('[CONTACT FORM] ✅ Sukces!');
-                successMsg.classList.remove("hidden");
-                formwrapper.classList.add("hidden");
-
-                // Reset form
-                form.reset();
-
-                // Reset Turnstile
-                if (window.turnstile && contactTurnstileWidgetId !== null) {
-                    window.turnstile.reset(contactTurnstileWidgetId);
-                }
-                contactTurnstileToken = null;
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: "smooth" });
-
-                // Hide modal after 5 seconds
-                setTimeout(() => {
-                    successMsg.classList.add("hidden");
-                    formwrapper.classList.remove("hidden");
-                }, 5000);
-
-            } else {
-                // Error from API
-                console.error('[CONTACT FORM] ❌ Błąd:', data.error);
-                alert(data.error || 'Wystąpił błąd podczas wysyłania wiadomości');
-
-                // Reset Turnstile
-                if (window.turnstile && contactTurnstileWidgetId !== null) {
-                    window.turnstile.reset(contactTurnstileWidgetId);
-                }
-                contactTurnstileToken = null;
-            }
-
-        } catch (error) {
-            console.error('[CONTACT FORM] ❌ Błąd sieci:', error);
-            alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.');
-
-            // Reset Turnstile
-            if (window.turnstile && contactTurnstileWidgetId !== null) {
-                window.turnstile.reset(contactTurnstileWidgetId);
-            }
-            contactTurnstileToken = null;
-        }
-    }
 
     // Form submit handler
     form.addEventListener("submit", (e) => {
@@ -228,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if Turnstile token is ready
         if (contactTurnstileToken) {
             console.log('[CONTACT FORM] Token gotowy, wysyłanie...');
-            submitForm();
+            submitContactForm();
         } else {
             // Execute Turnstile challenge
             console.log('[CONTACT FORM] Brak tokena, uruchamiam Turnstile...');
@@ -244,3 +174,78 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+// Submit function - OUTSIDE DOMContentLoaded so Turnstile callback can access it
+async function submitContactForm() {
+    console.log('[CONTACT FORM] Wysyłanie formularza...');
+
+    const formData = new FormData();
+    formData.append('name', document.getElementById('name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('message', document.getElementById('message').value);
+    formData.append('consent', document.getElementById('consent-toggle').checked ? 'true' : 'false');
+    formData.append('cf-turnstile-response', contactTurnstileToken);
+
+    console.log('[CONTACT FORM] Token Turnstile:', contactTurnstileToken ? 'obecny' : 'brak');
+
+    try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        console.log('[CONTACT FORM] Odpowiedź:', data);
+
+        if (response.ok && data.success) {
+            // Success - show modal
+            console.log('[CONTACT FORM] ✅ Sukces!');
+            const successMsg = document.getElementById("successMsg");
+            const formwrapper = document.getElementById("formwrapper");
+            const form = document.querySelector("form");
+
+            successMsg.classList.remove("hidden");
+            formwrapper.classList.add("hidden");
+
+            // Reset form
+            form.reset();
+
+            // Reset Turnstile
+            if (window.turnstile && contactTurnstileWidgetId !== null) {
+                window.turnstile.reset(contactTurnstileWidgetId);
+            }
+            contactTurnstileToken = null;
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Hide modal after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.add("hidden");
+                formwrapper.classList.remove("hidden");
+            }, 5000);
+
+        } else {
+            // Error from API
+            console.error('[CONTACT FORM] ❌ Błąd:', data.error);
+            alert(data.error || 'Wystąpił błąd podczas wysyłania wiadomości');
+
+            // Reset Turnstile
+            if (window.turnstile && contactTurnstileWidgetId !== null) {
+                window.turnstile.reset(contactTurnstileWidgetId);
+            }
+            contactTurnstileToken = null;
+        }
+
+    } catch (error) {
+        console.error('[CONTACT FORM] ❌ Błąd sieci:', error);
+        alert('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.');
+
+        // Reset Turnstile
+        if (window.turnstile && contactTurnstileWidgetId !== null) {
+            window.turnstile.reset(contactTurnstileWidgetId);
+        }
+        contactTurnstileToken = null;
+    }
+}
