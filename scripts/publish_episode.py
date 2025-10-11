@@ -289,6 +289,11 @@ def main():
     for field in text_fields:
         if field in episode_fields and episode_fields[field]:
             episode_fields[field] = clean_control_characters(episode_fields[field])
+
+    # Set default transcription if empty
+    if not episode_fields.get('transcription') or not episode_fields['transcription'].strip():
+        episode_fields['transcription'] = 'AI jeszcze nie zdążyło przepisać tego odcinka. Wracaj niedługo! 🤖'
+        logger.info("Transcription is empty, using default placeholder text.")
     
     # Add links data directly to episode fields for template access
     episode_fields['links'] = links_data
