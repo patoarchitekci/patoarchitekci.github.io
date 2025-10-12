@@ -10,12 +10,6 @@
   font-family: "Tomorrow", sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .transition-max-height {
   transition: max-height 0.5s ease;
   overflow: hidden;

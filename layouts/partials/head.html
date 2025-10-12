@@ -48,14 +48,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
 <meta property="twitter:image" content="{{ .Site.BaseURL }}metatag.png" />
 
-<!-- ===== TAILWIND CSS VIA CDN ===== -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script type="module" src="{{ .Site.BaseURL }}talwind.js"></script>
+<!-- ===== TAILWIND CSS via Hugo Pipes ===== -->
+{{ partial "css.html" . }}
+
+<!-- ===== Custom CSS ===== -->
+<link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css" />
+<link rel="stylesheet" href="{{ .Site.BaseURL }}css/root.css" />
 
 <!-- ===== Favicon ===== -->
 <link rel="icon" href="{{ .Site.BaseURL }}img/png/favicon.png" type="image/x-icon" />
-<link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css" />
-<link rel="stylesheet" href="{{ .Site.BaseURL }}css/root.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <!-- ===== Cookie Consent ===== -->

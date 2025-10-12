@@ -1,0 +1,13 @@
+{
+  "name": "patoarchitekci",
+  "version": "1.0.0",
+  "description": "Patoarchitekci podcast website",
+  "private": true,
+  "scripts": {
+    "tailwind:build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
+    "tailwind:watch": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.18"
+  }
+}

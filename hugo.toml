@@ -6,6 +6,10 @@ enableGitInfo = true
 # Wyłącz generowanie stron taxonomy i term (nie mają layoutów)
 disableKinds = ["taxonomy", "term"]
 
+# Hugo Pipes - TailwindCSS integration
+[build]
+  writeStats = true
+
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]
   lastmod = [":git", "lastmod", "date", "publishDate"]
