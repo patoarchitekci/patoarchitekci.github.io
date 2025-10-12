@@ -119,7 +119,7 @@ location:
   details: "2 spotkania, każde trwające 4 godziny"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites

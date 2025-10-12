@@ -121,7 +121,7 @@ location:
   details: "Format do ustalenia"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites

@@ -108,7 +108,7 @@ location:
   details: "Całe szkolenie prowadzone w środowisku GitHub Codespaces"
 
 participants:
-  max: 20
+  max: 12
   availability_note: "Ograniczona liczba miejsc dla zapewnienia jakości"
 
 # Prerequisites i przygotowanie

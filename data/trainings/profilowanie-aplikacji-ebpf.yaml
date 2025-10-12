@@ -108,7 +108,7 @@ location:
   details: "Intensywny jednodniowy warsztat z gotowym środowiskiem K8s"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites

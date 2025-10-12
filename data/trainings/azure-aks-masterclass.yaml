@@ -140,7 +140,7 @@ location:
   details: "Jednodniowe szkolenie trwające 7.5 godziny"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites

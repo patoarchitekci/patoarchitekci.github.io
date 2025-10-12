@@ -103,7 +103,7 @@ location:
   details: "Intensywny jednodniowy warsztat z praktycznymi przykładami"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites

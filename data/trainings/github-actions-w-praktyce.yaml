@@ -116,7 +116,7 @@ location:
   details: "2 spotkania, każde trwające 7.5 godziny - intensywny warsztaty (90% praktyki)"
 
 participants:
-  max: 15
+  max: 12
   availability_note: "Mała grupa dla lepszej interakcji"
 
 # Prerequisites
