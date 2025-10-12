@@ -11,6 +11,23 @@ tags:
   - "#DevOps"
   - "#SRE"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 23
+teaches:
+  - "Różnice między APM (Application Performance Monitoring) a Open Telemetry"
+  - "Implementacja Open Telemetry w systemach rozproszonych"
+  - "Prometheus - architektura, składnia PromQL, metryki i dobre praktyki"
+  - "Grafana - dashboardy, Alert Manager, źródła danych i organizacja"
+  - "Tempo - distributed tracing, architektura i integracja z innymi usługami"
+  - "Loki - architektura logów, korelacje z tracingiem i dobre praktyki"
+  - "Pixie i eBPF - nowa generacja Service Meshy, profilowanie bazy danych"
+  - "Cost optimization - efektywne monitorowanie bez rujnowania budżetu"
+audience: "Inżynierowie DevOps i SRE zarządzający observability w systemach rozproszonych, szukający efektywnych kosztowo rozwiązań monitoringu"
+
 # Treść
 description:
   - "Naucz się, jak monitorować systemy tak, by nie zbankrutować – poznaj narzędzia, które są efektywne i nie zrujnują Twojego budżetu."

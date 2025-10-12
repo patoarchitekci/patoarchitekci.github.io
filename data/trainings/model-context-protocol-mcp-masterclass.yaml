@@ -13,6 +13,23 @@ tags:
   - "#Python"
   - "#Architecture"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 22
+teaches:
+  - "Fundamenty Model Context Protocol jako standardu komunikacji dla AI"
+  - "Architektura MCP - relacje między hostami, klientami i serwerami"
+  - "Projektowanie i implementacja zasobów, narzędzi i promptów w MCP"
+  - "Mechanizmy transportu - STDIO, SSE i Streamable HTTP"
+  - "Tworzenie własnych serwerów MCP w TypeScript i Python"
+  - "Komunikacja JSON-RPC i obsługa żądań, odpowiedzi i powiadomień"
+  - "Bezpieczeństwo serwerów MCP - uwierzytelnianie i autoryzacja z OAuth 2.0"
+  - "Integracja serwerów MCP z agentami AI (Claude Desktop, OpenAI)"
+audience: "Programiści i architekci pracujący z AI, chcący integrować modele językowe z zewnętrznymi systemami danych i narzędziami wykorzystując najnowsze standardy"
+
 # Treść
 description:
   - "Podczas tego intensywnego szkolenia nauczysz się praktycznej implementacji Model Context Protocol (MCP) w rzeczywistych zastosowaniach biznesowych. MCP to nowy standard komunikacji między modelami AI a zewnętrznymi źródłami danych i narzędziami, który ma szansę stać się kluczowym protokołem w świecie technologii. Zdobędziesz konkretne narzędzia do tworzenia interoperacyjnych rozwiązań gotowych do współpracy z najnowszymi modelami AI."

@@ -13,6 +13,23 @@ tags:
   - "#Kubernetes"
   - "#Cloud"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 30
+teaches:
+  - "Fundamenty architektury IT i przegląd stylów architektury systemów"
+  - "Wzorce budowy systemów - modularność, komponenty i ich praktyczne zastosowanie"
+  - "Charakterystyki architektury - zarządzanie, identyfikacja, zakresy odpowiedzialności"
+  - "Bezpieczeństwo jako integralny element architektury systemów"
+  - "Architektura sieciowa - Load Balancing, L7, DNS, Firewalling, segmentacja"
+  - "Podejmowanie strategicznych decyzji - build vs. build z OSS vs. buy"
+  - "Kubernetes i ekosystem CNCF - minimal valuable stack"
+  - "Architecture Kata - praktyczne ćwiczenia projektowania architektury"
+audience: "Inżynierowie IT i programiści pragnący rozwijać umiejętności architektoniczne i przejść na kolejny poziom w projektowaniu systemów"
+
 # Treść
 description:
   - "Rozpocznij swoją przygodę z architekturą IT od podstaw, ale na sterydach. Bez zbędnych teorii, tylko praktyczna wiedza z pierwszej ręki."

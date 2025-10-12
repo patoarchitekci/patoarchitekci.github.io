@@ -11,6 +11,23 @@ tags:
   - "#Cloud"
   - "#Advanced"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 27
+teaches:
+  - "Szczegółowa architektura klastra Kubernetes i współpraca komponentów"
+  - "Szyfrowanie komunikacji TLS i danych at-rest w klastrze"
+  - "Konfiguracja i uruchomienie klastra etcd od podstaw"
+  - "Ręczna instalacja i konfiguracja control plane (API server, scheduler, controller manager)"
+  - "Konfiguracja węzłów roboczych z kubelet, kube-proxy i containerd"
+  - "Implementacja sieci klastra (CNI) i routingu dla Podów"
+  - "Testowanie wysokiej dostępności i symulacje awarii"
+  - "Zaawansowane techniki troubleshootingu i debugowania klastra"
+audience: "Zaawansowani administratorzy i inżynierowie Kubernetes, którzy chcą dogłębnie zrozumieć działanie klastra od środka oraz zdobyć praktyczną wiedzę w diagnozowaniu problemów produkcyjnych"
+
 # Treść
 description:
   - "Kubernetes bez ściemy! Łukasz pokaże Ci, jak to działa od środka. Zapomnij o narzędziach i gotowych rozwiązaniach. Tutaj liczy się tylko Twoja wiedza i kreatywność."

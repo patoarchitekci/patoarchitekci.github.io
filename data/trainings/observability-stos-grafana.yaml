@@ -16,6 +16,23 @@ tags:
   - "#DevOps"
   - "#SRE"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 26
+teaches:
+  - "Różnice między monitorowaniem a observability - kluczowe koncepty"
+  - "Open Telemetry - standardowa instrumentacja aplikacji dla observability"
+  - "Prometheus - architektura, składnia PromQL, wdrożenia i dobre praktyki metryk"
+  - "Tempo - distributed tracing, architektura, składnia i integracja z innymi usługami"
+  - "Loki - architektura logów, składnia LogQL, korelacje z tracingiem"
+  - "Integracja całego stosu LGTM (Loki, Grafana, Tempo, Mimir/Prometheus)"
+  - "Open Telemetry w praktyce - instrumentacja aplikacji i eksport danych"
+  - "Cost optimization - jak monitorować efektywnie bez rujnowania budżetu IT"
+audience: "Inżynierowie DevOps i SRE wdrażający open-source stos observability, którzy szukają potężnego systemu monitorowania bez kosztów licencyjnych"
+
 # Treść
 description:
   - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodów. Jednak czy muszą być? To zależy."

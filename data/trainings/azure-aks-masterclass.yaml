@@ -12,6 +12,23 @@ tags:
   - "#Cloud"
   - "#Containers"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 29
+teaches:
+  - "Architektura Azure Kubernetes Service i automatyzacja z AKS Automatic"
+  - "Wysoka dostępność i konfiguracja availability zones"
+  - "RBAC, integracja z Azure AD i zarządzanie tożsamościami (Workload Identity)"
+  - "Skalowanie klastrów, autoskaler, pule węzłów i Karpenter AKS"
+  - "Azure Kubernetes Fleet Manager - zarządzanie flotą klastrów"
+  - "Monitorowanie wydajności i bezpieczeństwo z Azure Policy i Defender for Cloud"
+  - "Zaawansowana konfiguracja sieci - Load Balancer, Firewall, polityki sieciowe"
+  - "Ingress, Application Gateway, WAF i integracja z Azure FrontDoor"
+audience: "Administratorzy i architekci chmurowi zarządzający klastrami Kubernetes w Azure, którzy chcą opanować zaawansowane funkcje AKS i best practices"
+
 # Treść
 description:
   - "Zgłębisz tajniki zarządzania kontenerami z wykorzystaniem Azure Kubernetes Service (AKS). Łukasz przeprowadzi Cię przez konfigurację, zarządzanie i skalowanie aplikacji w środowisku AKS."

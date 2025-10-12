@@ -13,6 +13,23 @@ tags:
   - "#BigData"
   - "#Performance"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 25
+teaches:
+  - "Typy baz NoSQL (key-value, wide table, document, full-text search, graph) i wykorzystanie ich ograniczeń jako atutów"
+  - "Projektowanie i optymalizacja struktur danych w różnych typach baz NoSQL"
+  - "Skalowanie horyzontalne baz danych i wybór odpowiedniego klucza partycji"
+  - "Projektowanie rozwiązań obsługujących duży ruch i dziesiątki terabajtów danych"
+  - "Implementacja indeksów full-text search i optymalizacja zapytań"
+  - "Modelowanie danych w bazach grafowych i projektowanie efektywnych zapytań"
+  - "Unikanie najczęstszych błędów w modelowaniu danych NoSQL"
+  - "Techniki normalizacji i denormalizacji w kontekście NoSQL"
+audience: "Architekci i inżynierowie baz danych projektujący rozwiązania NoSQL dla systemów o dużym ruchu, wymagających skalowalności horyzontalnej"
+
 # Treść
 description:
   - "Poznasz tajniki efektywnego modelowania danych w praktycznym zastosowaniu. Szymon pokaże, jak właściwie strukturyzując dane, można zwiększyć wydajność i skalowalność systemów."

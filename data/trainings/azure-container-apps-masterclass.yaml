@@ -12,6 +12,23 @@ tags:
   - "#Kubernetes"
   - "#Serverless"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 28
+teaches:
+  - "Architektura Azure Container Apps - plany, środowiska i zarządzanie nimi"
+  - "Wdrażanie i skalowanie aplikacji kontenerowych w Azure"
+  - "Konfiguracja sieci - firewalle, Internal vs External, DNS, UDR, połączenie z siecią firmową"
+  - "Zarządzanie logami, monitorowaniem i zapewnienie niezawodności"
+  - "Bezpieczeństwo - sekrety, zmienne środowiskowe, tożsamość, komunikacja między usługami"
+  - "Infrastructure as Code - automatyzacja stawiania środowisk"
+  - "Billing, limity zasobów i optymalizacja kosztów"
+  - "Wystawienie aplikacji na świat - Ingress, Azure Front Door"
+audience: "Developerzy i inżynierowie DevOps wdrażający aplikacje kontenerowe w Azure, którzy szukają alternatywy dla AKS lub App Service"
+
 # Treść
 description:
   - "Zanurz się w konteneryzację z Azure! Łukasz pokaże Ci, jak zarządzać, optymalizować i zabezpieczać kontenery z wykorzystaniem Azure Container Apps."

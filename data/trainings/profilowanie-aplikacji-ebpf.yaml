@@ -14,6 +14,23 @@ tags:
   - "#DevOps"
   - "#SRE"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 24
+teaches:
+  - "Fundamenty eBPF i jego zastosowania w obserwowalności systemów"
+  - "Różnice między samplingiem a tracingiem w profilowaniu aplikacji"
+  - "Czytanie i interpretacja flamegraphów jako narzędzia analizy problemów wydajnościowych"
+  - "Profilowanie aplikacji z Pixie w Kubernetes - analiza RPC/HTTP latency w czasie rzeczywistym"
+  - "Continuous profiling z Pyroscope i Grafana Phlare - profilowanie w czasie"
+  - "Parca - open-source system profilowania z pprof i integracja z Prometheusem"
+  - "Profilowanie ad-hoc z kube-flame - jednorazowe profilowanie podów"
+  - "Praktyczna diagnoza problemów z CPU, wysoką latencją i goroutine leakiem"
+audience: "Inżynierowie DevOps, SRE i platform engineering zajmujący się profilowaniem aplikacji w Kubernetes, którzy chcą opanować zaawansowane techniki diagnostyki wydajności"
+
 # Treść
 description:
   - "Czyli jak nie robić flamegraphów po pożarze. Dla DevOpsów, SRE, inżynierów platformowych i wszystkich tych, którym przestało wystarczać 'coś laguje, ale nie wiadomo co'. Jeśli w Kubernetesie masz więcej kontenerów niż pomysłów na debugowanie, a top pokazuje tylko, że 'coś mieli', to to szkolenie jest dla Ciebie."

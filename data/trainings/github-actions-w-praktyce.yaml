@@ -11,6 +11,23 @@ tags:
   - "#Automation"
   - "#DevOps"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 24
+teaches:
+  - "Architektura i zasady działania GitHub Actions oraz struktura workflow"
+  - "Zarządzanie sekretami, uprawnieniami i zmiennymi środowiskowymi"
+  - "Optymalizacja pipeline'ów z użyciem matrix strategies, artefaktów i cache"
+  - "Tworzenie własnych akcji w JavaScript, Docker i Composite"
+  - "Zarządzanie tokenami i dostępami (Classic, Fine-grained, GITHUB_TOKEN)"
+  - "Tworzenie reużywalnych workflow i template workflows"
+  - "Integracja z Microsoft Azure używając OpenID Connect"
+  - "GitHub Advanced Security - Code Scanning, Secret Scanning, Dependabot"
+audience: "Developerzy i inżynierowie DevOps pragnący automatyzować procesy CI/CD bezpośrednio w GitHub i tworzyć zaawansowane pipeline'y deployment"
+
 # Treść
 description:
   - "Intensywne, dwudniowe szkolenie w formie praktycznego warsztatu (90% praktyki). Poznasz nie tylko podstawy, ale również zaawansowane techniki budowania pipeline'ów, zarządzania sekretami, tworzenia własnych akcji i wdrażania wielośrodowiskowych konfiguracji. Szkolenie skupia się na realnych przypadkach użycia GitHub Actions, z którymi spotkasz się w codziennej pracy deweloperskiej."

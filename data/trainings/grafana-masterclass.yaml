@@ -13,6 +13,23 @@ tags:
   - "#SRE"
   - "#Dashboards"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 27
+teaches:
+  - "Tworzenie i organizowanie zaawansowanych dashboardów z różnymi typami paneli i zmiennymi"
+  - "Adnotacje (annotations) do analizy zdarzeń i Library panels do współdzielenia paneli"
+  - "Eksploracja danych w trybie Explore - metryki, logi, traces, debugowanie"
+  - "Automatyczne generowanie i wysyłanie raportów PDF (Reporting)"
+  - "Provisioning dashboardów i źródeł danych jako kod z synchronizacją przez Git (Observability as Code)"
+  - "Tworzenie dynamicznych dashboardów dostosowanych do kontekstu i użytkownika"
+  - "Zaawansowane operacje na danych z SQL Expressions i Transformations"
+  - "Przegląd pluginów i integracji z popularnymi źródłami danych"
+audience: "Inżynierowie DevOps, SRE i administratorzy systemów pracujący z Grafaną, którzy chcą opanować zaawansowane funkcje i automatyzację"
+
 # Treść
 description:
   - "Jednodniowe szkolenie, które pozwoli Ci opanować wszystkie kluczowe funkcje Grafany — od budowy dashboardów, przez eksplorację metryk i logów, automatyczne raportowanie, po provisioning i dynamiczne dashboardy."

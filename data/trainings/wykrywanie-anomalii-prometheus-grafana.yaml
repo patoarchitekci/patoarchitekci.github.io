@@ -14,6 +14,23 @@ tags:
   - "#DevOps"
   - "#SRE"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 20
+teaches:
+  - "Fundamenty detekcji anomalii w systemach monitorowania"
+  - "Linie bazowe (Baselines) - ustalanie normalnego stanu systemu i wykrywanie odstępstw"
+  - "Prognozy (Forecasting) - przewidywanie przyszłych wartości metryk i proaktywne wykrywanie"
+  - "Outlier Detection - wykrywanie wartości odstających w systemie"
+  - "Changepoint Detection - identyfikacja momentów zmiany zachowania systemu"
+  - "Metody statystyczne - Z-score i IQR (Inter-Quartile Range)"
+  - "Inteligentne ustawianie progów alarmowych (Thresholds)"
+  - "Implementacja technik detekcji anomalii w Prometheus i Grafana"
+audience: "Inżynierowie DevOps i SRE zajmujący się zaawansowanym monitoringiem, którzy chcą proaktywnie wykrywać problemy zamiast tylko reagować na alarmy"
+
 # Treść
 description:
   - "Kiedy infrastruktura zaczyna szaleć, musisz mieć narzędzie, które wyłapie każdy niuans. Chcesz w końcu zrozumieć, jak działa detekcja anomalii? Oto szkolenie, które wystrzeli Cię w świat monitorowania systemów na poziomie, o jakim nawet nie śniłeś!"

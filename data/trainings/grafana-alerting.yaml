@@ -13,6 +13,23 @@ tags:
   - "#DevOps"
   - "#SRE"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 21
+teaches:
+  - "Fundamenty skutecznego alertingu - kiedy i dlaczego alertować"
+  - "Budowanie alertów - wybór metryk, progi wyzwalające, jasne komunikaty"
+  - "Unikanie alert fatigue - optymalizacja powiadomień i poziomy krytyczności"
+  - "Konfiguracja alertów w Grafana Alerting z zapytaniami i warunkami progowymi"
+  - "Zarządzanie powiadomieniami - polityki, grupy alertów, silencing, okna serwisowe"
+  - "Ustawianie punktów kontaktowych - Slack, e-mail, webhooki"
+  - "Porównanie Grafana Alerting vs. Alertmanager Prometheusa"
+  - "Integracja Grafany z Alertmanagerem - najlepsze z obu światów"
+audience: "Inżynierowie DevOps i SRE odpowiedzialni za monitoring i zarządzanie incydentami, którzy chcą budować skuteczny system powiadomień"
+
 # Treść
 description:
   - "Czy wiesz, że twoje systemy mogą samodzielnie informować cię o problemach, zanim staną się katastrofą? Tak, dobrze widzisz! Twój monitoring może nie tylko pokazać, że coś się dzieje, ale również odpowiednio zareagować, zanim cała infrastruktura pójdzie w pizdu."

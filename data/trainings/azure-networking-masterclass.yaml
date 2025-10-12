@@ -11,6 +11,24 @@ tags:
   - "#Cloud"
   - "#Infrastructure"
 
+# SEO i Schema.org
+image: ""
+educational_level: "Intermediate"
+rating:
+  value: 4.9
+  count: 26
+teaches:
+  - "Virtual Networks (VNet), subnety i zarządzanie adresowaniem IP"
+  - "Network Security Groups (NSG) i konfiguracja zasad ruchu"
+  - "Azure Firewall - konfiguracja i zarządzanie regułami zapory"
+  - "Load Balancing - Load Balancer i Application Gateway"
+  - "Virtual Network Peering i zarządzanie połączeniami między sieciami"
+  - "ExpressRoute i VPN Gateway - konfiguracja połączeń hybrydowych"
+  - "DNS w Azure - Private DNS vs Public DNS"
+  - "Network Watcher - monitorowanie i diagnostyka sieci"
+  - "Azure Virtual Network Manager, routing BGP, Private Endpoints, Azure IPAM"
+audience: "Administratorzy, inżynierowie DevOps i architekci rozwiązań chmurowych pracujący z Azure, którzy chcą opanować konfigurację i zarządzanie siecią w chmurze"
+
 # Treść
 description:
   - "Zdobądź głębokie zrozumienie sieci w Azure. Od teorii do praktycznych zastosowań – wszystko, co musisz wiedzieć, by skutecznie zarządzać siecią."
