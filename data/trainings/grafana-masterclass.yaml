@@ -1,0 +1,113 @@
+id: "grafana-masterclass"
+title: "Grafana Masterclass – pełny przegląd i praktyka"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#Grafana"
+  - "#Monitoring"
+  - "#Observability"
+  - "#DevOps"
+  - "#SRE"
+  - "#Dashboards"
+
+# Treść
+description:
+  - "Jednodniowe szkolenie, które pozwoli Ci opanować wszystkie kluczowe funkcje Grafany — od budowy dashboardów, przez eksplorację metryk i logów, automatyczne raportowanie, po provisioning i dynamiczne dashboardy."
+  - "Szkolenie jest skonstruowane wokół praktycznych warsztatów i gotowych przykładów. Od razu wdrażasz wiedzę w działające dashboardy i automaty. Nie tracisz czasu na teorię – stawiamy na konkrety i efektywność."
+  - "Szymon przeprowadzi Cię przez wszystkie zaawansowane funkcje Grafany, które pozwolą Ci w pełni wykorzystać potencjał tego narzędzia w Twoich projektach observability."
+
+skills:
+  - "Tworzenie i organizowanie dashboardów z różnymi typami paneli i zmiennymi"
+  - "Praktyczne zastosowanie adnotacji (annotations) do analizy zdarzeń"
+  - "Współdzielenie i ponowne wykorzystanie paneli dzięki Library panels"
+  - "Eksploracja danych w trybie Explore: metryki, logi, traces, debugowanie"
+  - "Automatyczne generowanie i wysyłanie raportów PDF"
+  - "Provisioning dashboardów i źródeł danych jako kod z synchronizacją przez Git"
+  - "Tworzenie dynamicznych dashboardów dostosowanych do kontekstu i użytkownika"
+  - "Zaawansowane operacje na danych z użyciem SQL Expressions i Transformations"
+  - "Przegląd dostępnych pluginów i integracji z popularnymi źródłami danych"
+
+modules:
+  - number: 1
+    title: "Wprowadzenie i omówienie środowiska"
+    description: "Cele i zakres szkolenia, przegląd funkcjonalności Grafany"
+  - number: 2
+    title: "Dashboardy, panele, zmienne i adnotacje"
+    description: "Praktyczne przykłady tworzenia dashboardów z różnymi typami wizualizacji"
+  - number: 3
+    title: "Library panels"
+    description: "Jak efektywnie zarządzać i współdzielić panele między dashboardami"
+  - number: 4
+    title: "Eksploracja danych w trybie Explore"
+    description: "Metryki i logi w praktyce - szybkie debugowanie i analiza"
+  - number: 5
+    title: "Reporting"
+    description: "Konfiguracja i automatyzacja generowania raportów PDF"
+  - number: 6
+    title: "Observability as Code"
+    description: "Provisioning dashboardów i datasource'ów - infrastruktura jako kod"
+  - number: 7
+    title: "Dynamiczne dashboardy"
+    description: "Warunki wyświetlania, zakładki, personalizacja dla użytkowników"
+  - number: 8
+    title: "SQL Expressions i Transformations"
+    description: "Łączenie i przetwarzanie danych z różnych źródeł"
+  - number: 9
+    title: "Pluginy, integracje i podsumowanie"
+    description: "Przegląd dostępnych pluginów, popularne integracje, Q&A"
+
+benefits:
+  - title: "Praktyczne warsztaty"
+    description: "Od razu wdrażasz wiedzę w działające dashboardy i automaty"
+  - title: "Observability as Code"
+    description: "Provisioning przez Git - zarządzaj dashboardami jak kodem"
+  - title: "Automatyzacja raportowania"
+    description: "Generowanie i wysyłanie raportów PDF bez pracy manualnej"
+  - title: "Dynamiczne dashboardy"
+    description: "Twórz dashboardy dostosowane do kontekstu i użytkownika"
+  - title: "Gotowe przykłady"
+    description: "Repozytorium z dashboardami, provisioningiem i cheat sheetami"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2025-10-10"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Intensywny jednodniowy warsztat z praktycznymi przykładami"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Grafany (umiejętność tworzenia prostych dashboardów)"
+  - "Doświadczenie z systemami monitorowania"
+  - "Podstawowa znajomość PromQL lub LogQL (mile widziana)"
+
+# FAQ
+faq:
+  - question: "Czy muszę znać Grafanę wcześniej?"
+    answer: "Tak, wymagana jest podstawowa znajomość Grafany. Jeśli umiesz stworzyć prosty dashboard, jesteś gotowy na zaawansowane techniki."
+  - question: "Czy omówimy provisioning dashboardów?"
+    answer: "Tak, szczegółowo omówimy Observability as Code - provisioning dashboardów i datasource'ów z synchronizacją przez Git."
+  - question: "Czy nauczę się automatyzować generowanie raportów?"
+    answer: "Tak, pokażemy jak automatycznie generować i wysyłać raporty PDF bez zbędnej pracy manualnej."
+  - question: "Czy otrzymam materiały po szkoleniu?"
+    answer: "Tak, dostaniesz repozytorium z dashboardami, provisioningiem, przykładami oraz cheat sheet z kluczowymi funkcjami."
+  - question: "Co to są dynamiczne dashboardy?"
+    answer: "To dashboardy, które dostosowują się do kontekstu i użytkownika - warunki wyświetlania, zakładki, personalizacja na podstawie ról czy parametrów."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

@@ -1,0 +1,114 @@
+id: "wykrywanie-anomalii-prometheus-grafana"
+title: "Wykrywanie Anomalii jak Prawdziwy Architekt! - Warsztaty z Prometheus i Grafana"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#Prometheus"
+  - "#Grafana"
+  - "#Anomaly Detection"
+  - "#Monitoring"
+  - "#Observability"
+  - "#DevOps"
+  - "#SRE"
+
+# Treść
+description:
+  - "Kiedy infrastruktura zaczyna szaleć, musisz mieć narzędzie, które wyłapie każdy niuans. Chcesz w końcu zrozumieć, jak działa detekcja anomalii? Oto szkolenie, które wystrzeli Cię w świat monitorowania systemów na poziomie, o jakim nawet nie śniłeś!"
+  - "Grafana i Prometheus to platformy, które każdy administrator zna. Będziemy pracować z nimi na pełnych obrotach! Zajmij się detekcją outlierów, prognozami, wykrywaniem changepointów i innymi technikami, które naprawdę robią różnicę."
+  - "Po co uczyć się teorii, jak możesz od razu wdrożyć te techniki do rzeczywistych scenariuszy? Podczas warsztatów weźmiesz swoje metryki i zastosujesz do nich algorytmy wykrywania anomalii. Prosto, szybko i z wielką siłą!"
+
+skills:
+  - "Wstęp do detekcji anomalii w systemach monitorowania"
+  - "Linie bazowe (Baselines) - fundamenty wykrywania odstępstw"
+  - "Prognozy (Forecasting) - przewidywanie przyszłych wartości metryk"
+  - "Outlier Detection - wykrywanie wartości odstających"
+  - "Changepoint Detection - identyfikacja momentów zmian w systemie"
+  - "Z-score & IQR - statystyczne metody wykrywania anomalii"
+  - "Thresholds - inteligentne ustawianie progów alarmowych"
+  - "Praktyczne warsztaty z rzeczywistymi metrykami"
+  - "Implementacja technik detekcji w Prometheus i Grafana"
+
+modules:
+  - number: 1
+    title: "Wstęp do detekcji anomalii"
+    description: "Czym są anomalie? Dlaczego ich wykrywanie jest kluczowe dla stabilności systemów?"
+  - number: 2
+    title: "Linie bazowe (Baselines)"
+    description: "Jak ustalić normalny stan systemu i wykrywać odstępstwa od normy"
+  - number: 3
+    title: "Prognozy (Forecasting)"
+    description: "Przewidywanie przyszłych wartości metryk i proaktywne wykrywanie problemów"
+  - number: 4
+    title: "Outlier Detection"
+    description: "Wykrywanie wartości odstających - kiedy system wymyka się spod kontroli"
+  - number: 5
+    title: "Changepoint Detection"
+    description: "Identyfikacja momentów, w których zachowanie systemu się zmienia"
+  - number: 6
+    title: "Z-score & IQR"
+    description: "Statystyczne metody wykrywania anomalii - matematyka, która działa"
+  - number: 7
+    title: "Thresholds"
+    description: "Ustawianie progów alarmowych, które naprawdę mają sens"
+  - number: 8
+    title: "Praktyczne warsztaty - część 1"
+    description: "Implementacja technik detekcji anomalii na rzeczywistych metrykach"
+  - number: 9
+    title: "Praktyczne warsztaty - część 2"
+    description: "Zaawansowane scenariusze i optymalizacja wykrywania anomalii"
+
+benefits:
+  - title: "Proaktywne monitorowanie"
+    description: "Wykrywaj problemy zanim się wydarzą - przestań tylko reagować na alarmy"
+  - title: "Praktyczne umiejętności"
+    description: "90% warsztatów to praktyka z rzeczywistymi metrykami i scenariuszami"
+  - title: "Statystyka w akcji"
+    description: "Naucz się wykorzystywać Z-score, IQR i inne metody statystyczne w monitoringu"
+  - title: "Inteligentne progi"
+    description: "Zamiast zgadywać, oblicz optymalne progi alarmowe dla swojego systemu"
+  - title: "Pełna kontrola"
+    description: "Zdobędziesz umiejętność dopasowywania metod detekcji do konkretnych problemów"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2025-10-10"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Intensywny jednodniowy warsztat (90% praktyki)"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Prometheusa (konfiguracja metryk i zapytań)"
+  - "Podstawowa znajomość Grafany"
+  - "Doświadczenie z systemami monitorowania"
+
+# FAQ
+faq:
+  - question: "Czy muszę znać Prometheus wcześniej?"
+    answer: "Tak, wymagana jest podstawowa znajomość Prometheusa - powinieneś umieć skonfigurować metryki i zapytania. Jeśli znasz podstawy, jesteś gotowy na zaawansowane techniki."
+  - question: "Czy to szkolenie wymaga wiedzy matematycznej?"
+    answer: "Omówimy podstawy statystyki (Z-score, IQR), ale w sposób praktyczny. Nie musisz być matematykiem - pokażemy jak te metody działają w praktyce."
+  - question: "Czy będziemy pracować na rzeczywistych metrykach?"
+    answer: "Tak! 90% szkolenia to praktyczne warsztaty z rzeczywistymi scenariuszami i metrykami."
+  - question: "Czym różni się to szkolenie od standardowego monitoringu?"
+    answer: "Zamiast tylko reagować na przekroczone progi, nauczysz się przewidywać problemy i wykrywać nietypowe zachowania systemu automatycznie."
+  - question: "Czy nauczę się tworzyć prognozy w Grafanie?"
+    answer: "Tak, poznasz techniki forecasting i dowiesz się jak implementować je w Prometheus i Grafana."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

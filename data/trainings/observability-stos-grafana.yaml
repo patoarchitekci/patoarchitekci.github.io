@@ -1,0 +1,115 @@
+id: "observability-stos-grafana"
+title: "Observability ze stosem Grafana"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#Observability"
+  - "#Grafana"
+  - "#Prometheus"
+  - "#Tempo"
+  - "#Loki"
+  - "#OpenTelemetry"
+  - "#Monitoring"
+  - "#DevOps"
+  - "#SRE"
+
+# Treść
+description:
+  - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodów. Jednak czy muszą być? To zależy."
+  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez zagrożenia bankructwa i bólu głowy z utrzymaniem. A o tego taki który ma szerokie użycie. Na szkoleniu omówimy czym jest observability i jak się w to wpisuje Open Telemetry. I to byłby koniec mojego mówienia, bo potem to już zaczynają się konkretne warsztaty."
+  - "Jak zwykle - nie dla mięczaków :) A jakbyście po tym czuli głód dalszej wiedzy, to zapraszamy na inne szkolenia z monitoringu i observability: [Grafana Masterclass](/szkolenia/grafana-masterclass/), [Alerting w Grafanie](/szkolenia/grafana-alerting/), [Wykrywanie Anomalii](/szkolenia/wykrywanie-anomalii-prometheus-grafana/), [Profilowanie aplikacji z eBPF](/szkolenia/profilowanie-aplikacji-ebpf/)."
+
+skills:
+  - "Monitorowanie vs observability - kluczowe różnice"
+  - "Czym jest i dla kogo jest Open Telemetry?"
+  - "Prometheus - metryki: architektura, składnia, wdrożenia, dobre praktyki"
+  - "Tempo - tracing: jak działa, architektura, składnia, integracja"
+  - "Loki - logi: architektura, korelacje z tracingiem, dobre praktyki"
+  - "Integracja całego stosu LGTM (Loki, Grafana, Tempo, Mimir/Prometheus)"
+  - "Open Telemetry w praktyce - instrumentacja aplikacji"
+  - "Cost optimization - jak monitorować bez rujnowania budżetu"
+
+modules:
+  - number: 1
+    title: "Monitorowanie vs observability"
+    description: "Czym się różnią te pojęcia i dlaczego to ważne dla Twojej infrastruktury"
+  - number: 2
+    title: "Czym jest i dla kogo jest Open Telemetry?"
+    description: "Standard, który zmienia sposób instrumentacji aplikacji"
+  - number: 3
+    title: "Prometheus - metryki"
+    description: "Architektura i wynikające z tego ograniczenia, składnia PromQL, wdrożenia, dobre praktyki"
+  - number: 4
+    title: "Tempo - tracing"
+    description: "Jak działa distributed tracing, architektura, składnia, wdrożenia, integracja z innymi usługami"
+  - number: 5
+    title: "Loki - logi"
+    description: "Architektura, składnia LogQL, korelacje z tracingiem, wdrożenia, dobre praktyki"
+  - number: 6
+    title: "Integracja całego stosu"
+    description: "Jak połączyć Loki, Grafana, Tempo i Prometheus w jeden spójny system observability"
+  - number: 7
+    title: "Open Telemetry w praktyce"
+    description: "Instrumentacja aplikacji, eksport danych do stosu Grafana"
+  - number: 8
+    title: "Cost optimization"
+    description: "Jak monitorować efektywnie bez rujnowania budżetu IT"
+  - number: 9
+    title: "Praktyczne warsztaty"
+    description: "Budowa kompletnego systemu observability od podstaw"
+
+benefits:
+  - title: "Open Source bez kompromisów"
+    description: "Potężny system monitorowania bez kosztów licencyjnych wielkich graczy"
+  - title: "Pełny stos LGTM"
+    description: "Loki, Grafana, Tempo, Prometheus - kompleksowe rozwiązanie observability"
+  - title: "Open Telemetry"
+    description: "Standardowa instrumentacja, która działa z każdym backendem"
+  - title: "Cost optimization"
+    description: "Skuteczne monitorowanie bez bankructwa - praktyczne techniki oszczędzania"
+  - title: "Praktyczne warsztaty"
+    description: "90% czasu to konkretne ćwiczenia - nie dla mięczaków"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2025-10-11"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Intensywny jednodniowy warsztat z praktycznymi ćwiczeniami"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość systemów rozproszonych"
+  - "Doświadczenie z konteneryzacją i Kubernetes (mile widziane)"
+  - "Podstawowa znajomość monitoringu"
+
+# FAQ
+faq:
+  - question: "Czy muszę znać Grafanę wcześniej?"
+    answer: "Podstawowa znajomość Grafany będzie pomocna, ale nie jest wymagana. Skupiamy się na całym stosie observability."
+  - question: "Czy omówimy tylko Open Source narzędzia?"
+    answer: "Tak, skupiamy się na stosie Grafana Labs (Loki, Grafana, Tempo, Prometheus/Mimir) jako alternatywę dla drogich rozwiązań komercyjnych."
+  - question: "Czy nauczę się instrumentować aplikacje z Open Telemetry?"
+    answer: "Tak, pokażemy praktyczne zastosowanie Open Telemetry do instrumentacji aplikacji i eksportu danych."
+  - question: "Czy to szkolenie pokrywa koszty monitoringu?"
+    answer: "Tak, omówimy cost optimization - jak skutecznie monitorować bez rujnowania budżetu IT."
+  - question: "Jakie narzędzia będą zainstalowane w środowisku warsztatowym?"
+    answer: "Pełny stos LGTM: Loki (logi), Grafana (wizualizacja), Tempo (tracing), Prometheus/Mimir (metryki) plus Open Telemetry Collector."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

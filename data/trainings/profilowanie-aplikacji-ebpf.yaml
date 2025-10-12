@@ -1,0 +1,119 @@
+id: "profilowanie-aplikacji-ebpf"
+title: "Profilowanie aplikacji z użyciem eBPF"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#eBPF"
+  - "#Profiling"
+  - "#Kubernetes"
+  - "#Performance"
+  - "#Observability"
+  - "#DevOps"
+  - "#SRE"
+
+# Treść
+description:
+  - "Czyli jak nie robić flamegraphów po pożarze. Dla DevOpsów, SRE, inżynierów platformowych i wszystkich tych, którym przestało wystarczać 'coś laguje, ale nie wiadomo co'. Jeśli w Kubernetesie masz więcej kontenerów niż pomysłów na debugowanie, a top pokazuje tylko, że 'coś mieli', to to szkolenie jest dla Ciebie."
+  - "Pracujemy w gotowym środowisku, bez walki z Helm chartami. Profilujemy aplikacje w K8s jak dorośli ludzie – bez restartów, bez guessowania. Używamy Pixie do ogarniania tego, co się dzieje tu i teraz. Używamy Pyroscope i Parca do grzebania w tym, co działo się godzinę temu."
+  - "Przestań zgadywać, co laguje. Zacznij to widzieć. Profiluj z głową. I z eBPF."
+
+skills:
+  - "Czym jest eBPF i jakie ma zastosowania w obserwowalności"
+  - "Różnice między samplingiem a tracingiem"
+  - "Flamegraphy jako narzędzie analizy problemów wydajnościowych"
+  - "Profilowanie aplikacji z wykorzystaniem Pixie w Kubernetes"
+  - "Praca z flamegraphami i analizą RPC/HTTP latency"
+  - "Continuous profiling z Pyroscope i Grafana Phlare"
+  - "Parca - open-source system profilowania z pprof"
+  - "Profilowanie ad-hoc z kube-flame"
+  - "Analiza problemów z CPU, wysoką latencją i goroutine leakiem"
+  - "Wybór odpowiedniego narzędzia do danego typu problemu"
+
+modules:
+  - number: 1
+    title: "Wprowadzenie do eBPF i profilowania aplikacji"
+    description: "Czym jest eBPF, jakie ma zastosowania w obserwowalności, różnice między samplingiem a tracingiem"
+  - number: 2
+    title: "Flamegraphy"
+    description: "Jak zrozumieć flamegraphy jako narzędzie analizy problemów wydajnościowych"
+  - number: 3
+    title: "Pixie – obserwowalność w czasie rzeczywistym"
+    description: "Profilowanie aplikacji z Pixie w Kubernetes, praca z flamegraphami i analizą RPC/HTTP latency"
+  - number: 4
+    title: "Skrypty PxL"
+    description: "Pisanie i uruchamianie własnych skryptów PxL do customowej analizy"
+  - number: 5
+    title: "Profilowanie ciągłe z Pyroscope i Grafana Phlare"
+    description: "Architektura i sposób działania continuous profilingu, praca z danymi CPU w czasie"
+  - number: 6
+    title: "Parca – open-source profilowanie"
+    description: "Koncepcja działania, integracja z Prometheusem, analiza i porównywanie profili"
+  - number: 7
+    title: "Profilowanie ad-hoc z kube-flame"
+    description: "Jednorazowe, punktowe profilowanie poda, generowanie flamegraphów"
+  - number: 8
+    title: "Praca na rzeczywistych scenariuszach - część 1"
+    description: "Analiza problemów z CPU, wysoką latencją lub goroutine leakiem"
+  - number: 9
+    title: "Praca na rzeczywistych scenariuszach - część 2"
+    description: "Wybór odpowiedniego narzędzia do danego typu problemu, praktyczna diagnoza"
+  - number: 10
+    title: "Podsumowanie i rekomendacje"
+    description: "Porównanie narzędzi, rekomendacje wdrożeniowe, implementacja continuous profilingu w organizacji"
+
+benefits:
+  - title: "Gotowe środowisko"
+    description: "Pracujemy na gotowym klastrze K8s z zainstalowanymi narzędziami - zero walki z konfiguracją"
+  - title: "Prawdziwe scenariusze"
+    description: "Symulujemy problemy 'produkcja się sypie' i diagnozujemy je jak profesjonaliści"
+  - title: "Czytanie flamegraphów"
+    description: "Umiejętność czytania i interpretacji flamegraphów i wykresów CPU"
+  - title: "Wybór narzędzi"
+    description: "Świadomość, kiedy użyć Pixie, Parca, Pyroscope lub kube-flame"
+  - title: "Praktyczne skille"
+    description: "Gotowe scenariusze i skrypty do zastosowania w Twoim środowisku"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2025-10-10"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Intensywny jednodniowy warsztat z gotowym środowiskiem K8s"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Kubernetes"
+  - "Doświadczenie z aplikacjami w środowisku K8s"
+  - "Znajomość podstaw monitoringu i observability"
+  - "Nie musisz umieć pisać w C ani mieć doktoratu z kernel-space"
+
+# FAQ
+faq:
+  - question: "Czy muszę znać eBPF wcześniej?"
+    answer: "Nie! Wystarczy, że wiesz, że 'flamegraph' to nie nazwa zespołu metalowego. Wszystkiego nauczymy od podstaw."
+  - question: "Czy muszę znać C lub niski poziom programowania?"
+    answer: "Absolutnie nie. Nie musisz pisać eBPF samodzielnie - używamy gotowych narzędzi jak Pixie, Pyroscope, Parca."
+  - question: "Na czym będziemy pracować?"
+    answer: "Na gotowym klastrze K8s z aplikacjami demo, Pixie, Pyroscope, Parca i kube-flame. Zero walki z konfiguracją - cały dzień spędzasz z flamegraphami."
+  - question: "Czy to szkolenie wymaga zaawansowanej znajomości Kubernetes?"
+    answer: "Potrzebna jest podstawowa znajomość K8s. Jeśli umiesz uruchomić pod i sprawdzić logi, wystarczy."
+  - question: "Co to jest continuous profiling?"
+    answer: "To ciągłe zbieranie profili wydajnościowych aplikacji, które pozwala analizować problemy z przeszłości. Pyroscope i Parca to narzędzia do tego typu profilowania."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"

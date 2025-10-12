@@ -35,7 +35,9 @@
               <div>
                 <div class="w-full max-w-[775px] flex flex-col gap-[15px] md:gap-6 lg:mt-5">
                   {{ range $training.description }}
-                  <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white font-normal !leading-110">{{ . }}</p>
+                  {{- $content := . | markdownify -}}
+                  {{- $content = replace $content "<a href=" `<a class="text-orange hover:text-orange-500 transition-all duration-300 hover:underline" href=` -}}
+                  <p class="text-sm sm:text-base md:text-lg lg:text-xl text-white font-normal !leading-110">{{ $content | safeHTML }}</p>
                   {{ end }}
                 </div>
                 {{ if $training.purchase_url }}

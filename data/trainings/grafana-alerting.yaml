@@ -1,0 +1,113 @@
+id: "grafana-alerting"
+title: "Alerting w Grafanie - Sztuka Powiadamiania i Reagowania na Incydenty"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Szymon Warda"
+tags:
+  - "#Grafana"
+  - "#Alerting"
+  - "#Monitoring"
+  - "#Observability"
+  - "#DevOps"
+  - "#SRE"
+
+# Treść
+description:
+  - "Czy wiesz, że twoje systemy mogą samodzielnie informować cię o problemach, zanim staną się katastrofą? Tak, dobrze widzisz! Twój monitoring może nie tylko pokazać, że coś się dzieje, ale również odpowiednio zareagować, zanim cała infrastruktura pójdzie w pizdu."
+  - "Zapomnij o nudnych alertach, które nigdy nie trafiają w punkt. Na tym szkoleniu pokażemy Ci, jak konstruować perfekcyjne reguły alertów, jak zarządzać powiadomieniami, i jak rozwiązywać problemy w czasie rzeczywistym z pomocą Grafana i Alertmanagera."
+  - "Szymon poprowadzi Cię przez praktyczne podejście do alertingu – od podstaw, przez zaawansowane techniki, aż po integrację Grafana Alerting z Alertmanagerem Prometheusa. Dowiesz się, jak unikać alert fatigue i budować system powiadomień, który naprawdę działa."
+
+skills:
+  - "Wstęp do alertingu - po co są alerty i jakie problemy rozwiązują"
+  - "Budowanie alertów - wybór metryk, progi wyzwalające, jasne komunikaty"
+  - "Najlepsze praktyki w alertingu - unikanie alert fatigue"
+  - "Grafana Alerting - konfiguracja alertów, zapytania, warunki progowe"
+  - "Zarządzanie powiadomieniami - polityki, grupy, silencing, okna serwisowe"
+  - "Punkty kontaktowe - Slack, e-mail, webhooki"
+  - "Porównanie Grafana Alerting vs. Alertmanager"
+  - "Integracja Grafany z Alertmanagerem Prometheusa"
+  - "Praktyczne ćwiczenia - tworzenie, testowanie i konfiguracja alertów"
+
+modules:
+  - number: 1
+    title: "Wstęp do alertingu"
+    description: "Po co są alerty? Jakie problemy rozwiązuje skuteczny alerting? Kiedy i dlaczego alertować, a kiedy nie?"
+  - number: 2
+    title: "Budowanie alertów"
+    description: "Wybór metryk i danych do alertów, ustalanie progów wyzwalających, tworzenie jasnych komunikatów"
+  - number: 3
+    title: "Najlepsze praktyki w alertingu"
+    description: "Jak unikać alert fatigue? Optymalizacja powiadomień, rozróżnianie poziomów krytyczności"
+  - number: 4
+    title: "Grafana Alerting"
+    description: "Konfiguracja alertów w Grafanie, praca z zapytaniami i warunkami progowymi"
+  - number: 5
+    title: "Zarządzanie powiadomieniami"
+    description: "Polityki powiadomień, grupy alertów, silencing alertów, harmonogramy wyciszeń i okna serwisowe"
+  - number: 6
+    title: "Punkty kontaktowe"
+    description: "Ustawianie punktów kontaktowych - Slack, e-mail, webhooki"
+  - number: 7
+    title: "Grafana Alerting vs. Alertmanager"
+    description: "Wady i zalety obu narzędzi, kiedy wybrać jedno, a kiedy drugie"
+  - number: 8
+    title: "Integracja z Alertmanagerem"
+    description: "Integracja Grafany z Alertmanagerem Prometheusa - najlepsze z obu światów"
+  - number: 9
+    title: "Praktyczne ćwiczenia"
+    description: "Tworzenie i testowanie alertów w Grafanie, konfiguracja powiadomień w różnych kanałach"
+
+benefits:
+  - title: "Perfekcyjne alerty"
+    description: "Będziesz tworzyć alerty, które są celne i dokładne, bez fałszywych alarmów"
+  - title: "Skuteczne powiadomienia"
+    description: "Skonfigurujesz powiadomienia, które trafiają do odpowiednich osób we właściwym czasie"
+  - title: "Kontrola nad systemami"
+    description: "Pełna kontrola nad infrastrukturą bez konieczności ciągłego monitorowania"
+  - title: "Zarządzanie incydentami"
+    description: "Skuteczne zarządzanie każdym incydentem, zanim stanie się kryzysem"
+  - title: "Praktyczne podejście"
+    description: "90% praktyki - tworzenie, testowanie i konfiguracja rzeczywistych alertów"
+
+# Organizacja
+price_net: 1462.60
+price_gross: 1799.00
+currency: "PLN"
+
+dates:
+  - "2025-10-10"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Intensywny jednodniowy warsztat (90% praktyki)"
+
+participants:
+  max: 15
+  availability_note: "Mała grupa dla lepszej interakcji"
+
+# Prerequisites
+prerequisites:
+  - "Podstawowa znajomość Grafany"
+  - "Doświadczenie z systemami monitorowania"
+  - "Znajomość podstaw Prometheus (mile widziana)"
+
+# FAQ
+faq:
+  - question: "Czy muszę znać Grafanę wcześniej?"
+    answer: "Tak, potrzebna jest podstawowa znajomość Grafany. Jeśli umiesz tworzyć dashboardy i zapytania, wystarczy."
+  - question: "Czy omówimy zarówno Grafana Alerting jak i Alertmanager?"
+    answer: "Tak, porównamy oba narzędzia i pokażemy jak je zintegrować, żeby wykorzystać najlepsze cechy każdego z nich."
+  - question: "Co to jest alert fatigue?"
+    answer: "To zjawisko zmęczenia alertami, gdy dostajesz tak wiele powiadomień, że przestajesz na nie reagować. Pokażemy jak tego unikać."
+  - question: "Czy będą praktyczne ćwiczenia?"
+    answer: "Tak, 90% szkolenia to praktyka - będziesz tworzyć, testować i konfigurować rzeczywiste alerty."
+  - question: "Czy nauczę się integrować Grafanę ze Slackiem?"
+    answer: "Tak, pokażemy jak skonfigurować różne punkty kontaktowe, w tym Slack, e-mail i webhooki."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"
