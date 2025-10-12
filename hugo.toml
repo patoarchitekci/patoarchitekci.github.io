@@ -3,6 +3,9 @@ languageCode = "pl-PL"
 title = "Patoarchitekci"
 enableGitInfo = true
 
+# Wyłącz generowanie stron taxonomy i term (nie mają layoutów)
+disableKinds = ["taxonomy", "term"]
+
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]
   lastmod = [":git", "lastmod", "date", "publishDate"]
@@ -113,13 +116,13 @@ enableGitInfo = true
     mediaType = "application/rss+xml"
     baseName = "newsletter"
     path = ""
-    
+
   [outputFormats.social-rss]
     name = "RSS"
     mediaType = "application/rss+xml"
     baseName = "social"
     path = ""
-    
+
   [outputFormats.debug-rss]
     name = "RSS"
     mediaType = "application/rss+xml"
