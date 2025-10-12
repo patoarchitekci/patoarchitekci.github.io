@@ -212,6 +212,27 @@ def clean_control_characters(text: str) -> str:
     cleaned = ''.join(char for char in text if ord(char) >= 32 or char in '\t\n\r')
     return cleaned
 
+def convert_duration_to_iso8601(duration_ms: int) -> str:
+    """Converts duration from milliseconds to ISO 8601 format (PT1H23M45S)."""
+    if not duration_ms or duration_ms <= 0:
+        return ""
+
+    total_seconds = int(duration_ms / 1000)
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+
+    # Build ISO 8601 duration string
+    duration_parts = ["PT"]
+    if hours > 0:
+        duration_parts.append(f"{hours}H")
+    if minutes > 0:
+        duration_parts.append(f"{minutes}M")
+    if seconds > 0 or (hours == 0 and minutes == 0):  # Always include seconds if it's the only component
+        duration_parts.append(f"{seconds}S")
+
+    return "".join(duration_parts)
+
 def render_markdown(context: dict) -> str | None:
     """Renders the Markdown content using the Jinja template file and context."""
     logger.info(f"Rendering Markdown template from '{TEMPLATE_FILENAME}'...")
@@ -298,13 +319,22 @@ def main():
     # Add links data directly to episode fields for template access
     episode_fields['links'] = links_data
     
-    # Create YouTube embed URL from youtube_id if available  
+    # Create YouTube embed URL from youtube_id if available
     youtube_id = episode_fields.get('youtube_id', '')
     if youtube_id:
         episode_fields['youtube_embed_url'] = f"https://www.youtube.com/embed/{youtube_id}?enablejsapi=1"
         logger.info(f"Created YouTube embed URL for ID: {youtube_id}")
     else:
         logger.warning("No youtube_id found in episode data")
+
+    # Convert duration from milliseconds to ISO 8601 format
+    duration_ms = episode_fields.get('duration_ms')
+    if duration_ms:
+        episode_fields['duration_iso'] = convert_duration_to_iso8601(duration_ms)
+        logger.info(f"Converted duration: {duration_ms}ms -> {episode_fields['duration_iso']}")
+    else:
+        episode_fields['duration_iso'] = ""
+        logger.warning("No duration_ms found in episode data")
     
     # Download and save images BEFORE rendering template (template needs the paths)
     if not args.no_images:

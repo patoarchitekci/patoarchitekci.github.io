@@ -1,0 +1,44 @@
+<!-- ItemList Schema for Episodes List Page -->
+{{ if and (eq .Section "episodes") (eq .Kind "section") }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "episodes") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Wszystkie odcinki Patoarchitektów",
+  "description": "Pełna lista odcinków podcastu Patoarchitekci - polski podcast o architekturze IT, DevOps i inżynierii platform",
+  "url": "{{ .Permalink }}",
+  "numberOfItems": {{ len $paginator.Pages }},
+  "itemListElement": [
+    {{- range $index, $episode := $paginator.Pages -}}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "url": "{{ $episode.Permalink }}",
+      "name": "{{ $episode.Title }}",
+      {{ if $episode.Params.og_landscape }}
+      "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $episode.Params.og_landscape }}",
+      {{ end }}
+      "item": {
+        "@type": "PodcastEpisode",
+        {{ if $episode.Params.episode }}
+        "episodeNumber": "{{ $episode.Params.episode }}",
+        {{ end }}
+        "name": "{{ $episode.Title }}",
+        "datePublished": "{{ $episode.Date.Format "2006-01-02T15:04:05Z07:00" }}",
+        "url": "{{ $episode.Permalink }}",
+        {{ if $episode.Params.og_landscape }}
+        "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $episode.Params.og_landscape }}",
+        {{ end }}
+        "partOfSeries": {
+          "@type": "PodcastSeries",
+          "name": "{{ $.Site.Title }}",
+          "url": "{{ $.Site.BaseURL }}"
+        }
+      }
+    }{{ if ne (add $index 1) (len $paginator.Pages) }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+{{ end }}

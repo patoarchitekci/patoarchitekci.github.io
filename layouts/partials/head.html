@@ -20,6 +20,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- ===== Social Media Meta Tags (for episodes) ===== -->
 {{ partial "social-meta.html" . }}
 
+<!-- ===== Schema.org for Homepage (PodcastSeries) ===== -->
+{{ partial "series-schema.html" . }}
+
+<!-- ===== Schema.org for Episodes List (ItemList) ===== -->
+{{ partial "episodes-list-schema.html" . }}
+
+<!-- ===== Schema.org for Trainings List (ItemList) ===== -->
+{{ partial "trainings-list-schema.html" . }}
+
+<!-- ===== Schema.org for Training Pages ===== -->
+{{ if eq .Type "training" }}
+{{ partial "training-schema.html" . }}
+{{ end }}
+
 <!-- ===== Open Graph / Facebook ===== -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ .Permalink }}" />

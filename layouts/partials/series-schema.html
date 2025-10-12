@@ -1,0 +1,33 @@
+<!-- PodcastSeries Schema for Homepage -->
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "{{ .Site.Title }}",
+  "description": "{{ .Site.Params.description }}",
+  "url": "{{ .Site.BaseURL }}",
+  "webFeed": "https://www.spreaker.com/show/4215515/episodes/feed",
+  "image": "{{ .Site.BaseURL }}metatag.png",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Łukasz Kałużny"
+    },
+    {
+      "@type": "Person",
+      "name": "Szymon Warda"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.BaseURL }}img/png/favicon.png"
+    }
+  },
+  "inLanguage": "pl-PL"
+}
+</script>
+{{ end }}

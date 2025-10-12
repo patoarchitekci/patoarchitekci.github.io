@@ -1,0 +1,102 @@
+{{- if and (eq .Type "training") (eq .Kind "page") -}}
+{{- $trainingId := index (split (trim .RelPermalink "/") "/") 1 -}}
+{{- $training := index .Site.Data.trainings $trainingId -}}
+{{- if $training -}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $isTrainingPast := false -}}
+{{- $availabilityStatus := "InStock" -}}
+{{- $availabilityStarts := "" -}}
+
+{{- if $training.dates -}}
+{{- $firstDate := index $training.dates 0 -}}
+{{- $isTrainingPast = le $firstDate $today -}}
+{{- if $isTrainingPast -}}
+{{- $parsedDate := time $firstDate -}}
+{{- $futureDate := $parsedDate.AddDate 0 6 0 -}}
+{{- $availabilityStatus = "PreOrder" -}}
+{{- $availabilityStarts = $futureDate.Format "2006-01-02" -}}
+{{- end -}}
+{{- else -}}
+{{- $availabilityStatus = "PreOrder" -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "{{ $training.title }}",
+  "description": "{{ .Description | default (index $training.description 0) }}",
+  "url": "{{ .Permalink }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "Patoarchitekci",
+    "url": "{{ .Site.BaseURL }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.BaseURL }}img/png/favicon.png"
+    }
+  },
+  {{- if $training.image -}}
+  "image": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}{{ $training.image }}",
+  {{- end -}}
+  {{- if $training.educational_level -}}
+  "educationalLevel": "{{ $training.educational_level }}",
+  {{- end -}}
+  {{- if $training.rating -}}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ $training.rating.value }}",
+    "reviewCount": "{{ $training.rating.count }}"
+  },
+  {{- end -}}
+  {{- if $training.teaches -}}
+  "teaches": [
+    {{- range $index, $skill := $training.teaches -}}
+    "{{ $skill }}"{{- if ne $index (sub (len $training.teaches) 1) -}}, {{- end -}}
+    {{- end -}}
+  ],
+  {{- end -}}
+  {{- if $training.audience -}}
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "{{ $training.audience }}"
+  },
+  {{- end -}}
+  "inLanguage": "pl-PL",
+  {{- if $training.instructor -}}
+  "instructor": {
+    "@type": "Person",
+    "name": "{{ $training.instructor }}"
+  },
+  {{- end -}}
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    {{- if eq $training.location.type "online" -}}
+    "courseWorkload": "{{ $training.time }}",
+    {{- end -}}
+    {{- if $training.dates -}}
+    "startDate": "{{ index $training.dates 0 }}",
+    {{- end -}}
+    {{- if $training.location -}}
+    "location": {
+      "@type": "VirtualLocation",
+      "url": "{{ .Permalink }}"
+    },
+    {{- end -}}
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ $training.price_gross }}",
+      "priceCurrency": "{{ $training.currency }}",
+      "availability": "https://schema.org/{{ $availabilityStatus }}",
+      {{- if $availabilityStarts -}}
+      "availabilityStarts": "{{ $availabilityStarts }}",
+      {{- end -}}
+      "url": "{{ .Permalink }}",
+      "validFrom": "{{ now.Format "2006-01-02" }}"
+    }
+  }
+}
+</script>
+{{- end -}}
+{{- end -}}

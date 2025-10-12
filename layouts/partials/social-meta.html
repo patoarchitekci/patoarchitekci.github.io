@@ -45,11 +45,13 @@
 {{ end }}
 
 <!-- JSON-LD structured data for Google -->
+{{ if .Params.episode }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "PodcastEpisode",
-  "headline": "{{ .Title }}",
+  "episodeNumber": "{{ .Params.episode }}",
+  "name": "{{ .Title }}",
   "description": "{{ .Params.description | default .Site.Params.description }}",
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   {{ if ne .Date .Lastmod }}
@@ -58,6 +60,36 @@
   "url": "{{ .Permalink }}",
   {{ if .Params.og_landscape }}
   "image": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}{{ .Params.og_landscape }}",
+  {{ end }}
+  {{ if .Params.duration }}
+  "duration": "{{ .Params.duration }}",
+  {{ end }}
+  {{ if .Params.tags }}
+  "keywords": "{{ delimit .Params.tags ", " }}",
+  {{ end }}
+  "partOfSeries": {
+    "@type": "PodcastSeries",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  {{ if or .Params.audio_url .Params.youtube_id }}
+  "associatedMedia": [
+    {{ if .Params.audio_url }}
+    {
+      "@type": "MediaObject",
+      "contentUrl": "{{ .Params.audio_url }}",
+      "encodingFormat": "audio/mpeg"
+    }{{ if .Params.youtube_id }},{{ end }}
+    {{ end }}
+    {{ if .Params.youtube_id }}
+    {
+      "@type": "VideoObject",
+      "contentUrl": "https://www.youtube.com/watch?v={{ .Params.youtube_id }}",
+      "encodingFormat": "video/mp4",
+      "uploadDate": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"
+    }
+    {{ end }}
+  ],
   {{ end }}
   "author": {
     "@type": "Organization",
@@ -73,3 +105,4 @@
   }
 }
 </script>
+{{ end }}

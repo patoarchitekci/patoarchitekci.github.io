@@ -1,0 +1,63 @@
+<!-- ItemList Schema for Trainings List Page -->
+{{ if and (eq .Type "training") (eq .Kind "section") }}
+{{ $sortedTrainings := partial "training-sorter.html" .Site.Data.trainings }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Szkolenia Patoarchitektów",
+  "description": "Szkolenia otwarte z zakresu architektury IT, DevOps, Kubernetes, observability i inżynierii platform. Praktyczne warsztaty prowadzone przez doświadczonych architektów.",
+  "url": "{{ .Permalink }}",
+  "numberOfItems": {{ len $sortedTrainings }},
+  "itemListElement": [
+    {{- range $index, $training := $sortedTrainings -}}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "url": "{{ $.Site.BaseURL }}szkolenia/{{ $training.id }}/",
+      "name": "{{ $training.title }}",
+      {{ if $training.image }}
+      "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $training.image }}",
+      {{ end }}
+      "item": {
+        "@type": "Course",
+        "name": "{{ $training.title }}",
+        "description": "{{ index $training.description 0 }}",
+        "url": "{{ $.Site.BaseURL }}szkolenia/{{ $training.id }}/",
+        "provider": {
+          "@type": "Organization",
+          "name": "Patoarchitekci",
+          "url": "{{ $.Site.BaseURL }}"
+        },
+        {{ if $training.image }}
+        "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $training.image }}",
+        {{ end }}
+        {{ if $training.instructor }}
+        "instructor": {
+          "@type": "Person",
+          "name": "{{ $training.instructor }}"
+        },
+        {{ end }}
+        "inLanguage": "pl-PL",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "online",
+          {{ if $training.dates }}
+          {{ $firstDate := index $training.dates 0 }}
+          "startDate": "{{ $firstDate }}",
+          {{ end }}
+          "offers": {
+            "@type": "Offer",
+            "price": "{{ $training.price_gross }}",
+            "priceCurrency": "{{ $training.currency }}",
+            "availability": "https://schema.org/InStock",
+            "url": "{{ $.Site.BaseURL }}szkolenia/{{ $training.id }}/"
+          }
+        }
+      }
+    }{{ if ne (add $index 1) (len $sortedTrainings) }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+{{ end }}

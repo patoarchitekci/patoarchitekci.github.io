@@ -10,6 +10,10 @@ seo_keywords: "{{ seo_keywords | default('', true) | escape }}"
 youtube_id: "{{ episode.youtube_id | default('', true) }}"
 youtube_url: "{{ episode.youtube_embed_url | default('', true) }}"
 
+# Spreaker data (technical only - for Schema.org, not user-facing)
+duration: "{{ episode.duration_iso }}"
+audio_url: "{{ episode.audio_url }}"
+
 # Social media images (poprawione nazwy)
 og_landscape: "{{ episode.og_landscape_path | default('/img/' + episode.episode_number|string + '-landscape.webp', true) }}"
 og_square: "{{ episode.og_square_path | default('/img/' + episode.episode_number|string + '-square.webp', true) }}"
