@@ -94,6 +94,7 @@ benefits:
 price_net: 1462.60
 price_gross: 1799.00
 currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
 
 dates:
   - "2025-12-08"
