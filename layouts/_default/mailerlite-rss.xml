@@ -18,7 +18,29 @@
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid>{{ .Permalink }}</guid>
       <description>{{ with .Params.description }}{{ . | plainify | htmlUnescape }}{{ end }}</description>
-      <content:encoded>{{ printf "<![CDATA[" | safeHTML }}{{ with .Params.og_landscape }}<img src="{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}" alt="{{ $.Title }}" decoding="async" title="{{ $.Title }}">{{ end }}{{ with .Params.newsletter }}{{ . | $.Page.RenderString }}{{ end }}{{ printf "]]>" | safeHTML }}</content:encoded>
+      <content:encoded>{{ printf "<![CDATA[" | safeHTML }}
+{{- with .Params.og_landscape -}}
+<img src="{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}" alt="{{ $.Title }}" decoding="async" title="{{ $.Title }}">
+{{- end -}}
+{{- with .Params.newsletter -}}
+{{ . | $.Page.RenderString }}
+{{- end -}}
+<h3>Gdzie posłuchać tego odcinka?</h3>
+<ul>
+{{- if .Permalink -}}
+<li><a href="{{ .Permalink }}">Strona odcinka</a></li>
+{{- end -}}
+{{- if .Params.youtube_url -}}
+<li><a href="{{ .Params.youtube_url }}">YouTube</a></li>
+{{- end -}}
+{{- if .Params.spotify_url -}}
+<li><a href="{{ .Params.spotify_url }}">Spotify</a></li>
+{{- end -}}
+{{- if .Params.apple_id -}}
+<li><a href="{{ .Params.apple_id }}">Apple Podcasts</a></li>
+{{- end -}}
+</ul>
+{{- printf "]]>" | safeHTML }}</content:encoded>
     </item>
     {{- end }}
   </channel>
