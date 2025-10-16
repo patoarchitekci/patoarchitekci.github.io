@@ -40,6 +40,7 @@
 <li><a href="{{ .Params.apple_id }}">Apple Podcasts</a></li>
 {{- end -}}
 </ul>
+<p>PS. Masz pytania? Pisz śmiało - po drugiej stronie to nie bot na bazie GPT czy Claude 😎</p>
 {{- printf "]]>" | safeHTML }}</content:encoded>
     </item>
     {{- end }}
