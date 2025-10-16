@@ -29,11 +29,12 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.StreamHandler(sys.stdout) # Log to stdout
-    ]
+        logging.StreamHandler(sys.stdout)  # Log to stdout
+    ],
 )
 
 logger = logging.getLogger(__name__)
+
 
 # --- Airtable Functions ---
 def fetch_episode_data(api: Api, episode_number: int) -> dict | None:
@@ -43,18 +44,23 @@ def fetch_episode_data(api: Api, episode_number: int) -> dict | None:
         episode_table = api.table(AIRTABLE_BASE_ID, EPISODES_TABLE_NAME)
         # Assuming the field name in Airtable is exactly 'episode_number'
         formula = f"{{episode_number}} = {episode_number}"
-        
+
         episode_record = episode_table.first(formula=formula)
-        
+
         if not episode_record:
-            logger.error(f"Episode {episode_number} not found in Airtable table '{EPISODES_TABLE_NAME}'.")
+            logger.error(
+                f"Episode {episode_number} not found in Airtable table '{EPISODES_TABLE_NAME}'."
+            )
             return None
-            
-        logger.info(f"Successfully fetched data for episode: {episode_record['fields'].get('name', '[No Name]')}")
+
+        logger.info(
+            f"Successfully fetched data for episode: {episode_record['fields'].get('name', '[No Name]')}"
+        )
         return episode_record
     except Exception as e:
         logger.error(f"Error fetching episode data from Airtable: {e}", exc_info=True)
         return None
+
 
 def fetch_linked_links(api: Api, record_ids: list[str]) -> list[dict]:
     """Fetches link records with title and url fields for Hugo format."""
@@ -67,40 +73,50 @@ def fetch_linked_links(api: Api, record_ids: list[str]) -> list[dict]:
     try:
         # Get the links table
         links_table = api.table(AIRTABLE_BASE_ID, LINKS_TABLE_NAME)
-        
+
         # Construct an OR formula to fetch records by ID
         id_conditions = [f"RECORD_ID()='{rec_id}'" for rec_id in record_ids]
-        formula = f"OR({ ', '.join(id_conditions) })"
+        formula = f"OR({', '.join(id_conditions)})"
         logger.debug(f"Using formula for fetching link records: {formula}")
 
         # Use table.all() with the constructed formula
         records = links_table.all(formula=formula)
-        
+
         if len(records) != len(record_ids):
-             logger.warning(f"Fetched {len(records)} link records, but {len(record_ids)} IDs were provided. Some records might be missing.")
+            logger.warning(
+                f"Fetched {len(records)} link records, but {len(record_ids)} IDs were provided. Some records might be missing."
+            )
 
         for record in records:
             try:
-                fields = record.get('fields', {})
-                title = fields.get('name') or fields.get('title') or fields.get('Name')  # Try common field names
-                url = fields.get('url') or fields.get('URL') or fields.get('link')      # Try common field names
-                
+                fields = record.get("fields", {})
+                title = (
+                    fields.get("name") or fields.get("title") or fields.get("Name")
+                )  # Try common field names
+                url = (
+                    fields.get("url") or fields.get("URL") or fields.get("link")
+                )  # Try common field names
+
                 if title and url:
-                    links.append({
-                        'title': title,
-                        'url': url
-                    })
+                    links.append({"title": title, "url": url})
                 else:
-                    logger.warning(f"Link record {record['id']} missing title or url fields. Title: {title}, URL: {url}")
+                    logger.warning(
+                        f"Link record {record['id']} missing title or url fields. Title: {title}, URL: {url}"
+                    )
             except KeyError:
-                 logger.warning(f"Link record {record.get('id', '[Unknown ID]')} missing 'fields' key.")
-                    
-        logger.info(f"Successfully extracted {len(links)} link structures from {len(record_ids)} linked records.")
+                logger.warning(
+                    f"Link record {record.get('id', '[Unknown ID]')} missing 'fields' key."
+                )
+
+        logger.info(
+            f"Successfully extracted {len(links)} link structures from {len(record_ids)} linked records."
+        )
         return links
-        
+
     except Exception as e:
         logger.error(f"Error fetching link data from Airtable: {e}", exc_info=True)
-        return [] # Return empty list on error
+        return []  # Return empty list on error
+
 
 def update_airtable_published_flag(api: Api, record_id: str):
     """Updates the 'is_published' flag for the given record ID in Airtable."""
@@ -110,23 +126,29 @@ def update_airtable_published_flag(api: Api, record_id: str):
     try:
         episode_table = api.table(AIRTABLE_BASE_ID, EPISODES_TABLE_NAME)
         episode_table.update(record_id, {IS_PUBLISHED_FIELD: True})
-        logger.info(f"Successfully updated '{IS_PUBLISHED_FIELD}' flag for record {record_id}.")
+        logger.info(
+            f"Successfully updated '{IS_PUBLISHED_FIELD}' flag for record {record_id}."
+        )
         return True
     except Exception as e:
         logger.error(f"Error updating Airtable record {record_id}: {e}", exc_info=True)
         return False
 
+
 # --- File Operations ---
 POSTS_DIR = "content/episodes"  # Hugo episodes directory (relative to repo root)
-ASSETS_IMG_DIR = "static/img"   # Hugo static assets directory (relative to repo root)
+ASSETS_IMG_DIR = "static/img"  # Hugo static assets directory (relative to repo root)
+
 
 def save_markdown_file(content: str, episode_fields: dict) -> str | None:
     """Saves the markdown content to the correct file in the content/episodes directory."""
     try:
-        episode_number = episode_fields.get('episode_number')
-        
+        episode_number = episode_fields.get("episode_number")
+
         if not episode_number:
-            logger.error("Episode number missing in episode data. Cannot determine filename.")
+            logger.error(
+                "Episode number missing in episode data. Cannot determine filename."
+            )
             return None
 
         filename = f"{episode_number}.md"  # Hugo format: just episode number
@@ -134,83 +156,99 @@ def save_markdown_file(content: str, episode_fields: dict) -> str | None:
         filepath = os.path.join(POSTS_DIR, filename)
 
         logger.info(f"Saving markdown file to: {filepath}")
-        
+
         # Ensure the content/episodes directory exists
         os.makedirs(POSTS_DIR, exist_ok=True)
 
-        with open(filepath, 'w', encoding='utf-8') as f:
+        with open(filepath, "w", encoding="utf-8") as f:
             f.write(content)
-            
+
         logger.info("Markdown file saved successfully.")
         return filepath
     except Exception as e:
         logger.error(f"Error saving markdown file: {e}", exc_info=True)
         return None
 
-def download_and_save_image(attachment_list: list, target_dir: str, base_filename: str, quality: int = 85) -> str | None:
+
+def download_and_save_image(
+    attachment_list: list, target_dir: str, base_filename: str, quality: int = 85
+) -> str | None:
     """Downloads an image from an Airtable attachment field structure, converts to WebP, and saves it."""
     if not attachment_list or not isinstance(attachment_list, list):
-        logger.warning(f"No attachment data provided or invalid format for '{base_filename}'. Skipping download.")
+        logger.warning(
+            f"No attachment data provided or invalid format for '{base_filename}'. Skipping download."
+        )
         return None
-        
+
     try:
         # Airtable attachment field is a list, usually with one item for single attachments
         attachment_data = attachment_list[0]
-        image_url = attachment_data.get('url')
-        airtable_filename = attachment_data.get('filename')
+        image_url = attachment_data.get("url")
+        airtable_filename = attachment_data.get("filename")
 
         if not image_url:
-            logger.warning(f"No URL found in attachment data for '{base_filename}'. Skipping download.")
+            logger.warning(
+                f"No URL found in attachment data for '{base_filename}'. Skipping download."
+            )
             return None
 
         # Always use .webp extension for output
         filename = f"{base_filename}.webp"
         filepath = os.path.join(target_dir, filename)
 
-        logger.info(f"Downloading image from {image_url} and converting to WebP: {filepath}...")
-        
+        logger.info(
+            f"Downloading image from {image_url} and converting to WebP: {filepath}..."
+        )
+
         # Ensure the target directory exists
         os.makedirs(target_dir, exist_ok=True)
 
         # Download image to memory
         response = requests.get(image_url)
-        response.raise_for_status() # Raise an exception for bad status codes (4xx or 5xx)
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
 
         # Convert to WebP using PIL
         with Image.open(BytesIO(response.content)) as img:
             # Convert RGBA/P mode to RGB for WebP compatibility
             if img.mode in ("RGBA", "P"):
                 img = img.convert("RGB")
-            
+
             # Save as WebP
             img.save(filepath, format="WEBP", quality=quality, optimize=True)
-                
+
         logger.info(f"Image '{filename}' converted to WebP and saved successfully.")
         return filepath
-        
+
     except (IndexError, TypeError, KeyError) as e:
-        logger.error(f"Error parsing attachment data for '{base_filename}': {e}", exc_info=False)
+        logger.error(
+            f"Error parsing attachment data for '{base_filename}': {e}", exc_info=False
+        )
         return None
     except requests.exceptions.RequestException as e:
         logger.error(f"Error downloading image {image_url}: {e}", exc_info=False)
         return None
     except Exception as e:
         # Add filepath to error message if it was defined
-        err_filepath = filepath if 'filepath' in locals() else "target path"
-        logger.error(f"Error processing image {image_url} to {err_filepath}: {e}", exc_info=True)
+        err_filepath = filepath if "filepath" in locals() else "target path"
+        logger.error(
+            f"Error processing image {image_url} to {err_filepath}: {e}", exc_info=True
+        )
         return None
+
 
 # --- Markdown Generation ---
 
 TEMPLATE_FILENAME = "podcast_post_hugo.md.j2"  # Updated for Hugo format
+
 
 def clean_control_characters(text: str) -> str:
     """Remove control characters that cause YAML parsing issues."""
     if not text:
         return text
     # Remove control characters except tab, LF, CR
-    cleaned = ''.join(char for char in text if ord(char) >= 32 or char in '\t\n\r')
+    cleaned = "".join(char for char in text if ord(char) >= 32 or char in "\t\n\r")
     return cleaned
+
 
 def convert_duration_to_iso8601(duration_ms: int) -> str:
     """Converts duration from milliseconds to ISO 8601 format (PT1H23M45S)."""
@@ -228,10 +266,13 @@ def convert_duration_to_iso8601(duration_ms: int) -> str:
         duration_parts.append(f"{hours}H")
     if minutes > 0:
         duration_parts.append(f"{minutes}M")
-    if seconds > 0 or (hours == 0 and minutes == 0):  # Always include seconds if it's the only component
+    if seconds > 0 or (
+        hours == 0 and minutes == 0
+    ):  # Always include seconds if it's the only component
         duration_parts.append(f"{seconds}S")
 
     return "".join(duration_parts)
+
 
 def render_markdown(context: dict) -> str | None:
     """Renders the Markdown content using the Jinja template file and context."""
@@ -240,9 +281,7 @@ def render_markdown(context: dict) -> str | None:
         # Assuming the template file is in the same directory as the script
         script_dir = os.path.dirname(__file__)
         env = Environment(
-            loader=FileSystemLoader(script_dir), 
-            trim_blocks=True, 
-            lstrip_blocks=True
+            loader=FileSystemLoader(script_dir), trim_blocks=True, lstrip_blocks=True
         )
         template = env.get_template(TEMPLATE_FILENAME)
         rendered_content = template.render(context)
@@ -252,19 +291,33 @@ def render_markdown(context: dict) -> str | None:
         logger.error(f"Error rendering Markdown template: {e}", exc_info=True)
         return None
 
-# --- Main Execution --- 
+
+# --- Main Execution ---
 def main():
     """Main function to publish a podcast episode."""
-    parser = argparse.ArgumentParser(description="Publish a podcast episode from Airtable to GitHub Pages.")
-    parser.add_argument("--episode-number", type=int, required=True, help="The episode number to publish.")
-    parser.add_argument("--no-images", action="store_true", help="Skip downloading and processing images.")
+    parser = argparse.ArgumentParser(
+        description="Publish a podcast episode from Airtable to GitHub Pages."
+    )
+    parser.add_argument(
+        "--episode-number",
+        type=int,
+        required=True,
+        help="The episode number to publish.",
+    )
+    parser.add_argument(
+        "--no-images",
+        action="store_true",
+        help="Skip downloading and processing images.",
+    )
     args = parser.parse_args()
 
     logger.info(f"Starting publishing process for episode #{args.episode_number}...")
 
     # 1. Validate Configuration
     if not all([AIRTABLE_API_KEY, AIRTABLE_BASE_ID]):
-        logger.error("Airtable API Key or Base ID not configured in environment variables.")
+        logger.error(
+            "Airtable API Key or Base ID not configured in environment variables."
+        )
         sys.exit(1)
     logger.info("Configuration loaded.")
 
@@ -280,93 +333,135 @@ def main():
     episode_data = fetch_episode_data(airtable_api, args.episode_number)
     if not episode_data:
         sys.exit(1)
-        
-    episode_fields = episode_data.get('fields', {})
-        
+
+    episode_fields = episode_data.get("fields", {})
+
     # Fetch linked links (Hugo format with title and url)
-    link_ids = episode_fields.get('links', [])
+    link_ids = episode_fields.get("links", [])
     links_data = fetch_linked_links(airtable_api, link_ids)
     logger.info(f"Fetched {len(links_data)} link structures for Hugo format.")
 
     # Parse meta_seo JSON field
     import json
-    meta_seo_raw = episode_fields.get('meta_seo', '{}')
+
+    meta_seo_raw = episode_fields.get("meta_seo", "{}")
     try:
-        meta_seo = json.loads(meta_seo_raw) if isinstance(meta_seo_raw, str) else meta_seo_raw
+        meta_seo = (
+            json.loads(meta_seo_raw) if isinstance(meta_seo_raw, str) else meta_seo_raw
+        )
         logger.info(f"Parsed meta_seo JSON successfully.")
     except json.JSONDecodeError as e:
         logger.error(f"Error parsing meta_seo JSON: {e}. Using empty dict.")
         meta_seo = {}
 
     # Extract SEO data from meta_seo
-    seo_description = meta_seo.get('description', episode_fields.get('description', ''))
-    seo_keywords = meta_seo.get('keywords', '')
-    tag_names = meta_seo.get('tags', [])
+    seo_description = meta_seo.get("description", episode_fields.get("description", ""))
+    seo_keywords = meta_seo.get("keywords", "")
+    tag_names = meta_seo.get("tags", [])
     logger.info(f"Extracted {len(tag_names)} tags from meta_seo.")
 
     # 4. Prepare Template Context for Hugo
     # Clean control characters from text fields
-    text_fields = ['title', 'intro', 'description', 'transcription']
+    text_fields = ["title", "intro", "description", "transcription"]
     for field in text_fields:
         if field in episode_fields and episode_fields[field]:
             episode_fields[field] = clean_control_characters(episode_fields[field])
 
     # Set default transcription if empty
-    if not episode_fields.get('transcription') or not episode_fields['transcription'].strip():
-        episode_fields['transcription'] = 'AI jeszcze nie zdążyło przepisać tego odcinka. Wracaj niedługo! 🤖'
+    if (
+        not episode_fields.get("transcription")
+        or not episode_fields["transcription"].strip()
+    ):
+        episode_fields["transcription"] = (
+            "AI jeszcze nie zdążyło przepisać tego odcinka. Wracaj niedługo! 🤖"
+        )
         logger.info("Transcription is empty, using default placeholder text.")
-    
+
     # Add links data directly to episode fields for template access
-    episode_fields['links'] = links_data
-    
-    # Create YouTube embed URL from youtube_id if available
-    youtube_id = episode_fields.get('youtube_id', '')
+    episode_fields["links"] = links_data
+
+    # Create YouTube URLs from youtube_id if available
+    youtube_id = episode_fields.get("youtube_id", "")
     if youtube_id:
-        episode_fields['youtube_embed_url'] = f"https://www.youtube.com/embed/{youtube_id}?enablejsapi=1"
-        logger.info(f"Created YouTube embed URL for ID: {youtube_id}")
+        episode_fields["youtube_embed_url"] = (
+            f"https://www.youtube.com/embed/{youtube_id}?enablejsapi=1"
+        )
+        episode_fields["youtube_url"] = f"https://www.youtube.com/watch?v={youtube_id}"
+        logger.info(f"Created YouTube URLs for ID: {youtube_id}")
     else:
+        episode_fields["youtube_url"] = ""
         logger.warning("No youtube_id found in episode data")
 
-    # Convert duration from milliseconds to ISO 8601 format
-    duration_ms = episode_fields.get('duration_ms')
-    if duration_ms:
-        episode_fields['duration_iso'] = convert_duration_to_iso8601(duration_ms)
-        logger.info(f"Converted duration: {duration_ms}ms -> {episode_fields['duration_iso']}")
+    # Handle Spotify URL
+    spotify_url = episode_fields.get("spotify_url", "")
+    if spotify_url:
+        logger.info(f"Found Spotify URL: {spotify_url}")
     else:
-        episode_fields['duration_iso'] = ""
+        logger.warning("No spotify_url found in episode data")
+
+    # Handle Apple ID
+    apple_id = episode_fields.get("apple_id", "")
+    if apple_id:
+        logger.info(f"Found Apple ID: {apple_id}")
+    else:
+        logger.warning("No apple_id found in episode data")
+
+    # Handle Newsletter (multiline field)
+    newsletter = episode_fields.get("newsletter", "")
+    if newsletter:
+        # Clean control characters from newsletter
+        episode_fields["newsletter"] = clean_control_characters(newsletter)
+        logger.info("Newsletter field processed (multiline content preserved)")
+    else:
+        episode_fields["newsletter"] = ""
+        logger.info("No newsletter content found in episode data")
+
+    # Convert duration from milliseconds to ISO 8601 format
+    duration_ms = episode_fields.get("duration_ms")
+    if duration_ms:
+        episode_fields["duration_iso"] = convert_duration_to_iso8601(duration_ms)
+        logger.info(
+            f"Converted duration: {duration_ms}ms -> {episode_fields['duration_iso']}"
+        )
+    else:
+        episode_fields["duration_iso"] = ""
         logger.warning("No duration_ms found in episode data")
-    
+
     # Download and save images BEFORE rendering template (template needs the paths)
     if not args.no_images:
-        episode_num = episode_fields.get('episode_number')
+        episode_num = episode_fields.get("episode_number")
         if episode_num:
             # Square Image (og_square)
-            og_square_list = episode_fields.get('og_square', [])
-            square_filepath = download_and_save_image(og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square")
+            og_square_list = episode_fields.get("og_square", [])
+            square_filepath = download_and_save_image(
+                og_square_list, ASSETS_IMG_DIR, f"{episode_num}-square"
+            )
             if square_filepath:
                 # Extract just the filename with extension for Hugo path
                 square_filename = os.path.basename(square_filepath)
-                episode_fields['og_square_path'] = f"/img/{square_filename}"
+                episode_fields["og_square_path"] = f"/img/{square_filename}"
                 logger.info(f"Set og_square_path to: /img/{square_filename}")
 
             # Landscape Image (og_landscape) - pobieramy z og_portrait w Airtable
-            og_portrait_list = episode_fields.get('og_portrait', [])
-            landscape_filepath = download_and_save_image(og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-landscape")
+            og_portrait_list = episode_fields.get("og_portrait", [])
+            landscape_filepath = download_and_save_image(
+                og_portrait_list, ASSETS_IMG_DIR, f"{episode_num}-landscape"
+            )
             if landscape_filepath:
                 # Extract just the filename with extension for Hugo path
                 landscape_filename = os.path.basename(landscape_filepath)
-                episode_fields['og_landscape_path'] = f"/img/{landscape_filename}"
+                episode_fields["og_landscape_path"] = f"/img/{landscape_filename}"
                 logger.info(f"Set og_landscape_path to: /img/{landscape_filename}")
         else:
             logger.error("Cannot download images, episode number is missing.")
     else:
         logger.info("Skipping image download (--no-images flag set).")
-    
+
     template_context = {
-        "episode": episode_fields,      # Pass the whole fields dictionary (now with links, youtube_id, and image paths)
-        "tags": tag_names,              # Pass the list of tag names from meta_seo
+        "episode": episode_fields,  # Pass the whole fields dictionary (now with links, youtube_id, and image paths)
+        "tags": tag_names,  # Pass the list of tag names from meta_seo
         "seo_description": seo_description,  # SEO description from meta_seo
-        "seo_keywords": seo_keywords     # SEO keywords from meta_seo
+        "seo_keywords": seo_keywords,  # SEO keywords from meta_seo
     }
     logger.info("Prepared context dictionary for Jinja template.")
     # Example: Access title in template via {{ episode.title }}
@@ -376,18 +471,18 @@ def main():
     if not markdown_content:
         logger.error("Failed to render markdown content. Exiting.")
         sys.exit(1)
-        
+
     # 6. Save Files
     markdown_filepath = save_markdown_file(markdown_content, episode_fields)
     if not markdown_filepath:
         logger.error("Failed to save markdown file. Exiting.")
         sys.exit(1)
-        
 
     # 7. Update Airtable
-    update_airtable_published_flag(airtable_api, episode_data['id'])
+    update_airtable_published_flag(airtable_api, episode_data["id"])
 
     logger.info(f"Successfully processed episode #{args.episode_number}.")
 
+
 if __name__ == "__main__":
-    main() 
+    main()

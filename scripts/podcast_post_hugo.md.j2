@@ -8,7 +8,10 @@ seo_keywords: "{{ seo_keywords | default('', true) | escape }}"
 
 # Hugo fields
 youtube_id: "{{ episode.youtube_id | default('', true) }}"
-youtube_url: "{{ episode.youtube_embed_url | default('', true) }}"
+youtube_url: "{{ episode.youtube_url | default('', true) }}"
+youtube_embed_url: "{{ episode.youtube_embed_url | default('', true) }}"
+spotify_url: "{{ episode.spotify_url | default('', true) }}"
+apple_id: "{{ episode.apple_id | default('', true) }}"
 
 # Spreaker data (technical only - for Schema.org, not user-facing)
 duration: "{{ episode.duration_iso }}"
@@ -21,6 +24,10 @@ og_square: "{{ episode.og_square_path | default('/img/' + episode.episode_number
 # Intro for episode
 intro: |
   {{ episode.intro | replace('\n', '\n  ') | default('', true) }}
+
+# Newsletter content (multiline)
+newsletter: |
+  {{ episode.newsletter | replace('\n', '\n  ') | default('', true) }}
 
 # Links for the episode
 links:

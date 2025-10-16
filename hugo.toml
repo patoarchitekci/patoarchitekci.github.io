@@ -17,7 +17,7 @@ disableKinds = ["taxonomy", "term"]
 
 [params]
   description = "Stworzyliśmy ten podcast, bo sami szukaliśmy miejsca, które łączy wiedzę, praktykę i dystans do branży IT."
-  
+
   # Social media
   [params.social]
     tiktok = "https://www.tiktok.com/@patoarchitekci_"
@@ -35,18 +35,18 @@ disableKinds = ["taxonomy", "term"]
     [params.hosts.szymon]
       linkedin = "https://www.linkedin.com/in/szymonwarda/"
       twitter = "https://x.com/maklipsa"
-    
+
   # Podcast platforms
   [params.podcast]
     youtube = "https://www.youtube.com/@Patoarchitekci"
     spotify = "https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J"
     apple = "https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604"
-    
+
   # Legal
   [params.legal]
     privacyPolicy = "https://app.easy.tools/policies/otwarte-pato"
     terms = "https://app.easy.tools/terms/otwarte-pato"
-    
+
   # Training banner
   [params.trainingBanner]
     enabled = false
@@ -59,11 +59,11 @@ disableKinds = ["taxonomy", "term"]
     title = "Bezpłatna Konsultacja"
     purchaseUrl = "https://cart.easy.tools/checkout/patoarchitekci/szybkie-konsultacje"
     advisoryUrl = "https://protopia.tech/doradztwo"
-    
+
   # Footer
   [params.footer]
     copyright = "© Protopia 2025"
-    
+
   # Szkolenia - globalne dane
   [params.trainings]
     [params.trainings.coordinator]
@@ -112,7 +112,7 @@ disableKinds = ["taxonomy", "term"]
       unsafe = true
 
 [outputs]
-  home = ["HTML", "RSS", "newsletter-rss", "social-rss"]
+  home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss"]
 
 [outputFormats]
   [outputFormats.newsletter-rss]
@@ -131,4 +131,10 @@ disableKinds = ["taxonomy", "term"]
     name = "RSS"
     mediaType = "application/rss+xml"
     baseName = "debug"
+    path = ""
+
+  [outputFormats.mailerlite-rss]
+    name = "RSS"
+    mediaType = "application/rss+xml"
+    baseName = "mailerlite"
     path = ""
