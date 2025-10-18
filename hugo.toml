@@ -113,7 +113,6 @@ disableKinds = ["taxonomy", "term"]
 
 [outputs]
   home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss"]
-  section = ["HTML", "trainings-json"]
 
 [outputFormats]
   [outputFormats.newsletter-rss]
@@ -141,7 +140,7 @@ disableKinds = ["taxonomy", "term"]
     path = ""
 
   [outputFormats.trainings-json]
-    name = "JSON"
     mediaType = "application/json"
     baseName = "trainings"
-    path = ""
+    isPlainText = true
+    notAlternative = true
