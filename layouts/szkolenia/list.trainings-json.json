@@ -1,0 +1,21 @@
+{{- $today := now.Format "2006-01-02" -}}
+{{- $trainings := slice -}}
+
+{{- range $key, $training := .Site.Data.trainings -}}
+  {{- if and $training.active $training.dates -}}
+    {{- $firstDate := index $training.dates 0 -}}
+    {{- if gt $firstDate $today -}}
+      {{- $item := dict
+        "id" $training.id
+        "title" $training.title
+        "instructor" $training.instructor
+        "dates" $training.dates
+        "time" $training.time
+        "url" (printf "https://patoarchitekci.io/szkolenia/%s/" $training.id)
+      -}}
+      {{- $trainings = $trainings | append $item -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- dict "trainings" $trainings "count" (len $trainings) "updated_at" (now.Format "2006-01-02T15:04:05Z07:00") | jsonify -}}
