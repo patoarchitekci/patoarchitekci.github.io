@@ -69,7 +69,7 @@ disableKinds = ["taxonomy", "term"]
     [params.trainings.coordinator]
       name = "Mikołaj Szczerbicki"
       phone = "+48 667 013 893"
-      email = "mikołaj.szczerbicki@protopia.tech"
+      email = "mikolaj.szczerbicki@protopia.tech"
     [params.trainings.certificate]
       included = true
       description = "Oficjalne potwierdzenie zdobytych skilli"
