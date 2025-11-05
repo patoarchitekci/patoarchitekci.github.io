@@ -190,4 +190,4 @@ hugo_stats.json
 # Claude project instructions
 CLAUDE.md
 
-analiza/
+analiza/*.tar.gz
