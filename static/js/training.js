@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Zmień tekst wszystkich przycisków "Zapisz się" na "Rezerwuj miejsce"
         const signupButtons = document.querySelectorAll('button');
         signupButtons.forEach(button => {
-            if (button.textContent.trim() === 'Zapisz się') {
+            const buttonText = button.textContent.trim();
+            if (buttonText === 'Zapisz się' || buttonText === 'Rezerwuj miejsce') {
                 button.textContent = 'Rezerwuj miejsce';
                 button.dataset.waitlistButton = 'true';
             }
