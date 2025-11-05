@@ -6,7 +6,7 @@
 {{- $isTrainingPast := false -}}
 {{- if $training.dates -}}
 {{- $firstDate := index $training.dates 0 -}}
-{{- $isTrainingPast = le $firstDate $today -}}
+{{- $isTrainingPast = or (le $firstDate $today) (default false $training.waitlist_only) -}}
 {{- end -}}
 <div class="flex relative" data-training-past="{{ $isTrainingPast }}">
   <div class="w-full">
