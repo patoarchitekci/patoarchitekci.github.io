@@ -8,7 +8,9 @@
 {{- $firstDate := index $training.dates 0 -}}
 {{- $isTrainingPast = le $firstDate $today -}}
 {{- end -}}
-<div class="flex relative" data-training-past="{{ $isTrainingPast }}">
+{{- /* Check if waitlist is forced regardless of date */ -}}
+{{- $showWaitlist := or $isTrainingPast $training.force_waitlist -}}
+<div class="flex relative" data-training-past="{{ $showWaitlist }}">
   <div class="w-full">
     <!-- ======= TRAINING TITLE SECTION ======= -->
     <section class="bg-dark-black overflow-x-clip pt-10 sm:pt-[50px] pb-[15px] md:pb-[30px] px-[30px] xl:px-0">
@@ -206,6 +208,8 @@
                   <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
                     Termin
                   </p>
+                  {{- if and $training.force_waitlist (not $isTrainingPast) -}}
+                  {{- /* Show dates with waiting list note when force_waitlist is set */ -}}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
                     <span class="block">
                       {{- range $index, $date := $training.dates -}}
@@ -216,6 +220,21 @@
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
                     $training.time
                     }}</p>
+                  <p class="text-orange font-bold fs-custom-md !leading-100 sm:!text-xs uppercase mt-1">Lista rezerwowa</p>
+                  {{- else if $isTrainingPast -}}
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">Nowy termin w drodze</p>
+                  {{- else -}}
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
+                    <span class="block">
+                      {{- range $index, $date := $training.dates -}}
+                      {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
+                      {{- end }}
+                    </span>
+                  </p>
+                  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
+                    $training.time
+                    }}</p>
+                  {{- end -}}
                 </div>
               </div>
 
@@ -408,7 +427,18 @@
             <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
               </p>
-              {{- if $isTrainingPast -}}
+              {{- if and $training.force_waitlist (not $isTrainingPast) -}}
+              {{- /* Show dates with waiting list note when force_waitlist is set */ -}}
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
+                <span class="block">
+                  {{- range $index, $date := $training.dates -}}
+                  {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
+                  {{- end }}
+                </span>
+              </p>
+              <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+              <p class="text-orange font-bold fs-custom-md sm:!text-xs uppercase mt-1">Lista rezerwowa</p>
+              {{- else if $isTrainingPast -}}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">Nowy termin w drodze</p>
               {{- else -}}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
