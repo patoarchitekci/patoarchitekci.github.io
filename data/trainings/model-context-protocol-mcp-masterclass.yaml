@@ -22,11 +22,11 @@ rating:
 teaches:
   - "Fundamenty Model Context Protocol jako standardu komunikacji dla AI"
   - "Architektura MCP - relacje między hostami, klientami i serwerami"
-  - "Projektowanie i implementacja zasobów, narzędzi i promptów w MCP"
+  - "Projektowanie i implementacja zasobów, narzędzi i promptów w MCP (w tym elicitation i structured output)"
   - "Mechanizmy transportu - STDIO, SSE i Streamable HTTP"
   - "Tworzenie własnych serwerów MCP w TypeScript i Python"
   - "Komunikacja JSON-RPC i obsługa żądań, odpowiedzi i powiadomień"
-  - "Bezpieczeństwo serwerów MCP - uwierzytelnianie i autoryzacja z OAuth 2.0"
+  - "Bezpieczeństwo serwerów MCP - uwierzytelnianie i autoryzacja z OAuth 2.1"
   - "Integracja serwerów MCP z agentami AI (Claude Desktop, OpenAI)"
 audience: "Programiści i architekci pracujący z AI, chcący integrować modele językowe z zewnętrznymi systemami danych i narzędziami wykorzystując najnowsze standardy"
 
@@ -36,11 +36,12 @@ description:
   - "Model Context Protocol to kolejny kluczowy protokół w świecie technologii - obok HTTP API, REST API, GraphQL czy starszego SOAP. Wszystko wskazuje na to, że MCP będzie 'new normal' w ekosystemie AI, dlatego warto poznać go już teraz."
   - "Warsztaty poprowadzi Łukasz Kałużny - Technology Advisor i Managing Partner w Protopia, który specjalizuje się w pragmatycznym podejściu do technologii bleeding-edge, pomagając organizacjom wdrażać najnowsze technologie bez niepotrzebnego hypu. Współprowadzi także popularny podcast Patoarchitekci."
   - "MCP to nie tylko kolejna abstrakcja nad HTTP - to fundamentalnie inne podejście do projektowania API, które wymaga zrozumienia specyfiki wymiany danych z systemami AI. Podczas warsztatów zbudujesz działające implementacje, poznasz rozwiązania typowych problemów technicznych i opanujesz wzorce projektowe specyficzne dla tego protokołu."
+  - "UWAGA: MCP to dynamicznie rozwijający się protokół - specyfikacja jest regularnie aktualizowana. Jeśli przed szkoleniem wyjdzie nowa wersja, agenda może ulec zmianie."
 
 skills:
   - "Fundamenty Model Context Protocol (MCP) - poznasz podstawowe założenia i cele protokołu"
   - "Architektura MCP - zrozumiesz relacje między hostami, klientami i serwerami MCP"
-  - "Zasoby, narzędzia i prompty w MCP - nauczysz się projektować i implementować te elementy"
+  - "Zasoby, narzędzia i prompty w MCP - nauczysz się projektować i implementować te elementy wraz z elicitation i structured output"
   - "Mechanizmy transportu - poznasz różnice między STDIO, SSE i Streamable HTTP"
   - "Tworzenie pierwszego serwera MCP - zbudujesz od podstaw własny serwer MCP"
   - "Komunikacja JSON-RPC - zrozumiesz warstwy komunikacji w MCP"
@@ -58,7 +59,7 @@ modules:
     description: "Relacje między hostami, klientami i serwerami MCP oraz kluczowe komponenty ekosystemu"
   - number: 3
     title: "Zasoby, narzędzia i prompty w MCP"
-    description: "Projektowanie i implementacja elementów dla maksymalnej przydatności agentów AI"
+    description: "Projektowanie i implementacja elementów MCP, structured tool output, elicitation i resource links"
   - number: 4
     title: "Mechanizmy transportu"
     description: "Różnice między STDIO, SSE i Streamable HTTP oraz implementacja odpowiedniego dla danego zastosowania"
@@ -70,7 +71,7 @@ modules:
     description: "Warstwy komunikacji w MCP i skuteczna obsługa żądań, odpowiedzi i powiadomień"
   - number: 7
     title: "Bezpieczeństwo serwerów MCP"
-    description: "Najlepsze praktyki uwierzytelniania, autoryzacji i ochrony przed zagrożeniami z wykorzystaniem OAuth 2.0"
+    description: "Uwierzytelnianie i autoryzacja z OAuth 2.1, PKCE, Resource Indicators i najlepsze praktyki ochrony przed zagrożeniami"
   - number: 8
     title: "Testowanie serwerów MCP"
     description: "Używanie MCP Inspector i innych narzędzi do testowania i debugowania serwerów"
@@ -94,12 +95,12 @@ benefits:
     description: "Znajomość technologii, która dopiero zyskuje na popularności"
 
 # Organizacja
-price_net: 1462.60
-price_gross: 1799.00
+price_net: 1625.20
+price_gross: 1999.00
 currency: "PLN"
 
 dates:
-  - "2025-06-24"
+  - "2026-03-03"
 time: "9:30 – 17:00"
 
 location:
@@ -128,7 +129,7 @@ faq:
   - question: "W jakich językach będziemy programować?"
     answer: "Kod będziemy pisać głównie w TypeScript, z elementami Pythona dla implementacji agenta w oparciu o OpenAI Agents SDK."
   - question: "Czy MCP stanie się standardem w ekosystemie AI?"
-    answer: "Wszystko wskazuje na to, że MCP będzie 'new normal' w ekosystemie AI - to kolejny kluczowy protokół obok HTTP API, REST API i GraphQL. Dlatego warto poznać go już teraz."
+    answer: "MCP jest już adoptowany przez OpenAI, Google, Microsoft, GitHub, Stripe, Notion i AWS. W MCP Registry jest już kilka tysięcy serwerów. Wszystko wskazuje na to, że MCP będzie 'new normal' w ekosystemie AI."
   - question: "Jak się przygotować do szkolenia?"
     answer: "Załóż konto na GitHub, opcjonalnie konto na OpenAI, przygotuj podstawową wiedzę z TypeScript i Python oraz zarezerwuj sobie cały dzień bez rozpraszaczy."
 
