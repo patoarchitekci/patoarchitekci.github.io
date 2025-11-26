@@ -1,0 +1,150 @@
+id: "agentic-ai-the-hard-way"
+title: "Agentic AI the Hard Way"
+active: true
+featured: true
+
+# Prowadzący i meta
+instructor: "Łukasz Kałużny"
+tags:
+  - "#AI"
+  - "#Agents"
+  - "#LLM"
+  - "#Python"
+  - "#OpenAI"
+  - "#Advanced"
+
+# SEO i Schema.org
+image: ""
+educational_level: "Advanced"
+rating:
+  value: 4.9
+  count: 20
+teaches:
+  - "Architektura agentów AI i wzorzec ReAct (Reasoning + Acting)"
+  - "Implementacja pętli agenta od podstaw bez frameworków"
+  - "Function calling i tool use w OpenAI API"
+  - "Zarządzanie context window jako stanem agenta"
+  - "Budowanie praktycznych narzędzi dla agenta (file ops, HTTP, SQL)"
+  - "Wzorce orkiestracji: Supervisor Pattern i Pipeline Pattern"
+  - "Human-in-the-loop i mechanizmy bezpieczeństwa agentów"
+  - "Zasady 12-Factor Agents w praktyce"
+audience: "Inżynierowie IT, architekci i zaawansowani programiści, którzy chcą zrozumieć jak działają agenci AI od środka i nauczyć się budować własne rozwiązania bez polegania na frameworkach"
+
+# Treść
+description:
+  - "Zbuduj własnego agenta AI od podstaw - bez frameworków, bez abstrakcji. Tylko Ty, kod i OpenAI API. Zrozumiesz co naprawdę dzieje się pod maską LangChain, CrewAI, AutoGen i innych popularnych narzędzi do budowy agentów."
+  - "Podczas warsztatu przejdziesz przez wszystkie elementy: od pierwszego wywołania API, przez budowę context window i function calling, aż po kompletną pętlę ReAct. Każdy komponent poznasz od środka."
+  - "Agenci AI to w gruncie rzeczy LLM, pętla i narzędzia. Frameworki ukrywają tę prostotę za warstwami abstrakcji. Po szkoleniu będziesz wiedział co robią pod spodem i świadomie wybierzesz gotowe narzędzie lub zbudujesz własne rozwiązanie."
+  - "Szkolenie dla tych, którzy chcą naprawdę zrozumieć jak działają agenci AI - nie tylko używać gotowych rozwiązań, ale wiedzieć dlaczego działają tak, a nie inaczej."
+  - "UWAGA: Szczegóły agendy mogą ulec zmianie - to zupełnie nowe szkolenie w trakcie powstawania. Przedstawiona agenda stanowi ramę programową."
+
+skills:
+  - "Architektura agentów AI i wzorzec ReAct"
+  - "Implementacja pętli agenta (act → observe → decide → act)"
+  - "OpenAI API - chat completions i function calling"
+  - "Zarządzanie context window i typami wiadomości"
+  - "Definiowanie narzędzi (tools) z JSON Schema"
+  - "Error handling i graceful degradation w agentach"
+  - "System prompt engineering dla agentów"
+  - "Human-in-the-loop - pause/resume workflow"
+  - "Persistencja stanu i multi-turn conversations"
+  - "Wzorzec Supervisor - delegowanie do sub-agentów"
+  - "Wzorzec Pipeline - sekwencyjna orkiestracja agentów"
+  - "Bezpieczeństwo agentów - limity, sandboxing, validation"
+
+modules:
+  - number: 1
+    title: "Wprowadzenie i anatomia agenta"
+    description: "Co to jest agent AI? Wzorzec ReAct (Reasoning + Acting). Przegląd architektury, którą zbudujemy"
+  - number: 2
+    title: "Setup środowiska i OpenAI API"
+    description: "Konfiguracja projektu Python, pierwsze wywołanie OpenAI API, eksploracja struktury request/response"
+  - number: 3
+    title: "Context Window - pamięć agenta"
+    description: "Implementacja klasy ContextWindow z różnymi typami wiadomości (User, Assistant, ToolUse, ToolResult)"
+  - number: 4
+    title: "Function Calling / Tool Use"
+    description: "Jak LLM decyduje o wywołaniu narzędzia. JSON Schema dla tool definitions. Parsowanie tool_calls"
+  - number: 5
+    title: "Pętla ReAct - serce agenta"
+    description: "Implementacja głównej pętli agenta z rekurencyjnym wywołaniem act() i wykonywaniem narzędzi"
+  - number: 6
+    title: "Budowanie prawdziwych narzędzi"
+    description: "Od zabawkowych przykładów do użytecznych tools: read_file, write_file, http_get, execute_sql"
+  - number: 7
+    title: "Error handling i graceful degradation"
+    description: "Co gdy tool zawiedzie? Formatowanie błędów dla context window, retry patterns"
+  - number: 8
+    title: "System prompt engineering"
+    description: "Jak napisać skuteczny system prompt dla agenta. Instrukcje, constrainty, tool usage guidelines"
+  - number: 9
+    title: "Human-in-the-Loop"
+    description: "Kiedy agent powinien pytać człowieka. Tool ask_human, pause/resume workflow, approval flows"
+  - number: 10
+    title: "Persistencja i multi-turn"
+    description: "Zapisywanie context window. JSON serialization, session management, wznowienie z dowolnego punktu"
+  - number: 11
+    title: "Sub-agenci - Supervisor i Pipeline"
+    description: "Dwa wzorce orkiestracji: Supervisor delegujący do specjalistów oraz Pipeline z sekwencyjnym przekazywaniem"
+  - number: 12
+    title: "Bezpieczeństwo i limity"
+    description: "Guardrails dla agentów: max iterations, tool allowlisting, sandboxing, input/output validation"
+  - number: 13
+    title: "Podsumowanie i Q&A"
+    description: "Recap architektury, kiedy framework vs własna implementacja, kierunki rozwoju (RAG, multi-modal)"
+
+benefits:
+  - title: "Zero frameworków"
+    description: "Budujesz wszystko od zera - żadnego LangChain, LlamaIndex czy innych abstrakcji. Zrozumiesz każdą linię kodu"
+  - title: "Hands-on przez cały dzień"
+    description: "90% praktyki - piszesz kod razem z prowadzącym, na koniec masz działającego agenta"
+  - title: "12-Factor Agents"
+    description: "Poznasz i zastosujesz sprawdzone zasady budowania niezawodnych aplikacji LLM"
+  - title: "Demistyfikacja frameworków"
+    description: "Zrozumiesz co robią pod spodem LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, Strands Agents, Pydantic AI, LlamaIndex Agents i inne"
+
+# Organizacja
+price_net: 1625.20
+price_gross: 1999.00
+currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/agentic-ai-the-hard-way"
+
+dates:
+  - "2026-02-24"
+time: "9:30 – 17:00"
+
+location:
+  type: "online"
+  platform: "Microsoft Teams"
+  details: "Całe szkolenie prowadzone w środowisku GitHub Codespaces"
+
+participants:
+  max: 12
+  availability_note: "Mała grupa ze względu na praktyczny charakter warsztatu"
+
+# Prerequisites
+prerequisites:
+  - "Doświadczenie w programowaniu (Python, JavaScript, .NET, Java lub Go)"
+  - "Podstawowa znajomość HTTP/REST API"
+  - "Konto GitHub (środowisko w GitHub Codespaces, można też odpalić lokalnie)"
+
+# FAQ
+faq:
+  - question: "W jakim języku programowania będziemy pracować?"
+    answer: "Gotowe przykłady i wspólne kodowanie będzie w Python. Jednak OpenAI SDK jest dostępne dla JavaScript, Python, .NET, Java i Go - wzorce są identyczne we wszystkich językach. Jeśli chcesz pisać w innym języku, nie ma problemu."
+  - question: "Czy muszę mieć własne konto OpenAI?"
+    answer: "Nie, klucze API do OpenAI dostarczamy na czas szkolenia."
+  - question: "Czy muszę konfigurować lokalne środowisko?"
+    answer: "Nie, całe szkolenie będzie prowadzone w środowisku GitHub Codespaces (w ramach darmowego limitu). Wszystkie narzędzia będą już przygotowane. Można również odpalić środowisko lokalnie."
+  - question: "Czy to szkolenie o LangChain lub podobnych frameworkach?"
+    answer: "Absolutnie nie. Celowo omijamy frameworki, żebyś zrozumiał jak agent działa od środka. Po tym szkoleniu będziesz mógł świadomie wybrać framework lub zbudować własne rozwiązanie."
+  - question: "Czy agenda może się jeszcze zmienić?"
+    answer: "Tak, to zupełnie nowe szkolenie w trakcie powstawania. Przedstawiona agenda stanowi ramę programową - szczegóły mogą ulec dopracowaniu."
+  - question: "Dla kogo jest to szkolenie?"
+    answer: "Dla inżynierów IT, architektów i zaawansowanych programistów, którzy chcą zrozumieć jak działają agenci AI i nauczyć się budować własne rozwiązania. Wymagane jest doświadczenie w programowaniu."
+  - question: "Czy po szkoleniu zrozumiem jak działają frameworki typu LangChain?"
+    answer: "Tak! Frameworki takie jak LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, Strands Agents, Pydantic AI czy LlamaIndex Agents używają tych samych wzorców - pętla ReAct, function calling, context window. Po szkoleniu będziesz wiedział co dzieje się pod maską i świadomie wybierzesz narzędzie lub zbudujesz własne."
+
+# Meta dla Hugo
+layout: "training"
+type: "training"
