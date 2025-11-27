@@ -92,6 +92,7 @@ benefits:
 price_net: 1625.20
 price_gross: 1999.00
 currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/grafana-alerting"
 
 dates:
   - "2026-05-11"

@@ -93,6 +93,7 @@ benefits:
 price_net: 1300.00
 price_gross: 1599.00
 currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/wykrywanie-anomalii-prometheus-grafana"
 
 dates:
   - "2026-06-08"

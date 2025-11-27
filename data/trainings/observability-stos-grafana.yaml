@@ -2,7 +2,7 @@ id: "observability-stos-grafana"
 title: "Observability ze stosem Grafana"
 active: true
 featured: true
-waitlist_only: true
+waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Szymon Warda"

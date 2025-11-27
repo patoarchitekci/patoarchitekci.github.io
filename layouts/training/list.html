@@ -81,41 +81,43 @@
           </div>
         </a>
         {{- else -}}
-        <div onclick="window.location.href='/szkolenia/{{ $training.id }}/'" style="cursor: pointer;"
-          class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative {{ $hiddenClass }} card cursor-pointer">
-          <div class="flex flex-col justify-between w-full">
-            <div
-              class="flex max-[576px]:flex-col justify-between items-start w-full gap-2.5 sm:gap-[30px] max-sm:mb-[10px]">
-              <p
-                class="text-orange group-hover:text-black transition-all ease-linear duration-300 text-xl sm:text-2xl md:text-3xl uppercase xl:text-4xl max-sm:pb-8 font-semibold max-w-[650px] w-full">
-                {{ $training.title }}</p>
-              <p
-                class="text-xs sm:text-base md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
-                <span class="text-white">
-                  {{- partial "training-date-display.html" $training -}}
-                </span>
-              </p>
-            </div>
-            <div class="flex sm:justify-between items-end sm:items-baseline w-full gap-10 sm:gap-[30px]">
-              <p
-                class="text-xs max-sm:w-max sm:text-base uppercase md:text-xl xl:text-2xl text-white font-normal max-w-[650px] w-full">
-                <span class="font-semibold max-sm:block">PROWADZĄCY:</span> {{ $training.instructor | upper }}
-              </p>
-              <p
-                class="text-lg sm:text-xl md:text-2xl xl:text-custom-3xl text-white font-semibold whitespace-nowrap w-max xl:max-w-[424px] xl:w-full">
-                {{ $training.price_gross }}&nbsp;zł</p>
-              <button
-                class="min-w-8 min-h-8 sm:min-w-9 sm:min-h-9 flex items-center justify-center group-hover:bg-black bg-orange transition-all ease-linear duration-300 text-white rounded-full bottom-9 xl:absolute right-9">
-                <svg class="w-5 h-[17px] sm:w-[23px] sm:h-5" width="23" height="20" viewBox="0 0 23 20" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path class="group-hover:fill-orange transition-all ease-linear duration-300"
-                    d="M12.9688 20L11.25 18.3036L18.3259 11.2277H0V8.77232H18.3259L11.25 1.71875L12.9688 0L22.9688 10L12.9688 20Z"
-                    fill="#201B20" />
-                </svg>
-              </button>
+        <a href="/szkolenia/{{ $training.id }}/" class="{{ $hiddenClass }}">
+          <div
+            class="w-full max-w-[1200px] rounded-[14px] lg:rounded-[30px] border border-white min-h-[203px] sm:min-h-[260px] p-[20px_14px_19px_14px] sm:p-6 lg:p-[35px_37px_30px_35px] text-white flex justify-between hover:border-transparent group hover:bg-orange transition-all ease-linear duration-300 max-sm:gap-3 max-xl:gap-5 relative card">
+            <div class="flex flex-col justify-between w-full">
+              <div
+                class="flex max-[576px]:flex-col justify-between items-start w-full gap-2.5 sm:gap-[30px] max-sm:mb-[10px]">
+                <p
+                  class="text-orange group-hover:text-black transition-all ease-linear duration-300 text-xl sm:text-2xl md:text-3xl uppercase xl:text-4xl max-sm:pb-8 font-semibold max-w-[650px] w-full">
+                  {{ $training.title }}</p>
+                <p
+                  class="text-xs sm:text-base md:text-xl xl:text-2xl font-medium text-white xl:max-w-[424px] w-full max-sm:pb-[14px] max-sm:text-start max-xl:text-end">
+                  <span class="text-white">
+                    {{- partial "training-date-display.html" $training -}}
+                  </span>
+                </p>
+              </div>
+              <div class="flex sm:justify-between items-end sm:items-baseline w-full gap-10 sm:gap-[30px]">
+                <p
+                  class="text-xs max-sm:w-max sm:text-base uppercase md:text-xl xl:text-2xl text-white font-normal max-w-[650px] w-full">
+                  <span class="font-semibold max-sm:block">PROWADZĄCY:</span> {{ $training.instructor | upper }}
+                </p>
+                <p
+                  class="text-lg sm:text-xl md:text-2xl xl:text-custom-3xl text-white font-semibold whitespace-nowrap w-max xl:max-w-[424px] xl:w-full">
+                  {{ $training.price_gross }}&nbsp;zł</p>
+                <button
+                  class="min-w-8 min-h-8 sm:min-w-9 sm:min-h-9 flex items-center justify-center group-hover:bg-black bg-orange transition-all ease-linear duration-300 text-white rounded-full bottom-9 xl:absolute right-9">
+                  <svg class="w-5 h-[17px] sm:w-[23px] sm:h-5" width="23" height="20" viewBox="0 0 23 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path class="group-hover:fill-orange transition-all ease-linear duration-300"
+                      d="M12.9688 20L11.25 18.3036L18.3259 11.2277H0V8.77232H18.3259L11.25 1.71875L12.9688 0L22.9688 10L12.9688 20Z"
+                      fill="#201B20" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </a>
         {{- end -}}
         {{- end -}}
         <button id="toggleButton"
