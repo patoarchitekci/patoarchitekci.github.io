@@ -89,12 +89,12 @@ benefits:
     description: "90% praktyki - tworzenie, testowanie i konfiguracja rzeczywistych alertów"
 
 # Organizacja
-price_net: 1462.60
-price_gross: 1799.00
+price_net: 1625.20
+price_gross: 1999.00
 currency: "PLN"
 
 dates:
-  - "2025-10-10"
+  - "2026-05-11"
 time: "9:30 – 17:00"
 
 location:
