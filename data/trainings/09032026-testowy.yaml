@@ -1,6 +1,7 @@
 id: "09032026-testowy"
 title: "Testowy"
 active: true
+hidden: true
 
 # Prowadzący
 instructor: "Łukasz Kałużny"

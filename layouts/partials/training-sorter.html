@@ -10,7 +10,9 @@
 {{- $pastTrainings := slice -}}
 
 {{- /* Separate trainings into future and past, adding firstDate field for sorting */ -}}
+{{- /* Skip hidden trainings (used for test/JSON-only trainings) */ -}}
 {{- range . -}}
+  {{- if not .hidden -}}
   {{- if .dates -}}
     {{- $firstDate := index .dates 0 -}}
     {{- /* Add firstDate field to training object for proper sorting */ -}}
@@ -25,6 +27,7 @@
     {{- /* Trainings without dates go to the end */ -}}
     {{- $training := merge . (dict "firstDate" "") -}}
     {{- $pastTrainings = $pastTrainings | append $training -}}
+  {{- end -}}
   {{- end -}}
 {{- end -}}
 
