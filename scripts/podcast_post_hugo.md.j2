@@ -1,5 +1,5 @@
 ---
-title: '#{{ episode.episode_number }} {{ episode.title | replace("\n", " ") | replace("\r", " ") | escape }}'
+title: '#{{ episode.episode_number }} {{ episode.title | replace("\n", " ") | replace("\r", " ") }}'
 date: {{ episode.date }}T08:00:00+02:00
 episode: "{{ episode.episode_number }}"
 tags: [{{ tags | map('tojson') | join(', ') }}]
