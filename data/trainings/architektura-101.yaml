@@ -2,7 +2,7 @@ id: "architektura-101"
 title: "Architektura 101"
 active: true
 featured: true
-waitlist_only: false
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Łukasz Kałużny"
