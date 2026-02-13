@@ -92,8 +92,8 @@ benefits:
     description: "90% czasu to konkretne ćwiczenia - nie dla mięczaków"
 
 # Organizacja
-price_net: 2031.71
-price_gross: 2499.00
+price_net: 2357.72
+price_gross: 2899.00
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
 
