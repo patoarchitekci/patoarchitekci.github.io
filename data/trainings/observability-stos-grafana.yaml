@@ -2,7 +2,7 @@ id: "observability-stos-grafana"
 title: "Observability ze stosem Grafana"
 active: true
 featured: true
-waitlist_only: false
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
@@ -92,17 +92,15 @@ benefits:
     description: "90% czasu to konkretne ćwiczenia - nie dla mięczaków"
 
 # Organizacja
-# price_net: 2031.71
-# price_gross: 2499.00
-price_net: 1625.20
-price_gross: 1999.00
+price_net: 2031.71
+price_gross: 2499.00
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
 
 dates:
-  - "2026-02-16"
-  - "2026-02-17"
-  - "2026-02-18"
+  - "2026-03-02"
+  - "2026-03-03"
+  - "2026-03-04"
 time: "9:00 – 13:00"
 
 location:
