@@ -100,7 +100,7 @@
             {{ end }}
           </ul>
           <p class="text-white text-[10px] leading-120 sm:text-base">
-            {{ .Site.Params.footer.copyright }} <br />
+            &copy; {{ .Site.Params.footer.copyright }} {{ now.Year }} <br />
             <a href="{{ .Site.Params.legal.privacyPolicy }}" class="hover:text-orange">Polityka prywatności</a><br />
             <a href="{{ .Site.Params.legal.terms }}" class="hover:text-orange">Regulamin</a>
           </p>
