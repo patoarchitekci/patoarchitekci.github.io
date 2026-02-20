@@ -62,7 +62,7 @@ disableKinds = ["taxonomy", "term"]
 
   # Footer
   [params.footer]
-    copyright = "© Protopia 2025"
+    copyright = "Protopia"
 
   # Szkolenia - globalne dane
   [params.trainings]
