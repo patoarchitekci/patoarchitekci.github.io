@@ -87,7 +87,14 @@ def fetch_linked_links(api: Api, record_ids: list[str]) -> list[dict]:
                 f"Fetched {len(records)} link records, but {len(record_ids)} IDs were provided. Some records might be missing."
             )
 
-        for record in records:
+        # Map fetched records by ID to preserve the order from record_ids
+        records_by_id = {record['id']: record for record in records}
+
+        for rec_id in record_ids:
+            record = records_by_id.get(rec_id)
+            if record is None:
+                logger.warning(f"Link record {rec_id} not found in fetched results.")
+                continue
             try:
                 fields = record.get("fields", {})
                 title = (
