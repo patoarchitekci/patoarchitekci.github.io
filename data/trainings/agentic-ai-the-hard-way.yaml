@@ -2,6 +2,7 @@ id: "agentic-ai-the-hard-way"
 title: "Agentic AI the Hard Way"
 active: true
 featured: true
+waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Łukasz Kałużny"
@@ -110,7 +111,7 @@ currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/agentic-ai-the-hard-way"
 
 dates:
-  - "2026-02-24"
+  - "2026-05-26"
 time: "9:30 – 17:00"
 
 location:
