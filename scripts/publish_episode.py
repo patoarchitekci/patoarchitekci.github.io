@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse
+import glob
 import logging
 import os
 import sys
+from datetime import date
 from io import BytesIO
 
+import yaml
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader
 from pyairtable import Api
@@ -145,6 +148,7 @@ def update_airtable_published_flag(api: Api, record_id: str):
 # --- File Operations ---
 POSTS_DIR = "content/episodes"  # Hugo episodes directory (relative to repo root)
 ASSETS_IMG_DIR = "static/img"  # Hugo static assets directory (relative to repo root)
+TRAININGS_DIR = "data/trainings"  # Hugo trainings data directory (relative to repo root)
 
 
 def save_markdown_file(content: str, episode_fields: dict) -> str | None:
@@ -281,6 +285,109 @@ def convert_duration_to_iso8601(duration_ms: int) -> str:
     return "".join(duration_parts)
 
 
+POLISH_MONTHS_GENITIVE = [
+    "", "stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca",
+    "lipca", "sierpnia", "września", "października", "listopada", "grudnia",
+]
+
+
+def format_date_polish(d: date) -> str:
+    """Formats a date as '13 kwietnia 2026'."""
+    return f"{d.day} {POLISH_MONTHS_GENITIVE[d.month]} {d.year}"
+
+
+def load_upcoming_trainings(max_count: int = 3) -> list[dict]:
+    """Loads training YAML files and returns upcoming active trainings sorted by date."""
+    today = date.today()
+    trainings = []
+
+    yaml_files = glob.glob(os.path.join(TRAININGS_DIR, "*.yaml"))
+    for filepath in yaml_files:
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+            if not data or not data.get("active", False):
+                continue
+            if data.get("waitlist_only", False):
+                continue
+            if data.get("hidden", False):
+                continue
+
+            # Find the earliest future date
+            dates = data.get("dates", [])
+            future_dates = []
+            for d in dates:
+                if isinstance(d, str):
+                    d = date.fromisoformat(d)
+                if isinstance(d, date) and d > today:
+                    future_dates.append(d)
+
+            if not future_dates:
+                continue
+
+            data["_earliest_date"] = min(future_dates)
+            data["_all_future_dates"] = sorted(future_dates)
+            trainings.append(data)
+        except Exception as e:
+            logger.warning(f"Error reading training file {filepath}: {e}")
+            continue
+
+    trainings.sort(key=lambda t: t["_earliest_date"])
+    result = trainings[:max_count]
+    logger.info(f"Found {len(result)} upcoming trainings (from {len(yaml_files)} files)")
+    return result
+
+
+def format_trainings_section(trainings: list[dict]) -> str:
+    """Formats upcoming trainings as a markdown section for the newsletter."""
+    if not trainings:
+        return ""
+
+    lines = [
+        "",
+        "---",
+        "",
+        "### 🎓 Najbliższe szkolenia",
+        "",
+        "Kod: \\*\\*{$promo_code}\\*\\* - taniej o {$promo_discount}%!",
+        "",
+    ]
+
+    for t in trainings:
+        training_id = t.get("id", "")
+        title = t.get("title", "")
+        instructor = t.get("instructor", "")
+        time_str = t.get("time", "")
+        description_list = t.get("description", [])
+        short_desc = description_list[0] if description_list else ""
+
+        # Format dates
+        future_dates = t.get("_all_future_dates", [])
+        if len(future_dates) == 1:
+            date_str = format_date_polish(future_dates[0])
+        else:
+            date_str = f"{format_date_polish(future_dates[0])} - {format_date_polish(future_dates[-1])}"
+
+        lines.append(f"#### {title}")
+        lines.append(f"**Prowadzący:** {instructor}")
+        lines.append(f"**Termin:** {date_str} | {time_str}")
+        lines.append("")
+        lines.append(short_desc)
+        lines.append("")
+        lines.append(
+            f"[Szczegóły i zapisy →]"
+            f"(https://patoarchitekci.io/szkolenia/{training_id}/?promo={{$promo_code}})"
+        )
+        lines.append("")
+
+    lines.append(
+        "[Zobacz pełną ofertę szkoleń →]"
+        "(https://patoarchitekci.io/szkolenia/?promo={$promo_code})"
+    )
+
+    return "\n".join(lines)
+
+
 def render_markdown(context: dict) -> str | None:
     """Renders the Markdown content using the Jinja template file and context."""
     logger.info(f"Rendering Markdown template from '{TEMPLATE_FILENAME}'...")
@@ -415,13 +522,25 @@ def main():
 
     # Handle Newsletter (multiline field)
     newsletter = episode_fields.get("newsletter", "")
-    if newsletter:
+    if newsletter and newsletter.strip():
         # Clean control characters from newsletter
         episode_fields["newsletter"] = clean_control_characters(newsletter)
         logger.info("Newsletter field processed (multiline content preserved)")
     else:
-        episode_fields["newsletter"] = ""
-        logger.info("No newsletter content found in episode data")
+        # Fallback: use intro field + upcoming trainings when newsletter is empty
+        intro = episode_fields.get("intro", "")
+        if intro and intro.strip():
+            fallback = clean_control_characters(intro)
+            # Append upcoming trainings section
+            trainings = load_upcoming_trainings(max_count=3)
+            trainings_section = format_trainings_section(trainings)
+            if trainings_section:
+                fallback += trainings_section
+            episode_fields["newsletter"] = fallback
+            logger.info("Newsletter field empty - using intro + trainings as fallback")
+        else:
+            episode_fields["newsletter"] = ""
+            logger.info("No newsletter or intro content found in episode data")
 
     # Convert duration from milliseconds to ISO 8601 format
     duration_ms = episode_fields.get("duration_ms")
