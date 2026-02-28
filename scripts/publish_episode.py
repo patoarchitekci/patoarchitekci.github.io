@@ -420,8 +420,14 @@ def main():
         episode_fields["newsletter"] = clean_control_characters(newsletter)
         logger.info("Newsletter field processed (multiline content preserved)")
     else:
-        episode_fields["newsletter"] = ""
-        logger.info("No newsletter content found in episode data")
+        # Fallback: use intro field when newsletter is empty
+        intro = episode_fields.get("intro", "")
+        if intro:
+            episode_fields["newsletter"] = clean_control_characters(intro)
+            logger.info("Newsletter field empty - using intro as fallback")
+        else:
+            episode_fields["newsletter"] = ""
+            logger.info("No newsletter or intro content found in episode data")
 
     # Convert duration from milliseconds to ISO 8601 format
     duration_ms = episode_fields.get("duration_ms")
