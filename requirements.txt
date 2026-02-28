@@ -2,4 +2,5 @@ pyairtable
 requests
 jinja2
 python-dotenv
-Pillow 
+Pillow
+pyyaml
