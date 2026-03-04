@@ -97,6 +97,10 @@ if (linksForm) {
       linksErrorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
       linksErrorMsg.classList.remove("hidden");
       linksSuccessMsg.classList.add("hidden");
+      if (window.turnstile && turnstileWidgetId !== null) {
+        window.turnstile.reset(turnstileWidgetId);
+      }
+      turnstileToken = null;
     } finally {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
@@ -129,8 +133,10 @@ if (linksForm) {
         pendingSubmit = true;
         window.turnstile.execute(turnstileWidgetId);
       } else {
-        submitButton.textContent = "Zapisz się";
         submitButton.disabled = false;
+        linksErrorMsg.textContent = "Nie udało się załadować zabezpieczenia. Odśwież stronę i spróbuj ponownie.";
+        linksErrorMsg.classList.remove("hidden");
+        linksSuccessMsg.classList.add("hidden");
       }
     }
   });
