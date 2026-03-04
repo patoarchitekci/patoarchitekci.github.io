@@ -2,6 +2,3 @@ buttons:
   - label: "Bezpłatna Konsultacja"
     url: "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
     icon: "calendar"
-  - label: "Protopia - Doradztwo"
-    url: "https://protopia.tech/doradztwo"
-    icon: "arrow"
