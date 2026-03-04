@@ -1,10 +1,10 @@
-// ===== LINKTREE ACCORDION =====
+// ===== LINKS ACCORDION =====
 document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".linktree-accordion");
+  const buttons = document.querySelectorAll(".links-accordion");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const content = button.nextElementSibling;
-      const arrow = button.querySelector(".linktree-arrow");
+      const arrow = button.querySelector(".links-arrow");
       const isOpen = content.style.maxHeight && content.style.maxHeight !== "0px";
 
       if (isOpen) {
@@ -18,33 +18,33 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ===== LINKTREE NEWSLETTER =====
-const linktreeForm = document.getElementById("linktree-emailForm");
-const linktreeEmailInput = document.getElementById("linktree-emailInput");
-const linktreeErrorMsg = document.getElementById("linktree-errorMsg");
-const linktreeSuccessMsg = document.getElementById("linktree-successMsg");
+// ===== LINKS NEWSLETTER =====
+const linksForm = document.getElementById("links-emailForm");
+const linksEmailInput = document.getElementById("links-emailInput");
+const linksErrorMsg = document.getElementById("links-errorMsg");
+const linksSuccessMsg = document.getElementById("links-successMsg");
 
-if (linktreeForm) {
+if (linksForm) {
   let turnstileToken = null;
   let turnstileWidgetId = null;
   let pendingSubmit = false;
 
-  window.onloadLinktreeTurnstileCallback = function () {
+  window.onloadLinksTurnstileCallback = function () {
     if (window.turnstile) {
-      turnstileWidgetId = window.turnstile.render("#linktree-turnstile-container", {
+      turnstileWidgetId = window.turnstile.render("#links-turnstile-container", {
         sitekey: "0x4AAAAAAB3rTpbU6V5I845R",
         callback: function (token) {
           turnstileToken = token;
           if (pendingSubmit) {
             pendingSubmit = false;
-            submitLinktreeForm();
+            submitLinksForm();
           }
         },
         "error-callback": function () {
           pendingSubmit = false;
-          linktreeErrorMsg.textContent = "Weryfikacja nie powiodła się. Spróbuj ponownie.";
-          linktreeErrorMsg.classList.remove("hidden");
-          const submitButton = linktreeForm.querySelector('button[type="submit"]');
+          linksErrorMsg.textContent = "Weryfikacja nie powiodła się. Spróbuj ponownie.";
+          linksErrorMsg.classList.remove("hidden");
+          const submitButton = linksForm.querySelector('button[type="submit"]');
           submitButton.textContent = "Zapisz się";
           submitButton.disabled = false;
         },
@@ -54,14 +54,14 @@ if (linktreeForm) {
     }
   };
 
-  async function submitLinktreeForm() {
-    const submitButton = linktreeForm.querySelector('button[type="submit"]');
+  async function submitLinksForm() {
+    const submitButton = linksForm.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
     submitButton.textContent = "Zapisywanie...";
     submitButton.disabled = true;
 
     try {
-      const formData = new FormData(linktreeForm);
+      const formData = new FormData(linksForm);
       formData.append("cf-turnstile-response", turnstileToken);
 
       const response = await fetch("/api/newsletter", {
@@ -72,9 +72,9 @@ if (linktreeForm) {
       const data = await response.json();
 
       if (data.success) {
-        linktreeErrorMsg.classList.add("hidden");
-        linktreeSuccessMsg.classList.remove("hidden");
-        linktreeEmailInput.value = "";
+        linksErrorMsg.classList.add("hidden");
+        linksSuccessMsg.classList.remove("hidden");
+        linksEmailInput.value = "";
 
         if (window.turnstile && turnstileWidgetId !== null) {
           window.turnstile.reset(turnstileWidgetId);
@@ -82,46 +82,46 @@ if (linktreeForm) {
         turnstileToken = null;
 
         setTimeout(() => {
-          linktreeSuccessMsg.classList.add("hidden");
+          linksSuccessMsg.classList.add("hidden");
         }, 15000);
       } else {
-        linktreeErrorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
-        linktreeErrorMsg.classList.remove("hidden");
-        linktreeSuccessMsg.classList.add("hidden");
+        linksErrorMsg.textContent = data.error || "Wystąpił błąd. Spróbuj ponownie.";
+        linksErrorMsg.classList.remove("hidden");
+        linksSuccessMsg.classList.add("hidden");
         if (window.turnstile && turnstileWidgetId !== null) {
           window.turnstile.reset(turnstileWidgetId);
         }
         turnstileToken = null;
       }
     } catch (error) {
-      linktreeErrorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
-      linktreeErrorMsg.classList.remove("hidden");
-      linktreeSuccessMsg.classList.add("hidden");
+      linksErrorMsg.textContent = "Wystąpił błąd połączenia. Spróbuj ponownie.";
+      linksErrorMsg.classList.remove("hidden");
+      linksSuccessMsg.classList.add("hidden");
     } finally {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
     }
   }
 
-  linktreeForm.addEventListener("submit", function (e) {
+  linksForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const email = linktreeEmailInput.value.trim();
+    const email = linksEmailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(email)) {
-      linktreeErrorMsg.textContent = "Wprowadź poprawny adres e-mail.";
-      linktreeErrorMsg.classList.remove("hidden");
-      linktreeSuccessMsg.classList.add("hidden");
+      linksErrorMsg.textContent = "Wprowadź poprawny adres e-mail.";
+      linksErrorMsg.classList.remove("hidden");
+      linksSuccessMsg.classList.add("hidden");
       return;
     }
 
-    linktreeErrorMsg.classList.add("hidden");
+    linksErrorMsg.classList.add("hidden");
 
     if (turnstileToken) {
-      submitLinktreeForm();
+      submitLinksForm();
     } else {
-      const submitButton = linktreeForm.querySelector('button[type="submit"]');
+      const submitButton = linksForm.querySelector('button[type="submit"]');
       submitButton.textContent = "Weryfikacja...";
       submitButton.disabled = true;
 
