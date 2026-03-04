@@ -1,5 +1,9 @@
 {{ define "main" }}
-{{ $latestEp := index (first 1 (where .Site.RegularPages "Type" "episodes")) 0 }}
+{{ $episodes := where .Site.RegularPages "Type" "episodes" }}
+{{ $latestEp := false }}
+{{ if gt (len $episodes) 0 }}
+  {{ $latestEp = index (first 1 $episodes) 0 }}
+{{ end }}
 {{ $today := now.Format "2006-01-02" }}
 
 <div class="min-h-screen flex flex-col items-center px-4 py-10 sm:py-14">
@@ -16,65 +20,21 @@
     </div>
 
     <!-- ===== DOŁĄCZ DO DISCORD ===== -->
-    <a href="{{ .Site.Params.social.discord }}" target="_blank" rel="noopener noreferrer"
+    {{ with .Site.Params.social.discord }}
+    <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
       class="w-full flex items-center justify-center gap-3 bg-dark-black border border-[#5865F2] hover:bg-[#5865F2] text-white font-bold text-base sm:text-lg uppercase font-tomorrow rounded-2xl py-3.5 px-6 transition-colors duration-300">
       <svg class="w-6 h-6 shrink-0" viewBox="0 0 46 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M38.3006 3.4312C35.3304 2.04212 32.1948 1.05666 28.9738 0.5C28.5331 1.30486 28.1343 2.13294 27.7791 2.9808C24.3482 2.45268 20.8591 2.45268 17.4282 2.9808C17.0728 2.13303 16.674 1.30495 16.2334 0.5C13.0104 1.06137 9.87273 2.04916 6.89951 3.43846C0.996912 12.3592 -0.60319 21.0583 0.196861 29.634C3.65357 32.2428 7.52262 34.2269 11.6358 35.5C12.562 34.2276 13.3815 32.8777 14.0858 31.4646C12.7482 30.9543 11.4572 30.3247 10.2277 29.5831C10.5513 29.3434 10.8678 29.0964 11.1736 28.8567C14.751 30.5752 18.6557 31.4663 22.609 31.4663C26.5623 31.4663 30.4669 30.5752 34.0444 28.8567C34.3537 29.1146 34.6702 29.3616 34.9902 29.5831C33.7584 30.3259 32.465 30.9567 31.1251 31.4682C31.8284 32.8806 32.648 34.2294 33.575 35.5C37.6917 34.232 41.5637 32.2489 45.0211 29.6376C45.9598 19.6926 43.4174 11.0734 38.3006 3.4312ZM15.0992 24.36C12.8697 24.36 11.0278 22.2933 11.0278 19.7507C11.0278 17.2082 12.8057 15.1233 15.092 15.1233C17.3784 15.1233 19.2061 17.2082 19.167 19.7507C19.1279 22.2933 17.3713 24.36 15.0992 24.36ZM30.1188 24.36C27.8858 24.36 26.051 22.2933 26.051 19.7507C26.051 17.2082 27.8289 15.1233 30.1188 15.1233C32.4087 15.1233 34.2222 17.2082 34.183 19.7507C34.1439 22.2933 32.3909 24.36 30.1188 24.36Z" fill="currentColor"/>
       </svg>
       Dołącz do Discord
     </a>
+    {{ end }}
 
     <!-- ===== CUSTOM LINKS FROM data/links.yaml ===== -->
     {{ range .Site.Data.links.buttons }}
     <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"
       class="w-full flex items-center justify-center gap-3 bg-dark-black border border-orange hover:bg-orange hover:text-dark-black text-white font-bold text-base sm:text-lg uppercase font-tomorrow rounded-2xl py-3.5 px-6 transition-colors duration-300">
-      {{ if eq .icon "calendar" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-      {{ else if eq .icon "arrow" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-      {{ else if eq .icon "mail" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-      {{ else if eq .icon "book" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" /></svg>
-      {{ else if eq .icon "cart" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg>
-      {{ else if eq .icon "star" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-      {{ else if eq .icon "gift" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1" /><path d="M12 8v13" /><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" /></svg>
-      {{ else if eq .icon "users" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-      {{ else if eq .icon "headphones" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" /></svg>
-      {{ else if eq .icon "link" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
-      {{ else if eq .icon "phone" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-      {{ else if eq .icon "video" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" /></svg>
-      {{ else if eq .icon "mic" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
-      {{ else if eq .icon "globe" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
-      {{ else if eq .icon "code" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
-      {{ else if eq .icon "graduation" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5" /></svg>
-      {{ else if eq .icon "ticket" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /><path d="M13 5v2" /><path d="M13 17v2" /><path d="M13 11v2" /></svg>
-      {{ else if eq .icon "megaphone" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 13v-2z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg>
-      {{ else if eq .icon "play" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></svg>
-      {{ else if eq .icon "download" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-      {{ else if eq .icon "heart" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-      {{ else if eq .icon "zap" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-      {{ else if eq .icon "map" }}
-      <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-      {{ end }}
+      {{ partial "link-icon.html" .icon }}
       {{ .label }}
     </a>
     {{ end }}
@@ -83,12 +43,14 @@
     <div class="w-full flex flex-col gap-3 links-container">
 
       <!-- ===== NAJNOWSZY ODCINEK ===== -->
+      {{ if $latestEp }}
       <div>
-        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group">
+        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group"
+          aria-expanded="false" aria-controls="links-panel-episode">
           <span class="font-tomorrow font-semibold text-sm sm:text-base uppercase text-left">Najnowszy Odcinek</span>
           <img src="/img/svg/faq-arrow.svg" alt="arrow" class="links-arrow w-6 h-6 transition-transform duration-300" />
         </button>
-        <div class="links-content transition-max-height max-h-0 overflow-hidden">
+        <div id="links-panel-episode" role="region" class="links-content transition-max-height max-h-0 overflow-hidden">
           <div class="pt-2 pb-1 px-1">
             <div class="flex gap-3 items-center">
               {{ with $latestEp.Params.og_square }}
@@ -125,14 +87,16 @@
           </div>
         </div>
       </div>
+      {{ end }}
 
       <!-- ===== GDZIE SŁUCHAĆ ===== -->
       <div>
-        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group">
+        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group"
+          aria-expanded="false" aria-controls="links-panel-listen">
           <span class="font-tomorrow font-semibold text-sm sm:text-base uppercase text-left">Gdzie Słuchać</span>
           <img src="/img/svg/faq-arrow.svg" alt="arrow" class="links-arrow w-6 h-6 transition-transform duration-300" />
         </button>
-        <div class="links-content transition-max-height max-h-0 overflow-hidden">
+        <div id="links-panel-listen" role="region" class="links-content transition-max-height max-h-0 overflow-hidden">
           <div class="flex flex-col gap-2.5 pt-3 pb-1 px-1">
             {{ with .Site.Params.podcast.youtube }}
             <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
@@ -178,11 +142,12 @@
       {{ end }}
       {{ if $futureTrainings }}
       <div>
-        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group">
+        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group"
+          aria-expanded="false" aria-controls="links-panel-trainings">
           <span class="font-tomorrow font-semibold text-sm sm:text-base uppercase text-left">Nadchodzące Szkolenia</span>
           <img src="/img/svg/faq-arrow.svg" alt="arrow" class="links-arrow w-6 h-6 transition-transform duration-300" />
         </button>
-        <div class="links-content transition-max-height max-h-0 overflow-hidden">
+        <div id="links-panel-trainings" role="region" class="links-content transition-max-height max-h-0 overflow-hidden">
           <div class="flex flex-col gap-3 pt-3 pb-1 px-2">
             {{ range first 4 $futureTrainings }}
             <a href="/szkolenia/{{ .id }}/" class="flex flex-col gap-1 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors duration-300">
@@ -201,11 +166,12 @@
 
       <!-- ===== PROWADZĄCY ===== -->
       <div>
-        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group">
+        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group"
+          aria-expanded="false" aria-controls="links-panel-hosts">
           <span class="font-tomorrow font-semibold text-sm sm:text-base uppercase text-left">Prowadzący</span>
           <img src="/img/svg/faq-arrow.svg" alt="arrow" class="links-arrow w-6 h-6 transition-transform duration-300" />
         </button>
-        <div class="links-content transition-max-height max-h-0 overflow-hidden">
+        <div id="links-panel-hosts" role="region" class="links-content transition-max-height max-h-0 overflow-hidden">
           <div class="flex flex-col gap-2.5 pt-3 pb-1 px-1">
             <!-- Łukasz Kałużny -->
             <p class="text-white text-sm font-semibold px-1 pt-1">Łukasz Kałużny</p>
@@ -235,11 +201,12 @@
 
       <!-- ===== NEWSLETTER ===== -->
       <div>
-        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group">
+        <button class="links-accordion w-full flex items-center justify-between bg-dark-black border border-white/20 hover:border-orange text-white rounded-2xl py-3.5 px-5 transition-colors duration-300 cursor-pointer group"
+          aria-expanded="false" aria-controls="links-panel-newsletter">
           <span class="font-tomorrow font-semibold text-sm sm:text-base uppercase text-left">Newsletter</span>
           <img src="/img/svg/faq-arrow.svg" alt="arrow" class="links-arrow w-6 h-6 transition-transform duration-300" />
         </button>
-        <div class="links-content transition-max-height max-h-0 overflow-hidden">
+        <div id="links-panel-newsletter" role="region" class="links-content transition-max-height max-h-0 overflow-hidden">
           <div class="pt-4 pb-2 px-2">
             <p class="text-grey text-xs sm:text-sm mb-4 leading-120">
               Bądź na bieżąco ze wszystkimi odcinkami i uzyskaj dostęp do dodatkowych materiałów.

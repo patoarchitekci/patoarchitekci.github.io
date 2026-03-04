@@ -10,9 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isOpen) {
         content.style.maxHeight = null;
         arrow.classList.remove("rotate-90");
+        button.setAttribute("aria-expanded", "false");
       } else {
         content.style.maxHeight = content.scrollHeight + "px";
         arrow.classList.add("rotate-90");
+        button.setAttribute("aria-expanded", "true");
       }
     });
   });
