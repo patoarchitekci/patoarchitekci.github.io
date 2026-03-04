@@ -82,21 +82,27 @@
             {{ with .Site.Params.podcast.youtube }}
             <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
               class="flex items-center gap-3 w-full border border-white/20 hover:border-orange rounded-xl py-3 px-4 transition-colors duration-300">
-              <img src="/img/svg/youtube-icon.svg" alt="YouTube" class="w-7 h-5 shrink-0" />
+              <div class="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src="/img/svg/youtube-icon.svg" alt="YouTube" class="w-6 h-[18px]" />
+              </div>
               <span class="text-white font-semibold text-sm">YouTube</span>
             </a>
             {{ end }}
             {{ with .Site.Params.podcast.spotify }}
             <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
               class="flex items-center gap-3 w-full border border-white/20 hover:border-orange rounded-xl py-3 px-4 transition-colors duration-300">
-              <img src="/img/svg/spotify-icon.svg" alt="Spotify" class="w-5 h-5 shrink-0" />
+              <div class="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src="/img/svg/spotify-icon.svg" alt="Spotify" class="w-6 h-6" />
+              </div>
               <span class="text-white font-semibold text-sm">Spotify</span>
             </a>
             {{ end }}
             {{ with .Site.Params.podcast.apple }}
             <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
               class="flex items-center gap-3 w-full border border-white/20 hover:border-orange rounded-xl py-3 px-4 transition-colors duration-300">
-              <img src="/img/svg/poadcast-icon.svg" alt="Apple Podcasts" class="w-5 h-5 shrink-0" />
+              <div class="w-6 h-6 flex items-center justify-center shrink-0">
+                <img src="/img/svg/poadcast-icon.svg" alt="Apple Podcasts" class="w-6 h-6" />
+              </div>
               <span class="text-white font-semibold text-sm">Apple Podcasts</span>
             </a>
             {{ end }}
