@@ -54,9 +54,10 @@ if (linksForm) {
     }
   };
 
+  const defaultButtonText = "Zapisz się";
+
   async function submitLinksForm() {
     const submitButton = linksForm.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
     submitButton.textContent = "Zapisywanie...";
     submitButton.disabled = true;
 
@@ -102,7 +103,7 @@ if (linksForm) {
       }
       turnstileToken = null;
     } finally {
-      submitButton.textContent = originalText;
+      submitButton.textContent = defaultButtonText;
       submitButton.disabled = false;
     }
   }
