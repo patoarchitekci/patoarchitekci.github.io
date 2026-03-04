@@ -43,21 +43,27 @@
                 {{ $latestEp.Title }}
               </a>
             </div>
-            <!-- Platform icons row -->
-            <div class="flex items-center gap-5 mt-2.5 pl-1">
+            <!-- Platform buttons grid 1x3 -->
+            <div class="grid grid-cols-3 gap-2 mt-2.5">
               {{ with $latestEp.Params.youtube_url }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform duration-300" title="YouTube">
-                <img src="/img/svg/youtube-icon.svg" alt="YouTube" class="w-7 h-5" />
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-center gap-2 border border-white/20 hover:border-orange rounded-xl py-2.5 px-2 transition-colors duration-300">
+                <img src="/img/svg/youtube-icon.svg" alt="YouTube" class="w-6 h-4 shrink-0" />
+                <span class="text-white text-xs font-semibold">YouTube</span>
               </a>
               {{ end }}
               {{ with $latestEp.Params.spotify_url }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform duration-300" title="Spotify">
-                <img src="/img/svg/spotify-icon.svg" alt="Spotify" class="w-5 h-5" />
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-center gap-2 border border-white/20 hover:border-orange rounded-xl py-2.5 px-2 transition-colors duration-300">
+                <img src="/img/svg/spotify-icon.svg" alt="Spotify" class="w-4 h-4 shrink-0" />
+                <span class="text-white text-xs font-semibold">Spotify</span>
               </a>
               {{ end }}
               {{ with $latestEp.Params.apple_id }}
-              <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform duration-300" title="Apple Podcasts">
-                <img src="/img/svg/poadcast-icon.svg" alt="Apple Podcasts" class="w-5 h-5" />
+              <a href="{{ . }}" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-center gap-2 border border-white/20 hover:border-orange rounded-xl py-2.5 px-2 transition-colors duration-300">
+                <img src="/img/svg/poadcast-icon.svg" alt="Apple" class="w-4 h-4 shrink-0" />
+                <span class="text-white text-xs font-semibold">Apple</span>
               </a>
               {{ end }}
             </div>
