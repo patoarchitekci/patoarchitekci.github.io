@@ -2,6 +2,6 @@
 title: "Linktree"
 type: "linktree"
 layout: "single"
-url: /linktree/
+url: /links/
 description: "Patoarchitekci - podcast, który rozkłada IT na czynniki pierwsze. Wszystkie nasze linki w jednym miejscu."
 ---
