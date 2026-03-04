@@ -9,6 +9,19 @@
 #   users      - ludzie (community, zespół)
 #   headphones - słuchawki (podcast, audio)
 #   link       - link (ogólny odnośnik)
+#   phone      - telefon (kontakt telefoniczny)
+#   video      - kamera (wideo, webinar)
+#   mic        - mikrofon (podcast, nagrania)
+#   globe      - globus (strona www)
+#   code       - kod (tech, programowanie)
+#   graduation - czapka absolwenta (szkolenia, kursy)
+#   ticket     - bilet (eventy, wejściówki)
+#   megaphone  - megafon (ogłoszenia, promo)
+#   play       - play w kółku (odtwarzanie, demo)
+#   download   - pobieranie (pliki, materiały)
+#   heart      - serce (ulubione, wsparcie)
+#   zap        - błyskawica (szybkie akcje, nowości)
+#   map        - pin na mapie (lokalizacja, miejsce)
 
 buttons:
   - label: "Bezpłatna Konsultacja"
