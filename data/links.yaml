@@ -1,0 +1,29 @@
+# Dostępne ikony:
+#   calendar   - kalendarz (konsultacje, eventy)
+#   arrow      - strzałka external link
+#   mail       - koperta (kontakt, email)
+#   book       - książka (materiały, dokumentacja)
+#   cart       - koszyk (sklep, zakupy)
+#   star       - gwiazdka (wyróżnione, oceny)
+#   gift       - prezent (promocje, vouchery)
+#   users      - ludzie (community, zespół)
+#   headphones - słuchawki (podcast, audio)
+#   link       - link (ogólny odnośnik)
+#   phone      - telefon (kontakt telefoniczny)
+#   video      - kamera (wideo, webinar)
+#   mic        - mikrofon (podcast, nagrania)
+#   globe      - globus (strona www)
+#   code       - kod (tech, programowanie)
+#   graduation - czapka absolwenta (szkolenia, kursy)
+#   ticket     - bilet (eventy, wejściówki)
+#   megaphone  - megafon (ogłoszenia, promo)
+#   play       - play w kółku (odtwarzanie, demo)
+#   download   - pobieranie (pliki, materiały)
+#   heart      - serce (ulubione, wsparcie)
+#   zap        - błyskawica (szybkie akcje, nowości)
+#   map        - pin na mapie (lokalizacja, miejsce)
+
+buttons:
+  - label: "Bezpłatna Konsultacja"
+    url: "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
+    icon: "calendar"

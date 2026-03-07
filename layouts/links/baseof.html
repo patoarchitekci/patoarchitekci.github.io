@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body class="bg-dark-black min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P922WNC"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {{ block "main" . }}{{ end }}
+
+    <script src="{{ "js/links.js" | relURL }}"></script>
+</body>
+</html>
