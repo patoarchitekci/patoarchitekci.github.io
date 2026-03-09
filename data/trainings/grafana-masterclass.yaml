@@ -1,7 +1,7 @@
 id: "grafana-masterclass"
 title: "Grafana Masterclass – pełny przegląd i praktyka"
-active: true
-featured: true
+active: false
+featured: false
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
