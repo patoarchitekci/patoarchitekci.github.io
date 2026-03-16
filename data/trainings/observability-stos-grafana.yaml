@@ -2,7 +2,7 @@ id: "observability-stos-grafana"
 title: "Observability ze stosem Grafana"
 active: true
 featured: true
-waitlist_only: false
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
@@ -75,10 +75,6 @@ modules:
   - number: 8
     title: "Cost optimization"
     description: "Jak monitorować efektywnie bez rujnowania budżetu IT"
-  - number: 9
-    title: "Praktyczne warsztaty"
-    description: "Budowa kompletnego systemu observability od podstaw"
-
 benefits:
   - title: "Open Source bez kompromisów"
     description: "Potężny system monitorowania bez kosztów licencyjnych wielkich graczy"

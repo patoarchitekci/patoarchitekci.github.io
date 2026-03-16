@@ -2,6 +2,7 @@ id: "github-actions-w-praktyce"
 title: "GitHub Actions w Praktyce"
 active: true
 featured: true
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
