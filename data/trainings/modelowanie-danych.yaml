@@ -2,6 +2,7 @@ id: "modelowanie-danych"
 title: "Modelowanie Danych"
 active: true
 featured: true
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
