@@ -207,7 +207,7 @@
                     Termin
                   </p>
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
-                    {{- partial "training-date-display.html" $training -}}
+                    {{- partial "training-date-display.html" (dict "training" $training "showPrefix" false) -}}
                   </p>
                   {{- if not $isTrainingPast }}
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
@@ -407,7 +407,7 @@
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
               </p>
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
-                {{- partial "training-date-display.html" $training -}}
+                {{- partial "training-date-display.html" (dict "training" $training "showPrefix" false) -}}
               </p>
               {{- if not $isTrainingPast }}
               <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>

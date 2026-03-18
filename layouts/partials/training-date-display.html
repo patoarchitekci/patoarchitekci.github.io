@@ -1,24 +1,34 @@
 {{- /*
   Partial: training-date-display.html
-  Description: Displays training dates with "DATA:" prefix or "Nowy termin w drodze" for past/waitlist trainings
-  Context: Training object with .dates array and optional .waitlist_only flag
+  Description: Displays training dates or "Nowy termin w drodze" for past/waitlist trainings
+  Context: Either a training object directly, or a dict with:
+    - "training": the training object
+    - "showPrefix": bool (default true) — whether to prepend "DATA:" before future dates
 */ -}}
 
+{{- $training := . -}}
+{{- $showPrefix := true -}}
+{{- if .training -}}
+  {{- $training = .training -}}
+  {{- $showPrefix = default true .showPrefix -}}
+{{- end -}}
+
 {{- $today := now.Format "2006-01-02" -}}
-{{- if default false .waitlist_only -}}
+{{- if default false $training.waitlist_only -}}
   {{- /* Waitlist-only training - always show "Nowy termin w drodze" */ -}}
   Nowy termin w drodze
-{{- else if .dates -}}
-  {{- $firstDate := index .dates 0 -}}
+{{- else if $training.dates -}}
+  {{- $firstDate := index $training.dates 0 -}}
 
   {{- if gt $firstDate $today -}}
-    {{- /* Future training - show actual dates with DATA: prefix */ -}}
-    DATA: {{- range $dateIndex, $date := .dates -}}
+    {{- /* Future training - show formatted dates */ -}}
+    {{- if $showPrefix }}DATA: {{ end -}}
+    {{- range $dateIndex, $date := $training.dates -}}
       {{- dateFormat "02.01.2006" (time $date) -}}
-      {{- if ne $dateIndex (sub (len $.dates) 1) -}}, {{ end -}}
+      {{- if ne $dateIndex (sub (len $training.dates) 1) -}}, {{ end -}}
     {{- end -}}
   {{- else -}}
-    {{- /* Past training - show only "Nowy termin w drodze" without DATA: */ -}}
+    {{- /* Past training */ -}}
     Nowy termin w drodze
   {{- end -}}
 {{- else -}}
