@@ -1,11 +1,14 @@
 {{- /*
   Partial: training-date-display.html
-  Description: Displays training dates with "DATA:" prefix or "Nowy termin w drodze" for past trainings
-  Context: Training object with .dates array
+  Description: Displays training dates with "DATA:" prefix or "Nowy termin w drodze" for past/waitlist trainings
+  Context: Training object with .dates array and optional .waitlist_only flag
 */ -}}
 
 {{- $today := now.Format "2006-01-02" -}}
-{{- if .dates -}}
+{{- if default false .waitlist_only -}}
+  {{- /* Waitlist-only training - always show "Nowy termin w drodze" */ -}}
+  Nowy termin w drodze
+{{- else if .dates -}}
   {{- $firstDate := index .dates 0 -}}
 
   {{- if gt $firstDate $today -}}

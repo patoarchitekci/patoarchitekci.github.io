@@ -206,6 +206,9 @@
                   <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
                     Termin
                   </p>
+                  {{- if $isTrainingPast -}}
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">Nowy termin w drodze</p>
+                  {{- else -}}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
                     <span class="block">
                       {{- range $index, $date := $training.dates -}}
@@ -216,6 +219,7 @@
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
                     $training.time
                     }}</p>
+                  {{- end -}}
                 </div>
               </div>
 
