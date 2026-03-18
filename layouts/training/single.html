@@ -3,10 +3,10 @@
 {{ $trainingId := index (split (trim .RelPermalink "/") "/") 1 }}
 {{ $training := index .Site.Data.trainings $trainingId }}
 {{- $today := now.Format "2006-01-02" -}}
-{{- $isTrainingPast := false -}}
-{{- if $training.dates -}}
+{{- $isTrainingPast := default false $training.waitlist_only -}}
+{{- if and (not $isTrainingPast) $training.dates -}}
 {{- $firstDate := index $training.dates 0 -}}
-{{- $isTrainingPast = or (le $firstDate $today) (default false $training.waitlist_only) -}}
+{{- $isTrainingPast = le $firstDate $today -}}
 {{- end -}}
 <div class="flex relative" data-training-past="{{ $isTrainingPast }}">
   <div class="w-full">
@@ -206,16 +206,10 @@
                   <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
                     Termin
                   </p>
-                  {{- if $isTrainingPast -}}
-                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">Nowy termin w drodze</p>
-                  {{- else -}}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
-                    <span class="block">
-                      {{- range $index, $date := $training.dates -}}
-                      {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
-                      {{- end }}
-                    </span>
+                    {{- partial "training-date-display.html" $training -}}
                   </p>
+                  {{- if not $isTrainingPast }}
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
                     $training.time
                     }}</p>
@@ -412,16 +406,10 @@
             <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
               </p>
-              {{- if $isTrainingPast -}}
-              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">Nowy termin w drodze</p>
-              {{- else -}}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
-                <span class="block">
-                  {{- range $index, $date := $training.dates -}}
-                  {{ $date }}{{ if ne $index (sub (len $training.dates) 1) }}<br>{{ end -}}
-                  {{- end }}
-                </span>
+                {{- partial "training-date-display.html" $training -}}
               </p>
+              {{- if not $isTrainingPast }}
               <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
               {{- end -}}
             </div>
