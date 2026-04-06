@@ -19,7 +19,7 @@
         <div id="video-container" class="relative w-full mx-auto rounded-[30px] sm:rounded-[41.49px] overflow-hidden max-w-full 
            aspect-video sm:aspect-video lg:h-[589px] mb-[15px] sm:mb-[36px]">
             <div id="thumbnail-wrapper"
-                class="w-full h-full relative  sm:min-h-full sm:max-w-full overflow-hidden rounded-[30px] sm:rounded-[41.49px]">
+                class="w-full h-full relative  sm:min-h-full sm:max-w-full overflow-hidden rounded-[30px] sm:rounded-[41.49px] cursor-pointer">
                 <img class="h-full w-full object-cover" src="{{ .Params.og_landscape }}" alt="video-thumbnail">
                 <img id="custom-thumbnail" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer
                 lg:size-[95.43px]
@@ -287,7 +287,7 @@
 
 <!-- ===== VIDEO SCRIPT ===== -->
 <script>
-    document.getElementById("custom-thumbnail").addEventListener("click", () => {
+    document.getElementById("thumbnail-wrapper").addEventListener("click", () => {
         const iframe = document.getElementById("youtube-iframe");
         const loader = document.getElementById("video-loader");
         const thumbnail = document.getElementById("thumbnail-wrapper");
