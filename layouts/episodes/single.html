@@ -31,7 +31,7 @@
                 class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex items-center justify-center z-10 hidden">
                 <div class="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
             </div>
-            <iframe id="youtube-iframe" class="hidden w-full h-full rounded-[41px]" src="{{ .Params.youtube_url }}"
+            <iframe id="youtube-iframe" class="hidden w-full h-full rounded-[41px]" src="{{ with .Params.youtube_embed_url }}{{ . }}{{ else }}https://www.youtube.com/embed/{{ .Params.youtube_id }}?enablejsapi=1{{ end }}"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
