@@ -114,7 +114,7 @@
         </p>
 
         <div class="flex flex-wrap items-center gap-4 mb-6">
-          <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+          <a id="hero-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
              class="inline-flex items-center gap-3 h-14 px-10 rounded-full bg-brand-orange text-brand-charcoal font-sans font-bold text-xl uppercase shadow-2xl shadow-brand-orange/50 hover:shadow-brand-orange/70 hover:scale-[1.02] transition">
             Kup bilet · 359 zł netto
           </a>
@@ -1099,15 +1099,31 @@
         .catch(() => { /* silent - keep static fallback */ });
     })();
 
-    // Hide floating CTA when footer enters viewport (so footer links stay tappable on mobile)
+    // Floating CTA visibility:
+    //   - hidden while hero "Kup bilet" button is on screen (avoid duplicate CTA)
+    //   - hidden when footer is in viewport (don't block footer links on mobile)
+    //   - visible everywhere in between
     (function() {
       const cta = document.getElementById('float-cta');
+      const heroCta = document.getElementById('hero-cta');
       const footer = document.querySelector('footer');
-      if (!cta || !footer || !('IntersectionObserver' in window)) return;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => cta.classList.toggle('is-hidden', e.isIntersecting));
-      });
-      io.observe(footer);
+      if (!cta || !('IntersectionObserver' in window)) return;
+      let heroVisible = !!heroCta;   // assume on top of page → hero CTA visible
+      let footerVisible = false;
+      const update = () => cta.classList.toggle('is-hidden', heroVisible || footerVisible);
+      update();
+      if (heroCta) {
+        new IntersectionObserver((entries) => {
+          heroVisible = entries[0].isIntersecting;
+          update();
+        }).observe(heroCta);
+      }
+      if (footer) {
+        new IntersectionObserver((entries) => {
+          footerVisible = entries[0].isIntersecting;
+          update();
+        }).observe(footer);
+      }
     })();
   </script>
 
