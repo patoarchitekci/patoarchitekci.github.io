@@ -65,12 +65,15 @@
 
   <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling.
        Hidden when footer enters viewport (so footer links stay tappable on mobile). -->
+  <style>
+    #float-cta { transition: transform 300ms, opacity 300ms; }
+    #float-cta.is-hidden { transform: translateY(150%); opacity: 0; pointer-events: none; }
+  </style>
   <a id="float-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 h-14 px-7 rounded-full
             bg-brand-orange text-brand-charcoal font-sans font-bold text-base md:text-lg uppercase tracking-wide
             shadow-2xl shadow-brand-charcoal/50 ring-2 ring-brand-charcoal/10
-            hover:scale-105 hover:shadow-brand-orange/50 transition duration-300
-            data-[hidden=true]:translate-y-[150%] data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none">
+            hover:scale-105 hover:shadow-brand-orange/50">
     🎟 Kup bilet · 359 zł netto
   </a>
 
@@ -1102,8 +1105,8 @@
       const footer = document.querySelector('footer');
       if (!cta || !footer || !('IntersectionObserver' in window)) return;
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => cta.dataset.hidden = e.isIntersecting ? 'true' : 'false');
-      }, { rootMargin: '0px 0px -10% 0px' });
+        entries.forEach(e => cta.classList.toggle('is-hidden', e.isIntersecting));
+      });
       io.observe(footer);
     })();
   </script>
