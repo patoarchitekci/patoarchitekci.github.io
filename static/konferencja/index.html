@@ -66,8 +66,17 @@
   <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling.
        Hidden when footer enters viewport (so footer links stay tappable on mobile). -->
   <style>
-    #float-cta { transition: transform 300ms, opacity 300ms; }
+    #float-cta {
+      transition: transform 300ms, opacity 300ms,
+                  background-color 300ms, color 300ms,
+                  box-shadow 300ms, --tw-ring-color 300ms;
+    }
     #float-cta.is-hidden { transform: translateY(150%); opacity: 0; pointer-events: none; }
+    #float-cta.on-orange {
+      background-color: #ffffff;
+      color: var(--color-brand-charcoal, #201B20);
+      --tw-ring-color: rgba(32, 27, 32, 0.15);
+    }
   </style>
   <a id="float-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 h-14 px-7 rounded-full
@@ -181,7 +190,7 @@
   <!-- ============================================== -->
   <!-- INTRO · amber background                        -->
   <!-- ============================================== -->
-  <section class="relative bg-brand-orange pt-24 pb-32 md:pb-56 lg:pb-72 text-brand-charcoal overflow-hidden">
+  <section data-bg="orange" class="relative bg-brand-orange pt-24 pb-32 md:pb-56 lg:pb-72 text-brand-charcoal overflow-hidden">
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-charcoal/70 mb-6">O konferencji</p>
       <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">
@@ -652,7 +661,7 @@
   <!-- BUY TICKET · orange section (hard edge from white Miejsce) -->
   <!-- ============================================== -->
   <!-- ============================================== -->
-  <section class="relative bg-brand-orange text-brand-charcoal pt-24 pb-32 md:pb-56 lg:pb-72 overflow-hidden">
+  <section data-bg="orange" class="relative bg-brand-orange text-brand-charcoal pt-24 pb-32 md:pb-56 lg:pb-72 overflow-hidden">
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <p class="font-sans font-semibold text-sm uppercase tracking-widest mb-4">Bilety</p>
       <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-6">
@@ -1123,6 +1132,21 @@
           footerVisible = entries[0].isIntersecting;
           update();
         }).observe(footer);
+      }
+
+      // Background-aware color: when an orange section is behind the badge, swap to white.
+      // rootMargin shrinks the observation area to a band near the badge (bottom 120px of viewport).
+      const orangeSections = document.querySelectorAll('[data-bg="orange"]');
+      if (orangeSections.length) {
+        const onOrange = new Set();
+        const bgIo = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) onOrange.add(e.target);
+            else onOrange.delete(e.target);
+          });
+          cta.classList.toggle('on-orange', onOrange.size > 0);
+        }, { rootMargin: '0px 0px -' + (window.innerHeight - 120) + 'px 0px' });
+        orangeSections.forEach(s => bgIo.observe(s));
       }
     })();
   </script>
