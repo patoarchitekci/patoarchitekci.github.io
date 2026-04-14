@@ -47,11 +47,12 @@ disableKinds = ["taxonomy", "term"]
     privacyPolicy = "https://app.easy.tools/policies/otwarte-pato"
     terms = "https://app.easy.tools/terms/otwarte-pato"
 
-  # Training banner
+  # Training banner (also used as promo strip)
   [params.trainingBanner]
-    enabled = false
-    text = "Do najbliższego szkolenia"
-    highlight = "zostały 3 dni! 👉 Zapisz się teraz!"
+    enabled = true
+    text = "Konferencja Pato #200 · 16 czerwca 2026, Warszawa · "
+    highlight = "👉 Kup bilet za 359 zł netto"
+    url = "/konferencja/"
 
   # Consultation
   [params.consultation]
