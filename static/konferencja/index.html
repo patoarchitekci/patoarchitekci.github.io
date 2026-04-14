@@ -63,12 +63,14 @@
 </head>
 <body class="bg-brand-white text-charcoal-900 antialiased">
 
-  <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling -->
-  <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+  <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling.
+       Hidden when footer enters viewport (so footer links stay tappable on mobile). -->
+  <a id="float-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 h-14 px-7 rounded-full
             bg-brand-orange text-brand-charcoal font-sans font-bold text-base md:text-lg uppercase tracking-wide
             shadow-2xl shadow-brand-charcoal/50 ring-2 ring-brand-charcoal/10
-            hover:scale-105 hover:shadow-brand-orange/50 transition">
+            hover:scale-105 hover:shadow-brand-orange/50 transition duration-300
+            data-[hidden=true]:translate-y-[150%] data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none">
     🎟 Kup bilet · 359 zł netto
   </a>
 
@@ -1092,6 +1094,17 @@
           }
         })
         .catch(() => { /* silent - keep static fallback */ });
+    })();
+
+    // Hide floating CTA when footer enters viewport (so footer links stay tappable on mobile)
+    (function() {
+      const cta = document.getElementById('float-cta');
+      const footer = document.querySelector('footer');
+      if (!cta || !footer || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => cta.dataset.hidden = e.isIntersecting ? 'true' : 'false');
+      }, { rootMargin: '0px 0px -10% 0px' });
+      io.observe(footer);
     })();
   </script>
 
