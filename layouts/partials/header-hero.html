@@ -14,14 +14,23 @@
             style="background: #ff4405; mix-blend-mode: plus-lighter">
         </div>
         {{ if .Site.Params.trainingBanner.enabled }}
-        <div class="px-[30px] max-md:hidden relative z-20">
-            <div class="max-w-[998px] w-full py-3.5 bg-white mx-auto rounded-b-[15px]">
+        {{ $url := .Site.Params.trainingBanner.url | default "#" }}
+        <a href="{{ $url }}" class="block relative z-20 md:px-[30px] group">
+            {{/* Desktop: white rounded centered strip (original look). Hidden on mobile. */}}
+            <div class="hidden md:block max-w-[998px] w-full py-3.5 bg-white mx-auto rounded-b-[15px] transition group-hover:bg-orange-50">
                 <p class="uppercase font-bold text-base clr-dark-black leading-100 text-center">
                     {{ .Site.Params.trainingBanner.text }}
                     <span class="text-orange">{{ .Site.Params.trainingBanner.highlight }}</span>
                 </p>
             </div>
-        </div>
+            {{/* Mobile: full-width orange strip, single line, truncate. */}}
+            <div class="md:hidden w-full bg-orange px-4 py-2.5">
+                <p class="uppercase font-bold text-xs clr-dark-black leading-tight text-center">
+                    {{ .Site.Params.trainingBanner.text }}
+                    <span class="underline">{{ .Site.Params.trainingBanner.highlight }}</span>
+                </p>
+            </div>
+        </a>
         {{ end }}
         <nav class="mt-[74px] lg:mt-[138px] px-[30px] relative z-50">
             <div class="flex justify-end max-w-[998px] mx-auto">
