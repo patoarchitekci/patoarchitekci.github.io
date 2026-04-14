@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konferencja Pato #200 · 16 czerwca 2026 · Warszawa</title>
+  <meta name="description" content="Jednodniowa konferencja Patoarchitekci o nowoczesnych technologiach. 16 czerwca 2026, SkyHall Warszawa. Nagranie 200. odcinka na żywo." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tomorrow:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./konferencja.css" />
+
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { font-family: var(--font-sans); }
+    h1, h2, h3, h4, .font-display { font-family: var(--font-display); }
+    /* Cloud dividers - use SVG as a CSS mask so that `--cloud-color`
+     * (set per-section) tints the wave via background-color.
+     * An <img> cannot inherit CSS custom properties from its parent,
+     * which is why we mask a solid background instead.
+     * cloud-wave.svg viewBox = 1440×237 (~6:1). */
+    .cloud-divider {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1440 / 237;
+      max-height: 200px;
+      -webkit-mask: url('./pato-graphics/cloud-wave.svg') bottom / 100% 100% no-repeat;
+              mask: url('./pato-graphics/cloud-wave.svg') bottom / 100% 100% no-repeat;
+      background-color: var(--cloud-color, var(--color-brand-orange));
+      pointer-events: none;
+    }
+    .cloud-divider--flip-x { transform: scaleX(-1); }
+
+    /* Decorative brand-colored shapes - use SVG as CSS mask so color is controllable via --shape-color.
+     * (<img src="svg.svg"> doesn't inherit CSS custom properties, so fill="var(...)" in SVG falls back to default.) */
+    .brand-shape {
+      display: block;
+      background-color: var(--shape-color, var(--color-brand-orange));
+      -webkit-mask-position: center;
+              mask-position: center;
+      -webkit-mask-size: contain;
+              mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    /* Hero image slot · top anchored to the "Konferencja · 16 czerwca 2026 · Warszawa"
+     * label position (= section padding-top of nav + inner div pt-*).
+     * Single anchor model: top = label-top token; bottom = negative offset into intro.
+     * The intro section has overflow-hidden so the image terminates cleanly at its bottom. */
+    .hero-image-slot {
+      --hero-label-top: 9rem;   /* default: matches pt-16 (64px) + nav area */
+    }
+    @media (min-width: 768px)  { .hero-image-slot { --hero-label-top: 8rem; } }
+    @media (min-width: 1024px) { .hero-image-slot { --hero-label-top: 9rem; } }
+    @media (min-width: 1280px) { .hero-image-slot { --hero-label-top: 10rem; } }
+    @media (min-width: 1536px) { .hero-image-slot { --hero-label-top: 11rem; } }
+  </style>
+</head>
+<body class="bg-brand-white text-charcoal-900 antialiased">
+
+  <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling -->
+  <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+     class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 h-14 px-7 rounded-full
+            bg-brand-orange text-brand-charcoal font-sans font-bold text-base md:text-lg uppercase tracking-wide
+            shadow-2xl shadow-brand-charcoal/50 ring-2 ring-brand-charcoal/10
+            hover:scale-105 hover:shadow-brand-orange/50 transition">
+    🎟 Kup bilet · 359 zł netto
+  </a>
+
+  <!-- ============================================== -->
+  <!-- HERO · charcoal background, orange headlines    -->
+  <!-- ============================================== -->
+  <section class="relative bg-brand-charcoal">
+    <!-- Top nav -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-6 flex items-center justify-between">
+      <a href="https://patoarchitekci.io" class="inline-block">
+        <img src="./pato-logo/vertical-full-color.svg" alt="Patoarchitekci" class="h-20 md:h-24" />
+      </a>
+      <nav class="hidden md:flex items-center gap-2">
+        <a href="#agenda" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Agenda</a>
+        <a href="#co-cie-czeka" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Co Cię czeka</a>
+        <a href="#miejsce" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Miejsce</a>
+        <a href="#partner" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Partner</a>
+        <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200" class="rounded-full border-2 border-brand-orange px-6 py-1.5 font-sans font-semibold text-sm uppercase text-brand-orange hover:bg-brand-orange hover:text-brand-charcoal transition">Kup bilet</a>
+      </nav>
+    </div>
+
+    <!-- Hero · 2-column grid on md+: content left, image right. Image in its own cell,
+         self-aligned to the bottom and extended via negative margin into the padding
+         zone where the wave (z-20) crops its lower portion. -->
+    <div class="relative z-10 max-w-[1600px] mx-auto px-6 pt-20 md:pt-16 pb-32 md:pb-56 lg:pb-72 flex flex-col md:flex-row md:items-end md:justify-start gap-8 md:gap-10 lg:gap-16">
+
+      <div class="max-w-3xl flex-shrink-0">
+        <p class="font-sans font-semibold text-sm md:text-base uppercase tracking-widest mb-6 text-brand-white">Konferencja · 16 czerwca 2026 · Warszawa</p>
+        <h1 class="font-display font-bold uppercase leading-[0.9] text-5xl md:text-6xl lg:text-7xl 2xl:text-8xl mb-8 text-brand-orange">
+          Konferencja<br>
+          <span class="inline-block bg-brand-orange text-brand-charcoal px-4 pb-1 mt-2">Pato #200</span>
+        </h1>
+        <p class="font-display font-semibold uppercase text-lg md:text-2xl 2xl:text-3xl leading-tight max-w-3xl mb-2 text-brand-white">
+          Świętujemy 200. odcinek podcastu Patoarchitekci. Jeden dzień, trzech gości, jedno nagranie #200 na żywo.
+        </p>
+        <p class="font-sans font-semibold text-sm md:text-base uppercase tracking-widest text-brand-orange mb-10">
+          - Łukasz &amp; Szymon
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+             class="inline-flex items-center gap-3 h-14 px-10 rounded-full bg-brand-orange text-brand-charcoal font-sans font-bold text-xl uppercase shadow-2xl shadow-brand-orange/50 hover:shadow-brand-orange/70 hover:scale-[1.02] transition">
+            Kup bilet · 359 zł netto
+          </a>
+          <a href="#agenda" class="inline-flex items-center h-14 px-8 rounded-full border-2 border-brand-white font-sans font-semibold text-base uppercase text-brand-white hover:bg-brand-white hover:text-brand-charcoal transition">
+            Zobacz agendę ↓
+          </a>
+        </div>
+
+        <!-- Handwritten hint pointing CTA → tickets pill below -->
+        <div class="hidden md:flex items-end gap-3 mb-4 pl-6 opacity-80">
+          <svg width="140" height="64" viewBox="0 0 237 108" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="scale-y-[-1]">
+            <path d="M3.57671 68.3845C14.6526 36.9769 43.064 15.9112 72.6428 11.4624C102.222 7.01361 132.448 17.4446 157.975 34.9716C183.501 52.4986 204.87 76.7461 224.817 101.912" stroke="var(--color-brand-orange)" stroke-width="7.17348" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M178.692 94.181C193.032 97.4577 207.373 100.723 221.713 103.999C222.984 104.289 224.359 104.568 225.526 103.921C227.543 102.809 227.796 99.7201 227.737 97.1762C227.324 80.0235 225.265 62.9313 221.604 46.2908" stroke="var(--color-brand-orange)" stroke-width="7.17348" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="font-display font-bold text-sm uppercase tracking-wide text-brand-orange mb-1">tylko 99</span>
+        </div>
+
+        <!-- Key meta pills -->
+        <div class="flex flex-wrap gap-3 text-sm md:text-base">
+          <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-orange text-brand-charcoal font-display font-semibold uppercase tracking-wide">📍 Sky Hall · Warszawa</span>
+          <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-white text-brand-charcoal font-display font-semibold uppercase tracking-wide">🕘 9:00 - 17:00</span>
+          <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-amber text-brand-charcoal font-display font-bold uppercase tracking-wide shadow-lg shadow-brand-charcoal/30">🎟 Zostało tylko <span data-tickets-left>99</span> biletów</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hero image slot · section-level absolute positioning.
+         top = label-Y (from --hero-label-top token, matches inner div pt-*).
+         bottom = negative so the image bleeds into the orange intro section.
+         Inside the slot we MIRROR the inner div's flex layout (max-w-[1600px] + px-6
+         + flex items-end + gap + max-w-3xl spacer). The image is the flex sibling
+         right after the content column, so it lives glued to the RIGHT of the
+         "Konferencja" content div at every breakpoint, following the same gap. -->
+    <div class="hero-image-slot hidden lg:block pointer-events-none
+                absolute inset-x-0 z-[5]
+                top-[var(--hero-label-top)]
+                bottom-0">
+      <div class="relative mx-auto h-full max-w-[1600px] px-6
+                  flex items-end justify-start
+                  gap-8 md:gap-10 lg:gap-16">
+        <!-- Invisible spacer matching the content column's max-width, so the image
+             sits exactly where "the sibling after the content div" would sit. -->
+        <div class="max-w-3xl w-full flex-shrink-0" aria-hidden="true"></div>
+        <img src="./pato-graphics/hero.png" alt="Konferencja Pato #200"
+             class="block h-full w-auto max-h-full object-contain object-bottom" />
+      </div>
+    </div>
+
+    <!-- Decorative shapes (orange on charcoal) - mask technique so color follows --shape-color -->
+    <div class="brand-shape absolute top-32 right-10 w-20 h-20 md:w-32 md:h-32 opacity-90"
+         style="--shape-color: var(--color-brand-orange); -webkit-mask-image: url('./pato-graphics/shape-star.svg'); mask-image: url('./pato-graphics/shape-star.svg');" aria-hidden="true"></div>
+    <div class="brand-shape absolute bottom-48 left-10 w-16 h-16 md:w-24 md:h-24"
+         style="--shape-color: var(--color-brand-orange); -webkit-mask-image: url('./pato-graphics/shape-thunder.svg'); mask-image: url('./pato-graphics/shape-thunder.svg');" aria-hidden="true"></div>
+    <div class="brand-shape absolute top-1/2 right-1/4 w-8 h-14 opacity-60"
+         style="--shape-color: var(--color-brand-orange); -webkit-mask-image: url('./pato-graphics/shape-bolt.svg'); mask-image: url('./pato-graphics/shape-bolt.svg');" aria-hidden="true"></div>
+
+    <!-- Cloud divider (z-20 covers hero image z-5) → next section is ORANGE -->
+    <div
+         class="cloud-divider absolute inset-x-0 bottom-0 z-20"
+         style="--cloud-color: var(--color-brand-orange)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- INTRO · amber background                        -->
+  <!-- ============================================== -->
+  <section class="relative bg-brand-orange pt-24 pb-32 md:pb-56 lg:pb-72 text-brand-charcoal overflow-hidden">
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-charcoal/70 mb-6">O konferencji</p>
+      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">
+        Jeden dzień.<br>Łukasz &amp; Szymon + 3 gości.<br>200 słuchaczy na sali.
+      </h2>
+      <p class="font-sans text-lg md:text-xl leading-relaxed mb-6">
+        <strong>Hey, czołem, kluski z rosołem!</strong> Robimy jednodniową konferencję w Warszawie dla architektów, developerów, DevOpsów i engineering managerów, którzy o architekturze decydują bez wstawiania tego w CV pod „visionary".
+      </p>
+      <p class="font-sans text-lg md:text-xl leading-relaxed mb-6">
+        Na scenie Łukasz &amp; Szymon plus trójka gości, którzy wcześniej byli w Pato na mikrofonie. Tematy konkretne, bez marketingu. Na koniec dnia nagrywamy 200. odcinek na żywo - wszyscy na scenie. Na sali spotkacie też innych byłych gości podcastu, więc networking robi się sam, bez speed datingu z badgem na szyi.
+      </p>
+      <p class="font-sans text-lg md:text-xl leading-relaxed font-semibold">
+        Dwieście odcinków to wasza zasługa. Gdybyście nie słuchali, dawno byśmy skończyli na 12. Dzięki. Warszawa czeka.
+      </p>
+      <p class="font-sans text-base md:text-lg leading-relaxed mt-4 text-brand-charcoal/80">
+        PS. Rosołu na lunchu nie będzie. Sorry.
+      </p>
+    </div>
+
+    <div class="brand-shape absolute top-20 right-6 md:right-20 w-20 h-20 md:w-28 md:h-28 rotate-180 scale-y-[-1]"
+         style="--shape-color: var(--color-brand-charcoal); -webkit-mask-image: url('./pato-graphics/shape-arrow.svg'); mask-image: url('./pato-graphics/shape-arrow.svg');" aria-hidden="true"></div>
+
+    <!-- Cloud divider → next section is WHITE (Agenda) · flipped -->
+    <div
+         class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0"
+         style="--cloud-color: var(--color-brand-white)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- AGENDA · white background                       -->
+  <!-- ============================================== -->
+  <section id="agenda" class="relative bg-brand-white pt-24 pb-32 md:pb-56 lg:pb-72 text-charcoal-900 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-4">Agenda · Timetable</p>
+      <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-4">Plan dnia</h2>
+      <p class="font-sans text-lg text-charcoal-600 max-w-2xl mb-4">
+        Od kawy o 8:00 do panelu dyskusyjnego po nagraniu #200. Prelekcje ~40 min, przerwy prawdziwe, lunch długi. Kolejność może się jeszcze kosmetycznie przesunąć.
+      </p>
+      <div class="inline-flex items-center gap-3 mb-12 px-5 py-3 rounded-full bg-brand-charcoal text-brand-white font-sans font-bold text-sm md:text-base uppercase tracking-wide shadow-md">
+        <span class="inline-block w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+        Bez nagrania - wszystko na żywo · wyjątek: finałowy odcinek&nbsp;#200
+      </div>
+
+      <!-- Chronological card timetable - one row = one card = one session -->
+      <ol class="space-y-3">
+
+        <!-- 08:00 Registration -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">08:00 - 09:00</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Przerwa</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Rejestracja + kawa</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Godzina na ogarnięcie się, kawę i networking na dzień dobry.</p>
+          </div>
+        </li>
+
+        <!-- Handwritten hint: sessions are clickable -->
+        <li class="list-none flex items-center gap-2 py-1 pl-6 opacity-70" aria-hidden="true">
+          <span class="font-display font-bold text-xs uppercase tracking-widest text-charcoal-500">tak, klikalne</span>
+          <svg width="56" height="44" viewBox="0 0 62 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.65374 15.6382C7.50307 9.27037 16.4357 7.14057 23.9512 9.09699C31.4667 11.0534 37.6184 16.6283 41.9239 23.4175C46.2293 30.2068 48.8564 38.1763 51.0504 46.2201" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40.8276 39.6669C43.9168 41.9126 47.0073 44.1556 50.0965 46.4012C50.3703 46.6 50.67 46.807 51.0147 46.7716C51.6098 46.712 51.9853 46.0003 52.2309 45.387C53.8827 41.2499 55.1354 36.9592 55.9596 32.613" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </li>
+
+        <!-- 09:00 [KEYNOTE] Parafiliki -->
+        <li data-session="keynote" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-orange text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2 overflow-hidden cursor-pointer hover:ring-4 hover:ring-brand-charcoal/20 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">09:00 - 09:30</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider">[Keynote] · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Łukasz &amp; Szymon
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1">[Keynote] Parafialki, których nie możesz skipnąć</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base">Blok ogłoszeń parafialnych + nienagrywany Q&amp;A z publicznością. Tylko na żywo, bez streamu, bez nagrania.</p>
+          </div>
+          <img src="./pato-graphics/shape-star.svg" alt="" role="presentation" class="absolute -top-4 -right-4 w-24 h-24 opacity-25" style="--fill-0: var(--color-brand-charcoal)" />
+        </li>
+
+        <!-- 09:40 Łukasz (right after keynote) -->
+        <li data-session="lukasz" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-charcoal text-brand-white flex flex-col md:flex-row md:items-center md:gap-8 gap-2 cursor-pointer hover:ring-4 hover:ring-brand-orange/40 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums text-brand-orange">09:40 - 10:20</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-brand-orange">Prelekcja · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Łukasz Kałużny
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1 text-brand-white">200 odcinków later - powtarzające się patologie, które nigdy nie umierają</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-300">Wybraliście w głosowaniu, więc nie ma odwrotu. Lista patologii, które wracają jak bumerang pod nowym buzzwordem.</p>
+          </div>
+        </li>
+
+        <!-- 10:20 Break -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">10:20 - 10:50</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Przerwa</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Kawa + networking</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Rozmowy, narzekanie na legacy.</p>
+          </div>
+        </li>
+
+        <!-- 10:50 Oskar -->
+        <li data-session="oskar" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-pink text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2 cursor-pointer hover:ring-4 hover:ring-brand-charcoal/30 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">10:50 - 11:30</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider">Prelekcja · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Oskar Dudycz
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1">Usuwalność ponad utrzymywalność</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base">Najważniejsze decyzje podejmujemy, gdy jesteśmy najgłupsi. Lepiej projektować pod usunięcie niż pod utrzymanie.</p>
+          </div>
+        </li>
+
+        <!-- 11:40 Mariusz Gil -->
+        <li data-session="mariusz-gil" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-sky text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2 cursor-pointer hover:ring-4 hover:ring-brand-charcoal/30 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">11:40 - 12:20</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider">Prelekcja · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Mariusz Gil
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1">Kiedyś vs dziś, jak zmieniło się moje podejście do projektowania systemów</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base">„Kto to panu tak... napisał?" Po 25 latach w branży Mariusz wie, że zwykle on sam. I ma z tego wnioski.</p>
+          </div>
+        </li>
+
+        <!-- 12:20 Lunch -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">12:20 - 13:20</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Lunch</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Lunch</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Jedzenie i budowanie koalicji. Jak w brownfieldzie - 80% sukcesu to ludzie.</p>
+          </div>
+        </li>
+
+        <!-- 13:20 Szymon (right after lunch) -->
+        <li data-session="szymon" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-charcoal text-brand-white flex flex-col md:flex-row md:items-center md:gap-8 gap-2 cursor-pointer hover:ring-4 hover:ring-brand-orange/40 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums text-brand-orange">13:20 - 14:00</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-brand-orange">Prelekcja · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Szymon Warda
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1 text-brand-white">Profiling - 4. filar w observability</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-300">Myślałeś, że observability ma 3 filary? Jest 2026 - obudź się. Profile wchodzą do gry.</p>
+          </div>
+        </li>
+
+        <!-- 14:00 Short break (10 min) -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">14:00 - 14:10</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Przerwa 10 min</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Krótka przerwa</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Szybka kawa, szybka toaleta, szybka zmiana speakerów.</p>
+          </div>
+        </li>
+
+        <!-- 14:10 Mariusz Dalewski -->
+        <li data-session="mariusz-dalewski" class="session-clickable relative rounded-3xl p-6 md:p-7 bg-brand-amber text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2 cursor-pointer hover:ring-4 hover:ring-brand-charcoal/30 hover:scale-[1.005] transition">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">14:10 - 14:50</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider">Prelekcja · bez nagrania</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">
+              Mariusz Dalewski
+              <span class="block text-base md:text-lg font-semibold normal-case mt-1">Im więcej abstrakcji, tym więcej problemów - lekcja z Kubernetes</span>
+            </h3>
+            <p class="font-sans text-sm md:text-base">Kubernetes miał ukryć złożoność. Ukrył - tylko że wybucha piętro niżej, zazwyczaj o 3 w nocy.</p>
+          </div>
+        </li>
+
+        <!-- 14:50 Networking + przygotowanie sali do nagrania -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">14:50 - 15:10</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Networking</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Networking + przygotowanie sali</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Chwila na rozmowy - ekipa ustawia scenę pod nagranie #200 LIVE.</p>
+          </div>
+        </li>
+
+
+        <!-- 15:10 Live #200 -->
+        <li class="relative rounded-3xl p-8 md:p-10 bg-brand-orange text-brand-charcoal overflow-visible">
+          <!-- Handwritten hint OUTSIDE the card on the right, arrow pointing LEFT into the card -->
+          <div class="hidden xl:flex absolute top-1/2 -translate-y-1/2 left-full ml-4 items-center gap-3 opacity-90 whitespace-nowrap" aria-hidden="true">
+            <svg width="90" height="36" viewBox="0 0 184 71" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-x-[-1]">
+              <path d="M3.00073 53.7676C58.6157 33.9073 119.17 34.7066 178.218 35.7314" stroke="var(--color-brand-charcoal)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M153.879 3L179.54 32.3293C179.765 32.5957 180.011 32.8826 180.042 33.2311C180.083 33.682 179.776 34.0714 179.479 34.4096C169.989 45.5182 160.499 56.6269 151.01 67.7355" stroke="var(--color-brand-charcoal)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="font-display font-bold text-sm uppercase tracking-widest text-brand-charcoal">yay, dwusetka!</span>
+          </div>
+
+          <div class="md:flex md:items-start md:gap-8">
+            <div class="md:w-40 shrink-0 mb-3 md:mb-0">
+              <p class="font-display font-bold text-lg md:text-xl tabular-nums">15:10 - 16:30</p>
+              <p class="font-sans font-semibold text-xs uppercase tracking-wider">Nagranie LIVE</p>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-display font-bold text-2xl md:text-4xl uppercase leading-[0.95] mb-3">
+                Nagranie odcinka #200<br>Panel + Q&amp;A
+              </h3>
+              <p class="font-sans text-sm md:text-base max-w-2xl">Odcinek dwusetny nagrywany na żywo - bez cięć, bez cenzury, ze wszystkimi przejęzyczeniami. Wszyscy prelegenci razem na scenie.</p>
+            </div>
+          </div>
+          <img src="./pato-graphics/shape-thunder.svg" alt="" role="presentation" class="absolute -top-2 right-8 w-24 h-24 opacity-30" style="--fill-0: var(--color-brand-charcoal)" />
+          <div class="brand-shape absolute bottom-4 right-10 w-16 h-16 rotate-180 opacity-40"
+               style="--shape-color: var(--color-brand-charcoal); -webkit-mask-image: url('./pato-graphics/shape-arrow.svg'); mask-image: url('./pato-graphics/shape-arrow.svg');" aria-hidden="true"></div>
+        </li>
+
+        <!-- 16:30 Close -->
+        <li class="relative rounded-3xl p-6 md:p-7 bg-charcoal-100 text-brand-charcoal flex flex-col md:flex-row md:items-center md:gap-8 gap-2">
+          <div class="md:w-40 shrink-0">
+            <p class="font-display font-bold text-lg md:text-xl tabular-nums">16:30 - …</p>
+            <p class="font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500">Po konferencji</p>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl md:text-2xl uppercase leading-tight mb-1">Zamknięcie + networking</h3>
+            <p class="font-sans text-sm md:text-base text-charcoal-600">Nie uciekajcie od razu - najlepsze rozmowy dzieją się po.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Decorative quatrefoil in empty top-right of agenda -->
+    <img src="./pato-graphics/shape-quatrefoil.svg" alt="" role="presentation"
+         class="absolute top-20 right-6 md:right-16 lg:right-32 w-20 h-20 md:w-28 md:h-28 opacity-15 rotate-12 pointer-events-none" />
+    <img src="./pato-graphics/shape-quatrefoil.svg" alt="" role="presentation"
+         class="hidden lg:block absolute bottom-48 left-8 w-24 h-24 opacity-10 -rotate-12 pointer-events-none" />
+
+    <!-- Cloud divider → next section is AMBER (Prelegenci) · flipped -->
+    <div
+         class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0"
+         style="--cloud-color: var(--color-brand-amber)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- PRELEGENCI · amber section                      -->
+  <!-- ============================================== -->
+  <section id="prelegenci" class="relative bg-brand-amber pt-24 pb-32 md:pb-56 lg:pb-72 text-charcoal-900 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-4">Prelegenci</p>
+      <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-4">Kto mówi</h2>
+      <p class="font-sans text-lg text-charcoal-600 max-w-2xl mb-4">
+        Kliknij prelegenta, żeby zobaczyć bio i LinkedIn.
+      </p>
+
+      <!-- Handwritten hint pointing at first speaker card -->
+      <div class="flex items-center gap-2 mb-4 pl-4 opacity-80">
+        <span class="font-display font-bold text-xs uppercase tracking-widest text-brand-charcoal">tu też klika</span>
+        <svg width="72" height="56" viewBox="0 0 62 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M1.65374 15.6382C7.50307 9.27037 16.4357 7.14057 23.9512 9.09699C31.4667 11.0534 37.6184 16.6283 41.9239 23.4175C46.2293 30.2068 48.8564 38.1763 51.0504 46.2201" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M40.8276 39.6669C43.9168 41.9126 47.0073 44.1556 50.0965 46.4012C50.3703 46.6 50.67 46.807 51.0147 46.7716C51.6098 46.712 51.9853 46.0003 52.2309 45.387C53.8827 41.2499 55.1354 36.9592 55.9596 32.613" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+        <li class="h-full">
+          <button type="button" data-speaker="lukasz"
+                  class="group w-full h-full text-left flex items-center gap-4 p-5 rounded-3xl bg-brand-charcoal text-brand-white hover:ring-4 hover:ring-brand-orange transition cursor-pointer">
+            <img src="./pato-graphics/speakers/lukasz.png" alt="Łukasz Kałużny" class="shrink-0 w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-brand-white" />
+            <span class="flex-1 min-w-0">
+              <span class="block font-display font-bold text-lg uppercase leading-tight">Łukasz Kałużny</span>
+              <span class="inline-block mt-2 px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider">Patoarchitekci</span>
+            </span>
+            <span class="text-xs font-sans font-semibold text-charcoal-300 uppercase tracking-wider group-hover:text-brand-orange">bio →</span>
+          </button>
+        </li>
+        <li class="h-full">
+          <button type="button" data-speaker="szymon"
+                  class="group w-full h-full text-left flex items-center gap-4 p-5 rounded-3xl bg-brand-charcoal text-brand-white hover:ring-4 hover:ring-brand-orange transition cursor-pointer">
+            <img src="./pato-graphics/speakers/szymon.png" alt="Szymon Warda" class="shrink-0 w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-brand-white" />
+            <span class="flex-1 min-w-0">
+              <span class="block font-display font-bold text-lg uppercase leading-tight">Szymon Warda</span>
+              <span class="inline-block mt-2 px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider">Patoarchitekci</span>
+            </span>
+            <span class="text-xs font-sans font-semibold text-charcoal-300 uppercase tracking-wider group-hover:text-brand-orange">bio →</span>
+          </button>
+        </li>
+        <li class="h-full">
+          <button type="button" data-speaker="oskar"
+                  class="group w-full h-full text-left flex items-center gap-4 p-5 rounded-3xl bg-brand-pink text-brand-charcoal hover:ring-4 hover:ring-brand-charcoal/40 transition cursor-pointer">
+            <img src="./pato-graphics/speakers/oskar.png" alt="Oskar Dudycz" class="shrink-0 w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-brand-white" />
+            <span class="flex-1 min-w-0">
+              <span class="block font-display font-bold text-lg uppercase leading-tight">Oskar Dudycz</span>
+              <span class="block text-xs mt-1">Event sourcing · OSS contributor</span>
+            </span>
+            <span class="text-xs font-sans font-semibold uppercase tracking-wider">bio →</span>
+          </button>
+        </li>
+        <li class="h-full">
+          <button type="button" data-speaker="mariusz-gil"
+                  class="group w-full h-full text-left flex items-center gap-4 p-5 rounded-3xl bg-brand-sky text-brand-charcoal hover:ring-4 hover:ring-brand-charcoal/40 transition cursor-pointer">
+            <img src="./pato-graphics/speakers/mariusz-gil.png" alt="Mariusz Gil" class="shrink-0 w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-brand-white" />
+            <span class="flex-1 min-w-0">
+              <span class="block font-display font-bold text-lg uppercase leading-tight">Mariusz Gil</span>
+              <span class="block text-xs mt-1">Architekt · Better Software Design</span>
+            </span>
+            <span class="text-xs font-sans font-semibold uppercase tracking-wider">bio →</span>
+          </button>
+        </li>
+        <li class="h-full">
+          <button type="button" data-speaker="mariusz-dalewski"
+                  class="group w-full h-full text-left flex items-center gap-4 p-5 rounded-3xl bg-brand-white text-brand-charcoal hover:ring-4 hover:ring-brand-charcoal/40 transition cursor-pointer">
+            <img src="./pato-graphics/speakers/mariusz-dalewski.png" alt="Mariusz Dalewski" class="shrink-0 w-16 h-16 rounded-full object-cover shadow-xl ring-4 ring-brand-amber" />
+            <span class="flex-1 min-w-0">
+              <span class="block font-display font-bold text-lg uppercase leading-tight">Mariusz Dalewski</span>
+              <span class="block text-xs mt-1">CEO MDDV · SysOps/DevOps Polska</span>
+            </span>
+            <span class="text-xs font-sans font-semibold uppercase tracking-wider">bio →</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Decorative burst star in empty areas of prelegenci (amber bg) -->
+    <img src="./pato-graphics/shape-burst.svg" alt="" role="presentation"
+         class="absolute top-16 right-6 md:right-20 w-20 h-20 md:w-28 md:h-28 opacity-25 rotate-12 pointer-events-none" />
+    <img src="./pato-graphics/shape-burst.svg" alt="" role="presentation"
+         class="hidden md:block absolute bottom-56 left-8 w-24 h-24 opacity-20 -rotate-45 pointer-events-none" />
+
+    <!-- Cloud divider → next section is CHARCOAL -->
+    <div
+         class="cloud-divider absolute inset-x-0 bottom-0 z-0"
+         style="--cloud-color: var(--color-brand-charcoal)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- CO CIE CZEKA · dark section                     -->
+  <!-- ============================================== -->
+  <section id="co-cie-czeka" class="relative bg-brand-charcoal text-brand-white pt-24 pb-32 md:pb-56 lg:pb-72 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 pt-16">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-4">W cenie biletu</p>
+      <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-12">Co Cię czeka</h2>
+
+      <ul class="grid md:grid-cols-2 gap-6">
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">01</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">Praktycy, nie prelegenci</h3>
+            <p class="text-charcoal-300 text-base">Każdy z nich już się na tym sparzył. Dawno skończyli czytać cudze post-mortemy - mają już własne.</p>
+          </div>
+        </li>
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">02</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">Bez powtórek</h3>
+            <p class="text-charcoal-300 text-base">Keynote, Q&amp;A, wszystkie prelekcje - lecą tylko raz. Nagrywany jest tylko finałowy odcinek #200.</p>
+          </div>
+        </li>
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">03</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">#200 na żywo</h3>
+            <p class="text-charcoal-300 text-base">Mikrofon, publiczność, bez drugiego taku. Będą przejęzyczenia - i zostają.</p>
+          </div>
+        </li>
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">04</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">Pogadajmy normalnie</h3>
+            <p class="text-charcoal-300 text-base">Bez small talku o pogodzie. Raczej: co ci padło, czym to skleiliście i czy żałujesz.</p>
+          </div>
+        </li>
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">05</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">Mamy jedzenie</h3>
+            <p class="text-charcoal-300 text-base">Lunch, kawa, przekąski. Deploymentów na głodniaka nie polecamy.</p>
+          </div>
+        </li>
+        <li class="flex gap-5 items-start p-6 rounded-2xl border-2 border-brand-white/20">
+          <span class="shrink-0 w-12 h-12 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center font-display font-bold text-xl">06</span>
+          <div>
+            <h3 class="font-display font-bold text-xl uppercase mb-1">Discord z kanałem konferencji</h3>
+            <p class="text-charcoal-300 text-base">Dostęp do dedykowanego kanału przed, w trakcie i po konferencji. Pytania, linki, followup, memy z backstage'u.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cloud divider → next section is WHITE · flipped -->
+    <div
+         class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0"
+         style="--cloud-color: var(--color-brand-white)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- MIEJSCE · white section                         -->
+  <!-- ============================================== -->
+  <section id="miejsce" class="relative bg-brand-white pt-24 pb-16 md:pb-24 text-charcoal-900 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+      <div>
+        <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-4">Data i miejsce</p>
+        <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-10">Kiedy &amp; gdzie</h2>
+
+        <dl class="space-y-6 font-sans">
+          <div>
+            <dt class="font-display font-semibold text-xs uppercase tracking-widest text-charcoal-500 mb-1">Data</dt>
+            <dd class="font-display font-bold text-3xl">16 czerwca 2026 · wtorek</dd>
+          </div>
+          <div>
+            <dt class="font-display font-semibold text-xs uppercase tracking-widest text-charcoal-500 mb-1">Godziny</dt>
+            <dd class="font-display font-bold text-3xl">9:00 - 17:00</dd>
+          </div>
+          <div>
+            <dt class="font-display font-semibold text-xs uppercase tracking-widest text-charcoal-500 mb-1">Miejsce</dt>
+            <dd class="font-display font-bold text-2xl md:text-3xl leading-tight">
+              Sky Hall by SVITLO CONCERT EU<br>
+              <span class="font-normal text-xl">Twarda 18, 00-105 Warszawa</span>
+              <a href="https://maps.app.goo.gl/vwHC8Nno15Y2mN528" target="_blank" rel="noopener"
+                 class="block mt-2 font-sans font-semibold text-sm text-brand-orange uppercase tracking-wider hover:underline">
+                Otwórz w Google Maps →
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <!-- Handwritten arrow: address → map (visible on md+ where map is right-hand column) -->
+        <div class="hidden md:flex items-center gap-2 mt-8 pl-2 opacity-70" aria-hidden="true">
+          <span class="font-display font-bold text-xs uppercase tracking-widest text-charcoal-500">o, tu</span>
+          <svg width="84" height="64" viewBox="0 0 62 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="scale-y-[-1]">
+            <path d="M1.65374 15.6382C7.50307 9.27037 16.4357 7.14057 23.9512 9.09699C31.4667 11.0534 37.6184 16.6283 41.9239 23.4175C46.2293 30.2068 48.8564 38.1763 51.0504 46.2201" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40.8276 39.6669C43.9168 41.9126 47.0073 44.1556 50.0965 46.4012C50.3703 46.6 50.67 46.807 51.0147 46.7716C51.6098 46.712 51.9853 46.0003 52.2309 45.387C53.8827 41.2499 55.1354 36.9592 55.9596 32.613" stroke="var(--color-brand-charcoal)" stroke-width="1.86247" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="relative rounded-3xl overflow-hidden shadow-xl shadow-brand-charcoal/20 min-h-[320px] md:min-h-0 md:h-full">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6235.958711165927!2d20.9898402!3d52.2347064!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd566310664b%3A0x9901f550c456a1a9!2sSky%20Hall%20by%20SVITLO%20CONCERT%20EU!5e1!3m2!1spl!2spl!4v1776189043299!5m2!1spl!2spl"
+          class="w-full h-full border-0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Sky Hall by SVITLO CONCERT EU - Twarda 18, 00-105 Warszawa"></iframe>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================== -->
+  <!-- BUY TICKET · orange section (hard edge from white Miejsce) -->
+  <!-- ============================================== -->
+  <!-- ============================================== -->
+  <section class="relative bg-brand-orange text-brand-charcoal pt-24 pb-32 md:pb-56 lg:pb-72 overflow-hidden">
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest mb-4">Bilety</p>
+      <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-6">
+        Kup bilet
+      </h2>
+      <p class="font-sans text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+        Cena nie zmieni się wraz ze zbliżaniem się konferencji. Ale liczba biletów jest ograniczona.
+      </p>
+
+      <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+         class="group inline-flex flex-col md:flex-row items-stretch gap-0 md:gap-0 bg-brand-charcoal text-brand-white rounded-3xl overflow-hidden shadow-2xl shadow-brand-charcoal/40 ring-1 ring-brand-charcoal/10 mb-8 w-full md:w-auto hover:shadow-brand-orange/40 hover:scale-[1.01] transition">
+        <div class="px-10 py-6 text-left">
+          <p class="font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-2">Jeden dzień</p>
+          <p class="font-display font-bold text-5xl md:text-6xl leading-none">359 zł <span class="text-2xl md:text-3xl font-semibold text-charcoal-400">netto</span></p>
+          <p class="font-sans text-sm text-charcoal-300 mt-2">netto · 441,57 zł z VAT (23%)</p>
+        </div>
+        <div class="flex items-center justify-center px-10 py-6 bg-brand-orange text-brand-charcoal font-display font-bold text-2xl md:text-3xl uppercase group-hover:brightness-110 transition">
+          Kup bilet →
+        </div>
+      </a>
+
+<div class="flex flex-wrap justify-center gap-3 text-sm">
+        <span class="px-4 py-1.5 rounded-full bg-brand-amber text-brand-charcoal font-sans font-bold uppercase tracking-wide shadow-md shadow-brand-charcoal/20">🎟 Zostało tylko <span data-tickets-left>99</span> biletów</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">Faktura VAT</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">14 dni na zwrot</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">BLIK · Tpay · Karta</span>
+      </div>
+    </div>
+
+    <img src="./pato-graphics/shape-star.svg" alt="" role="presentation"
+         class="absolute top-12 left-8 w-24 h-24 opacity-50 rotate-12"
+         style="--fill-0: var(--color-brand-charcoal)" />
+    <img src="./pato-graphics/shape-thunder.svg" alt="" role="presentation"
+         class="absolute bottom-20 right-8 w-20 h-20 opacity-60"
+         style="--fill-0: var(--color-brand-charcoal)" />
+
+    <!-- Cloud divider → next section is WHITE (Partner) · flipped -->
+    <div
+         class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0"
+         style="--cloud-color: var(--color-brand-white)"></div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- PARTNER · white section                         -->
+  <!-- ============================================== -->
+  <section id="partner" class="relative bg-brand-white pt-24 pb-16 md:pb-24 text-charcoal-900 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="font-display font-bold uppercase text-3xl md:text-5xl leading-[0.95] text-brand-orange mb-10">Partner konferencji</h2>
+
+      <div class="grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] gap-8 lg:gap-12 items-start">
+
+        <!-- Left: big square logo -->
+        <div class="shrink-0">
+          <img src="./logo/Logo-WhiteOnBlack-Square.svg" alt="Protopia" class="block w-48 md:w-56 lg:w-64 h-auto" />
+          <a href="https://protopia.tech/" target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 mt-6 h-12 px-6 rounded-full border-2 border-brand-charcoal text-brand-charcoal font-sans font-semibold text-sm uppercase hover:bg-brand-charcoal hover:text-brand-orange transition">
+            protopia.tech →
+          </a>
+        </div>
+
+        <!-- Right: description + tech area chips -->
+        <div class="space-y-5 font-sans text-base leading-relaxed max-w-3xl">
+          <p><strong>Protopia</strong> - doradztwo technologiczne dla liderów, którzy chcą podejmować decyzje oparte na faktach, nie na trendach.</p>
+
+          <p class="text-sm text-charcoal-700">Pracujemy z zespołami IT na każdym etapie - strategia, architektura, implementacja, optymalizacja, szkolenia.</p>
+
+          <div>
+            <p class="font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-3">Obszary</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">☁️ Cloud &amp; Azure</span>
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">⎈ Kubernetes</span>
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">🤖 AI w praktyce</span>
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">🏗 Architektura IT</span>
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">📊 Observability</span>
+              <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-sm">⚙️ CI/CD &amp; GitHub</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Hard edge to footer -->
+  </section>
+
+  <!-- ============================================== -->
+  <!-- FOOTER · dark                                   -->
+  <!-- ============================================== -->
+  <footer class="bg-brand-charcoal text-brand-white relative">
+
+    <!-- Main footer block: logo + nav + podcast platforms + back-to-top -->
+    <div class="max-w-6xl mx-auto px-6 pt-16 pb-12 relative">
+      <div class="grid md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-start">
+
+        <!-- Left: logo + legal -->
+        <div>
+          <a href="https://patoarchitekci.io" target="_blank" rel="noopener" class="inline-block mb-8">
+            <img src="./pato-logo/horizontal-black-orange.svg" alt="Patoarchitekci" class="h-12 md:h-14" />
+          </a>
+          <p class="text-xs text-charcoal-400 mb-2">© 2026 Protopia</p>
+          <div class="flex flex-col gap-1 text-xs text-charcoal-400">
+            <a href="https://app.easy.tools/policies/otwarte-pato" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Polityka prywatności</a>
+            <a href="https://app.easy.tools/terms/otwarte-pato" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Regulamin</a>
+          </div>
+        </div>
+
+        <!-- Right: podcast platforms + nav -->
+        <div class="flex items-start gap-5 md:gap-8 pr-16">
+          <!-- Podcast platforms (stacked) -->
+          <div class="flex flex-col gap-3">
+            <a href="https://www.youtube.com/@Patoarchitekci" target="_blank" rel="noopener" aria-label="YouTube"
+               class="w-10 h-10 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center hover:scale-105 transition shadow-md">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J" target="_blank" rel="noopener" aria-label="Spotify"
+               class="w-10 h-10 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center hover:scale-105 transition shadow-md">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            </a>
+            <a href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604" target="_blank" rel="noopener" aria-label="Apple Podcasts"
+               class="w-10 h-10 rounded-full bg-brand-orange text-brand-charcoal grid place-items-center hover:scale-105 transition shadow-md">
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </div>
+
+          <!-- Nav links -->
+          <nav class="flex flex-col gap-3 font-sans font-semibold text-sm md:text-base uppercase tracking-wide pt-1">
+            <a href="https://patoarchitekci.io/odcinki/" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Gdzie słuchać</a>
+            <a href="https://patoarchitekci.io/" target="_blank" rel="noopener" class="hover:text-brand-orange transition">O nas</a>
+            <a href="https://patoarchitekci.io/szkolenia/" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Szkolenia</a>
+            <a href="https://outlook.office.com/book/Patoarchitekci@protopia.tech" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Bezpłatna konsultacja</a>
+            <a href="https://patoarchitekci.io/kontakt/" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Kontakt</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Back-to-top button -->
+      <a href="#top" aria-label="Powrót na górę"
+         class="absolute right-6 bottom-12 w-11 h-11 rounded-full border-2 border-brand-orange text-brand-orange grid place-items-center hover:bg-brand-orange hover:text-brand-charcoal transition">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Thin social bar -->
+    <div class="border-t border-brand-white/10">
+      <div class="max-w-6xl mx-auto px-6 py-5 flex justify-center items-center gap-6 md:gap-10 flex-wrap">
+        <a href="https://www.linkedin.com/company/patoarchitekci/" target="_blank" rel="noopener" aria-label="LinkedIn" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/patoarchitekci/" target="_blank" rel="noopener" aria-label="Facebook" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://x.com/patoarchitekci" target="_blank" rel="noopener" aria-label="X" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/patoarchitekci" target="_blank" rel="noopener" aria-label="Instagram" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="https://discord.com/invite/78zPcEaP22" target="_blank" rel="noopener" aria-label="Discord" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@patoarchitekci_" target="_blank" rel="noopener" aria-label="TikTok" class="text-brand-white hover:text-brand-orange transition">
+          <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- SESSION MODAL · vanilla JS, data from <script> below -->
+  <!-- ============================================== -->
+  <div id="session-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 md:p-6" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="session-modal-title">
+    <div class="absolute inset-0 bg-brand-charcoal/80 backdrop-blur-sm" data-modal-close></div>
+    <article class="relative z-10 w-full max-w-3xl max-h-[94vh] overflow-y-auto bg-brand-white text-brand-charcoal rounded-3xl shadow-2xl ring-1 ring-brand-charcoal/10">
+      <button type="button" aria-label="Zamknij" data-modal-close
+              class="sticky top-3 float-right mr-3 mb-[-3rem] z-20 w-10 h-10 rounded-full bg-brand-charcoal text-brand-white grid place-items-center hover:bg-brand-orange hover:text-brand-charcoal transition shadow-lg">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
+      </button>
+
+      <!-- Header · session meta + title · avatar + LinkedIn in speaker mode -->
+      <header class="bg-brand-orange text-brand-charcoal px-6 md:px-10 pt-8 pb-8 md:pt-10 md:pb-10 rounded-t-3xl">
+        <div class="flex items-start gap-4 md:gap-6">
+          <div id="modal-avatar" class="shrink-0 hidden"></div>
+          <div class="flex-1 min-w-0">
+            <p class="flex flex-wrap gap-x-3 gap-y-1 items-baseline mb-3">
+              <span id="modal-time" class="font-display font-bold text-base md:text-lg tabular-nums"></span>
+              <span class="text-brand-charcoal/40">·</span>
+              <span id="modal-type" class="font-sans font-semibold text-xs md:text-sm uppercase tracking-wider"></span>
+            </p>
+            <h3 id="modal-session-title" class="font-display font-bold uppercase text-xl md:text-2xl lg:text-3xl leading-[1.1]"></h3>
+            <div id="modal-header-actions" class="mt-4 empty:hidden"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Body · description + (in session mode only) speaker mini-cards -->
+      <div class="px-6 md:px-10 py-8 md:py-10">
+        <div id="modal-description" class="font-sans text-sm md:text-base leading-relaxed text-charcoal-700 mb-6"></div>
+        <div id="modal-speakers-list" class="space-y-6"></div>
+      </div>
+    </article>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SESSION DATA (JSON, edytowalne w miejscu) -->
+  <!-- ============================================== -->
+  <script id="session-data" type="application/json">
+  {
+    "speakers": {
+      "lukasz": {
+        "name": "Łukasz Kałużny",
+        "initials": "ŁK",
+        "photo": "./pato-graphics/speakers/lukasz.png",
+        "role": "Managing Partner @ Protopia · Host Patoarchitekci",
+        "linkedin": "https://www.linkedin.com/in/lukaszkaluzny/",
+        "bio": "Managing Partner i Technology Advisor w Protopii, współprowadzący Patoarchitekci. Microsoft Azure MVP nieprzerwanie od 2012 - był z chmurą Microsoftu, zanim jej marketing sam zrozumiał.\n\nW IT od 2008. Zaliczył różne strony barykady: zaczynał od helpdesku, potem sysadmin wprowadzający innowacje i wirtualizację (dopiero jak zaczynała realnie działać), Cloud Architect, Cloud Technology Leader, Lead Architect, wreszcie partner własnej firmy. Dzięki temu wie, jak wygląda ta sama decyzja z kilku różnych krzeseł - i że najczęściej z żadnego nie wygląda dobrze.\n\nAzure od 2013 (nim wszyscy odkryli, że istnieje). Kontenery od 2014 (nim „cloud native\" stało się zaklęciem z RFQ). LLM-y przed ChatGPT (nim AI weszło do każdego pitch decka). Technologie testuje wtedy, kiedy jest jeszcze „za wcześnie\" - a nie wtedy, kiedy każdy ma już na nie slajd z pięcioma ikonkami.\n\nDoradza zespołom, które mają prawdziwe problemy, a nie tylko slajdy z transformacji. Interesuje go moment, w którym kończy się obietnica technologii, a zaczyna koszt, ryzyko i odpowiedzialność - bo „to tylko PoC, prod nie zauważy\" to nasza branżowa wersja „AZ-5 powinien wystarczyć\".\n\nProwadzi Patoarchitekci (od 2019). Kiedyś blogował na kaluzny.io - dziś czas zabiera podcast. Geek, inżynier, ojciec dwójki. Kiedyś aktywnie uprawiał sport - dziś stara się po prostu nie zabić."
+      },
+      "szymon": {
+        "name": "Szymon Warda",
+        "initials": "SW",
+        "photo": "./pato-graphics/speakers/szymon.png",
+        "role": "Technology Advisor @ Protopia · Host Patoarchitekci",
+        "linkedin": "https://www.linkedin.com/in/szymonwarda/",
+        "bio": "Współzałożyciel Protopii, Technology Advisor, współprowadzący Patoarchitekci. W IT od czasów IE6 - zaczynał od pisania gry (niestety jej nie skończył), skończył na projektowaniu systemów rozproszonych, które mielą setki gigabajtów i jakimś cudem nie wywracają się w produkcji. Przerobił wszystkie role, które ma branża - od dewelopera przez architekta po Engineering Directora. Prowadził 45-osobowe zespoły, projektował ERP-y międzynarodowe (6 walut, 4 kraje, 400+ firm w jednym systemie), stawiał platformy SaaS na Kubernetesie i R&D teamy od zera. 13k testów, trzy deploye na noc, blue-green - taki tam weekend. Na co dzień robi architekturę ewolucyjną (ale wie, że to nie działa), modelowanie danych, performance i observability dla zespołów, które mają realne problemy, a nie slajdy z transformacji. Neo4j Ambassador, autor kursów Pluralsight. Kiedyś blogował na IndexOutOfRange.com. Szkoli klientów z banków, ubezpieczeń i fintechów - oraz własne dzieci, choć tym drugim trudniej wytłumaczyć dlaczego Kubernetes nie pomoże."
+      },
+      "oskar": {
+        "name": "Oskar Dudycz",
+        "initials": "OD",
+        "photo": "./pato-graphics/speakers/oskar.png",
+        "role": "Ten od event sourcing · OSS contributor",
+        "linkedin": "https://www.linkedin.com/in/oskardudycz/",
+        "bio": "„Ten od event sourcing\". Dojrzały programista z ponad 18-letnim doświadczeniem. Przeszedł wszystkie szczeble kariery: od juniora, przez seniora, architekta i menedżera, aż po powrót do programowania z zupełnie nowej perspektywy: aktywnego tworzenia narzędzi Open Source (Emmett, Marten, EventStoreDB, itd.). Promuje pragmatyczne podejście do wytwarzania oprogramowania: zamiast technologicznych modnych haseł - architektura, która działa, żyje na produkcji i realnie ułatwia pracę zespołom. Wierzy, że podejście zdarzeniowe może pomóc wielu produktom w lepszym skupieniu na biznesie, obserwowalności procesów biznesowych, niezawodności i skalowalności. Pomaga ludziom to realizować szkoleniami, konsultingiem, tworzonymi narzędziami, blogiem i newsletterem."
+      },
+      "mariusz-gil": {
+        "name": "Mariusz Gil",
+        "initials": "MG",
+        "photo": "./pato-graphics/speakers/mariusz-gil.png",
+        "role": "Architekt · Better Software Design",
+        "linkedin": "https://www.linkedin.com/in/mariuszgil/",
+        "bio": "Architekt oprogramowania, konsultant i trener z ponad 25-letnim stażem w projektowaniu dużych i skomplikowanych systemów. Tworzy i prowadzi podcast Better Software Design, w którym przekonuje, że warto stawiać na inżynieryjną jakość i porządne modelowanie oprogramowania. Często można go posłuchać na konferencjach IT, gdzie opowiada o strategicznym podejściu do Domain-Driven Design, architekturze i o tym, jak przenieść stare, sprawdzone w boju wzorce do współczesnych realiów - wliczając w to AI-Assisted Development."
+      },
+      "mariusz-dalewski": {
+        "name": "Mariusz Dalewski",
+        "initials": "MD",
+        "photo": "./pato-graphics/speakers/mariusz-dalewski.png",
+        "role": "CEO MDDV · SysOps/DevOps Polska",
+        "linkedin": "https://www.linkedin.com/in/mariuszdalewski/",
+        "bio": "CEO w MDDV i współzałożyciel społeczności SysOps/DevOps Polska. Administrator z powołania i doświadczenia, z zamiłowania fascynat technologii Kubernetes w każdym wydaniu. Audytor i entuzjasta bezpieczeństwa. W zamierzchłych czasach zdobył kilkunastoletnie doświadczenie w programowaniu w różnych językach. Dziś lubi testować nowe rozwiązania, które podobno mają przyspieszać pracę i dzielić się zdobytą już wiedzą. Po godzinach nałogowo ogląda seriale i gra w souls/rogue like."
+      }
+    },
+    "sessions": {
+      "keynote": {
+        "time": "09:00 - 09:30",
+        "type": "[Keynote] · bez nagrania",
+        "title": "[Keynote] Parafialki, których nie możesz skipnąć",
+        "description": "Blok ogłoszeń parafialnych + nienagrywany Q&A z publicznością. Tylko na żywo, bez streamu, bez nagrania.",
+        "speakerIds": ["lukasz", "szymon"]
+      },
+      "lukasz": {
+        "time": "09:40 - 10:20",
+        "type": "Prelekcja · bez nagrania",
+        "title": "200 odcinków later - powtarzające się patologie, które nigdy nie umierają",
+        "description": "Fan service dla słuchaczy - ten temat wybraliście Wy w głosowaniu. Nie mogłem się nawet wykręcić.\n\nPo 200 odcinkach mam tezę: branża nie rozwiązuje problemów, tylko je przepakowuje. Serverless miał zabić ops - dziś to Platform Engineering. Microservices miały rozwiązać monolit - dostaliśmy distributed monolith z gorszym debugowaniem. AI miał zabić Excela - prod dalej jedzie na Excelu.\n\nPrzejdę przez kilkanaście patologii, które wracają w każdej nowej technologii. Pokażę też które z nich widać już w warstwie AI agents - bo historia się nie powtarza, ale mocno rymuje. Nie będzie slajdu „12 trendów na 2026\" - będzie lista rzeczy, które możesz w poniedziałek powiedzieć zespołowi.",
+        "speakerIds": ["lukasz"]
+      },
+      "oskar": {
+        "time": "10:50 - 11:30",
+        "type": "Prelekcja · bez nagrania",
+        "title": "Usuwalność ponad Utrzymywalność",
+        "description": "Podejmujemy najważniejsze decyzje, gdy jesteśmy najgłupsi. Nie znamy naszej domeny biznesowej, nie znamy stosu technologicznego, a mimo to próbujemy odgadnąć najlepszą opcję i przedstawić ją jako mądre decyzje architektoniczne.\n\nDlaczego tak jest? Myślę, że optymalizujemy pod kątem niewłaściwych czynników.\n\nUtrzymanie jest ważnym aspektem naszych systemów, ale czy powinniśmy pod nie optymalizować?\n\nA co jeśli nasz system nigdy nie będzie potrzebował utrzymania, lub może tylko w części? Skąd wiemy, które części przetrwają?\n\nOmówimy to podczas wykładu i nauczymy się, jak być szczerymi wobec siebie. Jak zaakceptować ryzyko i chaos, wiedząc, że nasze systemy mogą nie skończyć się tak, jak początkowo przewidywaliśmy. Jak pogodzić się z tym, że to, co „niechcący\" zostanie z naszej wizji, może być silniejsze niż złożony, ale kruchy projekt.\n\nPrzedyskutujemy też dlaczego Dług Techniczny nie istnieje oraz jak minimalizować ryzyko robienia rzeczy, które nie mają znaczenia, skupiając się na tym co ważne dla naszego produktu.",
+        "speakerIds": ["oskar"]
+      },
+      "mariusz-gil": {
+        "time": "11:40 - 12:20",
+        "type": "Prelekcja · bez nagrania",
+        "title": "Kiedyś vs dziś, jak zmieniło się moje podejście do projektowania systemów",
+        "description": "Znasz to uczucie, kiedy po latach zaglądasz do swojego starego kodu i myślisz: „Kto to panu tak... napisał?\"\n\nSpokojnie, nie jesteś jedyny/a. Sam dziś stawiam na zupełnie inne aspekty oprogramowania i samego projektu niż kilka lat temu. Modularyzacja, testowalność czy łatwość szybkiego wycofania się z różnych decyzji są dziś dla mnie najważniejsze.\n\nPozwól więc, że pokażę Ci techniki i narzędzia, które dochodziły do mojego toolboxa na przestrzeni lat, dzięki którym projektowanie i późniejsza praca z systemami jest dla mnie znacznie łatwiejsza i przyjemniejsza.",
+        "speakerIds": ["mariusz-gil"]
+      },
+      "szymon": {
+        "time": "13:20 - 14:00",
+        "type": "Prelekcja · bez nagrania",
+        "title": "Profiling - 4. filar w observability",
+        "description": "Słyszałeś, że observability to 3 filary: logi, metryki i tracy. A jak trafił do Ciebie marketing Honeycomb, to twierdzisz, że same logi. I byłeś z siebie zadowolony. Myślałeś, że świat się zatrzymał.\n\nJest 2026 rok - obudź się i zacznij nadganiać! Pojawił się 4. „filar\" - profile ;)\n\nTo był żart, ale tylko trochę.\n\nTa sesja to realne spojrzenie na to, jak i do czego są 3 filary observability, jaką dają analitykę i jak w to wszystko wpisuje się profilowanie oparte na eBPF. Zobaczymy podejścia, głównych graczy i jakie one dają możliwości.",
+        "speakerIds": ["szymon"]
+      },
+      "mariusz-dalewski": {
+        "time": "14:10 - 14:50",
+        "type": "Prelekcja · bez nagrania",
+        "title": "Im więcej abstrakcji, tym więcej problemów - lekcja z Kubernetes",
+        "description": "O tym, jak tworzą się i adaptują standardy z perspektywy infrastruktury. Każda kolejna warstwa abstrakcji obiecuje, że ukryje złożoność. Problem w tym, że złożoność się nie chowa - tylko wybucha piętro niżej, zazwyczaj o trzeciej nad ranem.\n\nBędzie o tym, jak z „kubernetes solves everything\" robi się „kubernetes solves nothing\" i dlaczego każda nowa warstwa wymaga jeszcze jednej, żeby naprawić poprzednią.\n\nPełny opis pojawi się tutaj, jak tylko Mariusz w końcu odpowie Łukaszowi na WhatsAppie. Pracujemy nad tym.",
+        "speakerIds": ["mariusz-dalewski"]
+      }
+    }
+  }
+  </script>
+
+  <script>
+    (function() {
+      const modal = document.getElementById('session-modal');
+      if (!modal) return;
+      const data = JSON.parse(document.getElementById('session-data').textContent);
+      const speakers = data.speakers || {};
+      const sessions = data.sessions || {};
+
+      const linkedinIcon = '<svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
+
+      const esc = (str) => String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+      function speakerAvatar(sp, size) {
+        const cls = `inline-flex items-center justify-center shrink-0 rounded-full bg-brand-orange text-brand-charcoal font-display font-bold shadow-xl ring-4 ring-brand-white ${size || 'w-16 h-16 text-lg'}`;
+        if (sp.photo) return `<img src="${sp.photo}" alt="${esc(sp.name)}" class="${cls} object-cover" />`;
+        return `<span class="${cls}" aria-hidden="true">${esc(sp.initials || sp.name.split(' ').map(p => p[0]).join(''))}</span>`;
+      }
+
+      function clearHeaderExtras() {
+        const avatarEl = document.getElementById('modal-avatar');
+        avatarEl.innerHTML = '';
+        avatarEl.classList.add('hidden');
+        document.getElementById('modal-header-actions').innerHTML = '';
+      }
+
+      function openSession(id) {
+        const s = sessions[id];
+        if (!s) return;
+        clearHeaderExtras();
+        document.getElementById('modal-time').textContent = s.time;
+        document.getElementById('modal-type').textContent = s.type;
+        document.getElementById('modal-session-title').textContent = s.title;
+
+        const descEl = document.getElementById('modal-description');
+        descEl.innerHTML = (s.description || '').split(/\n{2,}/).map(p =>
+          `<p class="mb-4 last:mb-0">${esc(p)}</p>`
+        ).join('');
+
+        // Speakers in session modal = COMPACT mini-cards (avatar + name + role + "zobacz bio")
+        const speakersEl = document.getElementById('modal-speakers-list');
+        const speakerIds = s.speakerIds || [];
+        const labelText = speakerIds.length > 1 ? 'Prowadzący' : 'Prelegent';
+        speakersEl.innerHTML = `
+          <p class="font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-4">${labelText}</p>
+          <div class="flex flex-col gap-3">
+            ${speakerIds.map(id => {
+              const sp = speakers[id];
+              if (!sp) return '';
+              return `
+                <button type="button" data-speaker="${id}"
+                        class="speaker-mini group flex items-center gap-4 p-3 pr-5 rounded-2xl text-left bg-charcoal-50 hover:bg-brand-orange/10 ring-1 ring-charcoal-200 hover:ring-brand-orange transition cursor-pointer">
+                  ${speakerAvatar(sp, 'w-12 h-12 md:w-14 md:h-14 text-sm md:text-base')}
+                  <div class="flex-1 min-w-0">
+                    <p class="font-display font-bold uppercase text-base md:text-lg leading-tight">${esc(sp.name)}</p>
+                    <p class="text-xs md:text-sm text-charcoal-600 truncate">${esc(sp.role || '')}</p>
+                  </div>
+                  <span class="hidden md:inline-flex text-xs font-sans font-semibold uppercase tracking-wider text-charcoal-500 group-hover:text-brand-orange">bio →</span>
+                </button>`;
+            }).join('')}
+          </div>
+        `;
+
+        show();
+      }
+
+      function openSpeaker(id) {
+        const sp = speakers[id];
+        if (!sp) return;
+        clearHeaderExtras();
+        document.getElementById('modal-time').textContent = 'Prelegent';
+        document.getElementById('modal-type').textContent = sp.role || 'Konferencja Pato #200';
+        document.getElementById('modal-session-title').textContent = sp.name;
+
+        // Avatar in header (saves space, eliminates duplicate in body)
+        const avatarEl = document.getElementById('modal-avatar');
+        avatarEl.innerHTML = speakerAvatar(sp, 'w-16 h-16 md:w-20 md:h-20 text-lg md:text-xl');
+        avatarEl.classList.remove('hidden');
+
+        // LinkedIn in header actions
+        if (sp.linkedin) {
+          document.getElementById('modal-header-actions').innerHTML = `
+            <a href="${sp.linkedin}" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-charcoal text-brand-white font-sans font-semibold text-xs md:text-sm hover:bg-[#0077B5] transition">
+              ${linkedinIcon}<span>LinkedIn</span>
+            </a>`;
+        }
+
+        // Body = just bio text
+        const descEl = document.getElementById('modal-description');
+        descEl.innerHTML = (sp.bio || '').split(/\n{2,}/).map(p =>
+          `<p class="mb-4 last:mb-0">${esc(p)}</p>`
+        ).join('');
+        document.getElementById('modal-speakers-list').innerHTML = '';
+
+        show();
+      }
+
+      function show() {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      // Bind [data-session] + [data-speaker]
+      document.querySelectorAll('[data-session]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          // If click landed on a speaker-mini button inside session modal, let that handle it
+          if (e.target.closest('[data-speaker]')) return;
+          openSession(el.dataset.session);
+        });
+        el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSession(el.dataset.session); } });
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+      });
+
+      // Delegation for speaker-mini (inside modal) + external [data-speaker] (prelegenci section)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-speaker]');
+        if (!btn) return;
+        e.stopPropagation();
+        openSpeaker(btn.dataset.speaker);
+      });
+
+      modal.querySelectorAll('[data-modal-close]').forEach(el => el.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    // Tickets-left live counter · fetches /api/tickets-left and updates all [data-tickets-left]
+    (function() {
+      const els = document.querySelectorAll('[data-tickets-left]');
+      if (!els.length) return;
+      fetch('/api/tickets-left', { headers: { 'accept': 'application/json' } })
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(data => {
+          const n = (data && (data.remaining ?? data.tickets_left ?? data.left));
+          if (typeof n === 'number' && n >= 0) {
+            els.forEach(el => { el.textContent = n; });
+          }
+        })
+        .catch(() => { /* silent - keep static fallback */ });
+    })();
+  </script>
+
+</body>
+</html>
