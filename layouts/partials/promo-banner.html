@@ -1,0 +1,12 @@
+{{/* Promo banner. Hidden on training pages (szkolenia) - they have their own CTA. */}}
+{{ if and .Site.Params.trainingBanner.enabled (ne .Section "szkolenia") }}
+{{ $url := .Site.Params.trainingBanner.url | default "#" }}
+<a href="{{ $url }}" class="block w-full bg-orange hover:bg-[#e63d00] transition-colors text-dark-black">
+    <div class="max-w-[1200px] mx-auto px-4 py-2.5 md:py-3">
+        <p class="uppercase font-bold text-xs md:text-sm leading-tight text-center">
+            {{ .Site.Params.trainingBanner.text }}
+            <span class="underline decoration-dotted underline-offset-2">{{ .Site.Params.trainingBanner.highlight }}</span>
+        </p>
+    </div>
+</a>
+{{ end }}
