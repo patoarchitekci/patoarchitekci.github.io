@@ -2,7 +2,7 @@ id: "architektura-101"
 title: "Architektura 101"
 active: true
 featured: true
-waitlist_only: true
+waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Łukasz Kałużny"
@@ -87,16 +87,16 @@ benefits:
     description: "Praktyczne wskazówki dotyczące wyboru technologii i podejmowania decyzji architektonicznych"
 
 # Organizacja
-price_net: 2926.82
-price_gross: 3599.99
+price_net: 3089.42
+price_gross: 3799.99
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/architektura-101"
 
 dates:
-  - "2026-04-14"
-  - "2026-04-15"
-  - "2026-04-21"
-  - "2026-04-22"
+  - "2026-10-20"
+  - "2026-10-21"
+  - "2026-10-27"
+  - "2026-10-28"
 time: "9:00 – 13:00"
 
 location:
