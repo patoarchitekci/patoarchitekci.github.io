@@ -8,6 +8,11 @@
 {{- $firstDate := index $training.dates 0 -}}
 {{- $isTrainingPast = le $firstDate $today -}}
 {{- end -}}
+{{- $showLiveTickets := and $training.purchase_url (not $isTrainingPast) -}}
+{{- $easySlug := "" -}}
+{{- if $showLiveTickets -}}
+{{- $easySlug = path.Base $training.purchase_url -}}
+{{- end -}}
 <div class="flex relative" data-training-past="{{ $isTrainingPast }}">
   <div class="w-full">
     <!-- ======= TRAINING TITLE SECTION ======= -->
@@ -246,8 +251,15 @@
                     Liczba
                     miejsc
                   </p>
+                  {{ if $showLiveTickets }}
+                  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100"
+                    data-tickets-left data-tickets-type="training"
+                    data-tickets-slug="{{ $easySlug }}"
+                    data-tickets-max="{{ $training.participants.max }}">{{ $training.participants.max }}</p>
+                  {{ else }}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{
                     $training.participants.max }}</p>
+                  {{ end }}
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
                     $training.participants.availability_note }}</p>
                 </div>
@@ -441,9 +453,16 @@
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Liczba
                 miejsc
               </p>
+              {{ if $showLiveTickets }}
+              <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120"
+                data-tickets-left data-tickets-type="training"
+                data-tickets-slug="{{ $easySlug }}"
+                data-tickets-max="{{ $training.participants.max }}">{{ $training.participants.max }}</p>
+              {{ else }}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{
                 $training.participants.max
                 }}</p>
+              {{ end }}
               <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{
                 $training.participants.availability_note }}</p>
             </div>
@@ -513,4 +532,38 @@
 
 {{- /* Include Turnstile script if not already present */ -}}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+{{ if $showLiveTickets }}
+<script>
+(function () {
+  var els = document.querySelectorAll('[data-tickets-left][data-tickets-slug]');
+  if (!els.length) return;
+  var bySlug = {};
+  for (var i = 0; i < els.length; i++) {
+    var s = els[i].dataset.ticketsSlug;
+    (bySlug[s] = bySlug[s] || []).push(els[i]);
+  }
+  Object.keys(bySlug).forEach(function (slug) {
+    var group = bySlug[slug];
+    var type = group[0].dataset.ticketsType || 'training';
+    var u = '/api/tickets-left?type=' + encodeURIComponent(type) + '&slug=' + encodeURIComponent(slug);
+    fetch(u, { headers: { 'accept': 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var n = data && typeof data.remaining === 'number' ? data.remaining : null;
+        if (n === null || n < 0) return;
+        group.forEach(function (el) {
+          var max = parseInt(el.dataset.ticketsMax, 10);
+          if (!isNaN(max) && n < max) {
+            el.textContent = 'Zostało tylko ' + n;
+          } else {
+            el.textContent = isNaN(max) ? n : max;
+          }
+        });
+      })
+      .catch(function () { /* silent - keep static fallback */ });
+  });
+})();
+</script>
+{{ end }}
 {{ end }}

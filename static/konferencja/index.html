@@ -1165,7 +1165,7 @@
     (function() {
       const els = document.querySelectorAll('[data-tickets-left]');
       if (!els.length) return;
-      fetch('/api/tickets-left', { headers: { 'accept': 'application/json' } })
+      fetch('/api/tickets-left?type=conference&slug=konferencja-pato-200', { headers: { 'accept': 'application/json' } })
         .then(r => r.ok ? r.json() : Promise.reject(r.status))
         .then(data => {
           const n = (data && (data.remaining ?? data.tickets_left ?? data.left));
