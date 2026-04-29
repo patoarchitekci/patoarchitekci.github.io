@@ -11,9 +11,11 @@
 
 {{- /* Separate trainings into future and past, adding firstDate field for sorting */ -}}
 {{- /* Skip hidden trainings (used for test/JSON-only trainings) */ -}}
+{{- /* Waitlist-only trainings never count as "future" — even if they have a planned date, */ -}}
+{{- /* the card shows "Nowy termin w drodze" so they shouldn't outrank bookable terms */ -}}
 {{- range . -}}
   {{- if not .hidden -}}
-  {{- if .dates -}}
+  {{- if and .dates (not (default false .waitlist_only)) -}}
     {{- $firstDate := index .dates 0 -}}
     {{- /* Add firstDate field to training object for proper sorting */ -}}
     {{- $training := merge . (dict "firstDate" $firstDate) -}}
@@ -24,8 +26,10 @@
       {{- $pastTrainings = $pastTrainings | append $training -}}
     {{- end -}}
   {{- else -}}
-    {{- /* Trainings without dates go to the end */ -}}
-    {{- $training := merge . (dict "firstDate" "") -}}
+    {{- /* Trainings without dates or waitlist-only go to the end */ -}}
+    {{- $firstDate := "" -}}
+    {{- if .dates -}}{{- $firstDate = index .dates 0 -}}{{- end -}}
+    {{- $training := merge . (dict "firstDate" $firstDate) -}}
     {{- $pastTrainings = $pastTrainings | append $training -}}
   {{- end -}}
   {{- end -}}

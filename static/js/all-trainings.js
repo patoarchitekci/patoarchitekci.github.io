@@ -1,5 +1,5 @@
 const toggleButton = document.getElementById("toggleButton");
-const hiddenCards = document.querySelectorAll("#card-container .card:nth-child(n+4)");
+const hiddenCards = document.querySelectorAll("#card-container > a.hidden");
 let isExpanded = false;
 
 toggleButton.addEventListener("click", () => {

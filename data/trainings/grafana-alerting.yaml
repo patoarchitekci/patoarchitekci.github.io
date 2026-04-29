@@ -2,6 +2,7 @@ id: "grafana-alerting"
 title: "Alerting w Grafanie - Sztuka Powiadamiania i Reagowania na Incydenty"
 active: false
 featured: false
+waitlist_only: true
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
