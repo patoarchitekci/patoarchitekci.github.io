@@ -10,14 +10,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-P922WNC');</script>
 <!-- End Google Tag Manager -->
 
-<!-- ===== Primary Meta Tags ===== -->
-<meta name="title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Title }}{{ end }}" />
-<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-
-<!-- ===== SEO Meta Tags (for episodes) ===== -->
+<!-- ===== SEO Meta (description, canonical, robots, dates) ===== -->
 {{ partial "seo-meta.html" . }}
 
-<!-- ===== Social Media Meta Tags (for episodes) ===== -->
+<!-- ===== Social Media Meta (Open Graph + Twitter + per-page JSON-LD) ===== -->
 {{ partial "social-meta.html" . }}
 
 <!-- ===== Schema.org for Homepage (PodcastSeries) ===== -->
@@ -33,20 +29,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 {{ if eq .Type "training" }}
 {{ partial "training-schema.html" . }}
 {{ end }}
-
-<!-- ===== Open Graph / Facebook ===== -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Title }}{{ end }}" />
-<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-<meta property="og:image" content="{{ .Site.BaseURL }}metatag.png" />
-
-<!-- ===== X (Twitter) ===== -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="{{ .Permalink }}" />
-<meta property="twitter:title" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Title }}{{ end }}" />
-<meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
-<meta property="twitter:image" content="{{ .Site.BaseURL }}metatag.png" />
 
 <!-- ===== TAILWIND CSS via Hugo Pipes ===== -->
 {{ partial "css.html" . }}

@@ -1,8 +1,36 @@
 # robots.txt dla patoarchitekci.io
-# Zezwalaj na indeksowanie przez wszystkie crawlery (włącznie z AI)
+# Zezwalamy na indeksowanie przez wyszukiwarki tradycyjne i AI search engines.
 
+# --- AI / answer engines (citation crawlers) ---
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Bing (named block must repeat general rules; Bing nie merge'uje grup) ---
+User-agent: bingbot
+Allow: /
+
+# --- Wszyscy pozostali ---
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemapy
 Sitemap: https://patoarchitekci.io/sitemap.xml
+Sitemap: https://patoarchitekci.io/index.xml
+
+# IndexNow / hosting
+Host: patoarchitekci.io

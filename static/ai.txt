@@ -1,43 +1,62 @@
-# ai.txt - Instrukcje dla AI/LLM crawlerów
-# ==========================================
-# Ten plik określa zasady dla AI crawlerów i botów
-# This file specifies rules for AI crawlers and bots
+# ai.txt - Polityka dla AI / LLM crawlerów
+# Policy for AI / LLM crawlers
+# Spec: https://site.spawning.ai/spaces/ai-txt
 
-# TYMCZASOWO - CAŁKOWITY ZAKAZ
-# TEMPORARY - COMPLETE BAN
-# ========================
+# Zezwalamy na cytowanie naszych treści przez wyszukiwarki AI
+# (Perplexity, Bing Copilot, Google AI Overviews, ChatGPT Search, Claude).
+# Nie zgadzamy się na wykorzystanie treści do trenowania modeli.
 
-User-agent: *
-Disallow: *
+# Citation by AI search engines: ALLOWED
+# Use of content for AI model training: NOT ALLOWED
 
-# Zakaz używania treści do treningu AI
-# Prohibit using content for AI training
-Allow-AI-Training: no
-Allow-AI-Data-Mining: no
-Allow-AI-Model-Training: no
-Allow-AI-Crawling: no
-Allow-AI-Data-Collection: no
+User-Agent: *
+Allow: /
+Disallow-AI-Training: /
 
-# Polityka dla konkretnych firm AI
-# Policy for specific AI companies
-OpenAI: disallow
-Anthropic: disallow
-Google-AI: disallow
-Meta-AI: disallow
-Microsoft-AI: disallow
-Amazon-AI: disallow
-Apple-AI: disallow
-ByteDance: disallow
-Perplexity: disallow
-Cohere: disallow
+# Polityka dla konkretnych crawlerów AI
+# Per-crawler policy
+
+# --- Search / citation crawlers (allow) ---
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Perplexity-User
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: Applebot-Extended
+Allow: /
+
+User-Agent: Amazonbot
+Allow: /
+
+User-Agent: Bytespider
+Allow: /
+
+# --- Training-only crawlers (disallow training, allow citation where applicable) ---
+User-Agent: GPTBot
+Disallow-Training: /
+
+User-Agent: ClaudeBot
+Disallow-Training: /
+
+User-Agent: anthropic-ai
+Disallow-Training: /
+
+User-Agent: CCBot
+Disallow-Training: /
+
+User-Agent: Meta-ExternalAgent
+Disallow-Training: /
 
 # Kontakt
-# Contact
 Contact: webmaster@patoarchitekci.io
-
-# Status
-Status: TEMPORARY-BLOCK
-Last-Updated: 2025-09-28
-
-# Uwaga: Ten plik jest tymczasowy i zostanie zaktualizowany przed publikacją
-# Note: This file is temporary and will be updated before production
+Last-Updated: 2026-05-02
