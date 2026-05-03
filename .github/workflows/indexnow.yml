@@ -1,0 +1,89 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [hugo]
+    paths:
+      - "content/episodes/**"
+      - "content/szkolenia/**"
+      - "data/trainings/**"
+  workflow_dispatch:
+    inputs:
+      before_sha:
+        description: "Before SHA (default HEAD~1)"
+        required: false
+        default: ""
+      after_sha:
+        description: "After SHA (default HEAD)"
+        required: false
+        default: ""
+      skip_wait:
+        description: "Skip Cloudflare Pages deploy wait"
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: indexnow-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Resolve commit range
+        id: range
+        run: |
+          # Manual dispatch: take from inputs (with fallbacks)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            BEFORE="${{ github.event.inputs.before_sha }}"
+            AFTER="${{ github.event.inputs.after_sha }}"
+            [ -z "$AFTER" ] && AFTER="$(git rev-parse HEAD)"
+            [ -z "$BEFORE" ] && BEFORE="${AFTER}^"
+          else
+            # Push event
+            BEFORE="${{ github.event.before }}"
+            AFTER="${{ github.sha }}"
+            if [ "$BEFORE" = "0000000000000000000000000000000000000000" ] || [ -z "$BEFORE" ]; then
+              BEFORE="${AFTER}^"
+            fi
+          fi
+          echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
+          echo "after=$AFTER" >> "$GITHUB_OUTPUT"
+          echo "Range: $BEFORE..$AFTER"
+
+      - name: Build URL list from git diff
+        run: |
+          python scripts/indexnow_urls.py \
+            --before "${{ steps.range.outputs.before }}" \
+            --after "${{ steps.range.outputs.after }}" \
+            | tee urls.txt
+          test -s urls.txt
+
+      - name: Wait for Cloudflare Pages deploy
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.skip_wait != 'true' }}
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_PAGES_PROJECT: ${{ secrets.CF_PAGES_PROJECT }}
+        run: |
+          python scripts/wait_cf_pages_deploy.py \
+            --sha "${{ steps.range.outputs.after }}" \
+            --timeout 900
+
+      - name: Ping IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_KEY_LOCATION: https://patoarchitekci.io/${{ secrets.INDEXNOW_KEY }}.txt
+        run: python scripts/ping_indexnow.py urls.txt
