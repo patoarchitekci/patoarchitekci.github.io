@@ -75,8 +75,38 @@
     {{- if eq $training.location.type "online" -}}
     "courseWorkload": "{{ $training.time }}",
     {{- end -}}
+    {{- /* Multi-day course: dates[] = wszystkie dni jednego szkolenia (NIE 4 osobne kohorty) */ -}}
     {{- if $training.dates -}}
-    "startDate": "{{ index $training.dates 0 }}",
+    {{- $tz := "Europe/Warsaw" -}}
+    {{- $timeParts := split $training.time " – " -}}
+    {{- $startT := index $timeParts 0 -}}
+    {{- if lt (len $startT) 5 }}{{ $startT = print "0" $startT }}{{ end -}}
+    {{- $endT := "23:59" -}}
+    {{- if ge (len $timeParts) 2 -}}
+      {{- $endT = index $timeParts 1 -}}
+      {{- if lt (len $endT) 5 }}{{ $endT = print "0" $endT }}{{ end -}}
+    {{- end -}}
+    {{- $firstDate := index $training.dates 0 -}}
+    {{- $lastDate := index $training.dates (sub (len $training.dates) 1) -}}
+    {{- $startDT := time.AsTime (printf "%sT%s:00" $firstDate $startT) $tz -}}
+    {{- $endDT := time.AsTime (printf "%sT%s:00" $lastDate $endT) $tz -}}
+    "startDate": "{{ $startDT.Format "2006-01-02T15:04:05Z07:00" }}",
+    "endDate": "{{ $endDT.Format "2006-01-02T15:04:05Z07:00" }}",
+    {{- if gt (len $training.dates) 1 -}}
+    "subEvent": [
+      {{- range $i, $date := $training.dates -}}
+      {{- if $i }},{{ end -}}
+      {{- $dayStart := time.AsTime (printf "%sT%s:00" $date $startT) $tz -}}
+      {{- $dayEnd := time.AsTime (printf "%sT%s:00" $date $endT) $tz }}
+      {
+        "@type": "Event",
+        "name": "{{ $training.title }} — dzień {{ add $i 1 }}",
+        "startDate": "{{ $dayStart.Format "2006-01-02T15:04:05Z07:00" }}",
+        "endDate": "{{ $dayEnd.Format "2006-01-02T15:04:05Z07:00" }}"
+      }
+      {{- end }}
+    ],
+    {{- end -}}
     {{- end -}}
     {{- if $training.location -}}
     "location": {
