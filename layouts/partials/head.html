@@ -1,7 +1,26 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="content-language" content="pl-PL" />
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+{{- /* Task 3.1: per-kind title template (Bing literal-keyword scoring + better CTR) */ -}}
+{{- $title := "" -}}
+{{- if .IsHome -}}
+  {{- $title = "Patoarchitekci - podcast i szkolenia o architekturze IT" -}}
+{{- else if eq .Section "episodes" -}}
+  {{- if eq .Kind "page" -}}
+    {{- $title = printf "%s - Podcast Patoarchitekci" (.Title | strings.TrimSpace) -}}
+  {{- else -}}
+    {{- $title = "Wszystkie odcinki podcastu - Patoarchitekci" -}}
+  {{- end -}}
+{{- else if eq .Section "szkolenia" -}}
+  {{- if eq .Kind "page" -}}
+    {{- $title = printf "Szkolenie %s - Patoarchitekci" (.Title | strings.TrimSpace) -}}
+  {{- else -}}
+    {{- $title = "Szkolenia z architektury IT - Patoarchitekci" -}}
+  {{- end -}}
+{{- else -}}
+  {{- $title = printf "%s - Patoarchitekci" (.Title | strings.TrimSpace) -}}
+{{- end -}}
+<title>{{ $title }}</title>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

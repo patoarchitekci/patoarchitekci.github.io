@@ -1,5 +1,18 @@
 <!-- SEO Meta Tags -->
-<meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
+{{- /* Task 3.2: per-kind meta description (Bing direct ranking signal + Google SERP CTR) */ -}}
+{{- $desc := .Params.description -}}
+{{- if not $desc -}}
+  {{- if .IsHome -}}
+    {{- $desc = "Polski podcast IT i szkolenia z architektury oprogramowania, Kubernetes, Azure, AI Agents i DevOps. Prowadzą Łukasz Kałużny i Szymon Warda." -}}
+  {{- else if and (eq .Section "episodes") (ne .Kind "page") -}}
+    {{- $desc = "Pełne archiwum 192+ odcinków podcastu Patoarchitekci o architekturze IT, cloud, DevOps, observability i AI agents." -}}
+  {{- else if and (eq .Section "szkolenia") (ne .Kind "page") -}}
+    {{- $desc = "Praktyczne szkolenia IT z architektury oprogramowania, Kubernetes, Azure, AI agents, observability i DevOps. Online, prowadzone przez Łukasza Kałużnego i Szymona Wardę." -}}
+  {{- else -}}
+    {{- $desc = .Site.Params.description -}}
+  {{- end -}}
+{{- end -}}
+<meta name="description" content="{{ $desc }}"></meta>
 {{ if or .Params.keywords .Params.seo_keywords }}
 <meta name="keywords" content="{{ .Params.keywords | default .Params.seo_keywords }}">
 {{ end }}
