@@ -185,5 +185,31 @@
   }
 }
 </script>
+
+{{- /* Task 2.3: FAQPage JSON-LD - mirror visible FAQ z YAML (per-szkolenie + general) */ -}}
+{{- $allFaq := slice -}}
+{{- with $training.faq }}{{ range . }}{{ $allFaq = $allFaq | append . }}{{ end }}{{ end -}}
+{{- with .Site.Data.general_faq.general_faq }}{{ range . }}{{ $allFaq = $allFaq | append . }}{{ end }}{{ end -}}
+{{- if $allFaq }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- range $i, $q := $allFaq -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": {{ $q.question | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $q.answer | jsonify }}
+      }
+    }
+    {{- end }}
+  ]
+}
+</script>
+{{- end -}}
 {{- end -}}
 {{- end -}}
