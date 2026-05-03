@@ -72,30 +72,6 @@
   },
   {{- end -}}
   "inLanguage": "pl-PL",
-  {{- /* Task 2.8: rozszerzony Person z sameAs (z data/instructors/) */ -}}
-  {{- if $training.instructor -}}
-  "instructor": {
-    "@type": "Person",
-    "name": "{{ $training.instructor }}"
-    {{- with $instructorData -}}
-    ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person",
-    "url": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#hosts",
-    {{- with .photo -}}
-    "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}",
-    {{- end -}}
-    {{- with .bio_short -}}
-    "description": {{ . | jsonify }},
-    {{- end -}}
-    {{- $sameAs := slice -}}
-    {{- with .social.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-    {{- with .social.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-    {{- with .social.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-    {{- if $sameAs -}}
-    "sameAs": [{{ range $i, $u := $sameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
-    {{- end -}}
-    {{- end -}}
-  },
-  {{- end -}}
 
   {{- /* Task 2.7: Review[] z testimonials (fix dla Google strip aggregateRating bez Review) */ -}}
   {{- if $training.testimonials -}}
@@ -130,12 +106,27 @@
       "name": "Patoarchitekci",
       "url": "{{ .Site.BaseURL }}"
     },
+    {{- /* Task 2.8: instructor na CourseInstance (NIE na Course - schema.org compliance) */ -}}
     {{- if $training.instructor }}
-    "performer": {
+    "instructor": {
       "@type": "Person",
       "name": "{{ $training.instructor }}"
       {{- with $instructorData -}}
-      ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person"
+      ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person",
+      "url": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#hosts"
+      {{- with .photo -}}
+      ,"image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}"
+      {{- end -}}
+      {{- with .bio_short -}}
+      ,"description": {{ . | jsonify }}
+      {{- end -}}
+      {{- $sameAs := slice -}}
+      {{- with .social.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with .social.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- with .social.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+      {{- if $sameAs -}}
+      ,"sameAs": [{{ range $i, $u := $sameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
+      {{- end -}}
       {{- end -}}
     },
     {{- end }}
