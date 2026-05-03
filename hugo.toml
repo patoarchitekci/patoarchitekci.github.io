@@ -32,9 +32,11 @@ disableKinds = ["taxonomy", "term"]
     [params.hosts.lukasz]
       linkedin = "https://www.linkedin.com/in/lukaszkaluzny/"
       twitter = "https://x.com/kaluzaaa"
+      github = "https://github.com/kaluzaaa"
     [params.hosts.szymon]
       linkedin = "https://www.linkedin.com/in/szymonwarda/"
       twitter = "https://x.com/maklipsa"
+      github = "https://github.com/maklipsa"
 
   # Podcast platforms
   [params.podcast]
