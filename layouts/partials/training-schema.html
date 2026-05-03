@@ -91,7 +91,7 @@
     {{- with .social.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
     {{- with .social.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
     {{- if $sameAs -}}
-    "sameAs": [{{ range $i, $u := $sameAs }}{{ if $i }},{{ end }}{{ $u | jsonify }}{{ end }}]
+    "sameAs": {{ $sameAs | jsonify }}
     {{- end -}}
     {{- end -}}
   },
