@@ -44,13 +44,14 @@
 {{ end }}
 {{ end }}
 
-<!-- JSON-LD structured data for Google -->
+<!-- JSON-LD structured data for Google (Task 2.9: full PodcastEpisode + AudioObject + VideoObject) -->
 {{ if .Params.episode }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "PodcastEpisode",
-  "episodeNumber": "{{ .Params.episode }}",
+  "@id": "{{ .Permalink }}#episode",
+  "episodeNumber": {{ .Params.episode }},
   "name": "{{ .Title }}",
   "description": "{{ .Params.description | default .Site.Params.description }}",
   "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
@@ -58,45 +59,67 @@
   "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
   {{ end }}
   "url": "{{ .Permalink }}",
+  "inLanguage": "pl-PL",
+  "isAccessibleForFree": true,
   {{ if .Params.og_landscape }}
   "image": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}{{ .Params.og_landscape }}",
   {{ end }}
-  {{ if .Params.duration }}
-  "duration": "{{ .Params.duration }}",
+  {{ with .Params.duration }}
+  "duration": "{{ . }}",
   {{ end }}
   {{ if .Params.tags }}
   "keywords": "{{ delimit .Params.tags ", " }}",
   {{ end }}
   "partOfSeries": {
     "@type": "PodcastSeries",
+    "@id": "{{ .Site.BaseURL }}#podcast",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}"
   },
   {{ if or .Params.audio_url .Params.youtube_id }}
   "associatedMedia": [
-    {{ if .Params.audio_url }}
+    {{ with .Params.audio_url }}
     {
-      "@type": "MediaObject",
-      "contentUrl": "{{ .Params.audio_url }}",
+      "@type": "AudioObject",
+      "contentUrl": "{{ . }}",
       "encodingFormat": "audio/mpeg"
-    }{{ if .Params.youtube_id }},{{ end }}
+      {{ with $.Params.duration }},"duration": "{{ . }}"{{ end }}
+    }{{ if $.Params.youtube_id }},{{ end }}
     {{ end }}
-    {{ if .Params.youtube_id }}
+    {{ with .Params.youtube_id }}
     {
       "@type": "VideoObject",
-      "contentUrl": "https://www.youtube.com/watch?v={{ .Params.youtube_id }}",
-      "encodingFormat": "video/mp4",
-      "uploadDate": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"
+      "name": "{{ $.Title }}",
+      "description": "{{ $.Params.description | default $.Site.Params.description }}",
+      "thumbnailUrl": "https://i.ytimg.com/vi/{{ . }}/maxresdefault.jpg",
+      "uploadDate": "{{ $.Date.Format "2006-01-02T15:04:05Z07:00" }}",
+      "contentUrl": "https://www.youtube.com/watch?v={{ . }}",
+      "embedUrl": "https://www.youtube.com/embed/{{ . }}"
+      {{ with $.Params.duration }},"duration": "{{ . }}"{{ end }}
     }
     {{ end }}
   ],
   {{ end }}
+  "actor": [
+    {
+      "@type": "Person",
+      "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/lukasz-kaluzny/#person",
+      "name": "Łukasz Kałużny"
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/szymon-warda/#person",
+      "name": "Szymon Warda"
+    }
+  ],
   "author": {
     "@type": "Organization",
+    "@id": "{{ .Site.BaseURL }}#organization",
     "name": "{{ .Site.Title }}"
   },
   "publisher": {
     "@type": "Organization",
+    "@id": "{{ .Site.BaseURL }}#organization",
     "name": "{{ .Site.Title }}",
     "logo": {
       "@type": "ImageObject",
