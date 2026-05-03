@@ -217,7 +217,7 @@
       "availabilityStarts": "{{ $availabilityStarts }}",
       {{- end -}}
       "url": "{{ .Permalink }}",
-      "validFrom": "{{ now.Format "2006-01-02" }}"
+      "validFrom": "{{ if .GitInfo }}{{ .GitInfo.AuthorDate.Format "2006-01-02" }}{{ else }}{{ now.Format "2006-01-02" }}{{ end }}"
     }
   }
 }

@@ -1,0 +1,41 @@
+{{- /* Task 2.2: BreadcrumbList JSON-LD - schema only (bez visible UI).
+       Visible breadcrumbs jako TODO w Todoist. */ -}}
+{{- if not .IsHome -}}
+{{- $base := .Site.BaseURL | strings.TrimSuffix "/" -}}
+{{- $items := slice -}}
+{{- $items = $items | append (dict "name" "Strona główna" "url" (printf "%s/" $base)) -}}
+
+{{- /* Section level: Odcinki / Szkolenia / O nas / Kontakt */ -}}
+{{- if eq .Section "episodes" -}}
+  {{- $items = $items | append (dict "name" "Odcinki" "url" (printf "%s/odcinki/" $base)) -}}
+{{- else if eq .Section "szkolenia" -}}
+  {{- $items = $items | append (dict "name" "Szkolenia" "url" (printf "%s/szkolenia/" $base)) -}}
+{{- end -}}
+
+{{- /* Page level: title (current page - bez "item" url, bo tu jestesmy) */ -}}
+{{- if eq .Kind "page" -}}
+  {{- $items = $items | append (dict "name" (.Title | strings.TrimSpace) "url" "") -}}
+{{- end -}}
+
+{{- if gt (len $items) 1 -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{- range $i, $item := $items -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "name": {{ $item.name | jsonify }}
+      {{- if $item.url -}}
+      ,"item": {{ $item.url | jsonify }}
+      {{- end -}}
+    }
+    {{- end }}
+  ]
+}
+</script>
+{{- end -}}
+{{- end -}}
