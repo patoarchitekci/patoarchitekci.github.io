@@ -113,7 +113,7 @@ disableKinds = ["taxonomy", "term"]
       unsafe = true
 
 [outputs]
-  home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss"]
+  home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss", "llms"]
 
 [outputFormats]
   [outputFormats.newsletter-rss]
@@ -143,5 +143,11 @@ disableKinds = ["taxonomy", "term"]
   [outputFormats.trainings-json]
     mediaType = "application/json"
     baseName = "trainings"
+    isPlainText = true
+    notAlternative = true
+
+  [outputFormats.llms]
+    mediaType = "text/plain"
+    baseName = "llms"
     isPlainText = true
     notAlternative = true

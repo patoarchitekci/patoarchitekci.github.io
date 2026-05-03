@@ -1,0 +1,46 @@
+{{- $base := .Site.BaseURL | strings.TrimSuffix "/" -}}
+# Patoarchitekci
+
+> Polski podcast IT o architekturze oprogramowania, cloud, Kubernetes, DevOps, danych, observability i AI agents. Prowadzą Łukasz Kałużny (cloud/Azure/K8s) i Szymon Warda (data/NoSQL/observability). 192+ odcinków od 2019 r. Oferujemy też praktyczne szkolenia dla inżynierów i architektów IT. — Polish IT architecture podcast & technical training site.
+
+Strona w języku polskim. Treść techniczna, nazwy technologii po angielsku. Aktualizacja: {{ now.Format "2006-01-02" }}.
+
+## Najważniejsze
+
+- [Strona główna]({{ $base }}/): podcast i szkolenia z architektury IT, cloud, DevOps i AI agents
+- [Wszystkie odcinki]({{ $base }}/odcinki/): pełne archiwum 192+ odcinków podcastu Patoarchitekci
+- [Wszystkie szkolenia]({{ $base }}/szkolenia/): katalog praktycznych szkoleń IT prowadzonych przez Łukasza i Szymona
+- [Kontakt]({{ $base }}/kontakt/): formularz kontaktowy w sprawie szkoleń i współpracy
+
+## Szkolenia
+
+{{- $sortedTrainings := partial "training-sorter.html" .Site.Data.trainings }}
+{{- range $sortedTrainings }}
+{{- if and .active (not (default false .hidden)) }}
+- [{{ .title }}]({{ $base }}/szkolenia/{{ .id }}/){{ with .audience }}: {{ . }}{{ end }}
+{{- end }}
+{{- end }}
+
+## Najnowsze odcinki
+
+{{- range first 20 (where .Site.RegularPages "Section" "episodes").ByDate.Reverse }}
+- [{{ .Title | strings.TrimSpace }}]({{ .Permalink }}){{ with .Description }}: {{ . }}{{ end }}
+{{- end }}
+
+## Prowadzący
+
+- [Łukasz Kałużny]({{ $base }}/#hosts): architekt cloud, Azure, Kubernetes, DevOps, platform engineering — [LinkedIn]({{ .Site.Params.hosts.lukasz.linkedin }}), [X]({{ .Site.Params.hosts.lukasz.twitter }})
+- [Szymon Warda]({{ $base }}/#hosts): inżynier danych, NoSQL, observability, performance, architektura systemów — [LinkedIn]({{ .Site.Params.hosts.szymon.linkedin }}), [X]({{ .Site.Params.hosts.szymon.twitter }})
+
+## Subskrypcja i feedy
+
+- [RSS odcinków]({{ $base }}/index.xml): pełny feed RSS z najnowszymi odcinkami
+- [Spotify]({{ .Site.Params.podcast.spotify }}): podcast Patoarchitekci na Spotify
+- [Apple Podcasts]({{ .Site.Params.podcast.apple }}): podcast Patoarchitekci na Apple Podcasts
+- [YouTube]({{ .Site.Params.podcast.youtube }}): kanał YouTube z nagraniami video odcinków
+
+## Optional
+
+- [Sitemap XML]({{ $base }}/sitemap.xml): pełna mapa strony do indeksacji
+- [Linki z odcinków]({{ $base }}/links/): notatki i linki wymieniane w odcinkach podcastu
+- [Konferencja Pato]({{ $base }}/konferencja/): wydarzenie organizowane przez Patoarchitekci
