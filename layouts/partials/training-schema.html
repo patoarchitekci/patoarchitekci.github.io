@@ -116,7 +116,29 @@
 
   "hasCourseInstance": {
     "@type": "CourseInstance",
+    "@id": "{{ .Permalink }}#course-instance",
+    "name": "{{ $training.title }}",
     "courseMode": "online",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "description": "{{ .Description | default (index $training.description 0) }}",
+    {{- if $training.image }}
+    "image": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}{{ $training.image }}",
+    {{- end }}
+    "organizer": {
+      "@type": "Organization",
+      "name": "Patoarchitekci",
+      "url": "{{ .Site.BaseURL }}"
+    },
+    {{- if $training.instructor }}
+    "performer": {
+      "@type": "Person",
+      "name": "{{ $training.instructor }}"
+      {{- with $instructorData -}}
+      ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person"
+      {{- end -}}
+    },
+    {{- end }}
     {{- /* Task 2.6: courseWorkload w ISO 8601 (PT4H lub PT7H30M) liczone z time + dates */ -}}
     {{- if and $training.time $training.dates -}}
     {{- $tParts := split $training.time " – " -}}
@@ -159,7 +181,31 @@
         "@type": "Event",
         "name": "{{ $training.title }} — dzień {{ add $i 1 }}",
         "startDate": "{{ $dayStart.Format "2006-01-02T15:04:05Z07:00" }}",
-        "endDate": "{{ $dayEnd.Format "2006-01-02T15:04:05Z07:00" }}"
+        "endDate": "{{ $dayEnd.Format "2006-01-02T15:04:05Z07:00" }}",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "description": "Dzień {{ add $i 1 }} z {{ len $training.dates }} szkolenia {{ $training.title }} prowadzonego przez {{ $training.instructor }}.",
+        {{- if $training.image }}
+        "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ $training.image }}",
+        {{- end }}
+        "location": {
+          "@type": "VirtualLocation",
+          "url": "{{ .Permalink }}"
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "Patoarchitekci",
+          "url": "{{ $.Site.BaseURL }}"
+        }
+        {{- if $training.instructor -}}
+        ,"performer": {
+          "@type": "Person",
+          "name": "{{ $training.instructor }}"
+          {{- with $instructorData -}}
+          ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person"
+          {{- end -}}
+        }
+        {{- end }}
       }
       {{- end }}
     ],
