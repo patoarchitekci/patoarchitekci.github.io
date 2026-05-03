@@ -3,21 +3,30 @@
 {{- $training := index .Site.Data.trainings $trainingId -}}
 {{- if $training -}}
 {{- $today := now.Format "2006-01-02" -}}
-{{- $isTrainingPast := false -}}
 {{- $availabilityStatus := "InStock" -}}
 {{- $availabilityStarts := "" -}}
 
-{{- if $training.dates -}}
-{{- $firstDate := index $training.dates 0 -}}
-{{- $isTrainingPast = le $firstDate $today -}}
-{{- if $isTrainingPast -}}
-{{- $parsedDate := time $firstDate -}}
-{{- $futureDate := $parsedDate.AddDate 0 6 0 -}}
-{{- $availabilityStatus = "PreOrder" -}}
-{{- $availabilityStarts = $futureDate.Format "2006-01-02" -}}
-{{- end -}}
+{{- /* Task 2.5: waitlist_only -> SoldOut (priorytet ponad date check) */ -}}
+{{- if default false $training.waitlist_only -}}
+  {{- $availabilityStatus = "SoldOut" -}}
+{{- else if $training.dates -}}
+  {{- $firstDate := index $training.dates 0 -}}
+  {{- if le $firstDate $today -}}
+    {{- $parsedDate := time $firstDate -}}
+    {{- $futureDate := $parsedDate.AddDate 0 6 0 -}}
+    {{- $availabilityStatus = "PreOrder" -}}
+    {{- $availabilityStarts = $futureDate.Format "2006-01-02" -}}
+  {{- end -}}
 {{- else -}}
-{{- $availabilityStatus = "PreOrder" -}}
+  {{- $availabilityStatus = "PreOrder" -}}
+{{- end -}}
+
+{{- /* Task 2.8: znajdź instructor data po name (mapping name -> data/instructors/*.yaml) */ -}}
+{{- $instructorData := false -}}
+{{- range $iid, $idata := .Site.Data.instructors -}}
+  {{- if eq $idata.name $training.instructor -}}
+    {{- $instructorData = $idata -}}
+  {{- end -}}
 {{- end -}}
 
 <script type="application/ld+json">
@@ -63,17 +72,65 @@
   },
   {{- end -}}
   "inLanguage": "pl-PL",
+  {{- /* Task 2.8: rozszerzony Person z sameAs (z data/instructors/) */ -}}
   {{- if $training.instructor -}}
   "instructor": {
     "@type": "Person",
     "name": "{{ $training.instructor }}"
+    {{- with $instructorData -}}
+    ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person",
+    "url": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#hosts",
+    {{- with .photo -}}
+    "image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}",
+    {{- end -}}
+    {{- with .bio_short -}}
+    "description": {{ . | jsonify }},
+    {{- end -}}
+    {{- $sameAs := slice -}}
+    {{- with .social.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+    {{- with .social.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+    {{- with .social.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
+    {{- if $sameAs -}}
+    "sameAs": [{{ range $i, $u := $sameAs }}{{ if $i }},{{ end }}{{ $u | jsonify }}{{ end }}]
+    {{- end -}}
+    {{- end -}}
   },
   {{- end -}}
+
+  {{- /* Task 2.7: Review[] z testimonials (fix dla Google strip aggregateRating bez Review) */ -}}
+  {{- if $training.testimonials -}}
+  "review": [
+    {{- range $i, $t := $training.testimonials -}}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": {{ $t.author | jsonify }} }
+      {{- with $t.rating -}}
+      ,"reviewRating": { "@type": "Rating", "ratingValue": "{{ . }}", "bestRating": "5" }
+      {{- end -}}
+      ,"reviewBody": {{ $t.content | jsonify }}
+    }
+    {{- end }}
+  ],
+  {{- end -}}
+
   "hasCourseInstance": {
     "@type": "CourseInstance",
     "courseMode": "online",
-    {{- if eq $training.location.type "online" -}}
-    "courseWorkload": "{{ $training.time }}",
+    {{- /* Task 2.6: courseWorkload w ISO 8601 (PT4H lub PT7H30M) liczone z time + dates */ -}}
+    {{- if and $training.time $training.dates -}}
+    {{- $tParts := split $training.time " – " -}}
+    {{- if eq (len $tParts) 2 -}}
+    {{- $sParts := split (index $tParts 0) ":" -}}
+    {{- $eParts := split (index $tParts 1) ":" -}}
+    {{- $minStart := add (mul (int (index $sParts 0)) 60) (int (index $sParts 1)) -}}
+    {{- $minEnd := add (mul (int (index $eParts 0)) 60) (int (index $eParts 1)) -}}
+    {{- $minPerDay := sub $minEnd $minStart -}}
+    {{- $totalMin := mul $minPerDay (len $training.dates) -}}
+    {{- $h := div $totalMin 60 -}}
+    {{- $m := mod $totalMin 60 -}}
+    "courseWorkload": "PT{{ $h }}H{{ if $m }}{{ $m }}M{{ end }}",
+    {{- end -}}
     {{- end -}}
     {{- /* Multi-day course: dates[] = wszystkie dni jednego szkolenia (NIE 4 osobne kohorty) */ -}}
     {{- if $training.dates -}}

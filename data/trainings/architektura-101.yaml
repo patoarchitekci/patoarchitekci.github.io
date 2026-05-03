@@ -128,6 +128,7 @@ faq:
 # Opinie uczestników
 testimonials:
   - author: "Mateusz Kubaszek"
+    rating: 5
     content: "Ostatnio po naszym Architekcie 101 chyba rozbiłem team architektów 😛 przy wdrażaniu płatności. Musieli się kajać, jak mogli zwałić tak 'prosty' temat. 🧙"
 
 # Meta dla Hugo
