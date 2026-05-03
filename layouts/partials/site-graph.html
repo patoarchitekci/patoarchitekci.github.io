@@ -1,0 +1,116 @@
+{{- /*
+  Task 2.1: Site-wide @graph - unified entity tree (Org + WebSite + PodcastSeries
+  + EducationalOrganization + 2× Person). Render w <head> na KAŻDEJ stronie.
+
+  Inne schemas (PodcastEpisode, Course, FAQPage, BreadcrumbList) referuja przez @id:
+    "instructor": {"@id": "https://patoarchitekci.io/#lukasz-kaluzny"}
+*/ -}}
+{{- $base := .Site.BaseURL | strings.TrimSuffix "/" -}}
+{{- $orgId := printf "%s/#organization" $base -}}
+{{- $podcastId := printf "%s/#podcast" $base -}}
+{{- $eduId := printf "%s/#educational" $base -}}
+{{- $lukaszId := printf "%s/#lukasz-kaluzny" $base -}}
+{{- $szymonId := printf "%s/#szymon-warda" $base -}}
+
+{{- /* Build Organization.sameAs from params.social + params.podcast */ -}}
+{{- $orgSameAs := slice -}}
+{{- with .Site.Params.social.linkedin }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.podcast.youtube }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.podcast.spotify }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.podcast.apple }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.twitter }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.facebook }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.instagram }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+{{- with .Site.Params.social.tiktok }}{{ $orgSameAs = $orgSameAs | append . }}{{ end -}}
+
+{{- /* Person sameAs from data/instructors */ -}}
+{{- $lukasz := index .Site.Data.instructors "lukasz-kaluzny" -}}
+{{- $szymon := index .Site.Data.instructors "szymon-warda" -}}
+{{- $lukaszSameAs := slice -}}
+{{- with $lukasz.social.linkedin }}{{ $lukaszSameAs = $lukaszSameAs | append . }}{{ end -}}
+{{- with $lukasz.social.twitter }}{{ $lukaszSameAs = $lukaszSameAs | append . }}{{ end -}}
+{{- with $lukasz.social.github }}{{ $lukaszSameAs = $lukaszSameAs | append . }}{{ end -}}
+{{- $szymonSameAs := slice -}}
+{{- with $szymon.social.linkedin }}{{ $szymonSameAs = $szymonSameAs | append . }}{{ end -}}
+{{- with $szymon.social.twitter }}{{ $szymonSameAs = $szymonSameAs | append . }}{{ end -}}
+{{- with $szymon.social.github }}{{ $szymonSameAs = $szymonSameAs | append . }}{{ end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ $orgId }}",
+      "name": "Patoarchitekci",
+      "url": "{{ $base }}/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ $base }}/img/png/favicon.png"
+      },
+      "description": {{ .Site.Params.description | jsonify }},
+      "sameAs": [{{ range $i, $u := $orgSameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ $base }}/#website",
+      "url": "{{ $base }}/",
+      "name": "Patoarchitekci",
+      "publisher": { "@id": "{{ $orgId }}" },
+      "inLanguage": "pl-PL"
+    },
+    {
+      "@type": "PodcastSeries",
+      "@id": "{{ $podcastId }}",
+      "name": "Patoarchitekci",
+      "url": "{{ $base }}/odcinki/",
+      "description": {{ .Site.Params.description | jsonify }},
+      "image": "{{ $base }}/metatag.png",
+      "inLanguage": "pl-PL",
+      "webFeed": "https://www.spreaker.com/show/4215515/episodes/feed",
+      "publisher": { "@id": "{{ $orgId }}" },
+      "author": [
+        { "@id": "{{ $lukaszId }}" },
+        { "@id": "{{ $szymonId }}" }
+      ]
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": "{{ $eduId }}",
+      "name": "Patoarchitekci szkolenia",
+      "url": "{{ $base }}/szkolenia/",
+      "parentOrganization": { "@id": "{{ $orgId }}" }
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ $lukaszId }}",
+      "name": "Łukasz Kałużny",
+      "url": "{{ $base }}/#lukasz-kaluzny",
+      {{- with $lukasz.photo }}
+      "image": "{{ $base }}{{ . }}",
+      {{- end }}
+      {{- with $lukasz.bio_short }}
+      "description": {{ . | jsonify }},
+      {{- end }}
+      "jobTitle": "Technology Advisor",
+      "worksFor": { "@id": "{{ $orgId }}" },
+      "sameAs": [{{ range $i, $u := $lukaszSameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ $szymonId }}",
+      "name": "Szymon Warda",
+      "url": "{{ $base }}/#szymon-warda",
+      {{- with $szymon.photo }}
+      "image": "{{ $base }}{{ . }}",
+      {{- end }}
+      {{- with $szymon.bio_short }}
+      "description": {{ . | jsonify }},
+      {{- end }}
+      "jobTitle": "Managing Partner",
+      "worksFor": { "@id": "{{ $orgId }}" },
+      "sameAs": [{{ range $i, $u := $szymonSameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
+    }
+  ]
+}
+</script>

@@ -106,28 +106,15 @@
       "name": "Patoarchitekci",
       "url": "{{ .Site.BaseURL }}"
     },
-    {{- /* Task 2.8: instructor na CourseInstance (NIE na Course - schema.org compliance) */ -}}
+    {{- /* Task 2.8: instructor jako @id reference do site-graph Person (Task 2.1) */ -}}
     {{- if $training.instructor }}
     "instructor": {
+      {{- with $instructorData -}}
+      "@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#{{ .slug }}"
+      {{- else -}}
       "@type": "Person",
       "name": "{{ $training.instructor }}"
-      {{- with $instructorData -}}
-      ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person",
-      "url": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#hosts"
-      {{- with .photo -}}
-      ,"image": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}{{ . }}"
-      {{- end -}}
-      {{- with .bio_short -}}
-      ,"description": {{ . | jsonify }}
-      {{- end -}}
-      {{- $sameAs := slice -}}
-      {{- with .social.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-      {{- with .social.twitter }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-      {{- with .social.github }}{{ $sameAs = $sameAs | append . }}{{ end -}}
-      {{- if $sameAs -}}
-      ,"sameAs": [{{ range $i, $u := $sameAs }}{{ if $i }},{{ end }}"{{ $u }}"{{ end }}]
-      {{- end -}}
-      {{- end -}}
+      {{- end }}
     },
     {{- end }}
     {{- /* Task 2.6: courseWorkload w ISO 8601 (PT4H lub PT7H30M) liczone z time + dates */ -}}
@@ -190,11 +177,12 @@
         }
         {{- if $training.instructor -}}
         ,"performer": {
+          {{- with $instructorData -}}
+          "@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/#{{ .slug }}"
+          {{- else -}}
           "@type": "Person",
           "name": "{{ $training.instructor }}"
-          {{- with $instructorData -}}
-          ,"@id": "{{ $.Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/{{ .slug }}/#person"
-          {{- end -}}
+          {{- end }}
         }
         {{- end }}
       }

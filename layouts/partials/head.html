@@ -14,10 +14,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- ===== SEO Meta (description, canonical, robots, dates) ===== -->
 {{ partial "seo-meta.html" . }}
 
+<!-- ===== Schema.org @graph site-wide (Task 2.1 - Org+WebSite+PodcastSeries+EducationalOrg+Person×2) ===== -->
+{{ partial "site-graph.html" . }}
+
 <!-- ===== Social Media Meta (Open Graph + Twitter + per-page JSON-LD) ===== -->
 {{ partial "social-meta.html" . }}
 
-<!-- ===== Schema.org for Homepage (PodcastSeries) ===== -->
+<!-- ===== Schema.org for Homepage (PodcastSeries) — DEPRECATED, w site-graph ===== -->
 {{ partial "series-schema.html" . }}
 
 <!-- ===== Schema.org for Episodes List (ItemList) ===== -->

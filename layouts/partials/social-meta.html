@@ -101,16 +101,8 @@
   ],
   {{ end }}
   "actor": [
-    {
-      "@type": "Person",
-      "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/lukasz-kaluzny/#person",
-      "name": "Łukasz Kałużny"
-    },
-    {
-      "@type": "Person",
-      "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/o-nas/szymon-warda/#person",
-      "name": "Szymon Warda"
-    }
+    { "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/#lukasz-kaluzny" },
+    { "@id": "{{ .Site.BaseURL | strings.TrimSuffix "/" }}/#szymon-warda" }
   ],
   "author": {
     "@type": "Organization",
