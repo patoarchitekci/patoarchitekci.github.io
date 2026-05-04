@@ -1,8 +1,10 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl-PL">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="content-language" content="pl-PL" />
+  <meta name="robots" content="index, follow" />
   <title>Konferencja Pato #200 · 16 czerwca 2026 · Warszawa</title>
   <meta name="description" content="Jednodniowa konferencja Patoarchitekci. 200. odcinek nagrywany na żywo. 16 czerwca 2026, Sky Hall Warszawa. Łukasz, Szymon + 3 gości." />
   <link rel="canonical" href="https://patoarchitekci.io/konferencja/" />
@@ -51,14 +53,10 @@
     },
     "image": ["https://patoarchitekci.io/konferencja/og-image.png"],
     "url": "https://patoarchitekci.io/konferencja/",
-    "organizer": {
-      "@type": "Organization",
-      "name": "Patoarchitekci",
-      "url": "https://patoarchitekci.io"
-    },
+    "organizer": { "@id": "https://patoarchitekci.io/#organization" },
     "performer": [
-      { "@type": "Person", "name": "Łukasz Kałużny", "sameAs": "https://www.linkedin.com/in/lukaszkaluzny/" },
-      { "@type": "Person", "name": "Szymon Warda", "sameAs": "https://www.linkedin.com/in/szymonwarda/" },
+      { "@id": "https://patoarchitekci.io/#lukasz-kaluzny" },
+      { "@id": "https://patoarchitekci.io/#szymon-warda" },
       { "@type": "Person", "name": "Oskar Dudycz", "sameAs": "https://www.linkedin.com/in/oskardudycz/" },
       { "@type": "Person", "name": "Mariusz Gil", "sameAs": "https://www.linkedin.com/in/mariuszgil/" },
       { "@type": "Person", "name": "Mariusz Dalewski", "sameAs": "https://www.linkedin.com/in/mariuszdalewski/" }
@@ -71,6 +69,87 @@
       "availability": "https://schema.org/InStock",
       "validFrom": "2025-04-01"
     }
+  }
+  </script>
+
+  <!-- Site-wide @graph (parity z reszta strony - Org+WebSite+Person×2) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://patoarchitekci.io/#organization",
+        "name": "Patoarchitekci",
+        "url": "https://patoarchitekci.io/",
+        "logo": { "@type": "ImageObject", "url": "https://patoarchitekci.io/img/png/favicon.png" },
+        "sameAs": [
+          "https://www.linkedin.com/company/patoarchitekci/",
+          "https://www.youtube.com/@Patoarchitekci",
+          "https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J",
+          "https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604",
+          "https://x.com/patoarchitekci",
+          "https://www.facebook.com/patoarchitekci/",
+          "https://www.instagram.com/patoarchitekci",
+          "https://www.tiktok.com/@patoarchitekci_"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://patoarchitekci.io/#website",
+        "url": "https://patoarchitekci.io/",
+        "name": "Patoarchitekci",
+        "publisher": { "@id": "https://patoarchitekci.io/#organization" },
+        "inLanguage": "pl-PL"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://patoarchitekci.io/#lukasz-kaluzny",
+        "name": "Łukasz Kałużny",
+        "url": "https://patoarchitekci.io/#lukasz-kaluzny",
+        "jobTitle": "Technology Advisor",
+        "worksFor": { "@id": "https://patoarchitekci.io/#organization" },
+        "sameAs": [
+          "https://www.linkedin.com/in/lukaszkaluzny/",
+          "https://x.com/kaluzaaa",
+          "https://github.com/kaluzaaa"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://patoarchitekci.io/#szymon-warda",
+        "name": "Szymon Warda",
+        "url": "https://patoarchitekci.io/#szymon-warda",
+        "jobTitle": "Managing Partner",
+        "worksFor": { "@id": "https://patoarchitekci.io/#organization" },
+        "sameAs": [
+          "https://www.linkedin.com/in/szymonwarda/",
+          "https://x.com/maklipsa",
+          "https://github.com/maklipsa"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList: Strona główna > Konferencja Pato #200 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Strona główna",
+        "item": "https://patoarchitekci.io/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Konferencja Pato #200"
+      }
+    ]
   }
   </script>
 
