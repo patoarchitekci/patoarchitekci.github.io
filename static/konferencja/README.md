@@ -86,3 +86,24 @@ API endpoint: `functions/api/tickets-left.js` (Cloudflare Pages function).
 JSON z sesjami i prelegentami jest w `<script id="session-data" type="application/json">`
 wewnątrz `index.html`. Edytuj bezpośrednio — nie wymaga rebuildu CSS, tylko
 kopia HTML.
+
+## ⚠️ SEO/schema fixes (2026-05-04) — DO ZAAPLIKOWANIA przy każdym rebuild
+
+Manualne zmiany w `static/konferencja/index.html` które trzeba aplikować
+też w źródle (`/tmp/experiments/tailwind-brandings/konferencja.html`)
+przy każdym rebuild — bo `cp konferencja.html → index.html` je nadpisze.
+
+Lista (commit `6a01d83`):
+
+1. **`<html lang="pl-PL">`** (NIE `pl`) — spójność z resztą strony
+2. **`<meta http-equiv="content-language" content="pl-PL">`** w `<head>`
+3. **`<meta name="robots" content="index, follow">`** explicit
+4. **`Event.performer`**: Łukasz/Szymon jako `{"@id": "https://patoarchitekci.io/#lukasz-kaluzny"}`
+   i `{"@id": "https://patoarchitekci.io/#szymon-warda"}` (cross-ref do site-graph)
+5. **`Event.organizer`**: `{"@id": "https://patoarchitekci.io/#organization"}`
+6. **Site-wide @graph JSON-LD** — Org+WebSite+Person×2 (parity z resztą strony, bo
+   konferencja jest poza Hugo i NIE dziedziczy `layouts/partials/site-graph.html`)
+7. **BreadcrumbList JSON-LD** — Strona główna > Konferencja Pato #200
+
+Plus `layouts/sitemap.xml` (Hugo override) zawiera explicit `/konferencja/` URL
+żeby wyszukiwarki ją znalazły.
