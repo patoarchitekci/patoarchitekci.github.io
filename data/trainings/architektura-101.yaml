@@ -6,6 +6,7 @@ waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Łukasz Kałużny"
+instructor_id: "lukasz-kaluzny"
 tags:
   - "#Architecture"
   - "#IT"
@@ -91,6 +92,7 @@ price_net: 3089.42
 price_gross: 3799.99
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/architektura-101"
+product_id: "prod_Q0Dus6SShYYe7R"
 
 dates:
   - "2026-11-17"
@@ -98,6 +100,8 @@ dates:
   - "2026-11-24"
   - "2026-11-25"
 time: "9:00 – 13:00"
+start_time: "09:00"
+end_time: "13:00"
 
 location:
   type: "online"

@@ -1,21 +1,35 @@
+{{- /*
+  Public trainings.json — consumed by tap-router orchestrator.
+  Spec: docs/trainings-json-migration.md (raw array, 8 fields per entry).
+  Filters: active=true, waitlist_only!=true, all required fields set, dates[0] >= today.
+*/ -}}
 {{- $today := now.Format "2006-01-02" -}}
-{{- $trainings := slice -}}
-
-{{- range $key, $training := .Site.Data.trainings -}}
-  {{- if and $training.active $training.dates -}}
-    {{- $firstDate := index $training.dates 0 -}}
-    {{- if gt $firstDate $today -}}
-      {{- $item := dict
-        "id" $training.id
-        "title" $training.title
-        "instructor" $training.instructor
-        "dates" $training.dates
-        "time" $training.time
-        "url" (printf "https://patoarchitekci.io/szkolenia/%s/" $training.id)
-      -}}
-      {{- $trainings = $trainings | append $item -}}
+{{- $items := slice -}}
+{{- range $key, $t := .Site.Data.trainings -}}
+  {{- $hasDates := and $t.dates (gt (len $t.dates) 0) -}}
+  {{- $required := and (and $t.product_id $t.instructor_id) (and $t.start_time $t.end_time) -}}
+  {{- if and (and $t.active (not $t.waitlist_only)) (and $hasDates $required) -}}
+    {{- $firstDate := index $t.dates 0 -}}
+    {{- if ge $firstDate $today -}}
+      {{- $slug := printf "%s-%s" $firstDate $t.id -}}
+      {{- $location := "Online (Microsoft Teams)" -}}
+      {{- with $t.location -}}
+        {{- if and (ne .type "online") .address -}}
+          {{- $location = .address -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $items = $items | append (dict
+        "product_id" $t.product_id
+        "title" $t.title
+        "slug" $slug
+        "instructor_id" $t.instructor_id
+        "dates" $t.dates
+        "start_time" $t.start_time
+        "end_time" $t.end_time
+        "location" $location
+      ) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
-
-{{- dict "trainings" $trainings "count" (len $trainings) "updated_at" (now.Format "2006-01-02T15:04:05Z07:00") | jsonify -}}
+{{- $sorted := sort $items "slug" "asc" -}}
+{{- $sorted | jsonify (dict "indent" "  ") -}}
