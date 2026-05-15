@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11' # Specify desired Python version
 
@@ -37,8 +37,27 @@ jobs:
           IS_PUBLISHED_FIELD: ${{ secrets.IS_PUBLISHED_FIELD || 'is_published' }} # Allow override via secret, default to 'is_published'
           # Add other necessary secrets as environment variables
 
+      - name: Validate generated episode YAML front matter
+        run: |
+          python - <<'PY'
+          import re, sys, pathlib, yaml
+          ep = "${{ github.event.inputs.episode_number }}"
+          path = pathlib.Path(f"content/episodes/{ep}.md")
+          if not path.exists():
+              sys.exit(f"Episode file not found: {path}")
+          text = path.read_text(encoding="utf-8")
+          m = re.match(r"^---\n(.*?)\n---", text, re.DOTALL)
+          if not m:
+              sys.exit(f"No YAML front matter delimited by --- found in {path}")
+          try:
+              yaml.safe_load(m.group(1))
+          except yaml.YAMLError as e:
+              sys.exit(f"Invalid YAML front matter in {path}:\n{e}")
+          print(f"YAML front matter OK: {path}")
+          PY
+
       - name: Commit and Push changes
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           # Add the directories containing the generated files (Hugo structure)
           add: 'content/episodes/ static/img/'
