@@ -27,3 +27,6 @@ buttons:
   - label: "Bezpłatna Konsultacja"
     url: "https://outlook.office.com/book/Patoarchitekci@protopia.tech"
     icon: "calendar"
+  - label: "Powered By Protopia"
+    url: "https://www.youtube.com/@PoweredByProtopia"
+    icon: "video"
