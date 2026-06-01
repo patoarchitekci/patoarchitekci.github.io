@@ -46,27 +46,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMsg = document.getElementById('waitlistErrorMsg');
     const successMsg = document.getElementById('waitlistSuccessMsg');
 
-    // Sprawdź czy szkolenie ma przeszły termin
-    const isTrainingPast = document.querySelector('[data-training-past]')?.dataset.trainingPast === 'true';
-    console.log('[WAITLIST] Szkolenie przeszłe:', isTrainingPast);
+    // Tryb waitlisty: termin przeszły / tylko lista oczekujących / wyprzedane (quantity 0)
+    const rootEl = document.querySelector('[data-training-past]');
+    const isTrainingPast = rootEl?.dataset.trainingPast === 'true';
+    const isSoldOut = rootEl?.dataset.soldOut === 'true';
+    console.log('[WAITLIST] Przeszłe:', isTrainingPast, '| Wyprzedane:', isSoldOut);
 
-    if (isTrainingPast && modal) {
-        // Zmień tekst wszystkich przycisków "Zapisz się" na "Rezerwuj miejsce"
-        const signupButtons = document.querySelectorAll('button');
-        signupButtons.forEach(button => {
-            if (button.textContent.trim() === 'Zapisz się') {
-                button.textContent = 'Rezerwuj miejsce';
-                button.dataset.waitlistButton = 'true';
-            }
+    // Zamienia wszystkie CTA zakupu (linki [data-buy-cta] oraz przyciski "Zapisz się")
+    // na wyzwalacze listy oczekujących. Idempotentne — można wywołać ponownie, gdy
+    // szkolenie wyprzeda się "na żywo" (z licznika biletów).
+    window.enterWaitlistMode = function () {
+        if (!modal) return;
+        if (rootEl) rootEl.dataset.soldOut = 'true';
+        document.querySelectorAll('[data-buy-cta], button').forEach(function (el) {
+            const isAnchor = el.hasAttribute('data-buy-cta');
+            if (!isAnchor && el.textContent.trim() !== 'Zapisz się') return;
+            if (isAnchor) { el.setAttribute('href', '#'); el.removeAttribute('target'); }
+            el.textContent = 'Rezerwuj miejsce';
+            el.dataset.waitlistButton = 'true';
         });
+    };
 
-        // Dodaj obsługę kliknięć dla przycisków waitlist
-        document.addEventListener('click', function(e) {
-            if (e.target.dataset.waitlistButton === 'true') {
+    // Obsługa kliknięć w wyzwalacze waitlisty (podpięta zawsze, gdy modal istnieje).
+    if (modal) {
+        document.addEventListener('click', function (e) {
+            const trigger = e.target.closest && e.target.closest('[data-waitlist-button="true"]');
+            if (trigger) {
                 e.preventDefault();
                 openModal();
             }
         });
+    }
+
+    if ((isTrainingPast || isSoldOut) && modal) {
+        window.enterWaitlistMode();
     }
 
     // Turnstile dla waitlist

@@ -13,7 +13,27 @@
 {{- if $showLiveTickets -}}
 {{- $easySlug = path.Base $training.purchase_url -}}
 {{- end -}}
-<div class="flex relative" data-training-past="{{ $isTrainingPast }}">
+{{- /* Baked-in remaining stock from data/tickets.yaml (refreshed daily by GHA).
+       Honest fallback for crawlers / no-JS; live JS counter refreshes on top.
+       Quantity 0 = sold out -> show "Wyprzedane" and switch the CTA to the
+       waitlist (same modal as past/waitlist-only trainings). */ -}}
+{{- $ticketsMax := $training.participants.max -}}
+{{- $ticketsText := $ticketsMax -}}
+{{- $soldOut := false -}}
+{{- $tickets := .Site.Data.tickets | default dict -}}
+{{- if and $showLiveTickets (isset $tickets $easySlug) -}}
+{{- $baked := index $tickets $easySlug -}}
+{{- if eq $baked 0 -}}
+{{- $soldOut = true -}}
+{{- $ticketsText = "Wyprzedane" -}}
+{{- else if lt $baked $ticketsMax -}}
+{{- $ticketsText = printf "Zostało tylko %d" $baked -}}
+{{- else -}}
+{{- $ticketsText = $baked -}}
+{{- end -}}
+{{- end -}}
+{{- $waitlistMode := or $isTrainingPast $soldOut -}}
+<div class="flex relative" data-training-past="{{ $isTrainingPast }}" data-sold-out="{{ $soldOut }}">
   <div class="w-full">
     <!-- ======= TRAINING TITLE SECTION ======= -->
     <section class="bg-dark-black overflow-x-clip pt-10 sm:pt-[50px] pb-[15px] md:pb-[30px] px-[30px] xl:px-0">
@@ -46,7 +66,7 @@
                   {{ end }}
                 </div>
                 {{ if and $training.purchase_url (not $isTrainingPast) }}
-                <a href="{{ $training.purchase_url }}" target="_blank"
+                <a href="{{ $training.purchase_url }}" target="_blank" data-buy-cta
                   class="bg-white font-bold lg:text-custom-2xl mt-10 sm:mt-[55px] sm:text-lg text-[22.15px] leading-100 text-dark-black p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] uppercase hover:bg-orange transition-all ease-linear duration-300 max-sm:h-[46px] max-sm:w-[291px] flex items-center justify-center">
                   Zapisz się
                 </a>
@@ -255,7 +275,7 @@
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100"
                     data-tickets-left data-tickets-type="training"
                     data-tickets-slug="{{ $easySlug }}"
-                    data-tickets-max="{{ $training.participants.max }}">{{ $training.participants.max }}</p>
+                    data-tickets-max="{{ $ticketsMax }}">{{ $ticketsText }}</p>
                   {{ else }}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">{{
                     $training.participants.max }}</p>
@@ -312,7 +332,7 @@
                 }}</a>
             </div>
             {{ if and $training.purchase_url (not $isTrainingPast) }}
-            <a href="{{ $training.purchase_url }}" target="_blank"
+            <a href="{{ $training.purchase_url }}" target="_blank" data-buy-cta
               class="bg-white font-bold uppercase lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white flex items-center justify-center">
               Zapisz się
             </a>
@@ -457,7 +477,7 @@
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120"
                 data-tickets-left data-tickets-type="training"
                 data-tickets-slug="{{ $easySlug }}"
-                data-tickets-max="{{ $training.participants.max }}">{{ $training.participants.max }}</p>
+                data-tickets-max="{{ $ticketsMax }}">{{ $ticketsText }}</p>
               {{ else }}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">{{
                 $training.participants.max
@@ -508,7 +528,7 @@
               }}</a>
           </div>
           {{ if and $training.purchase_url (not $isTrainingPast) }}
-          <a href="{{ $training.purchase_url }}" target="_blank"
+          <a href="{{ $training.purchase_url }}" target="_blank" data-buy-cta
             class="bg-white uppercase font-bold lg:text-custom-2xl sm:text-lg text-[22px] leading-100 text-dark-black max-sm:h-[46px] p-3 sm:py-4 w-full max-w-[379px] sm:px-3 pe-[18px] rounded-full lg:min-w-[243px] transition-all ease-linear duration-300 hover:bg-black hover:text-white flex items-center justify-center">
             Zapisz się
           </a>
@@ -552,6 +572,12 @@
       .then(function (data) {
         var n = data && typeof data.remaining === 'number' ? data.remaining : null;
         if (n === null || n < 0) return;
+        if (n === 0) {
+          // Sold out since the last build — show it and switch the CTA to the waitlist.
+          group.forEach(function (el) { el.textContent = 'Wyprzedane'; });
+          if (typeof window.enterWaitlistMode === 'function') window.enterWaitlistMode();
+          return;
+        }
         group.forEach(function (el) {
           var max = parseInt(el.dataset.ticketsMax, 10);
           if (!isNaN(max) && n < max) {

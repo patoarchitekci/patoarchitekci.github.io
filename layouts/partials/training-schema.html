@@ -21,6 +21,15 @@
   {{- $availabilityStatus = "PreOrder" -}}
 {{- end -}}
 
+{{- /* Sold out: baked stock 0 from data/tickets.yaml (refreshed daily) -> SoldOut */ -}}
+{{- if and $training.purchase_url (ne $availabilityStatus "SoldOut") -}}
+  {{- $slug := path.Base $training.purchase_url -}}
+  {{- $tickets := .Site.Data.tickets | default dict -}}
+  {{- if and (isset $tickets $slug) (eq (index $tickets $slug) 0) -}}
+    {{- $availabilityStatus = "SoldOut" -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* Task 2.8: znajdź instructor data po name (mapping name -> data/instructors/*.yaml) */ -}}
 {{- $instructorData := false -}}
 {{- range $iid, $idata := .Site.Data.instructors -}}

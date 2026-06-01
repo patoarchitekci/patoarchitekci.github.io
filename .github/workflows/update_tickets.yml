@@ -1,0 +1,37 @@
+name: Update Ticket Stock
+
+on:
+  schedule:
+    # 04:00 UTC daily (~06:00 PL summer / 05:00 PL winter) — fresh numbers before traffic.
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: update-tickets-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Refresh ticket stock from easy.tools
+        run: python scripts/update_tickets.py
+
+      - name: Commit changes (triggers Cloudflare Pages build)
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: "data/tickets.yaml static/konferencja/index.html"
+          message: "chore: refresh ticket stock"
+          default_author: github_actions
