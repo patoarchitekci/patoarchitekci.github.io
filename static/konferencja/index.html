@@ -1265,6 +1265,22 @@
         .catch(() => { /* silent - keep static fallback */ });
     })();
 
+    // Promo code: read ?promo= from the URL and append it to every EasyCart link.
+    // Mirrors static/js/promo-code.js used on the szkolenia / szkolenie pages.
+    (function() {
+      const promoCode = new URLSearchParams(window.location.search).get('promo');
+      if (!promoCode) return;
+      document.querySelectorAll('a[href]').forEach((link) => {
+        const href = link.getAttribute('href');
+        if (!href || !(href.includes('easycart.pl') || href.includes('easy.tools'))) return;
+        try {
+          const url = new URL(href, window.location.origin);
+          url.searchParams.set('promo', promoCode);
+          link.setAttribute('href', url.toString());
+        } catch (e) { /* skip invalid URLs */ }
+      });
+    })();
+
     // Floating CTA visibility:
     //   - hidden while hero "Kup bilet" button is on screen (avoid duplicate CTA)
     //   - hidden when footer is in viewport (don't block footer links on mobile)
