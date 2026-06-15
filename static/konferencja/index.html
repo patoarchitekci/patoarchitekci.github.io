@@ -66,7 +66,7 @@
       "url": "https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200",
       "price": "359",
       "priceCurrency": "PLN",
-      "availability": "https://schema.org/InStock",
+      "availability": "https://schema.org/SoldOut",
       "validFrom": "2025-04-01"
     }
   }
@@ -210,8 +210,8 @@
 </head>
 <body class="bg-brand-white text-charcoal-900 antialiased">
 
-  <!-- Floating "Kup bilet" badge - fixed bottom-right, visible while scrolling.
-       Hidden when footer enters viewport (so footer links stay tappable on mobile). -->
+  <!-- Floating badge - fixed bottom-right, visible while scrolling. Sales closed:
+       now a non-clickable "see you on-site" note. Hidden when footer enters viewport. -->
   <style>
     #float-cta {
       transition: transform 300ms, opacity 300ms,
@@ -225,13 +225,12 @@
       --tw-ring-color: rgba(32, 27, 32, 0.15);
     }
   </style>
-  <a id="float-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
+  <span id="float-cta" aria-disabled="true"
      class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 h-14 px-7 rounded-full
-            bg-brand-orange text-brand-charcoal font-sans font-bold text-base md:text-lg uppercase tracking-wide
-            shadow-2xl shadow-brand-charcoal/50 ring-2 ring-brand-charcoal/10
-            hover:scale-105 hover:shadow-brand-orange/50">
-    🎟 Kup bilet · 359 zł netto
-  </a>
+            bg-brand-charcoal text-brand-white font-sans font-bold text-base md:text-lg uppercase tracking-wide
+            shadow-2xl shadow-brand-charcoal/50 ring-2 ring-brand-orange/30 cursor-default">
+    👋 Do zobaczenia na miejscu
+  </span>
 
   <!-- ============================================== -->
   <!-- HERO · charcoal background, orange headlines    -->
@@ -247,7 +246,7 @@
         <a href="#co-cie-czeka" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Co Cię czeka</a>
         <a href="#miejsce" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Miejsce</a>
         <a href="#partner" class="rounded-full px-4 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white hover:text-brand-orange">Partner</a>
-        <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200" class="rounded-full border-2 border-brand-orange px-6 py-1.5 font-sans font-semibold text-sm uppercase text-brand-orange hover:bg-brand-orange hover:text-brand-charcoal transition">Kup bilet</a>
+        <span aria-disabled="true" class="rounded-full border-2 border-brand-white/40 px-6 py-1.5 font-sans font-semibold text-sm uppercase text-brand-white/60 cursor-default">Sprzedaż zakończona</span>
       </nav>
     </div>
 
@@ -270,29 +269,20 @@
         </p>
 
         <div class="flex flex-wrap items-center gap-4 mb-6">
-          <a id="hero-cta" href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
-             class="inline-flex items-center gap-3 h-14 px-10 rounded-full bg-brand-orange text-brand-charcoal font-sans font-bold text-xl uppercase shadow-2xl shadow-brand-orange/50 hover:shadow-brand-orange/70 hover:scale-[1.02] transition">
-            Kup bilet · 359 zł netto
-          </a>
+          <span id="hero-cta" aria-disabled="true"
+             class="inline-flex items-center gap-3 h-14 px-10 rounded-full bg-brand-orange text-brand-charcoal font-sans font-bold text-xl uppercase shadow-2xl shadow-brand-orange/50 cursor-default">
+            👋 Do zobaczenia na miejscu
+          </span>
           <a href="#agenda" class="inline-flex items-center h-14 px-8 rounded-full border-2 border-brand-white font-sans font-semibold text-base uppercase text-brand-white hover:bg-brand-white hover:text-brand-charcoal transition">
             Zobacz agendę ↓
           </a>
-        </div>
-
-        <!-- Handwritten hint pointing CTA → tickets pill below -->
-        <div class="hidden md:flex items-end gap-3 mb-4 pl-6 opacity-80">
-          <svg width="140" height="64" viewBox="0 0 237 108" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="scale-y-[-1]">
-            <path d="M3.57671 68.3845C14.6526 36.9769 43.064 15.9112 72.6428 11.4624C102.222 7.01361 132.448 17.4446 157.975 34.9716C183.501 52.4986 204.87 76.7461 224.817 101.912" stroke="var(--color-brand-orange)" stroke-width="7.17348" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M178.692 94.181C193.032 97.4577 207.373 100.723 221.713 103.999C222.984 104.289 224.359 104.568 225.526 103.921C227.543 102.809 227.796 99.7201 227.737 97.1762C227.324 80.0235 225.265 62.9313 221.604 46.2908" stroke="var(--color-brand-orange)" stroke-width="7.17348" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="font-display font-bold text-sm uppercase tracking-wide text-brand-orange mb-1" data-tickets-badge data-soldout="Wyprzedane">tylko <span data-tickets-left>28</span></span>
         </div>
 
         <!-- Key meta pills -->
         <div class="flex flex-wrap gap-3 text-sm md:text-base">
           <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-orange text-brand-charcoal font-display font-semibold uppercase tracking-wide">📍 Sky Hall · Warszawa</span>
           <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-white text-brand-charcoal font-display font-semibold uppercase tracking-wide">🕘 9:00 - 17:00</span>
-          <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-amber text-brand-charcoal font-display font-bold uppercase tracking-wide shadow-lg shadow-brand-charcoal/30" data-tickets-badge data-soldout="🎟 Wyprzedane">🎟 Zostało tylko <span data-tickets-left>28</span> biletów</span>
+          <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-amber text-brand-charcoal font-display font-bold uppercase tracking-wide shadow-lg shadow-brand-charcoal/30">🎟 Sprzedaż biletów zakończona</span>
         </div>
       </div>
 
@@ -812,29 +802,27 @@
     <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
       <p class="font-sans font-semibold text-sm uppercase tracking-widest mb-4">Bilety</p>
       <h2 class="font-display font-bold uppercase text-5xl md:text-7xl leading-[0.95] mb-6">
-        Kup bilet
+        Sprzedaż zakończona
       </h2>
       <p class="font-sans text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-        Cena nie zmieni się wraz ze zbliżaniem się konferencji. Ale liczba biletów jest ograniczona.
+        Dziękujemy! Komplet biletów rozszedł się przed konferencją. Jeśli masz bilet — widzimy się 16 czerwca w Sky Hall. Do zobaczenia na miejscu! 👋
       </p>
 
-      <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200"
-         class="group inline-flex flex-col md:flex-row items-stretch gap-0 md:gap-0 bg-brand-charcoal text-brand-white rounded-3xl overflow-hidden shadow-2xl shadow-brand-charcoal/40 ring-1 ring-brand-charcoal/10 mb-8 w-full md:w-auto hover:shadow-brand-orange/40 hover:scale-[1.01] transition">
+      <div class="inline-flex flex-col md:flex-row items-stretch bg-brand-charcoal text-brand-white rounded-3xl overflow-hidden shadow-2xl shadow-brand-charcoal/40 ring-1 ring-brand-charcoal/10 mb-8 w-full md:w-auto opacity-90">
         <div class="px-10 py-6 text-left">
           <p class="font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-2">Jeden dzień</p>
           <p class="font-display font-bold text-5xl md:text-6xl leading-none">359 zł <span class="text-2xl md:text-3xl font-semibold text-charcoal-400">netto</span></p>
           <p class="font-sans text-sm text-charcoal-300 mt-2">netto · 441,57 zł z VAT (23%)</p>
         </div>
-        <div class="flex items-center justify-center px-10 py-6 bg-brand-orange text-brand-charcoal font-display font-bold text-2xl md:text-3xl uppercase group-hover:brightness-110 transition">
-          Kup bilet →
+        <div class="flex items-center justify-center px-10 py-6 bg-brand-orange text-brand-charcoal font-display font-bold text-2xl md:text-3xl uppercase">
+          Wyprzedane
         </div>
-      </a>
+      </div>
 
 <div class="flex flex-wrap justify-center gap-3 text-sm">
-        <span class="px-4 py-1.5 rounded-full bg-brand-amber text-brand-charcoal font-sans font-bold uppercase tracking-wide shadow-md shadow-brand-charcoal/20" data-tickets-badge data-soldout="🎟 Wyprzedane">🎟 Zostało tylko <span data-tickets-left>28</span> biletów</span>
-        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">Faktura VAT</span>
-        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">14 dni na zwrot</span>
-        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">BLIK · Tpay · Karta</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-amber text-brand-charcoal font-sans font-bold uppercase tracking-wide shadow-md shadow-brand-charcoal/20">🎟 Komplet biletów</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">📍 Sky Hall · Warszawa</span>
+        <span class="px-4 py-1.5 rounded-full bg-brand-white text-brand-charcoal font-sans font-semibold uppercase tracking-wide">🕘 16 czerwca 2026</span>
       </div>
     </div>
 
@@ -1240,46 +1228,8 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
     })();
 
-    // Tickets-left live counter · fetches /api/tickets-left and updates all [data-tickets-left]
-    (function() {
-      const els = document.querySelectorAll('[data-tickets-left]');
-      if (!els.length) return;
-      fetch('/api/tickets-left?type=conference&slug=konferencja-pato-200', { headers: { 'accept': 'application/json' } })
-        .then(r => r.ok ? r.json() : Promise.reject(r.status))
-        .then(data => {
-          const n = (data && (data.remaining ?? data.tickets_left ?? data.left));
-          if (typeof n !== 'number' || n < 0) return;
-          if (n === 0) {
-            // Sold out: swap badges to "Wyprzedane" and grey out / disable the buy CTAs.
-            document.querySelectorAll('[data-tickets-badge]').forEach(b => {
-              b.textContent = b.getAttribute('data-soldout') || 'Wyprzedane';
-            });
-            document.querySelectorAll('a[href*="cart.easy.tools/checkout/patoarchitekci/konferencja"]').forEach(a => {
-              a.classList.add('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
-              a.setAttribute('aria-disabled', 'true');
-            });
-            return;
-          }
-          els.forEach(el => { el.textContent = n; });
-        })
-        .catch(() => { /* silent - keep static fallback */ });
-    })();
-
-    // Promo code: read ?promo= from the URL and append it to every EasyCart link.
-    // Mirrors static/js/promo-code.js used on the szkolenia / szkolenie pages.
-    (function() {
-      const promoCode = new URLSearchParams(window.location.search).get('promo');
-      if (!promoCode) return;
-      document.querySelectorAll('a[href]').forEach((link) => {
-        const href = link.getAttribute('href');
-        if (!href || !(href.includes('easycart.pl') || href.includes('easy.tools'))) return;
-        try {
-          const url = new URL(href, window.location.origin);
-          url.searchParams.set('promo', promoCode);
-          link.setAttribute('href', url.toString());
-        } catch (e) { /* skip invalid URLs */ }
-      });
-    })();
+    // Ticket sales closed (2026-06) — live counter + promo-code passthrough removed.
+    // No checkout links remain on the page, so both are now dead code.
 
     // Floating CTA visibility:
     //   - hidden while hero "Kup bilet" button is on screen (avoid duplicate CTA)

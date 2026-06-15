@@ -51,7 +51,9 @@ def discover_slugs():
     number for them would be dead weight.
     """
     today = datetime.date.today().isoformat()
-    slugs = [CONFERENCE_SLUG]
+    # Conference sales closed (2026-06) — no longer synced. Trainings stay live.
+    # slugs = [CONFERENCE_SLUG]
+    slugs = []
     for path in sorted(glob.glob(os.path.join(TRAININGS_DIR, "*.yaml"))):
         with open(path, encoding="utf-8") as fh:
             data = yaml.safe_load(fh) or {}

@@ -51,7 +51,9 @@ disableKinds = ["taxonomy", "term"]
 
   # Training banner (also used as promo strip)
   [params.trainingBanner]
-    enabled = true
+    # Conference sales closed (2026-06) — banner off. Flip to true + update
+    # text/highlight/url to reuse it for the next promo.
+    enabled = false
     text = "Konferencja Pato #200 · 16 czerwca 2026, Warszawa · "
     highlight = "👉 Kup bilet za 359 zł netto"
     url = "/konferencja/"
