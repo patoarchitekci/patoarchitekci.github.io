@@ -117,9 +117,15 @@ disableKinds = ["taxonomy", "term"]
       unsafe = true
 
 [outputs]
-  home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss", "llms"]
+  home = ["HTML", "RSS", "newsletter-rss", "social-rss", "mailerlite-rss", "wakacje-rss", "llms"]
 
 [outputFormats]
+  [outputFormats.wakacje-rss]
+    name = "RSS"
+    mediaType = "application/rss+xml"
+    baseName = "newsletter-wakacyjny"
+    path = ""
+
   [outputFormats.newsletter-rss]
     name = "RSS"
     mediaType = "application/rss+xml"
