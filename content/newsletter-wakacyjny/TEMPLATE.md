@@ -1,7 +1,9 @@
 ---
 # SZABLON NA PRZYSZŁOŚĆ - nie publikuje się (draft: true).
 # Aby zrobić nowy numer: skopiuj ten plik, zmień nazwę na YYYY-MM-DD-numer-YY-TT.md
-# (TT = numer tygodnia ISO), uzupełnij treść i USUŃ linię "draft: true".
+# Numer = <YY (rok, 2 cyfry)>-<TT (numer tygodnia ISO, ZAWSZE dwucyfrowy, z zerem wiodącym)>.
+#   np. 2026, tydzień 8  -> 26-08   |   2026, tydzień 28 -> 26-28
+# Uzupełnij treść i USUŃ linię "draft: true".
 title: "Pato Summer Short Mail #YY-TT 🌞🏖️"
 date: 2026-01-01T09:00:00+02:00
 description: "Krótki opis numeru widoczny w <description> feeda (opcjonalny)."
