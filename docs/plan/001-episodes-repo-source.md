@@ -229,6 +229,11 @@ Not rendered (available for phase 2): `guests`, `chapters`, `summary.md`,
   `episodes` only, permission Contents: Read-only) and
   `gh secret set EPISODES_TOKEN -R patoarchitekci/patoarchitekci.github.io`.
   Expiry: ______ (fill in).
+- DONE 2026-09-04. The secret was set at 12:14 UTC; the first dry run
+  (33871933713) failed at the checkout with `403 Write access to repository
+  not granted` (the token did not cover the repository); the owner fixed the
+  token's permissions and the second dry run (33872129753) checked the store
+  out at `cf458cd` (sparse `data/`). Expiry date still to be written here.
 
 ### T02 — The reader and the renderer (2 h)
 
@@ -277,6 +282,13 @@ Not rendered (available for phase 2): `guests`, `chapters`, `summary.md`,
   `dry_run`, "Store revision" and "Show the change" steps, commit message
   `Publish episode N (episodes@<sha7>)`, commit skipped on dry run). The
   dry-run dispatch waits for the secret (T01) and the push of this branch.
+- DONE 2026-09-04: commit `a8a5edc` on `hugo` (rebased over a stray
+  "Publish episode 10" run of the old Airtable workflow at 11:45 UTC). Run
+  33872129753 with `episode_number=10, episodes_ref=main, dry_run=true`:
+  every step green, front matter valid, `1 file changed, 308 insertions(+),
+  9 deletions(-)` — only `content/episodes/10.md`; both covers re-encoded
+  from the blobs came out byte-identical, so `static/img/` shows no change;
+  the commit step was skipped as designed.
 
 ### T05 — Live test on episode 10 (0.5 h, owner's choice)
 
