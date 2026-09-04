@@ -1,5 +1,11 @@
 name: Publish Podcast Episode
 
+# Renders one episode page from the episode store (patoarchitekci/episodes)
+# and commits it to this branch. The dispatch is the publish decision: the
+# workflow renders whatever the store holds at `episodes_ref` (plan 001,
+# docs/plan/001-episodes-repo-source.md). The page goes live with the next
+# Cloudflare Pages build after its date — the Friday `pato publish cloudflare`.
+
 on:
   workflow_dispatch:
     inputs:
@@ -7,6 +13,16 @@ on:
         description: 'Episode Number to Publish'
         required: true
         type: string
+      episodes_ref:
+        description: 'Ref of patoarchitekci/episodes to render (branch, tag or sha)'
+        required: false
+        default: 'main'
+        type: string
+      dry_run:
+        description: 'Render and validate only, commit nothing'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   publish:
@@ -15,33 +31,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Checkout the episode store
+        uses: actions/checkout@v6
+        with:
+          repository: patoarchitekci/episodes
+          ref: ${{ inputs.episodes_ref }}
+          token: ${{ secrets.EPISODES_TOKEN }}
+          path: episodes
+          sparse-checkout: data
+          fetch-depth: 1
+
+      - name: Store revision
+        id: store
+        run: |
+          echo "sha=$(git -C episodes rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          git -C episodes log -1 --format='episodes@%h %ci %s'
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.11' # Specify desired Python version
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Publish Script
-        id: publish_script
+      - name: Render the episode
         run: |
-          python scripts/publish_episode.py --episode-number ${{ github.event.inputs.episode_number }}
-        env:
-          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          EPISODES_TABLE_NAME: ${{ secrets.EPISODES_TABLE_NAME || 'episodes' }} # Allow override via secret, default to 'episodes'
-          LINKS_TABLE_NAME: ${{ secrets.LINKS_TABLE_NAME || 'links' }}      # Allow override via secret, default to 'links'
-          IS_PUBLISHED_FIELD: ${{ secrets.IS_PUBLISHED_FIELD || 'is_published' }} # Allow override via secret, default to 'is_published'
-          # Add other necessary secrets as environment variables
+          python scripts/publish_episode.py \
+            --episode-number "${{ inputs.episode_number }}" \
+            --episodes-dir episodes/data
 
       - name: Validate generated episode YAML front matter
         run: |
           python - <<'PY'
           import re, sys, pathlib, yaml
-          ep = "${{ github.event.inputs.episode_number }}"
+          ep = "${{ inputs.episode_number }}"
           path = pathlib.Path(f"content/episodes/{ep}.md")
           if not path.exists():
               sys.exit(f"Episode file not found: {path}")
@@ -56,31 +82,15 @@ jobs:
           print(f"YAML front matter OK: {path}")
           PY
 
+      - name: Show the change
+        run: |
+          git --no-pager diff --stat -- content/episodes/ static/img/
+          git --no-pager diff -- "content/episodes/${{ inputs.episode_number }}.md" | head -300
+
       - name: Commit and Push changes
+        if: ${{ !inputs.dry_run }}
         uses: EndBug/add-and-commit@v10
         with:
-          # Add the directories containing the generated files (Hugo structure)
           add: 'content/episodes/ static/img/'
-          message: 'Publish episode ${{ github.event.inputs.episode_number }}'
-          default_author: github_actions # Use the default GitHub Actions bot user
-          # Ensure pushing to the correct branch (default is usually the branch the workflow runs on)
-          # push: 'true' # Default is true, explicitly setting for clarity if needed
-
-      # - name: Trigger GitHub Pages build
-      #   # This step is typically unnecessary if GitHub Pages is configured
-      #   # to build from the branch being pushed to.
-      #   # The push from the 'add-and-commit' step should trigger it automatically.
-      #   # If needed, you might trigger a separate workflow using:
-      #   repository_dispatch:
-      #     types: [build-pages] # Or use a specific action if available
-
-      # Optional steps (e.g., if Airtable update is moved here, or webhook calls are needed)
-      # - name: Update Airtable Status (Alternative)
-      #   if: success()
-      #   run: echo "Call script/API to update Airtable status if moved from Python script"
-      
-      # - name: Call Other Webhooks
-      #   if: success()
-      #   run: |
-      #     curl -X POST YOUR_WEBHOOK_URL_1?record_id=RECORD_ID&spreaker_id=SPREAKER_ID
-      #     curl -X POST YOUR_WEBHOOK_URL_2?record_id=RECORD_ID&spreaker_id=SPREAKER_ID 
+          message: 'Publish episode ${{ inputs.episode_number }} (episodes@${{ steps.store.outputs.sha }})'
+          default_author: github_actions
