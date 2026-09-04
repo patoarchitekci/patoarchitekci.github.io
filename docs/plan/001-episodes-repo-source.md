@@ -302,6 +302,19 @@ Not rendered (available for phase 2): `guests`, `chapters`, `summary.md`,
   re-encoded from the blobs (two binary changes).
 - Done: the commit is on `hugo`, IndexNow pinged `/10/`, the page shows the
   transcript after the next deploy; the deltas above are confirmed here.
+- DONE 2026-09-04. The owner ran `pato publish website 10`; run 33884255074
+  green, commit `11dcc2c Publish episode 10 (episodes@cf458cd)` on `hugo`
+  (only `content/episodes/10.md`: 308 insertions, 9 deletions; the covers
+  byte-identical). Cloudflare deployed on the push and
+  https://patoarchitekci.io/10/ showed the transcript within two minutes
+  (71 speaker paragraphs, no placeholder). Finding: the IndexNow workflow did
+  NOT run — its last runs are from 2026-05-15. A push made with the
+  repository `GITHUB_TOKEN` (the add-and-commit step) never triggers other
+  workflows, so IndexNow never fired for a published episode, before this
+  plan either. Fix for phase 2: a last step in `publish_podcast.yml` that
+  runs `gh workflow run indexnow.yml -f before_sha=... -f after_sha=...`
+  (`workflow_dispatch` is the exception to that rule; needs
+  `permissions: actions: write`).
 
 ### T06 — Episode store side (0.5 h)
 
@@ -348,6 +361,8 @@ Total: about 5 h of work plus the Friday check.
 
 ## Phase 2 (not in this plan; separate decisions)
 
+- IndexNow after a publish: dispatch `indexnow.yml` from the publish
+  workflow (T05 finding — the push of the bot never triggers it).
 - Chapters on the episode page and in Schema.org `hasPart`; guests with
   their `data/people` links; `summary.md` on the page or in `llms.txt`.
 - A workflow in the episode store that dispatches this one on a push that
