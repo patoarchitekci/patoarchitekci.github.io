@@ -38,7 +38,7 @@ description:
   - "Podczas warsztatu przejdziesz przez wszystkie elementy: od pierwszego wywołania API, przez budowę context window i function calling, aż po kompletną pętlę ReAct. Każdy komponent poznasz od środka."
   - "Agenci AI to w gruncie rzeczy LLM, pętla i narzędzia. Frameworki ukrywają tę prostotę za warstwami abstrakcji. Po szkoleniu będziesz wiedział co robią pod spodem i świadomie wybierzesz gotowe narzędzie lub zbudujesz własne rozwiązanie."
   - "Szkolenie dla tych, którzy chcą naprawdę zrozumieć jak działają agenci AI - nie tylko używać gotowych rozwiązań, ale wiedzieć dlaczego działają tak, a nie inaczej."
-  - "UWAGA: Szczegóły agendy mogą ulec zmianie - to zupełnie nowe szkolenie w trakcie powstawania. Przedstawiona agenda stanowi ramę programową."
+  - "„Polecam, brałem udział, widziałem, kodowałem. Łukasz niczym Mojżesz przeprowadza przez morze agentów.” - Dawid Hermann, Senior Software Engineer, Spacebridge"
 
 skills:
   - "Architektura agentów AI i wzorzec ReAct"
@@ -143,12 +143,17 @@ faq:
     answer: "Nie, całe szkolenie będzie prowadzone w środowisku GitHub Codespaces (w ramach darmowego limitu). Wszystkie narzędzia będą już przygotowane. Można również odpalić środowisko lokalnie."
   - question: "Czy to szkolenie o LangChain lub podobnych frameworkach?"
     answer: "Absolutnie nie. Celowo omijamy frameworki, żebyś zrozumiał jak agent działa od środka. Po tym szkoleniu będziesz mógł świadomie wybrać framework lub zbudować własne rozwiązanie."
-  - question: "Czy agenda może się jeszcze zmienić?"
-    answer: "Tak, to zupełnie nowe szkolenie w trakcie powstawania. Przedstawiona agenda stanowi ramę programową - szczegóły mogą ulec dopracowaniu."
   - question: "Dla kogo jest to szkolenie?"
     answer: "Dla inżynierów IT, architektów i zaawansowanych programistów, którzy chcą zrozumieć jak działają agenci AI i nauczyć się budować własne rozwiązania. Wymagane jest doświadczenie w programowaniu."
   - question: "Czy po szkoleniu zrozumiem jak działają frameworki typu LangChain?"
     answer: "Tak! Frameworki takie jak LangChain, CrewAI, AutoGen, OpenAI Agents SDK, Google ADK, Strands Agents, Pydantic AI czy LlamaIndex Agents używają tych samych wzorców - pętla ReAct, function calling, context window. Po szkoleniu będziesz wiedział co dzieje się pod maską i świadomie wybierzesz narzędzie lub zbudujesz własne."
+
+# Opinie uczestników
+testimonials:
+  - author: "Dawid Hermann"
+    role: "Senior Software Engineer · Spacebridge"
+    rating: 5
+    content: "Polecam, brałem udział, widziałem, kodowałem. Łukasz niczym Mojżesz przeprowadza przez morze agentów."
 
 # Meta dla Hugo
 layout: "training"
