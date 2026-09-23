@@ -13,6 +13,16 @@
   <meta property="og:title" content="HAL9000 · sesja" />
   <meta property="og:description" content="Zapis rozmowy z HAL9000 na Discordzie Patoarchitektów." />
 
+  <script>
+    // Theme before first paint: saved choice, else the system preference.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('hal9000-theme'); } catch (e) {}
+      var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    })();
+  </script>
+
   <link rel="icon" href="/img/png/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,85 +32,87 @@
   <script src="https://cdn.jsdelivr.net/npm/marked@18.0.14/lib/marked.umd.js" integrity="sha384-2vpGtuKqJvFlwJqYnf/wUMuzUfhUnYBt9oay0e2yaFcq0Dh6/aEbQ8YAOeKGzlYo" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js" integrity="sha384-a7SzOxErzJ3ZpQz0zJ32d67dSitNzPcbfybc/ykU9KJhMgZkwqfSxlhhdJRS+XGL" crossorigin="anonymous" defer></script>
 </head>
-<body class="bg-brand-white text-charcoal-900 antialiased overflow-x-hidden">
+<body class="bg-app text-fg antialiased text-[15px]">
+  <a href="#conversation" class="skip-link rounded-md bg-fg text-app px-3 py-2 text-sm font-semibold">Przejdź do rozmowy</a>
 
-  <!-- HERO · charcoal -->
-  <section id="top" class="relative bg-brand-charcoal text-brand-white overflow-hidden">
-    <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6 pt-6 flex items-center justify-between gap-4">
-      <a href="https://patoarchitekci.io" class="inline-block">
-        <img src="/konferencja/pato-logo/vertical-full-color.svg" alt="Patoarchitekci" class="h-16 md:h-20" />
+  <!-- TOP BAR -->
+  <header class="sticky top-0 z-30 h-14 border-b border-line bg-app/95 backdrop-blur">
+    <div class="mx-auto max-w-[1180px] h-full px-4 lg:px-6 flex items-center gap-3">
+      <a href="https://patoarchitekci.io" class="shrink-0" aria-label="Patoarchitekci — strona główna">
+        <img src="/konferencja/pato-logo/horizontal-black-orange.svg" alt="" class="h-9 w-auto dark:hidden" />
+        <img src="/konferencja/pato-logo/horizontal-mono-white.svg" alt="" class="h-9 w-auto hidden dark:block" />
       </a>
-      <a href="https://discord.com/invite/78zPcEaP22" target="_blank" rel="noopener"
-         class="rounded-full border-2 border-brand-white px-5 py-1.5 font-sans font-semibold text-sm uppercase hover:bg-brand-white hover:text-brand-charcoal transition">Discord</a>
-    </div>
-
-    <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-16 pb-32 md:pb-56 lg:pb-64">
-      <p class="font-sans font-semibold text-sm uppercase tracking-widest mb-5">HAL9000 · sesja z Discorda</p>
-      <h1 id="hero-title" class="font-display font-bold uppercase leading-[0.95] text-4xl md:text-6xl mb-6 text-brand-orange break-words">HAL9000</h1>
-      <p id="hero-dates" class="font-sans text-sm md:text-base text-charcoal-300 mb-6 empty:hidden"></p>
-      <div id="hero-pills" class="flex flex-wrap gap-2 md:gap-3 text-sm md:text-base empty:hidden"></div>
-      <p id="hero-models" class="font-sans text-xs md:text-sm text-charcoal-300 mt-4 break-words empty:hidden"></p>
-    </div>
-
-    <div class="brand-shape hidden md:block absolute top-28 right-10 w-28 h-28 opacity-90"
-         style="--shape: url('/konferencja/pato-graphics/shape-star.svg')" aria-hidden="true"></div>
-    <div class="brand-shape hidden md:block absolute bottom-40 right-1/4 w-12 h-20 opacity-60"
-         style="--shape: url('/konferencja/pato-graphics/shape-bolt.svg')" aria-hidden="true"></div>
-
-    <div id="hero-divider" class="cloud-divider absolute inset-x-0 bottom-0 z-20" style="--cloud-color: var(--color-brand-white)"></div>
-  </section>
-
-  <!-- STATE · loading / saving / not found / error -->
-  <section id="state" class="bg-brand-white py-16 md:py-24">
-    <div class="max-w-3xl mx-auto px-4 md:px-6">
-      <div class="rounded-3xl bg-charcoal-100 p-6 md:p-10 text-center">
-        <span id="state-dot" class="inline-block w-3 h-3 rounded-full bg-brand-orange animate-pulse mb-4"></span>
-        <h2 id="state-title" class="font-display font-bold uppercase text-2xl md:text-4xl leading-tight mb-3">Wczytuję sesję…</h2>
-        <p id="state-text" class="font-sans text-base md:text-lg text-charcoal-600"></p>
+      <span class="h-7 w-px bg-line shrink-0" aria-hidden="true"></span>
+      <div class="min-w-0 flex-1">
+        <h1 id="session-title" class="truncate font-display font-semibold text-[15px] leading-5">HAL9000</h1>
+        <p id="session-meta" class="truncate text-xs leading-4 text-muted empty:hidden"></p>
+      </div>
+      <div class="flex items-center gap-1 shrink-0">
+        <button id="copy-session" type="button" hidden class="inline-flex items-center gap-1.5 h-9 px-2.5 rounded-md text-sm font-medium text-fg hover:bg-sunken">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+          <span class="max-sm:sr-only">Kopiuj link</span>
+        </button>
+        <button id="theme-toggle" type="button" class="grid place-items-center w-9 h-9 rounded-md text-fg hover:bg-sunken" aria-label="Przełącz motyw">
+          <svg class="w-4 h-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a href="https://patoarchitekci.io" class="max-md:hidden inline-flex items-center h-9 px-2.5 rounded-md text-sm font-medium text-link hover:bg-sunken">Patoarchitekci</a>
       </div>
     </div>
-  </section>
+  </header>
 
-  <!-- PARTICIPANTS · amber (like speaker cards on /konferencja/) -->
-  <section id="participants" hidden class="relative bg-brand-amber pt-16 md:pt-20 pb-32 md:pb-56 lg:pb-64 text-charcoal-900 overflow-hidden">
-    <div class="max-w-5xl mx-auto px-4 md:px-6">
-      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-charcoal/70 mb-3">Uczestnicy</p>
-      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">Kto pyta</h2>
-      <ul id="participants-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch"></ul>
-    </div>
-    <div class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0" style="--cloud-color: var(--color-brand-white)"></div>
-  </section>
+  <div class="mx-auto max-w-[1180px] flex flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-10 lg:px-6">
+    <main id="conversation" tabindex="-1" class="min-w-0 px-4 lg:px-0 py-6 lg:py-8 focus:outline-none">
+      <div class="mx-auto max-w-[760px]">
+        <!-- loading / saving / not found / error -->
+        <section id="state" class="mt-6 lg:mt-12 rounded-xl border border-line bg-panel p-6 text-center" aria-live="polite">
+          <span id="state-dot" class="inline-block w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse mb-3" aria-hidden="true"></span>
+          <h2 id="state-title" class="font-display font-semibold text-lg">Wczytuję sesję…</h2>
+          <p id="state-text" class="mt-1 text-sm text-muted empty:hidden"></p>
+        </section>
 
-  <!-- TURNS · white (like the agenda timetable) -->
-  <section id="turns" hidden class="relative bg-brand-white pt-16 md:pt-20 pb-32 md:pb-56 lg:pb-64 text-charcoal-900 overflow-hidden">
-    <div class="max-w-5xl mx-auto px-4 md:px-6">
-      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-3">Rozmowa</p>
-      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">Pytania i odpowiedzi</h2>
-      <p id="turns-note" hidden class="inline-flex items-center gap-3 mb-8 px-5 py-3 rounded-full bg-brand-charcoal text-brand-white font-sans font-bold text-sm uppercase tracking-wide">
-        <span class="inline-block w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
-        Sesja jeszcze się nie zapisała — odśwież za chwilę
-      </p>
-      <ol id="turns-list" class="space-y-4"></ol>
-    </div>
-    <div class="cloud-divider absolute inset-x-0 bottom-0 z-0" style="--cloud-color: var(--color-brand-charcoal)"></div>
-  </section>
+        <p id="late-note" hidden class="mb-6 flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-2 text-sm">
+          <span class="inline-block w-2 h-2 rounded-full bg-brand-orange animate-pulse" aria-hidden="true"></span>
+          Sesja jeszcze się nie zapisała — odśwież za chwilę.
+        </p>
 
-  <!-- FOOTER · charcoal -->
-  <footer class="bg-brand-charcoal text-brand-white">
-    <div class="max-w-5xl mx-auto px-4 md:px-6 py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-      <div>
-        <a href="https://patoarchitekci.io" class="inline-block mb-6">
-          <img src="/konferencja/pato-logo/horizontal-black-orange.svg" alt="Patoarchitekci" class="h-12 md:h-14" />
-        </a>
-        <p class="text-xs text-charcoal-400">© 2026 Protopia · HAL9000 odpowiada na podstawie transkrypcji odcinków i może się mylić.</p>
+        <ol id="turns" hidden class="space-y-10"></ol>
+
+        <p id="disclaimer" hidden class="mt-12 pt-4 border-t border-line text-xs text-muted">HAL9000 odpowiada na podstawie transkrypcji odcinków i może się mylić. © 2026 Protopia</p>
       </div>
-      <nav class="flex flex-wrap gap-x-6 gap-y-3 font-sans font-semibold text-sm uppercase tracking-wide">
-        <a href="https://patoarchitekci.io/odcinki/" class="hover:text-brand-orange transition">Odcinki</a>
-        <a href="https://discord.com/invite/78zPcEaP22" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Discord</a>
-        <a href="#top" class="hover:text-brand-orange transition">Do góry ↑</a>
-      </nav>
-    </div>
-  </footer>
+    </main>
+
+    <aside id="session-panel" hidden data-open="false" aria-label="Szczegóły sesji" class="order-first lg:order-none border-b border-line lg:border-0">
+      <button id="panel-toggle" type="button" aria-expanded="false" aria-controls="panel-body"
+              class="lg:hidden w-full flex items-center justify-between px-4 h-11 text-sm font-medium bg-panel">
+        Szczegóły sesji
+        <svg class="chevron w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div id="panel-body" class="px-4 pb-4 lg:px-0 lg:py-8 lg:sticky lg:top-14 lg:max-h-[calc(100vh-3.5rem)] lg:overflow-y-auto space-y-6 max-lg:bg-panel">
+        <section aria-labelledby="h-people">
+          <h2 id="h-people" class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">Uczestnicy</h2>
+          <ul id="people" class="space-y-3"></ul>
+        </section>
+        <nav aria-labelledby="h-toc">
+          <h2 id="h-toc" class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">Spis pytań</h2>
+          <ol id="toc" class="space-y-0.5"></ol>
+        </nav>
+        <section aria-labelledby="h-models">
+          <h2 id="h-models" class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">Modele i koszt</h2>
+          <table class="w-full text-xs tabular-nums">
+            <tbody id="models"></tbody>
+          </table>
+        </section>
+        <section aria-labelledby="h-dates">
+          <h2 id="h-dates" class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">Sesja</h2>
+          <dl id="dates" class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs"></dl>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"
+       class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 rounded-md bg-fg text-app px-3 py-2 text-sm font-medium shadow-lg empty:hidden"></div>
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -110,7 +122,8 @@
     const ID_RE = /^\d{15,22}$/;
     const RETRY_EVERY_MS = 3000;
     const RETRY_FOR_MS = 60000;
-    const RESULT_MAX_CHARS = 1200;
+    const RESULT_MAX_CHARS = 800;
+    const THEME_KEY = 'hal9000-theme';
 
     // Discord ids stay strings end to end; never convert them to numbers.
     const params = new URLSearchParams(location.search);
@@ -131,10 +144,69 @@
       return node;
     }
 
+    // ---------- theme ----------
+    const root = document.documentElement;
+    const themeBtn = $('#theme-toggle');
+    function setThemeLabel() {
+      themeBtn.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Włącz jasny motyw' : 'Włącz ciemny motyw');
+    }
+    setThemeLabel();
+    themeBtn.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(THEME_KEY, root.dataset.theme); } catch (e) { /* storage blocked */ }
+      setThemeLabel();
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      let saved = null;
+      try { saved = localStorage.getItem(THEME_KEY); } catch (err) { /* storage blocked */ }
+      if (!saved) { root.dataset.theme = e.matches ? 'dark' : 'light'; setThemeLabel(); }
+    });
+
+    // ---------- copy link ----------
+    const toast = $('#toast');
+    let toastTimer = 0;
+    function say(text) {
+      toast.textContent = text;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toast.textContent = ''; }, 2000);
+    }
+    async function copyUrl(url) {
+      try {
+        await navigator.clipboard.writeText(url);
+        say('Skopiowano link');
+      } catch (err) {
+        say('Nie udało się skopiować linku');
+      }
+    }
+    function sessionUrl(turnId) {
+      const u = new URL(location.href);
+      u.hash = '';
+      if (turnId) u.searchParams.set('t', turnId); else u.searchParams.delete('t');
+      return u.toString();
+    }
+    $('#copy-session').addEventListener('click', () => copyUrl(sessionUrl(null)));
+
+    // ---------- mobile panel ----------
+    const panel = $('#session-panel');
+    const panelToggle = $('#panel-toggle');
+    function setPanel(open) {
+      panel.dataset.open = String(open);
+      panelToggle.setAttribute('aria-expanded', String(open));
+    }
+    panelToggle.addEventListener('click', () => setPanel(panel.dataset.open !== 'true'));
+
+    // ---------- markdown ----------
+    const CITE_RE = /^#(\d+)(?:,\s*(\d{1,2}:\d{2}(?::\d{2})?))?$/;
     window.DOMPurify?.addHook('afterSanitizeAttributes', (node) => {
-      if (node.tagName === 'A') {
-        node.setAttribute('target', '_blank');
-        node.setAttribute('rel', 'noopener noreferrer');
+      if (node.tagName !== 'A') return;
+      const href = node.getAttribute('href') || '';
+      if (!/^https:\/\//i.test(href)) { node.removeAttribute('href'); return; } // https links only
+      node.setAttribute('target', '_blank');
+      node.setAttribute('rel', 'noopener noreferrer');
+      const m = CITE_RE.exec(node.textContent.trim());
+      if (m) {
+        node.className = 'cite';
+        node.textContent = m[2] ? `#${m[1]} · ${m[2]}` : `#${m[1]}`;
       }
     });
     const markdown = (s) => DOMPurify.sanitize(marked.parse(String(s ?? ''), { gfm: true, breaks: true }), { FORBID_TAGS: ['img'] }); // no remote images from untrusted text
@@ -144,14 +216,15 @@
       return Number.isInteger(n) && n > 0 ? `https://patoarchitekci.io/${n}/` : null;
     }
 
+    // ---------- formatting ----------
     const dtFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', dateStyle: 'medium', timeStyle: 'short' });
     const timeFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' });
-    const dayFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', day: 'numeric', month: 'short', year: 'numeric' });
     const fmt = (f, iso) => { const d = new Date(iso); return isNaN(d) ? '—' : f.format(d); };
     const numFmt = new Intl.NumberFormat('pl-PL');
     const num = (n) => numFmt.format(Number(n) || 0);
     // Small model costs need more precision than the usual 4 decimals, or they round to $0.
     const usd = (n) => { const v = Number(n) || 0; return '$' + v.toFixed(v !== 0 && Math.abs(v) < 0.0001 ? 7 : 4); };
+    const secs = (n) => `${(Number(n) || 0).toLocaleString('pl-PL', { maximumFractionDigits: 1 })} s`;
 
     function plural(n, one, few, many) {
       if (n === 1) return one;
@@ -160,11 +233,14 @@
     }
     const zapytania = (n) => `${num(n)} ${plural(Number(n) || 0, 'zapytanie', 'zapytania', 'zapytań')}`;
     const tokeny = (n) => `${num(n)} ${plural(Number(n) || 0, 'token', 'tokeny', 'tokenów')}`;
+    const pytania = (n) => `${n} ${plural(n, 'pytanie', 'pytania', 'pytań')}`;
 
     function initials(name) {
       const words = String(name || '?').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w));
       return words.slice(0, 2).map((w) => w.match(/[\p{L}\p{N}]/u)[0]).join('').toUpperCase() || '?';
     }
+    const nameOf = (p) => (p && (p.display_name || p.username)) || 'Ktoś';
+    const shortTitle = (s) => String(s || '').replace(/^\s*HAL\s?9000\s*[·:|-]\s*/i, '').trim() || 'Sesja HAL9000';
 
     // ---------- states ----------
     const STATES = {
@@ -177,8 +253,9 @@
     function showState(kind) {
       const [title, text, busy] = STATES[kind];
       $('#state').hidden = false;
-      $('#participants').hidden = true;
       $('#turns').hidden = true;
+      $('#disclaimer').hidden = true;
+      panel.hidden = true;
       $('#state-title').textContent = title;
       $('#state-text').textContent = text;
       $('#state-dot').hidden = !busy;
@@ -217,115 +294,28 @@
       if (data) render(data, true); else showState('late');
     }
 
-    // ---------- render ----------
-    function pill(text, className) {
-      return el('span', 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-display font-semibold uppercase tracking-wide max-w-full break-words ' + className, text);
-    }
+    // ---------- usage ----------
+    const modelsOf = (u) => (u && Array.isArray(u.models) ? u.models.filter((m) => m && m.model) : []);
+    const kindOf = (m) => m.kind || (m.dimensions != null ? 'embedding' : 'chat');
+    const tokensOf = (m) => (Number(m.input_tokens) || 0) + (Number(m.output_tokens) || 0);
 
     // Distinct models used across all turns, with total tokens and cost per model.
     function aggregateModels(turns) {
       const totals = new Map();
       for (const turn of turns) {
-        const models = turn.usage && Array.isArray(turn.usage.models) ? turn.usage.models : [];
-        for (const m of models) {
-          if (!m || !m.model) continue;
-          const agg = totals.get(m.model) || { tokens: 0, cost: 0 };
-          agg.tokens += (Number(m.input_tokens) || 0) + (Number(m.output_tokens) || 0);
+        for (const m of modelsOf(turn.usage)) {
+          const agg = totals.get(m.model) || { model: m.model, kind: kindOf(m), tokens: 0, cost: 0 };
+          agg.tokens += tokensOf(m);
           agg.cost += Number(m.cost_usd) || 0;
           totals.set(m.model, agg);
         }
       }
-      return [...totals.entries()].map(([model, agg]) => ({ model, ...agg }));
-    }
-
-    function modelsSummaryText(turns) {
-      const models = aggregateModels(turns);
-      if (!models.length) return '';
-      return 'Modele: ' + models.map((m) => `${m.model} — ${tokeny(m.tokens)} · ${usd(m.cost)}`).join(' · ');
-    }
-
-    function renderHero(data, turns) {
-      $('#hero-title').textContent = data.title || 'HAL9000';
-      $('#hero-dates').textContent = `Start: ${fmt(dtFmt, data.created_at)} · ostatnia zmiana: ${fmt(dtFmt, data.updated_at)}`;
-      const cost = turns.reduce((sum, x) => sum + (Number(x.usage && x.usage.cost_usd) || 0), 0);
-      const pills = $('#hero-pills');
-      pills.replaceChildren();
-      if (data.channel && data.channel.name) pills.append(pill('#' + data.channel.name, 'bg-brand-orange text-brand-charcoal'));
-      if (data.guild && data.guild.name) pills.append(pill(data.guild.name, 'bg-brand-white text-brand-charcoal'));
-      pills.append(pill(`${turns.length} ${plural(turns.length, 'pytanie', 'pytania', 'pytań')}`, 'bg-brand-amber text-brand-charcoal'));
-      pills.append(pill('Koszt ' + usd(cost), 'border-2 border-brand-white/40 text-brand-white'));
-      $('#hero-models').textContent = modelsSummaryText(turns);
-    }
-
-    function participantCard(p) {
-      const host = !!p.is_host;
-      const li = el('li', 'h-full');
-      const card = el('div', 'h-full flex items-center gap-4 p-5 rounded-3xl ' +
-        (host ? 'bg-brand-charcoal text-brand-white' : 'bg-brand-white text-brand-charcoal'));
-      card.append(el('span', 'shrink-0 grid place-items-center w-16 h-16 rounded-full font-display font-bold text-xl shadow-xl ring-4 ' +
-        (host ? 'bg-brand-orange text-brand-charcoal ring-brand-white' : 'bg-brand-charcoal text-brand-white ring-brand-amber'), initials(p.display_name)));
-
-      const body = el('span', 'flex-1 min-w-0');
-      body.append(el('span', 'block font-display font-bold text-lg uppercase leading-tight break-words', p.display_name || p.username || '?'));
-      const aliases = [];
-      if (p.nick && p.nick !== p.display_name) aliases.push(p.nick);
-      if (p.global_name && p.global_name !== p.display_name) aliases.push(p.global_name);
-      if (p.username) aliases.push('@' + p.username);
-      if (aliases.length) body.append(el('span', 'block text-xs mt-1 break-words ' + (host ? 'text-charcoal-300' : 'text-charcoal-500'), aliases.join(' · ')));
-
-      const chips = el('span', 'flex flex-wrap gap-1.5 mt-2 empty:hidden');
-      if (host) chips.append(el('span', 'px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider', 'Prowadzący'));
-      for (const role of Array.isArray(p.roles) ? p.roles : []) {
-        chips.append(el('span', 'px-3 py-0.5 rounded-full text-xs font-sans font-semibold ' +
-          (host ? 'bg-brand-white/10 text-brand-white' : 'bg-charcoal-100 text-brand-charcoal'), role));
-      }
-      body.append(chips);
-      card.append(body);
-      li.append(card);
-      return li;
-    }
-
-    function stepsBlock(steps) {
-      const details = el('details', 'mt-5 rounded-2xl bg-brand-white/60 border border-charcoal-200');
-      const summary = el('summary', 'cursor-pointer select-none flex items-center gap-2 px-4 py-3 font-sans font-semibold text-sm uppercase tracking-wider text-charcoal-600 hover:text-brand-orange');
-      summary.append(el('span', 'summary-arrow inline-block transition-transform', '▸'), el('span', null, `Kroki agenta (${steps.length})`));
-      details.append(summary);
-      const list = el('ol', 'px-4 pb-4 space-y-3');
-      for (const s of steps) {
-        const item = el('li', 'min-w-0 rounded-xl bg-brand-white p-3 md:p-4');
-        if (s.type === 'tool_call') {
-          item.append(el('p', 'font-mono text-sm font-bold text-orange-700 break-words', s.tool || 'tool'));
-          if (s.args != null) item.append(el('pre', 'mt-2 text-xs bg-charcoal-100 rounded-lg p-3 overflow-x-auto', JSON.stringify(s.args, null, 2)));
-          if (s.result != null) {
-            const r = String(s.result);
-            item.append(el('pre', 'mt-2 text-xs bg-brand-charcoal text-charcoal-100 rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-words max-h-64 overflow-y-auto',
-              r.length > RESULT_MAX_CHARS ? r.slice(0, RESULT_MAX_CHARS) + '…' : r));
-          }
-        } else {
-          item.append(el('p', 'text-xs font-semibold uppercase tracking-wider text-charcoal-500', s.type === 'message' ? 'Notatka agenta' : String(s.type || 'krok')));
-          item.append(el('p', 'mt-1 text-sm whitespace-pre-wrap break-words', s.text ?? ''));
-        }
-        list.append(item);
-      }
-      details.append(list);
-      return details;
-    }
-
-    function sourceChips(sources) {
-      const wrap = el('div', 'mt-5 flex flex-wrap gap-2');
-      for (const s of sources) {
-        const label = `#${s.episode ?? '?'}` + (s.at ? ` · ${s.at}` : '');
-        const href = episodeUrl(s.episode);
-        const chip = el(href ? 'a' : 'span', 'inline-flex items-center px-3 py-1 rounded-full bg-brand-orange text-brand-charcoal text-xs md:text-sm font-display font-bold tabular-nums hover:bg-brand-charcoal hover:text-brand-orange transition', label);
-        if (href) { chip.href = href; chip.target = '_blank'; chip.rel = 'noopener noreferrer'; }
-        wrap.append(chip);
-      }
-      return wrap;
+      return [...totals.values()].sort((a, b) => b.cost - a.cost);
     }
 
     // Per-model usage.models[] shape (D16 / Appendix B). One compact line per model.
     function chatModelLine(m) {
-      const parts = [m.model || '?'];
+      const parts = [m.model];
       if (m.reasoning_effort) parts.push(m.reasoning_effort);
       parts.push(zapytania(m.requests));
       let inPart = `${num(m.input_tokens)} in`;
@@ -335,78 +325,275 @@
       parts.push(`${inPart} / ${outPart}`, usd(m.cost_usd));
       return parts.join(' · ');
     }
-
     function embeddingModelLine(m) {
-      const parts = [m.model || '?'];
+      const parts = [m.model];
       if (m.dimensions != null) parts.push(`${num(m.dimensions)} wym.`);
       parts.push(zapytania(m.requests), tokeny(m.input_tokens), usd(m.cost_usd));
       return parts.join(' · ');
     }
 
-    // Tolerant of the older flat usage shape (no `models`): show just cost and latency.
-    function usageBlock(u) {
-      const wrap = el('div', 'mt-4 space-y-1 font-sans text-xs text-charcoal-500 break-words');
-      const models = u && Array.isArray(u.models) ? u.models : [];
-      for (const m of models) {
-        if (!m || !m.model) continue;
-        const kind = m.kind || (m.dimensions != null ? 'embedding' : 'chat');
-        wrap.append(el('p', null, kind === 'embedding' ? embeddingModelLine(m) : chatModelLine(m)));
+    // One muted line: chat model(s), all tokens, cost, latency. Tolerates the older flat shape.
+    function usageSummary(u) {
+      const models = modelsOf(u);
+      const parts = [];
+      const chat = models.filter((m) => kindOf(m) === 'chat').map((m) => m.model);
+      if (chat.length) parts.push([...new Set(chat)].join(', '));
+      if (models.length) parts.push(tokeny(models.reduce((s, m) => s + tokensOf(m), 0)));
+      parts.push(usd(u && u.cost_usd), secs(u && u.latency_s));
+      return parts.join(' · ');
+    }
+
+    // ---------- render: sidebar ----------
+    function avatar(name, size) {
+      return el('span', `shrink-0 grid place-items-center rounded-full bg-fg text-app font-semibold ${size}`, initials(name));
+    }
+    function hostBadge() {
+      return el('span', 'shrink-0 rounded px-1.5 py-px bg-brand-amber text-charcoal-950 text-[10px] font-bold uppercase tracking-wide', 'Prowadzący');
+    }
+
+    function personRow(p) {
+      const li = el('li', 'flex items-start gap-2.5 min-w-0');
+      li.append(avatar(nameOf(p), 'w-8 h-8 text-xs'));
+      const body = el('div', 'min-w-0 flex-1');
+      const head = el('div', 'flex items-center gap-1.5 min-w-0');
+      head.append(el('span', 'truncate text-sm font-medium', nameOf(p)));
+      if (p.is_host) head.append(hostBadge());
+      body.append(head);
+      const aliases = [];
+      if (p.nick && p.nick !== p.display_name) aliases.push(p.nick);
+      if (p.username) aliases.push('@' + p.username);
+      if (aliases.length) body.append(el('p', 'truncate text-xs text-muted', aliases.join(' · ')));
+      const roles = Array.isArray(p.roles) ? p.roles : [];
+      if (roles.length) {
+        const chips = el('div', 'mt-1 flex flex-wrap gap-1');
+        for (const r of roles) chips.append(el('span', 'rounded bg-sunken px-1.5 py-px text-[11px] text-muted break-all', r));
+        body.append(chips);
       }
-      const total = `razem ${usd(u && u.cost_usd)} · ${(Number(u && u.latency_s) || 0).toFixed(1)} s`;
-      wrap.append(el('p', 'font-semibold', total));
+      li.append(body);
+      return li;
+    }
+
+    function tocItem(turn, i) {
+      const li = el('li');
+      const a = el('a', 'toc-link flex gap-2 rounded-md px-2 py-1.5 text-[13px] leading-snug text-muted hover:bg-sunken hover:text-fg');
+      a.href = '#turn-' + turn.message_id;
+      a.dataset.turn = String(turn.message_id);
+      a.append(el('span', 'toc-num shrink-0 grid place-items-center min-w-5 h-5 px-1 rounded bg-sunken text-[11px] font-semibold tabular-nums', i + 1));
+      a.append(el('span', 'line-clamp-2 break-words', turn.question || '—'));
+      a.addEventListener('click', () => setPanel(false));
+      li.append(a);
+      return li;
+    }
+
+    function modelRows(turns) {
+      const rows = [];
+      const models = aggregateModels(turns);
+      for (const m of models) {
+        const tr = el('tr', 'align-top');
+        const name = el('td', 'py-1 pr-2 break-all');
+        name.append(el('span', 'block font-medium', m.model), el('span', 'block text-muted', `${m.kind === 'embedding' ? 'embedding' : 'chat'} · ${tokeny(m.tokens)}`));
+        tr.append(name, el('td', 'py-1 text-right whitespace-nowrap', usd(m.cost)));
+        rows.push(tr);
+      }
+      const total = turns.reduce((sum, x) => sum + (Number(x.usage && x.usage.cost_usd) || 0), 0);
+      const tr = el('tr', 'border-t border-line font-semibold');
+      tr.append(el('td', 'pt-1.5 pr-2', 'Razem'), el('td', 'pt-1.5 text-right whitespace-nowrap', usd(total)));
+      rows.push(tr);
+      return rows;
+    }
+
+    function dateRows(data) {
+      const out = [];
+      const add = (k, v) => out.push(el('dt', 'text-muted', k), el('dd', 'min-w-0 break-words', v));
+      add('Start', fmt(dtFmt, data.created_at));
+      add('Ostatnio', fmt(dtFmt, data.updated_at));
+      if (data.guild && data.guild.name) add('Serwer', data.guild.name);
+      if (data.channel && data.channel.name) add('Kanał', '#' + data.channel.name);
+      return out;
+    }
+
+    // ---------- render: turns ----------
+    function discussionBlock(messages, participants) {
+      const details = el('details', 'mb-4 rounded-lg border border-line');
+      const summary = el('summary', 'flex items-center gap-2 px-3 py-2 text-xs font-medium text-muted hover:text-fg');
+      summary.append(el('span', 'caret inline-block', '▸'), el('span', null, `Dyskusja w wątku (${messages.length})`));
+      details.append(summary);
+      const list = el('ol', 'px-3 pb-3 space-y-2 border-t border-line pt-2');
+      for (const m of messages) {
+        const li = el('li', 'text-sm leading-relaxed');
+        const head = el('p', 'flex items-baseline gap-2');
+        head.append(el('span', 'font-semibold text-[13px]', nameOf(participants[m.author_id])), el('time', 'text-xs text-muted tabular-nums', fmt(timeFmt, m.at)));
+        if (m.at) head.lastChild.dateTime = String(m.at);
+        li.append(head, el('p', 'whitespace-pre-wrap break-words', m.text ?? ''));
+        list.append(li);
+      }
+      details.append(list);
+      return details;
+    }
+
+    function stepsBlock(steps, usage) {
+      const details = el('details', 'mt-3 group');
+      const summary = el('summary', 'inline-flex items-center gap-1.5 rounded-md px-2 py-1 -ml-2 text-xs font-medium text-muted hover:bg-sunken hover:text-fg');
+      summary.append(el('span', 'caret inline-block', '▸'), el('span', null, `Kroki agenta (${steps.length})`));
+      details.append(summary);
+      const box = el('div', 'mt-2 rounded-lg border border-line bg-panel p-3 space-y-3 text-xs');
+      steps.forEach((s, i) => {
+        const item = el('div', 'min-w-0');
+        if (s.type === 'tool_call') {
+          const head = el('p', 'font-mono break-words');
+          head.append(el('span', 'text-muted', `${i + 1}. `), el('span', 'font-semibold text-link', s.tool || 'tool'));
+          if (s.args != null) head.append(el('span', 'text-muted', ' ' + JSON.stringify(s.args)));
+          item.append(head);
+          if (s.result != null) {
+            const r = String(s.result);
+            item.append(el('pre', 'mt-1 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-md bg-sunken p-2 font-mono text-[11px] leading-relaxed text-muted',
+              r.length > RESULT_MAX_CHARS ? r.slice(0, RESULT_MAX_CHARS) + '…' : r));
+          }
+        } else {
+          item.append(el('p', 'font-semibold text-muted', `${i + 1}. ${s.type === 'message' ? 'Notatka agenta' : String(s.type || 'krok')}`));
+          item.append(el('p', 'mt-0.5 whitespace-pre-wrap break-words', s.text ?? ''));
+        }
+        box.append(item);
+      });
+      const models = modelsOf(usage);
+      if (models.length) {
+        const u = el('div', 'pt-2 border-t border-line text-muted space-y-0.5 break-words');
+        u.append(el('p', 'font-semibold text-fg', 'Zużycie'));
+        for (const m of models) u.append(el('p', null, kindOf(m) === 'embedding' ? embeddingModelLine(m) : chatModelLine(m)));
+        box.append(u);
+      }
+      details.append(box);
+      return details;
+    }
+
+    function sourceChips(sources) {
+      const wrap = el('div', 'mt-3 flex flex-wrap items-center gap-1.5');
+      wrap.append(el('span', 'text-xs text-muted mr-1', 'Źródła'));
+      for (const s of sources) {
+        const label = `#${s.episode ?? '?'}` + (s.at ? ` · ${s.at}` : '');
+        const href = episodeUrl(s.episode);
+        const chip = el(href ? 'a' : 'span', 'inline-flex items-center rounded-full border border-line px-2 py-0.5 text-xs font-medium tabular-nums text-link hover:bg-accent-soft', label);
+        if (href) { chip.href = href; chip.target = '_blank'; chip.rel = 'noopener noreferrer'; }
+        wrap.append(chip);
+      }
       return wrap;
     }
 
-    function turnItem(turn, participants) {
-      const isTarget = t && turn.message_id === t;
+    function turnItem(turn, i, participants) {
       const author = participants[turn.author_id];
-      const li = el('li', 'relative rounded-3xl p-5 md:p-7 flex flex-col md:flex-row md:gap-8 gap-3 scroll-mt-6 ' +
-        (isTarget ? 'bg-orange-50 ring-4 ring-brand-orange' : 'bg-charcoal-100'));
+      const li = el('li', 'turn scroll-mt-20 -mx-3 px-3 py-3 rounded-xl');
       if (turn.message_id) li.id = 'turn-' + turn.message_id;
+      if (t && turn.message_id === t) li.classList.add('is-target');
 
-      const side = el('div', 'md:w-36 shrink-0 flex md:flex-col flex-wrap items-center md:items-start gap-x-3 gap-y-1');
-      side.append(el('p', 'font-display font-bold text-lg md:text-xl tabular-nums', fmt(timeFmt, turn.at)));
-      side.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500', fmt(dayFmt, turn.at)));
-      side.append(el('p', 'md:mt-2 inline-block px-3 py-0.5 rounded-full bg-brand-charcoal text-brand-white text-xs font-sans font-bold uppercase tracking-wider break-words max-w-full',
-        author ? author.display_name : 'Ktoś'));
-      if (isTarget) side.append(el('p', 'inline-block px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider', 'Z linku'));
+      const sep = el('div', 'mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-muted');
+      sep.append(el('span', null, `Pytanie ${i + 1}`), el('span', 'h-px flex-1 bg-line'), el('span', 'font-normal normal-case tracking-normal tabular-nums', fmt(dtFmt, turn.at)));
+      li.append(sep);
 
-      const main = el('div', 'flex-1 min-w-0');
-      main.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-1', 'Pytanie'));
-      main.append(el('h3', 'font-display font-semibold text-lg md:text-xl leading-snug whitespace-pre-wrap break-words', turn.question ?? ''));
+      const discussion = Array.isArray(turn.discussion) ? turn.discussion : [];
+      if (discussion.length) li.append(discussionBlock(discussion, participants));
 
-      const steps = Array.isArray(turn.steps) ? turn.steps : [];
-      if (steps.length) main.append(stepsBlock(steps));
+      // Question
+      // Avatars sit in a gutter from 640px; on phones a small one goes inline with the name.
+      const q = el('div', 'flex gap-3');
+      q.append(avatar(nameOf(author), 'max-sm:hidden w-9 h-9 text-xs'));
+      const qBody = el('div', 'min-w-0 flex-1');
+      const qHead = el('div', 'flex flex-wrap items-center gap-x-2 min-w-0');
+      qHead.append(avatar(nameOf(author), 'sm:hidden w-6 h-6 text-[10px]'), el('span', 'font-semibold text-sm', nameOf(author)));
+      if (author && author.username) qHead.append(el('span', 'text-xs text-muted', '@' + author.username));
+      const time = el('time', 'text-xs text-muted tabular-nums', fmt(timeFmt, turn.at));
+      if (turn.at) time.dateTime = String(turn.at);
+      qHead.append(time);
+      qBody.append(qHead, el('p', 'mt-1 inline-block max-w-full rounded-2xl rounded-tl-sm bg-panel border border-line px-3.5 py-2 leading-relaxed whitespace-pre-wrap break-words', turn.question ?? ''));
+      q.append(qBody);
+      li.append(q);
 
-      const box = el('div', 'mt-5 rounded-2xl bg-brand-white p-5 md:p-6 shadow-sm');
-      box.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-widest text-charcoal-500 mb-3', 'Odpowiedź HAL9000'));
-      const answer = el('div', 'answer font-sans text-base text-charcoal-900');
+      // Answer
+      const a = el('div', 'mt-5 flex gap-3');
+      const halEye = (size) => { const e = el('span', `hal-eye shrink-0 rounded-full ${size}`); e.setAttribute('aria-hidden', 'true'); return e; };
+      a.append(halEye('max-sm:hidden w-9 h-9'));
+      const aBody = el('div', 'min-w-0 flex-1');
+      const aHead = el('p', 'flex items-center gap-2 font-display font-semibold text-sm');
+      aHead.append(halEye('sm:hidden w-6 h-6'), el('span', null, 'HAL9000'));
+      aBody.append(aHead);
+      const answer = el('div', 'answer mt-1');
       answer.innerHTML = markdown(turn.answer); // sanitized by DOMPurify
-      box.append(answer);
-      const sources = Array.isArray(turn.sources) ? turn.sources : [];
-      if (sources.length) box.append(sourceChips(sources));
-      main.append(box);
-      if (turn.usage) main.append(usageBlock(turn.usage));
+      aBody.append(answer);
 
-      li.append(side, main);
+      const sources = Array.isArray(turn.sources) ? turn.sources : [];
+      if (sources.length) aBody.append(sourceChips(sources));
+      const steps = Array.isArray(turn.steps) ? turn.steps : [];
+      if (steps.length || modelsOf(turn.usage).length) aBody.append(stepsBlock(steps, turn.usage));
+
+      const meta = el('div', 'mt-1 flex items-center gap-2 text-xs text-muted');
+      if (turn.usage) meta.append(el('span', 'min-w-0 break-words', usageSummary(turn.usage)));
+      if (turn.message_id) {
+        const link = el('button', 'ml-auto shrink-0 grid place-items-center w-7 h-7 rounded-md font-mono text-sm text-muted hover:bg-sunken hover:text-link', '#');
+        link.type = 'button';
+        link.setAttribute('aria-label', `Kopiuj link do pytania ${i + 1}`);
+        link.addEventListener('click', () => {
+          const url = sessionUrl(turn.message_id);
+          history.replaceState(null, '', url);
+          copyUrl(url);
+        });
+        meta.append(link);
+      }
+      aBody.append(meta);
+      a.append(aBody);
+      li.append(a);
       return li;
+    }
+
+    // Highlight the turn index entry of the turn at the top of the viewport.
+    function trackActiveTurn(turnEls) {
+      const links = new Map([...document.querySelectorAll('#toc a')].map((a) => [a.dataset.turn, a]));
+      let current = null;
+      let queued = false;
+      function update() {
+        queued = false;
+        let active = turnEls[0];
+        for (const x of turnEls) { if (x.getBoundingClientRect().top <= 120) active = x; else break; }
+        if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) active = turnEls[turnEls.length - 1];
+        const id = active && active.id.replace('turn-', '');
+        if (id === current) return;
+        if (current && links.get(current)) links.get(current).removeAttribute('aria-current');
+        current = id;
+        if (links.get(id)) links.get(id).setAttribute('aria-current', 'true');
+      }
+      addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+      addEventListener('resize', update);
+      update();
     }
 
     function render(data, late) {
       const turns = turnsOf(data);
       const participants = data.participants && typeof data.participants === 'object' ? data.participants : {};
-      renderHero(data, turns);
+      const title = shortTitle(data.title);
+      const cost = turns.reduce((sum, x) => sum + (Number(x.usage && x.usage.cost_usd) || 0), 0);
+
+      document.title = `${title} · HAL9000`;
+      $('#session-title').textContent = title;
+      const meta = [];
+      if (data.channel && data.channel.name) meta.push('#' + data.channel.name);
+      meta.push(pytania(turns.length), usd(cost));
+      $('#session-meta').textContent = meta.join(' · ');
 
       const people = Object.values(participants).sort((a, b) => (b.is_host ? 1 : 0) - (a.is_host ? 1 : 0));
-      $('#participants-list').replaceChildren(...people.map(participantCard));
-      $('#turns-list').replaceChildren(...turns.map((x) => turnItem(x, participants)));
-      $('#turns-note').hidden = !late;
+      $('#people').replaceChildren(...people.map(personRow));
+      $('#people').parentElement.hidden = people.length === 0;
+      $('#toc').replaceChildren(...turns.map(tocItem));
+      $('#models').replaceChildren(...modelRows(turns));
+      $('#dates').replaceChildren(...dateRows(data));
 
+      const turnEls = turns.map((x, i) => turnItem(x, i, participants));
+      $('#turns').replaceChildren(...turnEls);
+      $('#late-note').hidden = !late;
       $('#state').hidden = true;
-      $('#participants').hidden = people.length === 0;
       $('#turns').hidden = false;
-      $('#hero-divider').style.setProperty('--cloud-color', people.length ? 'var(--color-brand-amber)' : 'var(--color-brand-white)');
+      $('#disclaimer').hidden = false;
+      $('#copy-session').hidden = false;
+      panel.hidden = false;
 
+      trackActiveTurn(turnEls.filter((x) => x.id));
       const target = t && document.getElementById('turn-' + t);
       if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
     }

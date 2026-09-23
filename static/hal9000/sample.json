@@ -36,7 +36,7 @@
         {"type": "tool_call", "tool": "get_episode", "args": {"episode": 202}, "result": "{\"episode\": 202, \"title\": \"Event sourcing po latach\", \"url\": \"https://patoarchitekci.io/202/\"}"},
         {"type": "message", "text": "Mam dwa trafienia, odcinek 202 jest bardziej na temat."}
       ],
-      "answer": "Najwięcej o tym było w **odcinku #202**. Krótko, kiedy **nie** brać event sourcingu:\n\n1. Nie potrzebujesz historii zmian ani audytu.\n2. Zespół nie ma doświadczenia z projekcjami i wersjonowaniem eventów.\n3. Domena to zwykły CRUD.\n\nWcześniej temat przewinął się też w [odcinku #142](https://patoarchitekci.io/142/).",
+      "answer": "Najwięcej o tym było w **odcinku #202**. Krótko, kiedy **nie** brać event sourcingu: [#202, 00:07:18](https://patoarchitekci.io/202/)\n\n1. Nie potrzebujesz historii zmian ani audytu.\n2. Zespół nie ma doświadczenia z projekcjami i wersjonowaniem eventów.\n3. Domena to zwykły CRUD.\n\nWcześniej temat przewinął się też w [odcinku #142](https://patoarchitekci.io/142/).",
       "sources": [
         {"episode": 202, "at": "00:07:18", "url": "https://patoarchitekci.io/202/"},
         {"episode": 142, "at": "00:12:40", "url": "https://patoarchitekci.io/142/"}
@@ -59,6 +59,11 @@
       "author_id": "798661146151616566",
       "mentions": ["1187465340125839391"],
       "question": "@Kasia dobre pytanie. HAL, pokaż jej jeszcze, jak wygląda upcasting eventu, o którym mówiliśmy.",
+      "discussion": [
+        {"author_id": "1187465340125839391", "at": "2026-09-23T08:01:10Z", "text": "Dzięki! U nas w projekcie event sourcing wszedł „bo tak”, a po roku mamy 14 wersji OrderPlaced 😅"},
+        {"author_id": "798661146151616566", "at": "2026-09-23T08:02:02Z", "text": "Klasyka. Wersjonowanie eventów to właśnie ten podatek, o którym mówiliśmy w #202."},
+        {"author_id": "1187465340125839391", "at": "2026-09-23T08:03:21Z", "text": "A jak to ogarnąć bez migrowania całego event store?"}
+      ],
       "steps": [
         {"type": "tool_call", "tool": "search_transcript", "args": {"query": "upcasting wersjonowanie eventów"}, "result": "[{\"episode\": 202, \"at\": \"00:31:05\", \"text\": \"…upcaster zamienia starą wersję eventu na nową przy odczycie…\"}]"}
       ],
