@@ -41,7 +41,16 @@
         {"episode": 202, "at": "00:07:18", "url": "https://patoarchitekci.io/202/"},
         {"episode": 142, "at": "00:12:40", "url": "https://patoarchitekci.io/142/"}
       ],
-      "usage": {"model": "gpt-5.6-terra", "input_tokens": 18342, "cached_tokens": 12288, "output_tokens": 412, "cost_usd": 0.0198, "latency_s": 9.7},
+      "usage": {
+        "cost_usd": 0.0213,
+        "latency_s": 9.7,
+        "models": [
+          {"kind": "chat", "model": "gpt-5.6-terra", "reasoning_effort": "medium", "requests": 3,
+           "input_tokens": 18342, "cached_tokens": 12288, "output_tokens": 412, "reasoning_tokens": 250, "cost_usd": 0.0198},
+          {"kind": "embedding", "model": "text-embedding-3-small", "dimensions": 1536, "requests": 4,
+           "input_tokens": 57, "cost_usd": 0.0000011}
+        ]
+      },
       "trace_id": "trace_5b1f0c2e9a7d4e21b3c8f60a1d2e3f40"
     },
     {
@@ -57,7 +66,16 @@
       "sources": [
         {"episode": 202, "at": "00:31:05", "url": "https://patoarchitekci.io/202/"}
       ],
-      "usage": {"model": "gpt-5.6-terra", "input_tokens": 21507, "cached_tokens": 17920, "output_tokens": 236, "cost_usd": 0.0147, "latency_s": 6.3},
+      "usage": {
+        "cost_usd": 0.0146002,
+        "latency_s": 6.3,
+        "models": [
+          {"kind": "chat", "model": "gpt-5.6-terra", "reasoning_effort": "medium", "requests": 2,
+           "input_tokens": 21507, "cached_tokens": 17920, "output_tokens": 236, "reasoning_tokens": 96, "cost_usd": 0.0146},
+          {"kind": "embedding", "model": "text-embedding-3-small", "dimensions": 1536, "requests": 1,
+           "input_tokens": 9, "cost_usd": 0.0000002}
+        ]
+      },
       "trace_id": "trace_0e4d7a93c1b24f6d8e2a5b7c9d1f3a62"
     }
   ]

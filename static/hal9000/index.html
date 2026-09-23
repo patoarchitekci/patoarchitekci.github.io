@@ -39,6 +39,7 @@
       <h1 id="hero-title" class="font-display font-bold uppercase leading-[0.95] text-4xl md:text-6xl mb-6 text-brand-orange break-words">HAL9000</h1>
       <p id="hero-dates" class="font-sans text-sm md:text-base text-charcoal-300 mb-6 empty:hidden"></p>
       <div id="hero-pills" class="flex flex-wrap gap-2 md:gap-3 text-sm md:text-base empty:hidden"></div>
+      <p id="hero-models" class="font-sans text-xs md:text-sm text-charcoal-300 mt-4 break-words empty:hidden"></p>
     </div>
 
     <div class="brand-shape hidden md:block absolute top-28 right-10 w-28 h-28 opacity-90"
@@ -147,13 +148,18 @@
     const timeFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' });
     const dayFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', day: 'numeric', month: 'short', year: 'numeric' });
     const fmt = (f, iso) => { const d = new Date(iso); return isNaN(d) ? '—' : f.format(d); };
-    const usd = (n) => '$' + (Number(n) || 0).toFixed(4);
+    const numFmt = new Intl.NumberFormat('pl-PL');
+    const num = (n) => numFmt.format(Number(n) || 0);
+    // Small model costs need more precision than the usual 4 decimals, or they round to $0.
+    const usd = (n) => { const v = Number(n) || 0; return '$' + v.toFixed(v !== 0 && Math.abs(v) < 0.0001 ? 7 : 4); };
 
     function plural(n, one, few, many) {
       if (n === 1) return one;
       const d = n % 10, dd = n % 100;
       return d >= 2 && d <= 4 && (dd < 12 || dd > 14) ? few : many;
     }
+    const zapytania = (n) => `${num(n)} ${plural(Number(n) || 0, 'zapytanie', 'zapytania', 'zapytań')}`;
+    const tokeny = (n) => `${num(n)} ${plural(Number(n) || 0, 'token', 'tokeny', 'tokenów')}`;
 
     function initials(name) {
       const words = String(name || '?').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w));
@@ -216,6 +222,28 @@
       return el('span', 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-display font-semibold uppercase tracking-wide max-w-full break-words ' + className, text);
     }
 
+    // Distinct models used across all turns, with total tokens and cost per model.
+    function aggregateModels(turns) {
+      const totals = new Map();
+      for (const turn of turns) {
+        const models = turn.usage && Array.isArray(turn.usage.models) ? turn.usage.models : [];
+        for (const m of models) {
+          if (!m || !m.model) continue;
+          const agg = totals.get(m.model) || { tokens: 0, cost: 0 };
+          agg.tokens += (Number(m.input_tokens) || 0) + (Number(m.output_tokens) || 0);
+          agg.cost += Number(m.cost_usd) || 0;
+          totals.set(m.model, agg);
+        }
+      }
+      return [...totals.entries()].map(([model, agg]) => ({ model, ...agg }));
+    }
+
+    function modelsSummaryText(turns) {
+      const models = aggregateModels(turns);
+      if (!models.length) return '';
+      return 'Modele: ' + models.map((m) => `${m.model} — ${tokeny(m.tokens)} · ${usd(m.cost)}`).join(' · ');
+    }
+
     function renderHero(data, turns) {
       $('#hero-title').textContent = data.title || 'HAL9000';
       $('#hero-dates').textContent = `Start: ${fmt(dtFmt, data.created_at)} · ostatnia zmiana: ${fmt(dtFmt, data.updated_at)}`;
@@ -226,6 +254,7 @@
       if (data.guild && data.guild.name) pills.append(pill(data.guild.name, 'bg-brand-white text-brand-charcoal'));
       pills.append(pill(`${turns.length} ${plural(turns.length, 'pytanie', 'pytania', 'pytań')}`, 'bg-brand-amber text-brand-charcoal'));
       pills.append(pill('Koszt ' + usd(cost), 'border-2 border-brand-white/40 text-brand-white'));
+      $('#hero-models').textContent = modelsSummaryText(turns);
     }
 
     function participantCard(p) {
@@ -294,14 +323,38 @@
       return wrap;
     }
 
-    function usageLine(u) {
-      const parts = [];
-      if (u.model) parts.push(u.model);
-      const tokens = [`${Number(u.input_tokens) || 0} in`];
-      if (u.cached_tokens) tokens.push(`${Number(u.cached_tokens)} cache`);
-      tokens.push(`${Number(u.output_tokens) || 0} out`);
-      parts.push('tokeny: ' + tokens.join(' / '), usd(u.cost_usd), (Number(u.latency_s) || 0).toFixed(1) + ' s');
-      return el('p', 'mt-4 font-sans text-xs text-charcoal-500 break-words', parts.join(' · '));
+    // Per-model usage.models[] shape (D16 / Appendix B). One compact line per model.
+    function chatModelLine(m) {
+      const parts = [m.model || '?'];
+      if (m.reasoning_effort) parts.push(m.reasoning_effort);
+      parts.push(zapytania(m.requests));
+      let inPart = `${num(m.input_tokens)} in`;
+      if (m.cached_tokens != null) inPart += ` (${num(m.cached_tokens)} cache)`;
+      let outPart = `${num(m.output_tokens)} out`;
+      if (m.reasoning_tokens != null) outPart += ` (${num(m.reasoning_tokens)} reasoning)`;
+      parts.push(`${inPart} / ${outPart}`, usd(m.cost_usd));
+      return parts.join(' · ');
+    }
+
+    function embeddingModelLine(m) {
+      const parts = [m.model || '?'];
+      if (m.dimensions != null) parts.push(`${num(m.dimensions)} wym.`);
+      parts.push(zapytania(m.requests), tokeny(m.input_tokens), usd(m.cost_usd));
+      return parts.join(' · ');
+    }
+
+    // Tolerant of the older flat usage shape (no `models`): show just cost and latency.
+    function usageBlock(u) {
+      const wrap = el('div', 'mt-4 space-y-1 font-sans text-xs text-charcoal-500 break-words');
+      const models = u && Array.isArray(u.models) ? u.models : [];
+      for (const m of models) {
+        if (!m || !m.model) continue;
+        const kind = m.kind || (m.dimensions != null ? 'embedding' : 'chat');
+        wrap.append(el('p', null, kind === 'embedding' ? embeddingModelLine(m) : chatModelLine(m)));
+      }
+      const total = `razem ${usd(u && u.cost_usd)} · ${(Number(u && u.latency_s) || 0).toFixed(1)} s`;
+      wrap.append(el('p', 'font-semibold', total));
+      return wrap;
     }
 
     function turnItem(turn, participants) {
@@ -333,7 +386,7 @@
       const sources = Array.isArray(turn.sources) ? turn.sources : [];
       if (sources.length) box.append(sourceChips(sources));
       main.append(box);
-      if (turn.usage) main.append(usageLine(turn.usage));
+      if (turn.usage) main.append(usageBlock(turn.usage));
 
       li.append(side, main);
       return li;
