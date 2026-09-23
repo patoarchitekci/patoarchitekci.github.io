@@ -107,6 +107,7 @@
           <h2 id="h-dates" class="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted">Sesja</h2>
           <dl id="dates" class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs"></dl>
         </section>
+        <p class="text-[11px] text-muted">Ikona HAL 9000: <a class="underline" href="https://commons.wikimedia.org/wiki/File:HAL9000.svg" target="_blank" rel="noopener noreferrer">Cryteria</a>, <a class="underline" href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a></p>
       </div>
     </aside>
   </div>
@@ -509,7 +510,7 @@
 
       // Answer
       const a = el('div', 'mt-5 flex gap-3');
-      const halEye = (size) => { const e = el('span', `hal-eye shrink-0 rounded-full ${size}`); e.setAttribute('aria-hidden', 'true'); return e; };
+      const halEye = (size) => { const e = el('img', `hal-eye shrink-0 ${size}`); e.src = './hal9000-eye.svg'; e.alt = ''; e.width = 36; e.height = 36; e.decoding = 'async'; return e; };
       a.append(halEye('max-sm:hidden w-9 h-9'));
       const aBody = el('div', 'min-w-0 flex-1');
       const aHead = el('p', 'flex items-center gap-2 font-display font-semibold text-sm');

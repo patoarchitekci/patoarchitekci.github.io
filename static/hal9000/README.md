@@ -60,3 +60,7 @@ python3 -m http.server -d static 8765
 # http://localhost:8765/hal9000/?id=1395038920126894143&sample=1   (sample; turn 2 has a discussion)
 # http://localhost:8765/hal9000/?id=1552383732441157633            (a real session from the blob)
 ```
+
+## Credits
+
+`hal9000-eye.svg`: [HAL9000.svg](https://commons.wikimedia.org/wiki/File:HAL9000.svg) by Cryteria, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), unmodified. The page shows the attribution in the session panel.

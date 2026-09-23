@@ -61,11 +61,8 @@ body { font-family: var(--font-sans); }
 }
 #panel-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
-/* HAL avatar: the red eye. */
-.hal-eye {
-  background: radial-gradient(circle at 50% 50%, #fff3c4 0 7%, #ff4405 14%, #b3000c 34%, #3a0004 58%, #0d0a0d 72%);
-  box-shadow: 0 0 0 2px var(--color-brand-orange);
-}
+/* HAL avatar: HAL 9000 eye by Cryteria (CC BY 3.0), no frame. */
+.hal-eye { object-fit: contain; }
 
 /* Deep-linked turn: brief highlight. */
 @keyframes turn-flash {
