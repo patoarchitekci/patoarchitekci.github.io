@@ -1,0 +1,64 @@
+{
+  "format": "hal9000/1",
+  "id": "1395038920126894143",
+  "title": "HAL9000 · Kasia",
+  "created_at": "2026-09-23T08:00:00Z",
+  "updated_at": "2026-09-23T08:04:12Z",
+  "guild": {"id": "642314298412138496", "name": "Patoarchitekci"},
+  "channel": {"id": "1041679462393864274", "name": "pytania", "mode": "thread"},
+  "participants": {
+    "1187465340125839391": {
+      "display_name": "Kasia",
+      "global_name": "Katarzyna W.",
+      "nick": "Kasia",
+      "username": "kasia.dev",
+      "roles": ["Słuchacz", "Konferencja #200"],
+      "is_host": false
+    },
+    "798661146151616566": {
+      "display_name": "Łukasz",
+      "global_name": "kaluzaaa",
+      "nick": "Łukasz | Pato",
+      "username": "kaluzaaa",
+      "roles": ["host", "admin"],
+      "is_host": true
+    }
+  },
+  "turns": [
+    {
+      "message_id": "1395038918847631401",
+      "at": "2026-09-23T08:00:00Z",
+      "author_id": "1187465340125839391",
+      "mentions": [],
+      "question": "Hej HAL, w którym odcinku rozmawialiście o event sourcingu i kiedy warto go NIE używać?",
+      "steps": [
+        {"type": "tool_call", "tool": "search_transcript", "args": {"query": "event sourcing kiedy nie używać", "limit": 5}, "result": "[{\"episode\": 142, \"at\": \"00:12:40\", \"text\": \"Event sourcing to nie jest domyślny wybór. Jeśli nie potrzebujesz historii zmian, to płacisz podatek za nic…\"}, {\"episode\": 202, \"at\": \"00:07:18\", \"text\": \"…projekcje trzeba przebudowywać, wersjonowanie eventów boli po roku…\"}]"},
+        {"type": "tool_call", "tool": "get_episode", "args": {"episode": 202}, "result": "{\"episode\": 202, \"title\": \"Event sourcing po latach\", \"url\": \"https://patoarchitekci.io/202/\"}"},
+        {"type": "message", "text": "Mam dwa trafienia, odcinek 202 jest bardziej na temat."}
+      ],
+      "answer": "Najwięcej o tym było w **odcinku #202**. Krótko, kiedy **nie** brać event sourcingu:\n\n1. Nie potrzebujesz historii zmian ani audytu.\n2. Zespół nie ma doświadczenia z projekcjami i wersjonowaniem eventów.\n3. Domena to zwykły CRUD.\n\nWcześniej temat przewinął się też w [odcinku #142](https://patoarchitekci.io/142/).",
+      "sources": [
+        {"episode": 202, "at": "00:07:18", "url": "https://patoarchitekci.io/202/"},
+        {"episode": 142, "at": "00:12:40", "url": "https://patoarchitekci.io/142/"}
+      ],
+      "usage": {"model": "gpt-5.6-terra", "input_tokens": 18342, "cached_tokens": 12288, "output_tokens": 412, "cost_usd": 0.0198, "latency_s": 9.7},
+      "trace_id": "trace_5b1f0c2e9a7d4e21b3c8f60a1d2e3f40"
+    },
+    {
+      "message_id": "1395039981255331902",
+      "at": "2026-09-23T08:03:55Z",
+      "author_id": "798661146151616566",
+      "mentions": ["1187465340125839391"],
+      "question": "@Kasia dobre pytanie. HAL, pokaż jej jeszcze, jak wygląda upcasting eventu, o którym mówiliśmy.",
+      "steps": [
+        {"type": "tool_call", "tool": "search_transcript", "args": {"query": "upcasting wersjonowanie eventów"}, "result": "[{\"episode\": 202, \"at\": \"00:31:05\", \"text\": \"…upcaster zamienia starą wersję eventu na nową przy odczycie…\"}]"}
+      ],
+      "answer": "**Kasia**, w #202 (ok. 31. minuty) upcasting to zamiana starej wersji eventu na nową przy odczycie strumienia. Przykład:\n\n```csharp\npublic static OrderPlacedV2 Upcast(OrderPlacedV1 e) =>\n    new(e.OrderId, e.Amount, Currency: \"PLN\");\n```\n\nDzięki temu stare eventy w magazynie zostają bez zmian.",
+      "sources": [
+        {"episode": 202, "at": "00:31:05", "url": "https://patoarchitekci.io/202/"}
+      ],
+      "usage": {"model": "gpt-5.6-terra", "input_tokens": 21507, "cached_tokens": 17920, "output_tokens": 236, "cost_usd": 0.0147, "latency_s": 6.3},
+      "trace_id": "trace_0e4d7a93c1b24f6d8e2a5b7c9d1f3a62"
+    }
+  ]
+}

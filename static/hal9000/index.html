@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="content-language" content="pl-PL" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>HAL9000 · sesja</title>
+  <meta name="description" content="Zapis rozmowy z HAL9000 na Discordzie Patoarchitektów." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Patoarchitekci" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:title" content="HAL9000 · sesja" />
+  <meta property="og:description" content="Zapis rozmowy z HAL9000 na Discordzie Patoarchitektów." />
+
+  <link rel="icon" href="/img/png/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tomorrow:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./hal9000.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@18.0.14/lib/marked.umd.js" integrity="sha384-2vpGtuKqJvFlwJqYnf/wUMuzUfhUnYBt9oay0e2yaFcq0Dh6/aEbQ8YAOeKGzlYo" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.16/dist/purify.min.js" integrity="sha384-a7SzOxErzJ3ZpQz0zJ32d67dSitNzPcbfybc/ykU9KJhMgZkwqfSxlhhdJRS+XGL" crossorigin="anonymous" defer></script>
+</head>
+<body class="bg-brand-white text-charcoal-900 antialiased overflow-x-hidden">
+
+  <!-- HERO · charcoal -->
+  <section id="top" class="relative bg-brand-charcoal text-brand-white overflow-hidden">
+    <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6 pt-6 flex items-center justify-between gap-4">
+      <a href="https://patoarchitekci.io" class="inline-block">
+        <img src="/konferencja/pato-logo/vertical-full-color.svg" alt="Patoarchitekci" class="h-16 md:h-20" />
+      </a>
+      <a href="https://discord.com/invite/78zPcEaP22" target="_blank" rel="noopener"
+         class="rounded-full border-2 border-brand-white px-5 py-1.5 font-sans font-semibold text-sm uppercase hover:bg-brand-white hover:text-brand-charcoal transition">Discord</a>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-6 pt-14 md:pt-16 pb-32 md:pb-56 lg:pb-64">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest mb-5">HAL9000 · sesja z Discorda</p>
+      <h1 id="hero-title" class="font-display font-bold uppercase leading-[0.95] text-4xl md:text-6xl mb-6 text-brand-orange break-words">HAL9000</h1>
+      <p id="hero-dates" class="font-sans text-sm md:text-base text-charcoal-300 mb-6 empty:hidden"></p>
+      <div id="hero-pills" class="flex flex-wrap gap-2 md:gap-3 text-sm md:text-base empty:hidden"></div>
+    </div>
+
+    <div class="brand-shape hidden md:block absolute top-28 right-10 w-28 h-28 opacity-90"
+         style="--shape: url('/konferencja/pato-graphics/shape-star.svg')" aria-hidden="true"></div>
+    <div class="brand-shape hidden md:block absolute bottom-40 right-1/4 w-12 h-20 opacity-60"
+         style="--shape: url('/konferencja/pato-graphics/shape-bolt.svg')" aria-hidden="true"></div>
+
+    <div id="hero-divider" class="cloud-divider absolute inset-x-0 bottom-0 z-20" style="--cloud-color: var(--color-brand-white)"></div>
+  </section>
+
+  <!-- STATE · loading / saving / not found / error -->
+  <section id="state" class="bg-brand-white py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="rounded-3xl bg-charcoal-100 p-6 md:p-10 text-center">
+        <span id="state-dot" class="inline-block w-3 h-3 rounded-full bg-brand-orange animate-pulse mb-4"></span>
+        <h2 id="state-title" class="font-display font-bold uppercase text-2xl md:text-4xl leading-tight mb-3">Wczytuję sesję…</h2>
+        <p id="state-text" class="font-sans text-base md:text-lg text-charcoal-600"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTICIPANTS · amber (like speaker cards on /konferencja/) -->
+  <section id="participants" hidden class="relative bg-brand-amber pt-16 md:pt-20 pb-32 md:pb-56 lg:pb-64 text-charcoal-900 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-charcoal/70 mb-3">Uczestnicy</p>
+      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">Kto pyta</h2>
+      <ul id="participants-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch"></ul>
+    </div>
+    <div class="cloud-divider cloud-divider--flip-x absolute inset-x-0 bottom-0 z-0" style="--cloud-color: var(--color-brand-white)"></div>
+  </section>
+
+  <!-- TURNS · white (like the agenda timetable) -->
+  <section id="turns" hidden class="relative bg-brand-white pt-16 md:pt-20 pb-32 md:pb-56 lg:pb-64 text-charcoal-900 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <p class="font-sans font-semibold text-sm uppercase tracking-widest text-brand-orange mb-3">Rozmowa</p>
+      <h2 class="font-display font-bold uppercase text-4xl md:text-6xl leading-[0.95] mb-8">Pytania i odpowiedzi</h2>
+      <p id="turns-note" hidden class="inline-flex items-center gap-3 mb-8 px-5 py-3 rounded-full bg-brand-charcoal text-brand-white font-sans font-bold text-sm uppercase tracking-wide">
+        <span class="inline-block w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+        Sesja jeszcze się nie zapisała — odśwież za chwilę
+      </p>
+      <ol id="turns-list" class="space-y-4"></ol>
+    </div>
+    <div class="cloud-divider absolute inset-x-0 bottom-0 z-0" style="--cloud-color: var(--color-brand-charcoal)"></div>
+  </section>
+
+  <!-- FOOTER · charcoal -->
+  <footer class="bg-brand-charcoal text-brand-white">
+    <div class="max-w-5xl mx-auto px-4 md:px-6 py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+      <div>
+        <a href="https://patoarchitekci.io" class="inline-block mb-6">
+          <img src="/konferencja/pato-logo/horizontal-black-orange.svg" alt="Patoarchitekci" class="h-12 md:h-14" />
+        </a>
+        <p class="text-xs text-charcoal-400">© 2026 Protopia · HAL9000 odpowiada na podstawie transkrypcji odcinków i może się mylić.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-6 gap-y-3 font-sans font-semibold text-sm uppercase tracking-wide">
+        <a href="https://patoarchitekci.io/odcinki/" class="hover:text-brand-orange transition">Odcinki</a>
+        <a href="https://discord.com/invite/78zPcEaP22" target="_blank" rel="noopener" class="hover:text-brand-orange transition">Discord</a>
+        <a href="#top" class="hover:text-brand-orange transition">Do góry ↑</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
+
+    const BLOB_URL = 'https://patodeepresearch.blob.core.windows.net/hal9000/';
+    const ID_RE = /^\d{15,22}$/;
+    const RETRY_EVERY_MS = 3000;
+    const RETRY_FOR_MS = 60000;
+    const RESULT_MAX_CHARS = 1200;
+
+    // Discord ids stay strings end to end; never convert them to numbers.
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id') || '';
+    const t = ID_RE.test(params.get('t') || '') ? params.get('t') : null;
+    // The sample fixture is a local preview aid only; production always reads the blob.
+    const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+    const src = isLocal && params.get('sample') === '1' ? './sample.json' : BLOB_URL + id + '.json';
+
+    const $ = (sel) => document.querySelector(sel);
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+    // Plain text only: every JSON string is untrusted user text.
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = String(text);
+      return node;
+    }
+
+    window.DOMPurify?.addHook('afterSanitizeAttributes', (node) => {
+      if (node.tagName === 'A') {
+        node.setAttribute('target', '_blank');
+        node.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+    const markdown = (s) => DOMPurify.sanitize(marked.parse(String(s ?? ''), { gfm: true, breaks: true }), { FORBID_TAGS: ['img'] }); // no remote images from untrusted text
+
+    // Source chips link only to episode pages built from the episode number, never to a URL from the JSON.
+    function episodeUrl(n) {
+      return Number.isInteger(n) && n > 0 ? `https://patoarchitekci.io/${n}/` : null;
+    }
+
+    const dtFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', dateStyle: 'medium', timeStyle: 'short' });
+    const timeFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', hour: '2-digit', minute: '2-digit' });
+    const dayFmt = new Intl.DateTimeFormat('pl-PL', { timeZone: 'Europe/Warsaw', day: 'numeric', month: 'short', year: 'numeric' });
+    const fmt = (f, iso) => { const d = new Date(iso); return isNaN(d) ? '—' : f.format(d); };
+    const usd = (n) => '$' + (Number(n) || 0).toFixed(4);
+
+    function plural(n, one, few, many) {
+      if (n === 1) return one;
+      const d = n % 10, dd = n % 100;
+      return d >= 2 && d <= 4 && (dd < 12 || dd > 14) ? few : many;
+    }
+
+    function initials(name) {
+      const words = String(name || '?').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w));
+      return words.slice(0, 2).map((w) => w.match(/[\p{L}\p{N}]/u)[0]).join('').toUpperCase() || '?';
+    }
+
+    // ---------- states ----------
+    const STATES = {
+      loading: ['Wczytuję sesję…', '', true],
+      saving: ['Zapisuję sesję…', 'HAL właśnie odpowiedział. Zapis pojawi się tu za kilka sekund.', true],
+      late: ['Sesja jeszcze się nie zapisała — odśwież za chwilę', 'Jeśli to potrwa dłużej, daj znać na Discordzie.', false],
+      notfound: ['Nie ma takiej sesji', 'Sprawdź link z wątku HAL9000 na Discordzie.', false],
+      error: ['Nie udało się wczytać sesji', 'Spróbuj odświeżyć stronę za chwilę.', false],
+    };
+    function showState(kind) {
+      const [title, text, busy] = STATES[kind];
+      $('#state').hidden = false;
+      $('#participants').hidden = true;
+      $('#turns').hidden = true;
+      $('#state-title').textContent = title;
+      $('#state-text').textContent = text;
+      $('#state-dot').hidden = !busy;
+    }
+
+    // ---------- data ----------
+    async function fetchSession() {
+      const res = await fetch(src, { cache: 'no-store' });
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (!data || data.format !== 'hal9000/1') throw new Error('Unsupported format: ' + (data && data.format));
+      return data;
+    }
+
+    const turnsOf = (data) => (Array.isArray(data.turns) ? data.turns : []);
+    const hasTurn = (data) => !t || turnsOf(data).some((x) => x.message_id === t);
+
+    async function load() {
+      if (!ID_RE.test(id)) return showState('notfound');
+      const until = Date.now() + RETRY_FOR_MS;
+      let data = null;
+      for (;;) {
+        try {
+          data = await fetchSession();
+        } catch (err) {
+          console.warn('HAL9000 session:', err);
+          return showState('error');
+        }
+        if (data && hasTurn(data)) return render(data, false);
+        const left = until - Date.now();
+        if (left <= 0) break;
+        showState('saving');
+        await sleep(Math.min(RETRY_EVERY_MS, left));
+      }
+      if (data) render(data, true); else showState('late');
+    }
+
+    // ---------- render ----------
+    function pill(text, className) {
+      return el('span', 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full font-display font-semibold uppercase tracking-wide max-w-full break-words ' + className, text);
+    }
+
+    function renderHero(data, turns) {
+      $('#hero-title').textContent = data.title || 'HAL9000';
+      $('#hero-dates').textContent = `Start: ${fmt(dtFmt, data.created_at)} · ostatnia zmiana: ${fmt(dtFmt, data.updated_at)}`;
+      const cost = turns.reduce((sum, x) => sum + (Number(x.usage && x.usage.cost_usd) || 0), 0);
+      const pills = $('#hero-pills');
+      pills.replaceChildren();
+      if (data.channel && data.channel.name) pills.append(pill('#' + data.channel.name, 'bg-brand-orange text-brand-charcoal'));
+      if (data.guild && data.guild.name) pills.append(pill(data.guild.name, 'bg-brand-white text-brand-charcoal'));
+      pills.append(pill(`${turns.length} ${plural(turns.length, 'pytanie', 'pytania', 'pytań')}`, 'bg-brand-amber text-brand-charcoal'));
+      pills.append(pill('Koszt ' + usd(cost), 'border-2 border-brand-white/40 text-brand-white'));
+    }
+
+    function participantCard(p) {
+      const host = !!p.is_host;
+      const li = el('li', 'h-full');
+      const card = el('div', 'h-full flex items-center gap-4 p-5 rounded-3xl ' +
+        (host ? 'bg-brand-charcoal text-brand-white' : 'bg-brand-white text-brand-charcoal'));
+      card.append(el('span', 'shrink-0 grid place-items-center w-16 h-16 rounded-full font-display font-bold text-xl shadow-xl ring-4 ' +
+        (host ? 'bg-brand-orange text-brand-charcoal ring-brand-white' : 'bg-brand-charcoal text-brand-white ring-brand-amber'), initials(p.display_name)));
+
+      const body = el('span', 'flex-1 min-w-0');
+      body.append(el('span', 'block font-display font-bold text-lg uppercase leading-tight break-words', p.display_name || p.username || '?'));
+      const aliases = [];
+      if (p.nick && p.nick !== p.display_name) aliases.push(p.nick);
+      if (p.global_name && p.global_name !== p.display_name) aliases.push(p.global_name);
+      if (p.username) aliases.push('@' + p.username);
+      if (aliases.length) body.append(el('span', 'block text-xs mt-1 break-words ' + (host ? 'text-charcoal-300' : 'text-charcoal-500'), aliases.join(' · ')));
+
+      const chips = el('span', 'flex flex-wrap gap-1.5 mt-2 empty:hidden');
+      if (host) chips.append(el('span', 'px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider', 'Prowadzący'));
+      for (const role of Array.isArray(p.roles) ? p.roles : []) {
+        chips.append(el('span', 'px-3 py-0.5 rounded-full text-xs font-sans font-semibold ' +
+          (host ? 'bg-brand-white/10 text-brand-white' : 'bg-charcoal-100 text-brand-charcoal'), role));
+      }
+      body.append(chips);
+      card.append(body);
+      li.append(card);
+      return li;
+    }
+
+    function stepsBlock(steps) {
+      const details = el('details', 'mt-5 rounded-2xl bg-brand-white/60 border border-charcoal-200');
+      const summary = el('summary', 'cursor-pointer select-none flex items-center gap-2 px-4 py-3 font-sans font-semibold text-sm uppercase tracking-wider text-charcoal-600 hover:text-brand-orange');
+      summary.append(el('span', 'summary-arrow inline-block transition-transform', '▸'), el('span', null, `Kroki agenta (${steps.length})`));
+      details.append(summary);
+      const list = el('ol', 'px-4 pb-4 space-y-3');
+      for (const s of steps) {
+        const item = el('li', 'min-w-0 rounded-xl bg-brand-white p-3 md:p-4');
+        if (s.type === 'tool_call') {
+          item.append(el('p', 'font-mono text-sm font-bold text-orange-700 break-words', s.tool || 'tool'));
+          if (s.args != null) item.append(el('pre', 'mt-2 text-xs bg-charcoal-100 rounded-lg p-3 overflow-x-auto', JSON.stringify(s.args, null, 2)));
+          if (s.result != null) {
+            const r = String(s.result);
+            item.append(el('pre', 'mt-2 text-xs bg-brand-charcoal text-charcoal-100 rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-words max-h-64 overflow-y-auto',
+              r.length > RESULT_MAX_CHARS ? r.slice(0, RESULT_MAX_CHARS) + '…' : r));
+          }
+        } else {
+          item.append(el('p', 'text-xs font-semibold uppercase tracking-wider text-charcoal-500', s.type === 'message' ? 'Notatka agenta' : String(s.type || 'krok')));
+          item.append(el('p', 'mt-1 text-sm whitespace-pre-wrap break-words', s.text ?? ''));
+        }
+        list.append(item);
+      }
+      details.append(list);
+      return details;
+    }
+
+    function sourceChips(sources) {
+      const wrap = el('div', 'mt-5 flex flex-wrap gap-2');
+      for (const s of sources) {
+        const label = `#${s.episode ?? '?'}` + (s.at ? ` · ${s.at}` : '');
+        const href = episodeUrl(s.episode);
+        const chip = el(href ? 'a' : 'span', 'inline-flex items-center px-3 py-1 rounded-full bg-brand-orange text-brand-charcoal text-xs md:text-sm font-display font-bold tabular-nums hover:bg-brand-charcoal hover:text-brand-orange transition', label);
+        if (href) { chip.href = href; chip.target = '_blank'; chip.rel = 'noopener noreferrer'; }
+        wrap.append(chip);
+      }
+      return wrap;
+    }
+
+    function usageLine(u) {
+      const parts = [];
+      if (u.model) parts.push(u.model);
+      const tokens = [`${Number(u.input_tokens) || 0} in`];
+      if (u.cached_tokens) tokens.push(`${Number(u.cached_tokens)} cache`);
+      tokens.push(`${Number(u.output_tokens) || 0} out`);
+      parts.push('tokeny: ' + tokens.join(' / '), usd(u.cost_usd), (Number(u.latency_s) || 0).toFixed(1) + ' s');
+      return el('p', 'mt-4 font-sans text-xs text-charcoal-500 break-words', parts.join(' · '));
+    }
+
+    function turnItem(turn, participants) {
+      const isTarget = t && turn.message_id === t;
+      const author = participants[turn.author_id];
+      const li = el('li', 'relative rounded-3xl p-5 md:p-7 flex flex-col md:flex-row md:gap-8 gap-3 scroll-mt-6 ' +
+        (isTarget ? 'bg-orange-50 ring-4 ring-brand-orange' : 'bg-charcoal-100'));
+      if (turn.message_id) li.id = 'turn-' + turn.message_id;
+
+      const side = el('div', 'md:w-36 shrink-0 flex md:flex-col flex-wrap items-center md:items-start gap-x-3 gap-y-1');
+      side.append(el('p', 'font-display font-bold text-lg md:text-xl tabular-nums', fmt(timeFmt, turn.at)));
+      side.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-wider text-charcoal-500', fmt(dayFmt, turn.at)));
+      side.append(el('p', 'md:mt-2 inline-block px-3 py-0.5 rounded-full bg-brand-charcoal text-brand-white text-xs font-sans font-bold uppercase tracking-wider break-words max-w-full',
+        author ? author.display_name : 'Ktoś'));
+      if (isTarget) side.append(el('p', 'inline-block px-3 py-0.5 rounded-full bg-brand-orange text-brand-charcoal text-xs font-sans font-bold uppercase tracking-wider', 'Z linku'));
+
+      const main = el('div', 'flex-1 min-w-0');
+      main.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-widest text-brand-orange mb-1', 'Pytanie'));
+      main.append(el('h3', 'font-display font-semibold text-lg md:text-xl leading-snug whitespace-pre-wrap break-words', turn.question ?? ''));
+
+      const steps = Array.isArray(turn.steps) ? turn.steps : [];
+      if (steps.length) main.append(stepsBlock(steps));
+
+      const box = el('div', 'mt-5 rounded-2xl bg-brand-white p-5 md:p-6 shadow-sm');
+      box.append(el('p', 'font-sans font-semibold text-xs uppercase tracking-widest text-charcoal-500 mb-3', 'Odpowiedź HAL9000'));
+      const answer = el('div', 'answer font-sans text-base text-charcoal-900');
+      answer.innerHTML = markdown(turn.answer); // sanitized by DOMPurify
+      box.append(answer);
+      const sources = Array.isArray(turn.sources) ? turn.sources : [];
+      if (sources.length) box.append(sourceChips(sources));
+      main.append(box);
+      if (turn.usage) main.append(usageLine(turn.usage));
+
+      li.append(side, main);
+      return li;
+    }
+
+    function render(data, late) {
+      const turns = turnsOf(data);
+      const participants = data.participants && typeof data.participants === 'object' ? data.participants : {};
+      renderHero(data, turns);
+
+      const people = Object.values(participants).sort((a, b) => (b.is_host ? 1 : 0) - (a.is_host ? 1 : 0));
+      $('#participants-list').replaceChildren(...people.map(participantCard));
+      $('#turns-list').replaceChildren(...turns.map((x) => turnItem(x, participants)));
+      $('#turns-note').hidden = !late;
+
+      $('#state').hidden = true;
+      $('#participants').hidden = people.length === 0;
+      $('#turns').hidden = false;
+      $('#hero-divider').style.setProperty('--cloud-color', people.length ? 'var(--color-brand-amber)' : 'var(--color-brand-white)');
+
+      const target = t && document.getElementById('turn-' + t);
+      if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    }
+
+    if (window.marked && window.DOMPurify) load(); else showState('error');
+  });
+  </script>
+</body>
+</html>
