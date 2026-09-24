@@ -1,141 +1,60 @@
-export async function onRequestPost(context) {
-  const { request, env } = context;
+const SITE = 'patoarchitekci';
+const FORM = 'contact';
+const POLICY_URL = 'https://patoarchitekci.io/polityka-prywatnosci/';
+const RELAY_TIMEOUT_MS = 10000;
 
+const json = (body, status) => new Response(JSON.stringify(body), {
+  status,
+  headers: { 'Content-Type': 'application/json' }
+});
+
+const escapeHtml = (value) => value
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
+// Base64 of UTF-8 bytes (btoa alone breaks on Polish characters)
+const toBase64 = (text) => {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  return btoa(binary);
+};
+
+// Critical Pushover alert; never throws, never blocks the response
+async function sendAlert(env, stage, detail, submissionId) {
+  if (!env.PUSHOVER_TOKEN || !env.PUSHOVER_USER) {
+    console.error('[CONTACT] Pushover not configured, alert dropped:', stage, detail);
+    return;
+  }
   try {
-    console.log('[CONTACT] Request received');
-    const formData = await request.formData();
-
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone') || '';
-    const message = formData.get('message');
-    const consent = formData.get('consent');
-    const turnstileResponse = formData.get('cf-turnstile-response');
-
-    console.log('[CONTACT] Data:', { name, email, phone: phone ? 'present' : 'empty', message: message?.length, consent, turnstile: turnstileResponse ? 'present' : 'missing' });
-
-    // Validation
-    if (!name || !email || !message || consent !== 'true' || !turnstileResponse) {
-      console.error('[CONTACT] Missing required data');
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Brak wymaganych danych'
-      }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
-    // Server-side validation
-    const nameClean = name.trim();
-    const emailClean = email.trim().toLowerCase();
-    const phoneClean = phone.trim();
-    const messageClean = message.trim();
-
-    if (nameClean.length === 0 || nameClean.length > 100) {
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Nieprawidłowe imię'
-      }), { status: 400, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailClean) || emailClean.length > 255) {
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Nieprawidłowy adres email'
-      }), { status: 400, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    if (phoneClean.length > 0 && phoneClean.length < 9) {
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Nieprawidłowy numer telefonu'
-      }), { status: 400, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    if (messageClean.length < 10 || messageClean.length > 2000) {
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Wiadomość musi mieć od 10 do 2000 znaków'
-      }), { status: 400, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    // Verify Turnstile
-    console.log('[CONTACT] Verifying Turnstile...');
-    const turnstileVerify = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    const response = await fetch('https://api.pushover.net/1/messages.json', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        secret: env.TURNSTILE_SECRET,
-        response: turnstileResponse
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        token: env.PUSHOVER_TOKEN,
+        user: env.PUSHOVER_USER,
+        priority: '2',
+        retry: '60',
+        expire: '3600',
+        title: `[${SITE}] Formularz kontaktowy: błąd (${stage})`,
+        message: `site: ${SITE}\nform: ${FORM}\nsubmission_id: ${submissionId || '-'}\nstage: ${stage}\n${String(detail).slice(0, 800)}`
       })
     });
-
-    const turnstileResult = await turnstileVerify.json();
-    console.log('[CONTACT] Turnstile result:', turnstileResult.success);
-
-    if (!turnstileResult.success) {
-      console.error('[CONTACT] Turnstile verification failed');
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Weryfikacja antyspamowa nie powiodła się'
-      }), {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' }
-      });
+    if (!response.ok) {
+      console.error('[CONTACT] Pushover failed:', response.status, await response.text());
     }
+  } catch (error) {
+    console.error('[CONTACT] Pushover error:', error);
+  }
+}
 
-    // Get Microsoft Graph API token
-    console.log('[CONTACT] Getting MS Graph token...');
-    const tokenResponse = await fetch(
-      `https://login.microsoftonline.com/${env.MS_TENANT_ID}/oauth2/v2.0/token`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          client_id: env.MS_CLIENT_ID,
-          client_secret: env.MS_CLIENT_SECRET,
-          scope: 'https://graph.microsoft.com/.default',
-          grant_type: 'client_credentials'
-        })
-      }
-    );
-
-    const tokenData = await tokenResponse.json();
-
-    if (!tokenResponse.ok) {
-      console.error('[CONTACT] Failed to get token:', tokenData);
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Błąd autoryzacji'
-      }), { status: 500, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    const accessToken = tokenData.access_token;
-    console.log('[CONTACT] Token obtained');
-
-    const timestamp = new Date().toLocaleString('pl-PL', {
-      timeZone: 'Europe/Warsaw',
-      dateStyle: 'full',
-      timeStyle: 'short'
-    });
-
-    // Get email addresses from env
-    const salesEmail = env.CONTACT_SALES_EMAIL || 'sales@protopia.tech';
-    const podcastEmail = env.CONTACT_PODCAST_EMAIL || 'podcast@patoarchitekci.io';
-
-    console.log('[CONTACT] Sending to:', salesEmail, podcastEmail);
-
-    // EMAIL 1: To us (sales@protopia.tech + podcast@patoarchitekci.io)
-    console.log('[CONTACT] Sending email 1 (to us)...');
-    const email1Body = {
-      message: {
-        subject: `[KONTAKT] Nowa wiadomość od ${nameClean}`,
-        body: {
-          contentType: 'HTML',
-          content: `
-<!DOCTYPE html>
+function renderTeamEmail({ name, email, phone, message, timestamp }) {
+  const html = `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -150,59 +69,40 @@ export async function onRequestPost(context) {
 <body>
   <h2>🔔 Nowa wiadomość z formularza kontaktowego</h2>
 
-  <div class="field"><strong>Imię:</strong> ${nameClean}</div>
-  <div class="field"><strong>Email:</strong> <a href="mailto:${emailClean}">${emailClean}</a></div>
-  ${phoneClean ? `<div class="field"><strong>Telefon:</strong> <a href="tel:${phoneClean}">${phoneClean}</a></div>` : ''}
+  <div class="field"><strong>Imię:</strong> ${escapeHtml(name)}</div>
+  <div class="field"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></div>
+  ${phone ? `<div class="field"><strong>Telefon:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></div>` : ''}
 
   <h3>Wiadomość:</h3>
-  <p>${messageClean.replace(/\n/g, '<br>')}</p>
+  <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
 
   <hr>
   <p class="footer">Wysłano: ${timestamp}</p>
 </body>
 </html>
-`
-        },
-        toRecipients: [
-          { emailAddress: { address: salesEmail } },
-          { emailAddress: { address: podcastEmail } }
-        ]
-      },
-      saveToSentItems: true
-    };
+`;
+  const text = [
+    'Nowa wiadomość z formularza kontaktowego',
+    '',
+    `Imię: ${name}`,
+    `Email: ${email}`,
+    phone ? `Telefon: ${phone}` : null,
+    '',
+    'Wiadomość:',
+    message,
+    '',
+    `Wysłano: ${timestamp}`
+  ].filter((line) => line !== null).join('\n');
 
-    const sendEmail1 = await fetch(
-      `https://graph.microsoft.com/v1.0/users/${env.MS_USER_ID}/sendMail`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(email1Body)
-      }
-    );
+  return {
+    subject: `[KONTAKT] Nowa wiadomość od ${name}`,
+    html_b64: toBase64(html),
+    text_b64: toBase64(text)
+  };
+}
 
-    if (!sendEmail1.ok) {
-      const error1 = await sendEmail1.text();
-      console.error('[CONTACT] Failed to send email 1:', error1);
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Błąd podczas wysyłania wiadomości'
-      }), { status: 500, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    console.log('[CONTACT] Email 1 sent successfully');
-
-    // EMAIL 2: To client (with CC to us)
-    console.log('[CONTACT] Sending email 2 (to client with CC)...');
-    const email2Body = {
-      message: {
-        subject: 'Potwierdzenie - Otrzymaliśmy Twoją wiadomość',
-        body: {
-          contentType: 'HTML',
-          content: `
-<!DOCTYPE html>
+function renderSenderCopy({ name, message }) {
+  const html = `<!DOCTYPE html>
 <html>
 <head>
   <style>
@@ -217,13 +117,13 @@ export async function onRequestPost(context) {
 <body>
   <h2>Dziękujemy za kontakt! 🎉</h2>
 
-  <p>Cześć <strong>${nameClean}</strong>,</p>
+  <p>Cześć <strong>${escapeHtml(name)}</strong>,</p>
 
   <p>Otrzymaliśmy Twoją wiadomość i odpowiemy najszybciej jak to możliwe.</p>
 
   <h3>Kopia Twojej wiadomości:</h3>
   <div class="message-box">
-    ${messageClean.replace(/\n/g, '<br>')}
+    ${escapeHtml(message).replace(/\n/g, '<br>')}
   </div>
 
   <hr>
@@ -236,57 +136,172 @@ export async function onRequestPost(context) {
   </div>
 </body>
 </html>
-`
-        },
-        toRecipients: [
-          { emailAddress: { address: emailClean } }
-        ],
-        ccRecipients: [
-          { emailAddress: { address: salesEmail } },
-          { emailAddress: { address: podcastEmail } }
-        ]
-      },
-      saveToSentItems: true
-    };
+`;
+  const text = [
+    'Dziękujemy za kontakt!',
+    '',
+    `Cześć ${name},`,
+    '',
+    'Otrzymaliśmy Twoją wiadomość i odpowiemy najszybciej jak to możliwe.',
+    '',
+    'Kopia Twojej wiadomości:',
+    message,
+    '',
+    'Pozdrawiamy,',
+    'Zespół Patoarchitekci',
+    'https://patoarchitekci.io'
+  ].join('\n');
 
-    const sendEmail2 = await fetch(
-      `https://graph.microsoft.com/v1.0/users/${env.MS_USER_ID}/sendMail`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(email2Body)
-      }
-    );
+  return {
+    subject: 'Potwierdzenie - Otrzymaliśmy Twoją wiadomość',
+    html_b64: toBase64(html),
+    text_b64: toBase64(text)
+  };
+}
 
-    if (!sendEmail2.ok) {
-      const error2 = await sendEmail2.text();
-      console.error('[CONTACT] Failed to send email 2:', error2);
-      // Email 1 was sent successfully, so we still return success but log the error
-      console.warn('[CONTACT] Email 1 sent but email 2 failed - partial success');
-    } else {
-      console.log('[CONTACT] Email 2 sent successfully');
+export async function onRequestPost(context) {
+  const { request, env } = context;
+  const submissionId = crypto.randomUUID();
+  const alert = (stage, detail) => context.waitUntil(sendAlert(env, stage, detail, submissionId));
+
+  try {
+    console.log('[CONTACT] Request received', submissionId);
+    const formData = await request.formData();
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone') || '';
+    const message = formData.get('message');
+    const consent = formData.get('consent');
+    const turnstileResponse = formData.get('cf-turnstile-response');
+
+    // Validation
+    if (!name || !email || !message || consent !== 'true' || !turnstileResponse) {
+      return json({ success: false, error: 'Brak wymaganych danych' }, 400);
     }
 
-    console.log('[CONTACT] ✅ Success! Both emails sent');
-    return new Response(JSON.stringify({
+    const nameClean = name.trim();
+    const emailClean = email.trim().toLowerCase();
+    const phoneClean = phone.trim();
+    const messageClean = message.trim();
+
+    if (nameClean.length === 0 || nameClean.length > 100) {
+      return json({ success: false, error: 'Nieprawidłowe imię' }, 400);
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailClean) || emailClean.length > 255) {
+      return json({ success: false, error: 'Nieprawidłowy adres email' }, 400);
+    }
+
+    if (phoneClean.length > 0 && phoneClean.length < 9) {
+      return json({ success: false, error: 'Nieprawidłowy numer telefonu' }, 400);
+    }
+
+    if (messageClean.length < 10 || messageClean.length > 2000) {
+      return json({ success: false, error: 'Wiadomość musi mieć od 10 do 2000 znaków' }, 400);
+    }
+
+    // Verify Turnstile
+    let turnstileResult;
+    try {
+      const turnstileVerify = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET,
+          response: turnstileResponse
+        })
+      });
+      if (!turnstileVerify.ok) {
+        throw new Error(`siteverify HTTP ${turnstileVerify.status}`);
+      }
+      turnstileResult = await turnstileVerify.json();
+    } catch (error) {
+      console.error('[CONTACT] Turnstile siteverify error:', error);
+      alert('turnstile', error.message);
+      return json({ success: false, error: 'Błąd weryfikacji antyspamowej, spróbuj ponownie' }, 502);
+    }
+
+    if (!turnstileResult.success) {
+      console.error('[CONTACT] Turnstile verification failed', turnstileResult['error-codes']);
+      return json({ success: false, error: 'Weryfikacja antyspamowa nie powiodła się' }, 403);
+    }
+
+    if (!env.CONTACT_RELAY_URL || !env.CONTACT_RELAY_API_KEY) {
+      alert('config', 'Missing CONTACT_RELAY_URL or CONTACT_RELAY_API_KEY');
+      return json({ success: false, error: 'Błąd podczas wysyłania wiadomości' }, 500);
+    }
+
+    const timestamp = new Date().toLocaleString('pl-PL', {
+      timeZone: 'Europe/Warsaw',
+      dateStyle: 'full',
+      timeStyle: 'short'
+    });
+
+    const fields = { name: nameClean, email: emailClean, phone: phoneClean, message: messageClean, timestamp };
+
+    const payload = {
+      version: 1,
+      site: SITE,
+      form: FORM,
+      submission_id: submissionId,
+      submitted_at: new Date().toISOString(),
+      locale: 'pl',
+      sender: { name: nameClean, email: emailClean, phone: phoneClean || null },
+      emails: {
+        team: renderTeamEmail(fields),
+        sender_copy: renderSenderCopy(fields)
+      },
+      raw: {
+        message: messageClean,
+        consent: { privacy: true, policy_url: POLICY_URL }
+      },
+      context: {
+        page_url: request.headers.get('Referer') || null,
+        referer: request.headers.get('Referer') || null,
+        ip: request.headers.get('CF-Connecting-IP') || null,
+        country: request.headers.get('CF-IPCountry') || null,
+        user_agent: (request.headers.get('User-Agent') || '').slice(0, 255) || null
+      },
+      site_fields: {}
+    };
+
+    let relayResponse;
+    try {
+      relayResponse = await fetch(env.CONTACT_RELAY_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.CONTACT_RELAY_API_KEY}`,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': submissionId
+        },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(RELAY_TIMEOUT_MS)
+      });
+    } catch (error) {
+      console.error('[CONTACT] Relay network error:', error);
+      alert('relay-network', `${error.name}: ${error.message}`);
+      return json({ success: false, error: 'Błąd podczas wysyłania wiadomości' }, 502);
+    }
+
+    const relayText = await relayResponse.text();
+
+    if (relayResponse.status !== 200 && relayResponse.status !== 202) {
+      console.error('[CONTACT] Relay rejected:', relayResponse.status, relayText);
+      alert('relay-status', `HTTP ${relayResponse.status}: ${relayText.slice(0, 500)}`);
+      return json({ success: false, error: 'Błąd podczas wysyłania wiadomości' }, 502);
+    }
+
+    console.log('[CONTACT] Relay accepted:', relayResponse.status, relayText);
+    return json({
       success: true,
       message: 'Wiadomość została wysłana! Kopia została wysłana na Twój email.'
-    }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    }, 200);
 
   } catch (error) {
     console.error('[CONTACT] Error:', error);
-    return new Response(JSON.stringify({
-      success: false,
-      error: 'Wystąpił błąd serwera'
-    }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    alert('exception', error.stack || error.message);
+    return json({ success: false, error: 'Wystąpił błąd serwera' }, 500);
   }
 }
