@@ -2,20 +2,22 @@ id: "observability-stos-grafana"
 title: "Observability ze stosem Grafana"
 active: true
 featured: true
-waitlist_only: true
+waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
 tags:
   - "#Observability"
   - "#Grafana"
-  - "#Prometheus"
-  - "#Tempo"
-  - "#Loki"
   - "#OpenTelemetry"
-  - "#Monitoring"
-  - "#DevOps"
+  - "#Alloy"
+  - "#Prometheus"
+  - "#Loki"
+  - "#Tempo"
+  - "#Pyroscope"
+  - "#AI"
   - "#SRE"
+  - "#DevOps"
 
 # SEO i Schema.org
 image: ""
@@ -24,85 +26,98 @@ rating:
   value: 4.9
   count: 26
 teaches:
-  - "Różnice między monitorowaniem a observability - kluczowe koncepty"
-  - "Open Telemetry - standardowa instrumentacja aplikacji dla observability"
-  - "Prometheus - architektura, składnia PromQL, wdrożenia i dobre praktyki metryk"
-  - "Tempo - distributed tracing, architektura, składnia i integracja z innymi usługami"
-  - "Loki - architektura logów, składnia LogQL, korelacje z tracingiem"
-  - "Omówimy integrację całego stosu LGTM (Loki, Grafana, Tempo, Mimir/Prometheus)"
-  - "Open Telemetry w praktyce - omówimy instrumentację aplikacji i eksport danych"
-  - "Cost optimization - jak monitorować efektywnie bez rujnowania budżetu IT"
-audience: "Inżynierowie DevOps i SRE wdrażający open-source stos observability, którzy szukają potężnego systemu monitorowania bez kosztów licencyjnych"
+  - "Różnice między monitorowaniem a observability"
+  - "Cztery sygnały OpenTelemetry: logi, metryki, trace'y i profile"
+  - "Instrumentacja aplikacji z OpenTelemetry: ręczna, automatyczna i eBPF"
+  - "Kolektory: Alloy vs OpenTelemetry Collector, topologie i niezawodność"
+  - "Prometheus i PromQL, Loki i LogQL, Tempo i TraceQL"
+  - "Profilowanie ciągłe z Pyroscope"
+  - "Grafana Drilldown i adnotacje"
+  - "AI SRE: agent wpięty w observability przez MCP i weryfikacja jego diagnozy"
+audience: "Inżynierowie DevOps i SRE oraz architekci wdrażający albo rozważający wdrożenie open-source stosu observability, którzy szukają potężnego systemu monitorowania bez kosztów licencyjnych"
 
 # Treść
 description:
   - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodów. Jednak czy muszą być? To zależy."
-  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez zagrożenia bankructwa i bólu głowy z utrzymaniem. A o tego taki który ma szerokie użycie. Na szkoleniu omówimy czym jest observability i jak się w to wpisuje Open Telemetry. I to byłby koniec mojego mówienia, bo potem to już zaczynają się konkretne warsztaty."
+  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez zagrożenia bankructwa i bólu głowy z utrzymaniem. A do tego taki, który ma szerokie użycie. Na szkoleniu omówimy czym jest observability i jak się w to wpisuje Open Telemetry. I to byłby koniec mojego mówienia, bo potem to już zaczynają się konkretne warsztaty."
+  - "Nowość w tej edycji: kolektory dostają osobny moduł, profilowanie (Pyroscope) wraca do programu, a na koniec wpinamy agenta AI w observability i puszczamy go na prawdziwy incydent - razem z tym, jak sprawdzić, czy Wam nie kłamie."
   - "Jak zwykle - nie dla mięczaków :) A jakbyście po tym czuli głód dalszej wiedzy, to zapraszamy na inne szkolenia z monitoringu i observability: [Grafana Masterclass](/szkolenia/grafana-masterclass/), [Alerting w Grafanie](/szkolenia/grafana-alerting/), [Wykrywanie Anomalii](/szkolenia/wykrywanie-anomalii-prometheus-grafana/), [Profilowanie aplikacji z eBPF](/szkolenia/profilowanie-aplikacji-ebpf/)."
 
 skills:
   - "Monitorowanie vs observability - kluczowe różnice"
-  - "Czym jest i dla kogo jest Open Telemetry?"
-  - "Prometheus - metryki: architektura, składnia, wdrożenia, dobre praktyki i nie oczywiste możliwości ekosystemu Prometheus"
-  - "Tempo - tracing: jak działa, architektura, składnia, integracja"
-  - "Loki - logi: architektura, korelacje z tracingiem, dobre praktyki"
-  - "Integracja całego stosu LGTM (Loki, Grafana, Tempo, Mimir/Prometheus)"
-  - "Open Telemetry w praktyce - instrumentacja aplikacji - jakie są możliwści i jakie problemy tworzą"
-  - "Cost optimization - jak monitorować bez rujnowania budżetu"
+  - "Cztery sygnały OpenTelemetry: logi, metryki, trace'y i profile - na jakie pytania odpowiadają"
+  - "Instrumentacja aplikacji z OpenTelemetry - co daje, co po sobie zostawia i jakie są możliwości"
+  - "Kolektory: architektura, możliwości, Alloy vs OpenTelemetry Collector, topologie i niezawodność"
+  - "Prometheus - metryki: architektura, PromQL, kardynalność, ekosystem"
+  - "Loki - logi: architektura, etykiety, LogQL"
+  - "Tempo - tracing: jak działa, architektura, TraceQL"
+  - "Profilowanie ciągłe: Pyroscope"
+  - "Grafana Drilldown - eksploracja sygnałów bez pisania zapytań"
+  - "Adnotacje - zdarzenia (deploye, zmiany, awarie) na tle danych"
+  - "AI SRE - agent wpięty w observability przez MCP i weryfikacja tego, co odpowie"
+  - "Funkcje Grafany, które warto znać, a o których mało kto wie"
 
 modules:
   - number: 1
-    title: "Monitorowanie vs observability"
-    description: "Czym się różnią te pojęcia i dlaczego to ważne dla Twojej infrastruktury"
+    title: "Dzień 1 · OpenTelemetry: teoria"
+    description: "Monitorowanie vs observability, a potem cztery sygnały: logi, metryki, trace'y i profile. Na jakie pytania każdy z nich faktycznie odpowiada i jak OpenTelemetry spina je jednym modelem danych."
   - number: 2
-    title: "Czym jest i dla kogo jest Open Telemetry?"
-    description: "Standard, który zmienia sposób instrumentacji aplikacji"
+    title: "Dzień 1 · OpenTelemetry: instrumentacja aplikacji"
+    description: "Instrumentacja ręczna, automatyczna i eBPF - co daje każda z nich i co po sobie zostawia. Konwencje semantyczne i eksport danych do stosu Grafana. Praktyka: co i jak instrumentować."
   - number: 3
-    title: "Prometheus - metryki"
-    description: "Architektura i wynikające z tego ograniczenia, składnia PromQL, wdrożenia, dobre praktyki i nie oczywiste możliwości ekosystemu Prometheus"
+    title: "Dzień 1 · Kolektory"
+    description: "Model pipeline'ów, Alloy vs OpenTelemetry Collector, topologie na Kubernetesie, kolejki, retry i pamięć. Jak kolektor gubi dane po cichu, choć wszystko świeci na zielono. Praktyka: pierwszy pipeline, pułapka reloadu, ciche gubienie danych, monitoring."
   - number: 4
-    title: "Tempo - tracing"
-    description: "Jak działa distributed tracing, architektura, składnia, wdrożenia, integracja z innymi usługami"
+    title: "Dzień 1 · Prometheus: metryki"
+    description: "Architektura i wynikające z niej ograniczenia, PromQL, service discovery, recording rules, kardynalność, exportery. Teoria i praktyka PromQL."
   - number: 5
-    title: "Loki - logi"
-    description: "Architektura, składnia LogQL, korelacje z tracingiem, wdrożenia, dobre praktyki"
+    title: "Dzień 1 · Loki: logi"
+    description: "Architektura, tryby wdrożenia, etykiety i kardynalność strumieni, structured data, LogQL. Praktyka LogQL na początku dnia 2."
   - number: 6
-    title: "Integracja całego stosu"
-    description: "Jak połączyć Loki, Grafana, Tempo i Prometheus w jeden spójny system observability"
+    title: "Dzień 2 · Tempo: tracing"
+    description: "Jak działa distributed tracing, architektura Tempo, TraceQL, integracje z pozostałymi sygnałami. Teoria i praktyka TraceQL."
   - number: 7
-    title: "Użycie Open Telemetry w aplikacjach"
-    description: "Instrumentacja aplikacji, eksport danych do stosu Grafana"
+    title: "Dzień 2 · Profilowanie"
+    description: "Co mierzy profil i kiedy po niego sięgać. Flame graphy w Pyroscope. Teoria i praktyka."
   - number: 8
-    title: "Cost optimization"
-    description: "Jak monitorować efektywnie bez rujnowania budżetu IT"
+    title: "Dzień 2 · Grafana Drilldown"
+    description: "Eksploracja metryk, logów, trace'ów i profili bez pisania zapytań - i gdzie ta wygoda się kończy. Teoria i praktyka."
+  - number: 9
+    title: "Dzień 2 · Adnotacje"
+    description: "Deploye, zmiany konfiguracji i przełączenia flag jako zdarzenia na tle danych. Teoria i praktyka."
+  - number: 10
+    title: "Dzień 2 · AI SRE"
+    description: "Agent wpięty w observability przez MCP (Grafana, Tempo) na prawdziwym incydencie. Uczymy się nie tylko z nim pracować, ale też obalać albo potwierdzać jego diagnozę. Praktyka: incydent prowadzony przez agenta."
+  - number: 11
+    title: "Dzień 2 · Funkcje Grafany"
+    description: "Funkcje Grafany, które warto znać, a o których mało kto wie. Teoria i praktyka."
 benefits:
   - title: "Open Source bez kompromisów"
     description: "Potężny system monitorowania bez kosztów licencyjnych wielkich graczy"
-  - title: "Pełny stos LGTM"
-    description: "Loki, Grafana, Tempo, Prometheus - kompleksowe rozwiązanie observability"
-  - title: "Open Telemetry"
-    description: "Standardowa instrumentacja, która działa z każdym backendem"
-  - title: "Cost optimization"
-    description: "Skuteczne monitorowanie bez bankructwa - praktyczne techniki oszczędzania"
+  - title: "Pełny stos"
+    description: "Loki, Grafana, Tempo, Prometheus, Pyroscope - logi, metryki, trace'y i profile w jednym miejscu"
+  - title: "Open Telemetry i kolektory"
+    description: "Standardowa instrumentacja i warstwa zbierania, która działa z każdym backendem"
+  - title: "AI SRE"
+    description: "Agent wpięty w observability na prawdziwym incydencie - i umiejętność sprawdzenia, kiedy kłamie"
   - title: "Praktyczne warsztaty"
-    description: "80% czasu to konkretne ćwiczenia - nie dla mięczaków"
+    description: "Ponad połowa czasu to ćwiczenia na żywym klastrze - nie dla mięczaków"
 
 # Organizacja
-price_net: 2275.61
-price_gross: 2799.00
+price_net: 3089.42
+price_gross: 3799.99
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
 
 dates:
-  - "2026-03-02"
-  - "2026-03-03"
-  - "2026-03-04"
-time: "9:00 – 13:00"
+  - "2026-12-07"
+  - "2026-12-08"
+time: "9:00 – 17:00"
 
 location:
   type: "online"
   platform: "Microsoft Teams"
-  details: "3 spotkania po 4 godziny"
+  details: "2 dni warsztatów po 7 godzin"
 
 participants:
   max: 12
@@ -119,13 +134,13 @@ faq:
   - question: "Czy muszę znać Grafanę wcześniej?"
     answer: "Podstawowa znajomość Grafany będzie pomocna, ale nie jest wymagana. Skupiamy się na całym stosie observability."
   - question: "Czy omówimy tylko Open Source narzędzia?"
-    answer: "Tak, skupiamy się na stosie Grafana Labs (Loki, Grafana, Tempo, Prometheus/Mimir) jako alternatywę dla drogich rozwiązań komercyjnych."
+    answer: "Tak, skupiamy się na stosie Grafana Labs (Loki, Grafana, Tempo, Prometheus/Mimir, Pyroscope) jako alternatywie dla drogich rozwiązań komercyjnych."
   - question: "Czy nauczę się instrumentować aplikacje z Open Telemetry?"
-    answer: "Pokażemy jakie są możliwości instrumentacji aplikacji z Open Telemetry, jak eksportować dane i jaka jest rola Open Telemetry Collectora. Nie będziemy jednak dodawać instrumentacji do aplikacji (bo to jest bardzo łatwe)."
+    answer: "Tak - moduł 2 to praktyka instrumentacji: ręczna, automatyczna i eBPF, plus eksport danych do stosu Grafana."
   - question: "Czy to szkolenie pokrywa koszty monitoringu?"
-    answer: "Tak, omówimy cost optimization - jak skutecznie monitorować bez rujnowania budżetu IT."
+    answer: "Tak. Koszt omawiamy tam, gdzie realnie powstaje - przy kolektorach, kardynalności i retencji."
   - question: "Jakie narzędzia będą zainstalowane w środowisku warsztatowym?"
-    answer: "Pełny stos LGTM: Loki (logi), Grafana (wizualizacja), Tempo (tracing), Prometheus/Mimir (metryki) plus Open Telemetry Collector w formie Grafana Alloy."
+    answer: "Pełny stos: Loki (logi), Grafana (wizualizacja), Tempo (tracing), Prometheus/Mimir (metryki), Pyroscope, Grafana Alloy jako kolektor. Do modułu AI SRE - serwery MCP dla Grafany i Tempo."
 
 # Meta dla Hugo
 layout: "training"
