@@ -39,10 +39,10 @@ audience: "Inżynierowie DevOps i SRE oraz architekci wdrażający albo rozważa
 
 # Treść
 description:
-  - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodów. Jednak czy muszą być? To zależy."
-  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez zagrożenia bankructwa i bólu głowy z utrzymaniem. A do tego taki, który ma szerokie użycie. Na szkoleniu omówimy czym jest observability i jak się w to wpisuje Open Telemetry. I to byłby koniec mojego mówienia, bo potem to już zaczynają się konkretne warsztaty."
-  - "Nowość w tej edycji: kolektory dostają osobny moduł, profilowanie (Pyroscope) wraca do programu, a na koniec wpinamy agenta AI w observability i puszczamy go na prawdziwy incydent - razem z tym, jak sprawdzić, czy Wam nie kłamie."
-  - "Jak zwykle - nie dla mięczaków :) A jakbyście po tym czuli głód dalszej wiedzy, to zapraszamy na inne szkolenia z monitoringu i observability: [Grafana Masterclass](/szkolenia/grafana-masterclass/), [Alerting w Grafanie](/szkolenia/grafana-alerting/), [Wykrywanie Anomalii](/szkolenia/wykrywanie-anomalii-prometheus-grafana/), [Profilowanie aplikacji z eBPF](/szkolenia/profilowanie-aplikacji-ebpf/)."
+  - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie, czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodu. Ale czy muszą być? To zależy."
+  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez ryzyka bankructwa i bez bólu głowy z utrzymaniem. Do tego taki, który jest szeroko używany. Na szkoleniu omówimy, czym jest observability i gdzie w tym wszystkim jest OpenTelemetry. Teorii jest tyle, ile trzeba - resztę czasu robimy na warsztatach."
+  - "Nowość w tej edycji: kolektory dostają osobny moduł, wraca profilowanie z Pyroscope, a na koniec wpinamy agenta AI w observability i puszczamy go na prawdziwy incydent. Pokażemy też, jak sprawdzić, czy agent Was nie okłamuje."
+  - "Jak zwykle - nie dla mięczaków :)"
 
 skills:
   - "Monitorowanie vs observability - kluczowe różnice"
