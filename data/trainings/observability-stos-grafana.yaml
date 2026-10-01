@@ -40,8 +40,10 @@ audience: "Inżynierowie DevOps i SRE oraz architekci wdrażający albo rozważa
 # Treść
 description:
   - "Znacie ten dowcip: 'Cisco przelało Splunkowi 150 mln dolarów. Nikt nie wie, czy chcieli ich kupić, czy tylko opłacić swój rachunek'? Wiecie, czemu jest śmieszny? Bo jest prawdziwy - narzędzia do monitorowania są DROGIE. I nie bez powodu. Ale czy muszą być? To zależy."
-  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez ryzyka bankructwa i bez bólu głowy z utrzymaniem. Do tego taki, który jest szeroko używany. Na szkoleniu omówimy, czym jest observability i gdzie w tym wszystkim jest OpenTelemetry. Teorii jest tyle, ile trzeba - resztę czasu robimy na warsztatach."
-  - "Nowość w tej edycji: kolektory dostają osobny moduł, wraca profilowanie z Pyroscope, a na koniec wpinamy agenta AI w observability i puszczamy go na prawdziwy incydent. Pokażemy też, jak sprawdzić, czy agent Was nie okłamuje."
+  - "Grafana Labs udowadnia, że można mieć potężny system monitorowania bez ryzyka bankructwa. Na szkoleniu budujemy go od początku do końca: instrumentacja z OpenTelemetry, kolektory, Prometheus, Loki, Tempo i Pyroscope - logi, metryki, trace'y i profile w jednym stosie."
+  - "Ta edycja jest przebudowana pod pracę z AI. Zapytania w PromQL, LogQL czy TraceQL pisze dziś model, więc nie wkuwamy składni. Skupiamy się na tym, czego model za Was nie zrobi: na jakie pytania odpowiada każdy sygnał, jak czytać zapytania i jak je krytykować."
+  - "Kolektory dostają osobny moduł: Alloy vs OpenTelemetry Collector, topologie na Kubernetesie i to, jak kolektor gubi dane po cichu, choć wszystko świeci na zielono."
+  - "Na koniec wpinamy agenta AI w observability przez MCP i puszczamy go na prawdziwy incydent. Uczycie się nie tylko z nim pracować, ale też obalać albo potwierdzać jego diagnozę - bo agent mówi pewnie także wtedy, kiedy się myli."
   - "Jak zwykle - nie dla mięczaków :)"
 
 skills:
