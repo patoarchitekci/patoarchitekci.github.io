@@ -6,6 +6,7 @@ waitlist_only: false
 
 # Prowadzący i meta
 instructor: "Szymon Warda"
+instructor_id: "szymon-warda"
 tags:
   - "#Observability"
   - "#Grafana"
@@ -108,11 +109,14 @@ price_net: 3089.42
 price_gross: 3799.99
 currency: "PLN"
 purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
+product_id: "prod_TEA06WG0HrD0yc"
 
 dates:
   - "2026-12-07"
   - "2026-12-08"
 time: "9:00 – 17:00"
+start_time: "09:00"
+end_time: "17:00"
 
 location:
   type: "online"
