@@ -1,0 +1,32 @@
+id: "ai-coding-devops"
+title: "Anty-Vibe Coding — AI Coding dla DevOps/Ops"
+active: true
+featured: false
+waitlist_only: false
+hidden: true
+
+instructor: "Łukasz Kałużny"
+instructor_id: "lukasz-kaluzny"
+
+price_net: 0
+price_gross: 0
+currency: "PLN"
+purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/ai-coding-devops"
+product_id: "prod_VNB3J7UcuycWjl"
+
+dates:
+  - "2026-11-21"
+time: "9:00 – 17:00"
+start_time: "09:00"
+end_time: "17:00"
+
+location:
+  type: "stacjonarnie"
+  platform: "Warszawa"
+  address: "Nowogrodzka 62B/22, 02-014 Warszawa"
+
+participants:
+  max: 10
+
+layout: "training"
+type: "training"
