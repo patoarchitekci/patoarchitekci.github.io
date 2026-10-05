@@ -40,6 +40,10 @@ export async function onRequestGet(context) {
       if (match) {
         remaining = parseInt(match[1], 10);
         source = 'live';
+      } else if (html.includes('"prices":[]')) {
+        // Sold out: easy.tools renders no purchasable variants, so no quantity field.
+        remaining = 0;
+        source = 'live';
       } else {
         console.error('[tickets-left] quantity pattern not found:', type, slug);
       }

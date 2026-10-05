@@ -34,6 +34,8 @@ CONFERENCE_SLUG = "konferencja-pato-200"
 
 # Mirrors the parser in functions/api/tickets-left.js
 QUANTITY_RE = re.compile(r'"has_quantity":true,"quantity":(\d+)')
+# A sold-out product renders with no purchasable variants (no quantity field).
+SOLD_OUT_RE = re.compile(r'"prices":\[\]')
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 SPAN_RE = re.compile(r"(<span data-tickets-left>)\d+(</span>)")
 
@@ -82,6 +84,8 @@ def fetch_remaining(slug):
         print(f"  ! non-OK ({res.status_code}) for {slug}", file=sys.stderr)
         return None
     match = QUANTITY_RE.search(res.text)
+    if not match and SOLD_OUT_RE.search(res.text):
+        return 0
     if not match:
         print(f"  ! quantity pattern not found for {slug}", file=sys.stderr)
         return None
