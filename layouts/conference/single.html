@@ -1,0 +1,527 @@
+{{ define "header" }}
+  {{ partial "header-dark.html" . }}
+{{ end }}
+
+{{ define "main" }}
+
+  <!-- ===== SEKCJA 1: HERO ===== -->
+  <section id="hero" class="bg-dark-black relative overflow-hidden">
+    <div class="max-w-[1200px] mx-auto px-[30px] pt-16 sm:pt-20 lg:pt-28 pb-20 sm:pb-28 lg:pb-36">
+      <!-- Eyebrow tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-6 sm:mb-8">
+        16 CZERWCA 2026 | WARSZAWA, Q22 SKYHALL
+      </p>
+
+      <!-- Headline -->
+      <h1 class="font-tomorrow font-semibold text-white uppercase text-4xl sm:text-5xl lg:text-custom-6xl !leading-100 mb-6 sm:mb-8">
+        Odcinek #200.<br />
+        Tym razem na żywo.
+      </h1>
+
+      <!-- Subhead -->
+      <p class="text-grey text-sm sm:text-base lg:text-lg !leading-150 max-w-[700px] mb-10 sm:mb-12">
+        Dwusetny odcinek naszego show. Tudzież miernego stand-upu, jak niektórzy komentowali. Architektura, chmura, AI i narzekanie na legacy - tym razem na żywo w Warszawie, z prelekcjami i nagraniem #200.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4 sm:gap-6 mb-10 sm:mb-14">
+        <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200" target="_blank"
+          class="bg-orange text-white font-semibold text-sm sm:text-base uppercase py-3 sm:py-4 px-8 sm:px-10 rounded-full hover:bg-white hover:text-dark-black transition-all duration-300">
+          KUP BILET
+        </a>
+        <a href="#agenda"
+          class="border-2 border-white text-white font-semibold text-sm sm:text-base uppercase py-3 sm:py-4 px-8 sm:px-10 rounded-full hover:bg-white hover:text-dark-black transition-all duration-300">
+          ZOBACZ AGENDĘ
+        </a>
+      </div>
+
+      <!-- Meta info -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-white text-xs sm:text-sm">
+        <div>
+          <span class="text-orange font-semibold uppercase block mb-1">Data</span>
+          16 czerwca 2026
+        </div>
+        <div>
+          <span class="text-orange font-semibold uppercase block mb-1">Miejsce</span>
+          Q22 SkyHall, Warszawa
+        </div>
+        <div>
+          <span class="text-orange font-semibold uppercase block mb-1">Godziny</span>
+          8:00 - 17:00
+        </div>
+        <div>
+          <span class="text-orange font-semibold uppercase block mb-1">Format</span>
+          Keynote + prelekcje + #200 live
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative elements -->
+    <img src="{{ .Site.BaseURL }}img/svg/top-right-ellipse.svg" alt=""
+      class="absolute top-[10%] right-[5%] size-[60px] lg:size-[105px] animate-float2 opacity-30 pointer-events-none max-md:hidden" />
+    <img src="{{ .Site.BaseURL }}img/svg/bottom-left-ellipse.svg" alt=""
+      class="absolute bottom-[15%] left-[5%] size-[60px] lg:size-[105px] animate-float2 opacity-30 pointer-events-none max-md:hidden" />
+  </section>
+
+  <!-- ===== SEKCJA 2: O WYDARZENIU ===== -->
+  <section id="o-wydarzeniu" class="bg-dark-black border-t border-white/10">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-16 sm:py-20 lg:py-28">
+      <!-- Tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        O WYDARZENIU
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-white uppercase text-3xl sm:text-4xl lg:text-custom-4xl !leading-110 mb-8 sm:mb-12">
+        Konferencja, nie meetup.
+      </h2>
+
+      <!-- Body text -->
+      <div class="text-grey text-sm sm:text-base !leading-180 max-w-[850px] space-y-6 mb-12 sm:mb-16">
+        <p>
+          Dwusetka wypada w czerwcu. Zamiast nagrać kolejny odcinek z domowego biura, robimy z tego całodniowy event. 200 osób, jedna sala, zero równoległych tracków - bo jak gadamy, to gadamy do wszystkich.
+        </p>
+        <p>
+          Szybki keynote na otwarcie - krótszy niż nasze przynudzanie w intro, obiecujemy. Potem prelekcje - nasze i zaproszonych gości, których cytujemy w co trzecim odcinku i których blogi linkujemy od lat. Na koniec nagranie odcinka #200 jako panel dyskusyjny z Q&A od was. Bez cięć, bez cenzury, ze wszystkimi przejęzyczeniami.
+        </p>
+        <p>
+          Sponsor? Protopia, czyli my. Nasza firma, nasz event. Nie będzie prelekcji o produkcie, który "zmienia reguły gry". Nie będzie panelu "AI w enterprise - wyzwania i szanse". Będzie to, co robimy od 2019 - konkret o architekturze, chmurze i AI. Tylko tym razem nie przez słuchawki.
+        </p>
+      </div>
+
+      <!-- Three feature blocks -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+        <div class="border-t-2 border-orange pt-6">
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Merytoryka, nie marketing
+          </h3>
+          <p class="text-grey text-sm sm:text-base !leading-150">
+            Prelegenci, którzy budują systemy, a nie slajdy. Tematy z praktyki, nie z roadmapy vendora.
+          </p>
+        </div>
+        <div class="border-t-2 border-orange pt-6">
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Community, nie audience
+          </h3>
+          <p class="text-grey text-sm sm:text-base !leading-150">
+            Słuchacie nas od lat. Discord to za mało. Czas pogadać normalnie, przy kawie, twarzą w twarz.
+          </p>
+        </div>
+        <div class="border-t-2 border-orange pt-6">
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Jeden dzień, jeden track
+          </h3>
+          <p class="text-grey text-sm sm:text-base !leading-150">
+            Bez wybierania "sala A czy sala B". Wszyscy w jednym miejscu, od keynote'a po nagranie #200.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 3: LICZBY ===== -->
+  <section id="liczby" class="bg-orange">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-16 sm:py-20 lg:py-24">
+      <!-- Tag -->
+      <p class="text-dark-black uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        PATOARCHITEKCI W LICZBACH
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-dark-black uppercase text-2xl sm:text-3xl lg:text-custom-4xl !leading-110 mb-12 sm:mb-16">
+        Od sierpnia 2019 do dzisiaj.
+      </h2>
+
+      <!-- Stats grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+        <div>
+          <span class="font-tomorrow font-bold text-white text-6xl sm:text-7xl lg:text-8xl !leading-100 block mb-2">200</span>
+          <p class="text-dark-black font-medium text-sm sm:text-base">odcinków podcastu</p>
+        </div>
+        <div>
+          <span class="font-tomorrow font-bold text-white text-6xl sm:text-7xl lg:text-8xl !leading-100 block mb-2">7</span>
+          <p class="text-dark-black font-medium text-sm sm:text-base">lat na antenie</p>
+        </div>
+        <div>
+          <span class="font-tomorrow font-bold text-white text-6xl sm:text-7xl lg:text-8xl !leading-100 block mb-2">2</span>
+          <p class="text-dark-black font-medium text-sm sm:text-base">prowadzących, którzy się jeszcze nie pozabijali</p>
+        </div>
+        <div>
+          <span class="font-tomorrow font-bold text-white text-6xl sm:text-7xl lg:text-8xl !leading-100 block mb-2">1</span>
+          <p class="text-dark-black font-medium text-sm sm:text-base">dzień konferencji, żeby to uczcić</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 4: AGENDA ===== -->
+  <section id="agenda" class="bg-dark-black">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-16 sm:py-20 lg:py-28">
+      <!-- Tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        AGENDA
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-white uppercase text-2xl sm:text-3xl lg:text-custom-4xl !leading-110 mb-12 sm:mb-16">
+        Plan dnia. Bez "sesji networkingowej<br class="max-sm:hidden" /> z elementami creative thinkingu".
+      </h2>
+
+      <!-- Schedule -->
+      <div class="space-y-0">
+        <!-- Item -->
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">08:00 - 09:00</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Rejestracja + kawa</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Godzina na ogarnięcie się, kawę i networking na dzień dobry.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">09:00 - 09:30</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Keynote otwierający</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Łukasz Kałużny & Szymon Warda. Szybko, konkretnie, bez przynudzania. Co widzieliśmy, co się zmieniło, co nas zaskoczyło.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">09:40 - 10:20</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Prelekcja: Oskar Dudycz</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Event-Driven nie tylko w teorii. Praktyka, którą cytujemy w co trzecim odcinku.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">10:20 - 10:50</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Przerwa + networking</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Kawa, rozmowy, narzekanie na legacy.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">10:50 - 11:30</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Prelekcja: Mariusz Gil</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Architektura i DDD z perspektywy kogoś, kto to naprawdę robi, a nie tylko o tym mówi.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">11:40 - 12:20</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Prelekcja: TBA</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Kolejny prelegent - ogłosimy wkrótce.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">12:20 - 13:20</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Lunch</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Jedzenie i budowanie koalicji. Jak w brownfieldzie - 80% sukcesu to ludzie.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">13:20 - 14:00</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Prelekcja: Łukasz Kałużny</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Temat TBA - ale będzie o tym co boli, nie o tym co ładnie wygląda na slajdach.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">14:00 - 14:20</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Networking</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Czas na rozmowy i kawę przed ostatnią prostą.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">14:20 - 15:00</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Prelekcja: Szymon Warda</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Temat TBA - coś, co was albo zainspiruje, albo przestraszy. Prawdopodobnie jedno i drugie.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-t border-orange/50 border-b border-b-orange/50 py-5 sm:py-6 gap-1 sm:gap-8 bg-orange/5">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">15:10 - 16:30</span>
+          <div>
+            <h3 class="text-orange font-semibold text-base sm:text-lg">Nagranie #200 LIVE</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Panel dyskusyjny + Q&A od widzów. Odcinek dwusetny nagrywany na żywo - bez cięć, bez cenzury, ze wszystkimi przejęzyczeniami.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row border-b border-white/20 py-5 sm:py-6 gap-1 sm:gap-8">
+          <span class="text-orange font-semibold text-sm sm:text-base sm:min-w-[140px] shrink-0">16:30</span>
+          <div>
+            <h3 class="text-white font-semibold text-base sm:text-lg">Zamknięcie + networking</h3>
+            <p class="text-grey text-sm !leading-150 mt-1">Nie uciekajcie od razu. Najlepsze rozmowy dzieją się po konferencji.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="text-lightGray text-xs sm:text-sm mt-8 italic">
+        Agenda może się zmienić. Prelegenci mogą się pojawić. Lista nie jest zamknięta.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 5: PRELEGENCI ===== -->
+  <section id="prelegenci" class="bg-dark-black border-t border-white/10">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-16 sm:py-20 lg:py-28">
+      <!-- Tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        PRELEGENCI
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-white uppercase text-2xl sm:text-3xl lg:text-custom-4xl !leading-110 mb-12 sm:mb-16">
+        Ludzie, którzy wiedzą o czym mówią.<br class="max-sm:hidden" /> Bo to robią.
+      </h2>
+
+      <!-- Speaker cards -->
+      <div class="grid sm:grid-cols-2 gap-8 sm:gap-10">
+        <!-- Łukasz Kałużny -->
+        <div class="border border-white/20 rounded-[20px] p-6 sm:p-8">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="size-16 sm:size-20 rounded-full bg-orange flex items-center justify-center shrink-0">
+              <span class="font-tomorrow font-bold text-white text-xl sm:text-2xl">ŁK</span>
+            </div>
+            <div>
+              <h3 class="font-tomorrow font-semibold text-white text-lg sm:text-xl uppercase">Łukasz Kałużny</h3>
+              <p class="text-orange text-sm">Host Patoarchitektów | Managing Partner, Protopia</p>
+            </div>
+          </div>
+          <p class="text-grey text-sm !leading-150">
+            Azure, Kubernetes, AI - od sprzątania brownfieldów po budowę agentów. Popędza agenty AI i robi to publicznie. Jak sam mówi: "Jak nie kontrolujesz ruchu wychodzącego, jesteś wystawiony dupą do świata."
+          </p>
+        </div>
+
+        <!-- Szymon Warda -->
+        <div class="border border-white/20 rounded-[20px] p-6 sm:p-8">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="size-16 sm:size-20 rounded-full bg-orange flex items-center justify-center shrink-0">
+              <span class="font-tomorrow font-bold text-white text-xl sm:text-2xl">SW</span>
+            </div>
+            <div>
+              <h3 class="font-tomorrow font-semibold text-white text-lg sm:text-xl uppercase">Szymon Warda</h3>
+              <p class="text-orange text-sm">Host Patoarchitektów | Managing Partner, Protopia</p>
+            </div>
+          </div>
+          <p class="text-grey text-sm !leading-150">
+            Observability, systemy rozproszone, performance. Twierdzi, że subskrybenci mają o 30% wyższą spójność w systemach rozproszonych. Szkolenia z Grafany i eBPF, a prywatnie - pogromca kosmicznych kosztów w chmurze.
+          </p>
+        </div>
+
+        <!-- Oskar Dudycz -->
+        <div class="border border-white/20 rounded-[20px] p-6 sm:p-8">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="size-16 sm:size-20 rounded-full bg-orange flex items-center justify-center shrink-0">
+              <span class="font-tomorrow font-bold text-white text-xl sm:text-2xl">OD</span>
+            </div>
+            <div>
+              <h3 class="font-tomorrow font-semibold text-white text-lg sm:text-xl uppercase">Oskar Dudycz</h3>
+              <p class="text-orange text-sm">Event-Driven Systems</p>
+            </div>
+          </div>
+          <p class="text-grey text-sm !leading-150">
+            Praktyk event sourcingu i event-driven architecture. Jego blog cytujemy tak często w podcaście, że powinien dostawać tantiemy.
+          </p>
+        </div>
+
+        <!-- Mariusz Gil -->
+        <div class="border border-white/20 rounded-[20px] p-6 sm:p-8">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="size-16 sm:size-20 rounded-full bg-orange flex items-center justify-center shrink-0">
+              <span class="font-tomorrow font-bold text-white text-xl sm:text-2xl">MG</span>
+            </div>
+            <div>
+              <h3 class="font-tomorrow font-semibold text-white text-lg sm:text-xl uppercase">Mariusz Gil</h3>
+              <p class="text-orange text-sm">Software Architecture & DDD</p>
+            </div>
+          </div>
+          <p class="text-grey text-sm !leading-150">
+            Architektura oprogramowania i Domain-Driven Design w praktyce. Nie-teoretyk. Prowadzi warsztaty, które zmieniają sposób myślenia o systemach. Jeden z tych ludzi, po których prelekcji wracasz do kodu z innym podejściem.
+          </p>
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="text-lightGray text-xs sm:text-sm mt-8 italic">
+        To nie jest zamknięta lista. Kolejni prelegenci zostaną ogłoszeni.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 6: DLA KOGO ===== -->
+  <section id="dla-kogo" class="bg-orange">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-16 sm:py-20 lg:py-24">
+      <!-- Tag -->
+      <p class="text-dark-black uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        DLA KOGO
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-dark-black uppercase text-2xl sm:text-3xl lg:text-custom-4xl !leading-110 mb-12 sm:mb-16">
+        Jeśli się tu znalazłeś,<br class="max-sm:hidden" /> pewnie jesteś we właściwym miejscu.
+      </h2>
+
+      <!-- Audience segments -->
+      <div class="grid sm:grid-cols-2 gap-8 sm:gap-10">
+        <div>
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Architektów i Senior Developerów
+          </h3>
+          <p class="text-dark-black font-medium text-sm sm:text-base !leading-150">
+            Którzy projektują systemy, a nie tylko piszą kod. Chcesz posłuchać ludzi, którzy sprzątają po decyzjach architektonicznych - nie tych, którzy rysują diagramy na konferencjach.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Team Leadów i Engineering Managerów
+          </h3>
+          <p class="text-dark-black font-medium text-sm sm:text-base !leading-150">
+            Którzy codziennie balansują między długiem technicznym a priorytetami biznesu. Bo jak wiemy - "biznes z projektem technicznym zawsze wygra" - ale można grać mądrzej.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            DevOps / Platform Engineers
+          </h3>
+          <p class="text-dark-black font-medium text-sm sm:text-base !leading-150">
+            Którzy budują i utrzymują platformy. Od Kubernetesa po observability, od IaC po cost management. Łukasz i Szymon mówią waszym językiem, bo to robią na co dzień.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-tomorrow font-semibold text-white uppercase text-lg sm:text-xl mb-3">
+            Ludzi, którzy słuchają Pato
+          </h3>
+          <p class="text-dark-black font-medium text-sm sm:text-base !leading-150">
+            I chcą w końcu spotkać się z community twarzą w twarz. Bo Discord to za mało.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 7: BILETY ===== -->
+  <section id="bilety" class="bg-dark-black">
+    <div class="max-w-[800px] mx-auto px-[30px] py-16 sm:py-20 lg:py-28 text-center">
+      <!-- Tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        BILETY
+      </p>
+
+      <!-- Headline -->
+      <h2 class="font-tomorrow font-semibold text-white uppercase text-2xl sm:text-3xl lg:text-custom-4xl !leading-110 mb-6 sm:mb-8">
+        Bez early bird, bez late bird.<br /> Jedna cena, zero bullshitu.
+      </h2>
+
+      <!-- Description -->
+      <p class="text-grey text-sm sm:text-base !leading-150 mb-10">
+        Bilet obejmuje dostęp do całego dnia konferencji, lunch, kawę, nagranie #200 live i networking. Żadnych ukrytych kosztów, żadnych tierów "gold/silver/bronze".
+      </p>
+
+      <!-- What you get -->
+      <ul class="text-white text-left max-w-[500px] mx-auto space-y-3 mb-10 sm:mb-12">
+        <li class="flex items-start gap-3">
+          <span class="text-orange mt-0.5">&#10003;</span>
+          <span class="text-sm sm:text-base">Keynote otwierający + wszystkie prelekcje</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-orange mt-0.5">&#10003;</span>
+          <span class="text-sm sm:text-base">Lunch i przerwy kawowe w cenie</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-orange mt-0.5">&#10003;</span>
+          <span class="text-sm sm:text-base">Nagranie odcinka #200 na żywo z Q&A</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-orange mt-0.5">&#10003;</span>
+          <span class="text-sm sm:text-base">Networking z community Patoarchitektów</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-orange mt-0.5">&#10003;</span>
+          <span class="text-sm sm:text-base">Możliwość zadania pytania na żywo</span>
+        </li>
+      </ul>
+
+      <!-- CTA -->
+      <a href="https://cart.easy.tools/checkout/patoarchitekci/konferencja-pato-200" target="_blank"
+        class="inline-block bg-orange text-white font-semibold text-base sm:text-lg uppercase py-4 px-12 sm:px-16 rounded-full hover:bg-white hover:text-dark-black transition-all duration-300">
+        KUP BILET
+      </a>
+
+      <!-- Small text -->
+      <p class="text-lightGray text-xs sm:text-sm mt-6">
+        16 czerwca 2026 | Q22 SkyHall, Warszawa | 8:00-17:00
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 8: SPONSOR ===== -->
+  <section id="partner" class="bg-dark-black border-t border-white/10">
+    <div class="max-w-[800px] mx-auto px-[30px] py-16 sm:py-20 text-center">
+      <!-- Tag -->
+      <p class="text-orange uppercase text-xs sm:text-sm font-semibold tracking-wider mb-4">
+        PARTNER
+      </p>
+
+      <!-- Name -->
+      <h2 class="font-tomorrow font-semibold text-white uppercase text-2xl sm:text-3xl !leading-110 mb-6">
+        Protopia
+      </h2>
+
+      <!-- Description -->
+      <p class="text-grey text-sm sm:text-base !leading-150 mb-6">
+        Rozwiązujemy problemy z cloud i AI. Firma Łukasza i Szymona - ci sami ludzie, ten sam styl. Konsulting, szkolenia, wdrożenia. Bez buzzwordów, bez slajdów z transformacją cyfrową.
+      </p>
+
+      <!-- Link -->
+      <a href="https://protopia.tech" target="_blank"
+        class="inline-block border-2 border-white text-white font-semibold text-sm uppercase py-3 px-8 rounded-full hover:bg-white hover:text-dark-black transition-all duration-300">
+        protopia.tech
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== SEKCJA 9: CONFERENCE FOOTER ===== -->
+  <section class="bg-dark-black border-t border-white/10">
+    <div class="max-w-[1200px] mx-auto px-[30px] py-12 sm:py-16">
+      <div class="flex flex-col sm:flex-row justify-between gap-8">
+        <div>
+          <p class="text-white font-semibold text-sm uppercase mb-2">Organizator</p>
+          <p class="text-grey text-sm">Patoarchitekci | <a href="https://patoarchitekci.io" class="text-orange hover:text-white transition-colors duration-200">patoarchitekci.io</a></p>
+        </div>
+        <div>
+          <p class="text-white font-semibold text-sm uppercase mb-2">Partner</p>
+          <p class="text-grey text-sm">Protopia | <a href="https://protopia.tech" target="_blank" class="text-orange hover:text-white transition-colors duration-200">protopia.tech</a></p>
+        </div>
+        <div>
+          <p class="text-white font-semibold text-sm uppercase mb-2">Linki</p>
+          <ul class="text-grey text-sm space-y-1">
+            <li><a href="{{ .Site.Params.social.discord }}" class="text-orange hover:text-white transition-colors duration-200">Discord Patoarchitektów</a></li>
+            <li><a href="{{ .Site.Params.podcast.youtube }}" class="text-orange hover:text-white transition-colors duration-200">YouTube</a></li>
+            <li><a href="{{ .Site.Params.podcast.spotify }}" class="text-orange hover:text-white transition-colors duration-200">Spotify</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-white font-semibold text-sm uppercase mb-2">Kontakt</p>
+          <p class="text-grey text-sm"><a href="mailto:cooperation@protopia.tech" class="text-orange hover:text-white transition-colors duration-200">cooperation@protopia.tech</a></p>
+        </div>
+      </div>
+      <p class="text-lightGray text-xs mt-8 pt-6 border-t border-white/10">
+        &copy; 2026 Patoarchitekci. Wszystkie prawa zastrzeżone.
+      </p>
+    </div>
+  </section>
+
+{{ end }}

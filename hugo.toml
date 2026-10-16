@@ -81,6 +81,10 @@ disableKinds = ["taxonomy", "term"]
 
 [menu]
   [[menu.main]]
+    name = "Konferencja #200"
+    url = "/konferencja/"
+    weight = 0
+  [[menu.main]]
     name = "Odcinki"
     url = "/odcinki/"
     weight = 1

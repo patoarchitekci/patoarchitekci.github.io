@@ -22,3 +22,6 @@
 <script src="{{ .Site.BaseURL }}js/podcast.js"></script>
   {{ end }}
 {{ end }}
+{{ if eq .Type "conference" }}
+<script src="{{ .Site.BaseURL }}js/conference.js"></script>
+{{ end }}
