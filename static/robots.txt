@@ -23,10 +23,12 @@ Allow: /
 # --- Bing (named block must repeat general rules; Bing nie merge'uje grup) ---
 User-agent: bingbot
 Allow: /
+Disallow: /cdn-cgi/
 
 # --- Wszyscy pozostali ---
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 # Sitemapy
 Sitemap: https://patoarchitekci.io/sitemap.xml
