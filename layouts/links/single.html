@@ -19,6 +19,18 @@
       </p>
     </div>
 
+    <!-- ===== EVENT LINKS (front matter: event.title, event.buttons) ===== -->
+    {{ with .Params.event }}
+    <p class="text-white text-center text-sm sm:text-base font-medium leading-120 max-w-[320px]">{{ .title }}</p>
+    {{ range .buttons }}
+    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"
+      class="w-full flex items-center justify-center gap-3 bg-dark-black border border-orange hover:bg-orange hover:text-dark-black text-white font-bold text-base sm:text-lg uppercase font-tomorrow rounded-2xl py-3.5 px-6 transition-colors duration-300">
+      {{ partial "link-icon.html" .icon }}
+      {{ .label }}
+    </a>
+    {{ end }}
+    {{ end }}
+
     <!-- ===== KONFERENCJA PATO #200 — sprzedaż zakończona (2026-06), blok usunięty ===== -->
 
     <!-- ===== DOŁĄCZ DO DISCORD ===== -->
