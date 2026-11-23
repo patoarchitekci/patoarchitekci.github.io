@@ -567,6 +567,7 @@
 
   {{- /* Include waitlist modal */ -}}
   {{- partial "training-waitlist-modal.html" $training -}}
+  {{- if gt (len $editionRows) 1 }}{{ partial "training-editions-modal.html" (dict "rows" $editionRows) }}{{ end -}}
 
 
 
@@ -598,7 +599,7 @@
           // Sold out since the last build — show it and switch the CTA to the waitlist.
           group.forEach(function (el) { el.textContent = 'Wyprzedane'; });
           {{- if $editionRows }}
-          // Plan 002: hide this edition; waitlist only when no edition is left on sale.
+          // Plan 002: hide this edition (info rows and modal buttons); waitlist only when no edition is left on sale.
           var rows = document.querySelectorAll('[data-edition="' + slug + '"]');
           var soldUrl = rows.length ? rows[0].dataset.editionUrl : null;
           rows.forEach(function (el) { el.style.display = 'none'; });

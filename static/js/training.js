@@ -58,6 +58,15 @@ document.addEventListener('DOMContentLoaded', function() {
     window.enterWaitlistMode = function () {
         if (!modal) return;
         if (rootEl) rootEl.dataset.soldOut = 'true';
+        // Close the "Wybierz termin" modal: every edition is sold out now.
+        const editionsEl = document.getElementById('training-editions-modal');
+        if (editionsEl && !editionsEl.classList.contains('hidden')) {
+            editionsEl.dataset.open = 'false';
+            editionsEl.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            const ctaEl = document.querySelector('[data-buy-cta]');
+            if (ctaEl) ctaEl.focus();
+        }
         document.querySelectorAll('[data-buy-cta], button').forEach(function (el) {
             const isAnchor = el.hasAttribute('data-buy-cta');
             if (!isAnchor && el.textContent.trim() !== 'Zapisz się') return;
@@ -80,6 +89,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if ((isTrainingPast || isSoldOut) && modal) {
         window.enterWaitlistMode();
+    }
+
+    // Modal "Wybierz termin" (2+ terminy w sprzedaży): CTA [data-buy-cta] otwiera
+    // modal zamiast linku. Bez JS link prowadzi do pierwszego terminu.
+    const editionsModal = document.getElementById('training-editions-modal');
+    if (editionsModal) {
+        let lastFocus = null;
+        const focusables = function () {
+            return Array.from(editionsModal.querySelectorAll('a[href], button'))
+                .filter(function (el) { return el.offsetParent !== null; });
+        };
+        const closeEditions = function () {
+            if (editionsModal.classList.contains('hidden')) return;
+            editionsModal.dataset.open = 'false';
+            editionsModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (lastFocus) lastFocus.focus();
+        };
+        document.addEventListener('click', function (e) {
+            const cta = e.target.closest && e.target.closest('[data-buy-cta]');
+            if (cta && cta.dataset.waitlistButton !== 'true') {
+                e.preventDefault();
+                lastFocus = cta;
+                editionsModal.classList.remove('hidden');
+                void editionsModal.offsetWidth; // start the entry transition
+                editionsModal.dataset.open = 'true';
+                document.body.classList.add('overflow-hidden');
+                const first = focusables()[1]; // [0] is the close button
+                (first || focusables()[0]).focus();
+                return;
+            }
+            if (e.target.closest && e.target.closest('[data-editions-close]')) closeEditions();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (editionsModal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') { closeEditions(); return; }
+            if (e.key !== 'Tab') return;
+            const items = focusables();
+            const first = items[0], last = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
     }
 
     // Turnstile dla waitlist

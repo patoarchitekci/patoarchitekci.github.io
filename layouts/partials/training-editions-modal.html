@@ -1,0 +1,31 @@
+{{- /*
+  Partial: training-editions-modal.html
+  Description: "Wybierz termin" modal for a training with 2+ editions on sale.
+    Every [data-buy-cta] opens it (static/js/training.js). Same look as
+    training-waitlist-modal.html. The live script in training/single.html hides
+    a button ([data-edition]) when its edition sells out.
+  Context: dict with "rows" (editions on sale, training-current.html saleEditions)
+*/ -}}
+<div id="training-editions-modal" class="group fixed inset-0 z-[9999] hidden" data-open="false"
+  role="dialog" aria-modal="true" aria-labelledby="training-editions-title">
+  <div data-editions-close
+    class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm opacity-0 transition-opacity duration-200 ease-out group-data-[open=true]:opacity-100 motion-reduce:transition-none"></div>
+  <div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
+    <div
+      class="pointer-events-auto bg-white rounded-[30px] md:rounded-[56px] max-w-[600px] w-full max-h-[90vh] overflow-y-auto relative shadow-[1px_0px_17px_#a884844f] p-8 md:p-12 opacity-0 scale-95 translate-y-4 transition duration-200 ease-out group-data-[open=true]:opacity-100 group-data-[open=true]:scale-100 group-data-[open=true]:translate-y-0 motion-reduce:transition-none motion-reduce:transform-none">
+      <button type="button" data-editions-close aria-label="Zamknij"
+        class="absolute top-4 right-4 text-red hover:text-dark-black transition-colors text-2xl font-bold z-10">×</button>
+      <div class="text-center">
+        <h3 id="training-editions-title"
+          class="text-2xl md:text-4xl font-bold font-tomorrow uppercase text-dark-black mb-6 md:mb-8">Wybierz termin</h3>
+        <div class="flex flex-col gap-3 md:gap-4 max-w-[420px] mx-auto">
+          {{- range $i, $e := .rows }}
+          <a href="{{ $e.purchase_url }}" target="_blank" data-edition="{{ $e.slug }}" data-edition-url="{{ $e.purchase_url }}"
+            class="bg-orange text-base md:text-xl text-dark-black uppercase px-6 py-3 rounded-full font-bold hover:bg-dark-black hover:text-orange transition-all duration-300 ease-linear">
+            Termin {{ add $i 1 }} · {{ partial "training-date-display.html" (dict "training" $e "showPrefix" false) }}</a>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

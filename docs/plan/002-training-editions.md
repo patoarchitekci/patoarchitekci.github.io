@@ -204,6 +204,18 @@ Code review, 2026-11-23, 2 points:
 Deviations from the plan (implementation, accepted): when an edition sells
 out live, the main "Zapisz się" buttons switch to the next edition on sale.
 
+UI follow-up (owner, 2026-11-23): for 2+ editions on sale, "Termin N" pills
+in the info box and on the list card, no per-edition "Kup", and the
+"Zapisz się" CTAs open a "Wybierz termin" modal with one button per edition.
+
+Codex review of the UI, run 1: P1 fixed (the modal closes when the last
+edition sells out live); P3 rejected (`static/js/training.js` is CRLF in the
+whole file on HEAD). Run 2: focus fixed (focus returns to the first CTA when
+waitlist mode closes the modal). Rejected: "with one edition left live, the
+CTA still opens a one-button modal and the row keeps its pill". This is a
+transient state until the next build; the daily ticket refresh rebuilds the
+page with the single-edition markup (KISS).
+
 ## Risks
 
 - If EasyCart ever serializes an inactive variant on the checkout page,

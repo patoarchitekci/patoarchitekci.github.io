@@ -1,0 +1,14 @@
+{{- /*
+  Partial: training-card-dates.html
+  Description: Dates on a training card. A training with 2+ editions on sale
+    lists each edition on its own line with a "Termin N" pill; any other
+    training renders training-date-display.html unchanged.
+  Context: a training normalized by training-current.html
+*/ -}}
+{{- if gt (len .saleEditions) 1 -}}
+  {{- range $i, $e := .saleEditions -}}
+    <span class="block xl:text-xl{{ if $i }} mt-1.5{{ end }}">{{ partial "training-edition-pill.html" (add $i 1) }} {{ partial "training-date-display.html" $e }}</span>
+  {{- end -}}
+{{- else -}}
+  {{- partial "training-date-display.html" . -}}
+{{- end -}}
