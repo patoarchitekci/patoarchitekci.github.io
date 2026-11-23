@@ -50,7 +50,8 @@ def discover_slugs():
     (the page that renders the live counter):
       active (not false) + has purchase_url + not waitlist_only + future date.
     Waitlist-only / past / inactive trainings show no counter, so baking a
-    number for them would be dead weight.
+    number for them would be dead weight. A training with "editions" counts
+    each edition (its own purchase_url and dates) the same way.
     """
     today = datetime.date.today().isoformat()
     # Conference sales closed (2026-06) — no longer synced. Trainings stay live.
@@ -59,17 +60,18 @@ def discover_slugs():
     for path in sorted(glob.glob(os.path.join(TRAININGS_DIR, "*.yaml"))):
         with open(path, encoding="utf-8") as fh:
             data = yaml.safe_load(fh) or {}
-        url = data.get("purchase_url") or ""
-        slug = url.rstrip("/").rsplit("/", 1)[-1] if url else ""
-        if not (slug and SLUG_RE.match(slug)):
-            continue
         if data.get("active") is False or data.get("waitlist_only"):
             continue
-        dates = data.get("dates") or []
-        if not dates or str(dates[0]) <= today:  # no date or already past
-            continue
-        if slug not in slugs:
-            slugs.append(slug)
+        for edition in data.get("editions") or [data]:
+            url = edition.get("purchase_url") or ""
+            slug = url.rstrip("/").rsplit("/", 1)[-1] if url else ""
+            if not (slug and SLUG_RE.match(slug)):
+                continue
+            dates = edition.get("dates") or []
+            if not dates or str(dates[0]) <= today:  # no date or already past
+                continue
+            if slug not in slugs:
+                slugs.append(slug)
     return slugs
 
 

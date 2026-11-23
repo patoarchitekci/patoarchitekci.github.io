@@ -1,6 +1,7 @@
 {{- /*
   Partial: training-sorter.html
-  Description: Sorts trainings - future by closest date first, then past by most recent first
+  Description: Sorts trainings - future by closest date first, then past by most recent first.
+    Each training is normalized by training-current.html first (current edition).
   Context: Map of all trainings
   Returns: Sorted slice of trainings
 */ -}}
@@ -14,6 +15,7 @@
 {{- /* Waitlist-only trainings never count as "future" — even if they have a planned date, */ -}}
 {{- /* the card shows "Nowy termin w drodze" so they shouldn't outrank bookable terms */ -}}
 {{- range . -}}
+  {{- with partial "training-current.html" . -}}
   {{- if not .hidden -}}
   {{- if and .dates (not (default false .waitlist_only)) -}}
     {{- $firstDate := index .dates 0 -}}
@@ -31,6 +33,7 @@
     {{- if .dates -}}{{- $firstDate = index .dates 0 -}}{{- end -}}
     {{- $training := merge . (dict "firstDate" $firstDate) -}}
     {{- $pastTrainings = $pastTrainings | append $training -}}
+  {{- end -}}
   {{- end -}}
   {{- end -}}
 {{- end -}}

@@ -1,7 +1,7 @@
 {{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 {{ define "main" }}
 {{ $trainingId := index (split (trim .RelPermalink "/") "/") 1 }}
-{{ $training := index .Site.Data.trainings $trainingId }}
+{{ $training := partial "training-current.html" (index .Site.Data.trainings $trainingId) }}
 {{- $today := now.Format "2006-01-02" -}}
 {{- $isTrainingPast := default false $training.waitlist_only -}}
 {{- if and (not $isTrainingPast) $training.dates -}}
@@ -33,6 +33,20 @@
 {{- end -}}
 {{- end -}}
 {{- $waitlistMode := or $isTrainingPast $soldOut -}}
+{{- /* Plan 002: a training with editions lists each edition on sale (dates, counter, buy link). */ -}}
+{{- $editionRows := slice -}}
+{{- if and $training.editions $showLiveTickets -}}
+{{- range $training.saleEditions -}}
+{{- $text := $ticketsMax -}}
+{{- $baked := index $tickets .slug -}}
+{{- if and $baked (lt $baked $ticketsMax) -}}
+{{- $text = printf "Zostało tylko %d" $baked -}}
+{{- else if $baked -}}
+{{- $text = $baked -}}
+{{- end -}}
+{{- $editionRows = $editionRows | append (merge . (dict "ticketsText" $text)) -}}
+{{- end -}}
+{{- end -}}
 <div class="flex relative" data-training-past="{{ $isTrainingPast }}" data-sold-out="{{ $soldOut }}">
   <div class="w-full">
     <!-- ======= TRAINING TITLE SECTION ======= -->
@@ -231,6 +245,9 @@
                   <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">
                     Termin
                   </p>
+                  {{- if $editionRows }}
+                  {{ partial "training-editions.html" (dict "rows" $editionRows "max" $ticketsMax "time" $training.time) }}
+                  {{- else }}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
                     {{- partial "training-date-display.html" (dict "training" $training "showPrefix" false) -}}
                   </p>
@@ -238,6 +255,7 @@
                   <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{
                     $training.time
                     }}</p>
+                  {{- end -}}
                   {{- end -}}
                 </div>
               </div>
@@ -271,7 +289,7 @@
                     Liczba
                     miejsc
                   </p>
-                  {{ if $showLiveTickets }}
+                  {{ if and $showLiveTickets (not $editionRows) }}
                   <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100"
                     data-tickets-left data-tickets-type="training"
                     data-tickets-slug="{{ $easySlug }}"
@@ -438,11 +456,15 @@
             <div class="max-w-[248px] w-full flex flex-col gap-[7px] sm:gap-[5px]">
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Termin
               </p>
+              {{- if $editionRows }}
+              {{ partial "training-editions.html" (dict "rows" $editionRows "max" $ticketsMax "time" $training.time) }}
+              {{- else }}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120">
                 {{- partial "training-date-display.html" (dict "training" $training "showPrefix" false) -}}
               </p>
               {{- if not $isTrainingPast }}
               <p class="text-dark-black fs-custom-md sm:!text-xs font-medium uppercase">{{ $training.time }}</p>
+              {{- end -}}
               {{- end -}}
             </div>
           </div>
@@ -473,7 +495,7 @@
               <p class="uppercase font-tomorrow font-semibold leading-100 text-sm text-white mb-2 flex sm:hidden">Liczba
                 miejsc
               </p>
-              {{ if $showLiveTickets }}
+              {{ if and $showLiveTickets (not $editionRows) }}
               <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-120"
                 data-tickets-left data-tickets-type="training"
                 data-tickets-slug="{{ $easySlug }}"
@@ -575,7 +597,25 @@
         if (n === 0) {
           // Sold out since the last build — show it and switch the CTA to the waitlist.
           group.forEach(function (el) { el.textContent = 'Wyprzedane'; });
+          {{- if $editionRows }}
+          // Plan 002: hide this edition; waitlist only when no edition is left on sale.
+          var rows = document.querySelectorAll('[data-edition="' + slug + '"]');
+          var soldUrl = rows.length ? rows[0].dataset.editionUrl : null;
+          rows.forEach(function (el) { el.style.display = 'none'; });
+          var next = null;
+          document.querySelectorAll('[data-edition]').forEach(function (el) {
+            if (!next && el.style.display !== 'none') next = el.dataset.editionUrl;
+          });
+          if (!next) {
+            if (typeof window.enterWaitlistMode === 'function') window.enterWaitlistMode();
+            return;
+          }
+          document.querySelectorAll('a[data-buy-cta]').forEach(function (a) {
+            if (a.getAttribute('href') === soldUrl) a.setAttribute('href', next);
+          });
+          {{- else }}
           if (typeof window.enterWaitlistMode === 'function') window.enterWaitlistMode();
+          {{- end }}
           return;
         }
         group.forEach(function (el) {

@@ -1,6 +1,6 @@
 {{- if and (eq .Type "training") (eq .Kind "page") -}}
 {{- $trainingId := index (split (trim .RelPermalink "/") "/") 1 -}}
-{{- $training := index .Site.Data.trainings $trainingId -}}
+{{- $training := partial "training-current.html" (index .Site.Data.trainings $trainingId) -}}
 {{- if $training -}}
 {{- $today := now.Format "2006-01-02" -}}
 {{- $availabilityStatus := "InStock" -}}
@@ -27,6 +27,16 @@
   {{- $tickets := .Site.Data.tickets | default dict -}}
   {{- if and (isset $tickets $slug) (eq (index $tickets $slug) 0) -}}
     {{- $availabilityStatus = "SoldOut" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Plan 002: one CourseInstance per edition on sale (all InStock); else one from the training */ -}}
+{{- $multi := and $training.editions $training.saleEditions -}}
+{{- $instances := slice $training -}}
+{{- if $multi -}}
+  {{- $instances = slice -}}
+  {{- range $training.saleEditions -}}
+    {{- $instances = $instances | append (merge $training (dict "dates" .dates "purchase_url" .purchase_url "product_id" .product_id)) -}}
   {{- end -}}
 {{- end -}}
 
@@ -99,9 +109,9 @@
   ],
   {{- end -}}
 
-  "hasCourseInstance": {
+  "hasCourseInstance": {{ if $multi }}[{{ end }}{{ range $ii, $training := $instances }}{{ with $ }}{{ if $ii }},{{ end }}{
     "@type": "CourseInstance",
-    "@id": "{{ .Permalink }}#course-instance",
+    "@id": "{{ .Permalink }}#course-instance{{ if $multi }}-{{ index $training.dates 0 }}{{ end }}",
     "name": "{{ $training.title }}",
     "courseMode": "online",
     "eventStatus": "https://schema.org/EventScheduled",
@@ -217,6 +227,7 @@
       "validFrom": "{{ if .GitInfo }}{{ .GitInfo.AuthorDate.Format "2006-01-02" }}{{ else }}{{ now.Format "2006-01-02" }}{{ end }}"
     }
   }
+  {{- end }}{{ end }}{{ if $multi }}]{{ end }}
 }
 </script>
 

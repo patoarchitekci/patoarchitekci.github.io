@@ -1,0 +1,42 @@
+{{- /*
+  Partial: training-current.html
+  Description: Normalizes a training with several editions (plan 002).
+  Context: a training from data/trainings (or nil)
+  Returns: the training merged with "saleEditions" (editions with first date
+    after today and slug not at 0 in data/tickets.yaml, in date order). A
+    training with "editions" also gets "dates", "purchase_url" and "product_id"
+    of its current edition: the first on sale, else the first upcoming (sold
+    out), else the last one. A training without "editions" keeps its fields;
+    its top-level dates/purchase_url/product_id count as its one edition.
+*/ -}}
+{{- $result := . -}}
+{{- if . -}}
+  {{- $today := now.Format "2006-01-02" -}}
+  {{- $tickets := site.Data.tickets | default dict -}}
+  {{- $editions := slice -}}
+  {{- $raw := .editions -}}
+  {{- if and (not $raw) .dates -}}
+    {{- $raw = slice (dict "dates" .dates "purchase_url" .purchase_url "product_id" .product_id) -}}
+  {{- end -}}
+  {{- range $raw -}}
+    {{- $slug := "" -}}
+    {{- with .purchase_url }}{{ $slug = path.Base . }}{{ end -}}
+    {{- $editions = $editions | append (merge . (dict "firstDate" (index .dates 0) "slug" $slug)) -}}
+  {{- end -}}
+  {{- if $editions }}{{ $editions = sort $editions "firstDate" }}{{ end -}}
+  {{- $upcoming := where $editions "firstDate" "gt" $today -}}
+  {{- $sale := slice -}}
+  {{- range $upcoming -}}
+    {{- if not (and (isset $tickets .slug) (eq (index $tickets .slug) 0)) -}}
+      {{- $sale = $sale | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $result = merge . (dict "saleEditions" $sale) -}}
+  {{- if .editions -}}
+    {{- $current := index $editions (sub (len $editions) 1) -}}
+    {{- with $upcoming }}{{ $current = index . 0 }}{{ end -}}
+    {{- with $sale }}{{ $current = index . 0 }}{{ end -}}
+    {{- $result = merge $result (dict "dates" $current.dates "purchase_url" $current.purchase_url "product_id" $current.product_id) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

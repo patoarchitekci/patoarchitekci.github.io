@@ -1,0 +1,23 @@
+{{- /*
+  Partial: training-editions.html
+  Description: Editions on sale of one training (plan 002): dates, live seat
+    counter and buy link per edition. The live script in training/single.html
+    hides a row ([data-edition]) when its edition sells out.
+  Context: dict with
+    - "rows": editions on sale (training-current.html saleEditions + "ticketsText")
+    - "max": participants.max (counter fallback)
+    - "time": the training time
+*/ -}}
+{{- range .rows }}
+<div class="flex flex-col gap-[7px] pb-2.5" data-edition="{{ .slug }}" data-edition-url="{{ .purchase_url }}">
+  <p class="font-bold text-dark-black text-sm sm:text-lg uppercase !leading-100">
+    {{- partial "training-date-display.html" (dict "training" . "showPrefix" false) -}}
+  </p>
+  <p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">Liczba miejsc:
+    <span data-tickets-left data-tickets-type="training" data-tickets-slug="{{ .slug }}"
+      data-tickets-max="{{ $.max }}">{{ .ticketsText }}</span></p>
+  <a href="{{ .purchase_url }}" target="_blank"
+    class="bg-white font-bold uppercase text-sm text-dark-black p-3 rounded-full w-max transition-all ease-linear duration-300 hover:bg-black hover:text-white">Kup</a>
+</div>
+{{- end }}
+<p class="text-dark-black fs-custom-md !leading-100 sm:!text-xs font-medium uppercase">{{ .time }}</p>
