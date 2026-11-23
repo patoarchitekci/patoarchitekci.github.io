@@ -23,72 +23,72 @@ rating:
   value: 4.9
   count: 7
 teaches:
-  - "Flow agentowy od pomysłu do wdrożenia: grilling, mapa, spec, tickety, implementacja, code review, PR"
-  - "Spec-driven development w lekkiej formie: agent przepytuje, Ty decydujesz, decyzje zostają w repo"
-  - "Skille agenta: grill-me, grill-with-docs, wayfinder, to-spec, to-tickets, implement-spec, tdd, code-review"
-  - "Kiedy pełny flow (duża funkcja), a kiedy krótki (mały ticket: grill-with-docs i implementacja)"
-  - "Kontekst i zatruta sesja: dlaczego każda funkcja zaczyna się w czystej sesji"
-  - "Harness: AGENTS.md, hooki i skille oraz testy, że reguły naprawdę działają"
-  - "Subagenci budujący tickety test-first i code review zgodności ze spec"
+  - "Jak zdefiniować problem tak, żeby agent AI zbudował właściwe narzędzie"
+  - "Jak doprecyzować wymagania: agent dopytuje, Ty podejmujesz decyzje"
+  - "Jak z wymagań zrobić plan, a z planu specyfikację z kryteriami gotowości"
+  - "Jak zlecić implementację agentowi i sprawdzić wynik: testy, review, CI"
+  - "Kiedy pełny proces (duża funkcja), a kiedy krótka ścieżka (mała zmiana)"
+  - "Dlaczego każde zadanie zaczyna się w czystej sesji agenta"
+  - "Harness: reguły, hooki i bramki jakości, których agent nie obejdzie"
   - "Sekrety poza kodem i czatem, wdrożenie tylko przez pipeline"
 audience: "Administratorzy, Ops, DevOps i SRE, którzy piszą skrypty, pipeline'y i IaC, a potrzebują własnych narzędzi: paneli, botów i automatyzacji, na które zespół developerski nie ma czasu. Szkolenie nie jest dla programistów."
 
 # Treść
 description:
-  - "Szkolenie dla adminów, Ops i DevOps, nie dla programistów. Pokazujemy, jak zbudować z agentem AI własne narzędzie dla zespołu: nie tylko skrypt czy automatyzację, ale pełną aplikację z logowaniem, bazą, API i interfejsem, wdrożoną przez pipeline."
-  - "Sednem jest flow agentowy. Agent przepytuje Cię jedno pytanie naraz (grill-me, grill-with-docs) i zapisuje opis, stack i zasady w repo. Skill wayfinder rozpisuje aplikację na mapę funkcji z decyzjami do podjęcia. Każda funkcja przechodzi tę samą drogę: rozstrzygnięcie, spec z kontraktami i seamami testów, małe tickety, implementacja przez subagentów test-first, code review zgodności ze spec, PR i merge po zielonym CI."
-  - "To spec-driven development w lekkiej, przejrzystej formie. Fakty to praca agenta, decyzje są Twoje. Każda decyzja, spec i słownik pojęć zostają w repo i w issues, więc po miesiącu wiesz, dlaczego kod wygląda tak, a nie inaczej. A agent w nowej sesji wie to samo."
-  - "Ćwiczysz dwie ścieżki: dużą funkcję przez pełny flow i mały ticket ze zmianą wymagań w trakcie, przez krótki flow. Na koniec dodajesz AI do gotowego narzędzia. Wychodzisz z wdrożonym narzędziem, repozytorium z harnessem i promptami, którymi zaczniesz własny projekt."
+  - "Szkolenie dla adminów, Ops i DevOps, nie dla programistów. Budujesz z agentem AI własne narzędzie dla zespołu: nie tylko skrypt czy automatyzację, ale pełną aplikację z logowaniem, bazą, API i interfejsem, wdrożoną przez pipeline."
+  - "Ale sednem nie jest kod. Uczysz się procesu pracy z agentem: jak zdefiniować problem, doprecyzować wymagania, opracować plan, napisać specyfikację i zlecić implementację. Agent dopytuje i zbiera fakty, Ty podejmujesz decyzje. Potem agent buduje kod testami, a Ty sprawdzasz wynik przez review i CI."
+  - "Dla Ops to znajomy schemat: jak przy zmianie na produkcji. Najpierw opis problemu i plan, potem wykonanie, potem weryfikacja. Różnica jest taka, że wykonawcą jest agent AI. To spec-driven development w lekkiej, przejrzystej formie. Plan, decyzje i specyfikacja zostają w repo, więc po miesiącu wiesz, dlaczego narzędzie działa tak, a nie inaczej."
+  - "Ćwiczysz dwie ścieżki: dużą funkcję przez pełny proces i małą zmianę wymagań w trakcie przez krótką ścieżkę. Na koniec dodajesz AI do gotowego narzędzia. Wychodzisz z wdrożonym narzędziem, gotowymi skillami i promptami, którymi zaczniesz własny projekt."
   - "„Wszystko na żywym organizmie: widzisz efekty swojej pracy, napotykasz prawdziwe problemy i uczysz się je rozwiązywać. Polecam gorąco :)” - Jan Szczyra"
 
 skills:
-  - "Pętla agenta, kontekst, zatruta sesja i czysta sesja na każdą funkcję"
-  - "Grilling: grill-me i grill-with-docs, opis aplikacji i stack w docs"
-  - "Mapa funkcji i decyzje: wayfinder, GLOSSARY.md"
-  - "Spec z kontraktami, modelem danych i seamami testów: to-spec"
-  - "Podział na małe tickety z zależnościami: to-tickets"
-  - "Implementacja przez subagentów test-first: implement-spec, tdd"
-  - "Code review zgodności ze spec i standardami repo"
-  - "AGENTS.md, hooki i skille oraz testy harnessu"
-  - "CI, ochrona main, squash merge i wdrożenie przez pipeline"
+  - "Definiowanie problemu i zakresu narzędzia"
+  - "Doprecyzowanie wymagań w rozmowie z agentem"
+  - "Plan: podział narzędzia na funkcje i kolejność"
+  - "Specyfikacja z kryteriami gotowości i testami"
+  - "Zlecanie implementacji agentowi i podział na małe zadania"
+  - "Weryfikacja: testy, review zgodności ze specyfikacją, CI"
+  - "Kontekst agenta i czysta sesja na każde zadanie"
+  - "Harness: reguły, hooki i bramki jakości"
+  - "Sekrety i wdrożenie przez pipeline"
   - "Model AI w narzędziu: structured output, limity i koszt"
 
 modules:
   - number: 1
     title: "Agent (teoria)"
-    description: "Model, toole, AGENTS.md, skille, MCP, subagenci i hooki. Kontekst, cache i zatruta sesja: dlaczego każda funkcja zaczyna się w czystej sesji."
+    description: "Jak działa agent: model, narzędzia, reguły, skille, subagenci i hooki. Kontekst i zatruta sesja: dlaczego każde zadanie zaczyna się w czystej sesji."
   - number: 2
-    title: "Flow agentowy (teoria)"
-    description: "Grilling, mapa, spec, tickety, implementacja, code review, PR. Kto co robi: fakty to praca agenta, decyzje są Twoje. Kiedy pełny flow, a kiedy krótki."
+    title: "Proces (teoria)"
+    description: "Problem, doprecyzowanie, plan, specyfikacja, implementacja, weryfikacja. Kto co robi: agent zbiera fakty, Ty decydujesz. Kiedy pełny proces, a kiedy krótka ścieżka."
   - number: 3
     title: "Repo i lab"
     description: "CI, ochrona main, squash merge, przypięte GitHub Actions z cache. Dane labu w plikach poza Gitem: agent bierze je z plików, nikt nic nie kopiuje."
   - number: 4
     title: "Harness i jego testy"
-    description: "AGENTS.md, hooki i skille. Sprawdzamy, że reguły naprawdę działają: hook blokuje commit do main, lint zatrzymuje zły kod."
+    description: "Reguły dla agenta, hooki i bramki jakości. Sprawdzamy, że naprawdę działają: hook blokuje commit do main, lint zatrzymuje zły kod."
   - number: 5
-    title: "Wymagania i mapa"
-    description: "Agent przepytuje Cię o aplikację, a wayfinder rysuje mapę funkcji z pytaniami do rozstrzygnięcia i zależnościami."
+    title: "Problem i plan"
+    description: "Definiujesz narzędzie, agent dopytuje o szczegóły. Z odpowiedzi powstaje plan: funkcje, kolejność i decyzje do podjęcia."
   - number: 6
-    title: "Duża funkcja: pełny flow"
-    description: "Rozstrzygnięcie ticketu z mapy, spec, tickety, implementacja test-first przez subagentów, code review, PR. Pierwsze wdrożenie i logowanie przez Entra ID."
+    title: "Duża funkcja: pełny proces"
+    description: "Doprecyzowanie, specyfikacja, podział na małe zadania, implementacja testami, review i wdrożenie. Pierwszy deploy i logowanie przez Entra ID."
   - number: 7
-    title: "Mały ticket: zmiana wymagań"
-    description: "Wymagania zmieniają się w trakcie, jak w pracy. Krótki flow: grill-with-docs doprecyzowuje zmianę, potem implementacja. Praca równoległa w dwóch sesjach."
+    title: "Mała zmiana: krótka ścieżka"
+    description: "Wymagania zmieniają się w trakcie, jak w pracy. Agent doprecyzowuje zmianę i od razu ją wdraża. Praca równoległa w dwóch sesjach."
   - number: 8
     title: "AI w narzędziu"
     description: "Dodajemy model AI do gotowego narzędzia: structured output, obsługa limitów, koszt. Kiedy AI pomaga, a kiedy wystarczy zwykły kod."
   - number: 9
     title: "Dalej sam"
-    description: "Jak zacząć własny projekt tym samym flow: prompty startowe na opis, stack, jakość i testy oraz setup repo."
+    description: "Jak zacząć własny projekt tym samym procesem: prompty startowe na opis problemu, stack, jakość i testy."
 
 benefits:
-  - title: "Flow, nie prompty"
-    description: "Powtarzalny proces pracy z agentem: od grillingu przez spec i tickety po PR. Działa tak samo w Claude Code, OpenCode i Codex"
+  - title: "Proces, nie prompty"
+    description: "Problem, plan, specyfikacja, zlecenie, weryfikacja. Działa tak samo w Claude Code, OpenCode i Codex"
   - title: "Narzędzie, nie tylko automatyzacja"
     description: "Pełna aplikacja z logowaniem, bazą, API i interfejsem, wdrożona przez pipeline. Bez kolejki do developerów"
   - title: "Decyzje zostają w repo"
-    description: "Spec, tickety, decyzje i słownik pojęć w repo i issues. Narzędzie przetrwa odejście autora, a agent w nowej sesji wie, co ustaliliście"
+    description: "Plan, specyfikacja i decyzje w repo. Narzędzie przetrwa odejście autora, a agent w nowej sesji wie, co ustaliliście"
   - title: "Bezpieczeństwo pod kontrolą"
     description: "Hasła poza kodem i czatem, minimalne uprawnienia agenta, wdrożenie tylko przez pipeline"
 
@@ -125,11 +125,11 @@ faq:
   - question: "Dla kogo NIE jest to szkolenie?"
     answer: "Dla programistów, którzy już na co dzień pracują z agentem na planach, testach i hookach: znajdziesz tu głównie znane rzeczy. Nie jest też o budowaniu aplikacji z LLM w środku (RAG, własne agenty): to temat szkolenia Agentic AI the Hard Way. I nie jest no-code: czytasz i poprawiasz kod, który pisze agent."
   - question: "Jakie umiejętności wyniosę?"
-    answer: "Flow agentowy od pomysłu do wdrożenia: grilling (grill-me, grill-with-docs), mapa funkcji (wayfinder), spec z seamami testów (to-spec), małe tickety (to-tickets), implementacja test-first przez subagentów (implement-spec, tdd), code review i PR. Do tego harness dla agenta i jego testy, sekrety poza kodem, CI/CD i model AI w środku narzędzia."
-  - question: "Czym jest ten flow agentowy?"
-    answer: "To spec-driven development w lekkiej formie. Agent przepytuje Cię i zbiera fakty, Ty podejmujesz decyzje. Z decyzji powstaje spec, ze spec małe tickety, a tickety budują subagenci testami. Wszystko zostaje w repo i w issues, więc każdą funkcję zaczynasz w czystej sesji, a agent wie, co już ustalono. GitHub Issues to tylko miejsce na plan: ważny jest proces."
+    answer: "Proces pracy z agentem AI: jak zdefiniować problem, doprecyzować wymagania, opracować plan i specyfikację, zlecić implementację i sprawdzić wynik. Do tego harness z regułami i bramkami jakości, sekrety poza kodem, CI/CD i model AI w środku narzędzia."
+  - question: "Czy to szkolenie z konkretnych skilli albo narzędzia?"
+    answer: "Nie. Skille i agent to narzędzia, a uczysz się procesu: problem, plan, specyfikacja, zlecenie, weryfikacja. Gotowe skille dostajesz, żeby ten proces był powtarzalny w Claude Code, OpenCode i Codex."
   - question: "Co budujemy?"
-    answer: "Wewnętrzne narzędzie dla zespołu, nie tylko automatyzację: logowanie, baza, API, interfejs i wdrożenie. Budujemy je w trzech krokach: duża funkcja przez pełny flow, mały ticket ze zmianą wymagań przez krótki flow i dodanie AI do narzędzia."
+    answer: "Wewnętrzne narzędzie dla zespołu, nie tylko automatyzację: logowanie, baza, API, interfejs i wdrożenie. Budujemy je w trzech krokach: duża funkcja przez pełny proces, mała zmiana wymagań przez krótką ścieżkę i dodanie AI do narzędzia."
   - question: "Którego agenta AI użyjemy?"
     answer: "Wybierasz: Claude Code, OpenCode albo Codex. Laby testujemy na wszystkich trzech. Stack też wybierasz: Python (FastAPI) albo Go."
   - question: "Czy muszę umieć programować?"
