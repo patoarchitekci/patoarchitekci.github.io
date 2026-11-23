@@ -105,8 +105,18 @@ button, counter); the next build drops it for good (D1).
 
 ## Tasks
 
-Each task: scenario first (Given / When / Then), then code, then
-`hugo --gc --minify` with no warnings and the check in the scenario.
+Each task: scenario first (Given / When / Then), then code, then the local
+build with no ERROR lines and the check in the scenario.
+
+Local build (Hugo 0.169 on macOS; env only, `hugo.toml` unchanged). Hugo
+0.169 blocks `tailwindcss` in `security.exec.allow`, and its Node sandbox
+blocks Tailwind's browserslist from reading parent directories:
+
+```
+HUGO_SECURITY_EXEC_ALLOW='^(go|git|node|npx|postcss|tailwindcss)$' \
+HUGO_SECURITY_NODE_PERMISSIONS_DISABLE=true \
+hugo --gc --minify -d <scratch dir>
+```
 
 - [ ] T01 `training-current.html` + `training-sorter.html`.
   Given the Observability YAML with three editions and today = 2026-11-23,
