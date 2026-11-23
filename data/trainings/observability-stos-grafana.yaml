@@ -110,12 +110,17 @@ benefits:
 price_net: 3089.42
 price_gross: 3799.99
 currency: "PLN"
-purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
-product_id: "prod_TEA06WG0HrD0yc"
 
-dates:
-  - "2026-12-07"
-  - "2026-12-08"
+editions:
+  - dates: ["2026-12-07", "2026-12-08"]
+    purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana"
+    product_id: "prod_TEA06WG0HrD0yc"
+  - dates: ["2027-03-15", "2027-03-16"]
+    purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana-2027-03"
+    product_id: "prod_VgRfLUqeC7OvKV"
+  - dates: ["2027-06-07", "2027-06-08"]
+    purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/observability-ze-stosem-grafana-2027-06"
+    product_id: "prod_VgRfhQogJgcxxh"
 time: "9:00 – 17:00"
 start_time: "09:00"
 end_time: "17:00"

@@ -118,14 +118,14 @@ HUGO_SECURITY_NODE_PERMISSIONS_DISABLE=true \
 hugo --gc --minify -d <scratch dir>
 ```
 
-- [ ] T01 `training-current.html` + `training-sorter.html`.
+- [x] T01 `training-current.html` + `training-sorter.html`.
   Given the Observability YAML with three editions and today = 2026-11-23,
   When Hugo builds, Then the list page and the home page show the card with
   date `15.03.2027, 16.03.2027` (December is sold out), price and link of the
   March edition, and every other card is byte-identical to the build before
   the change (diff of `public/szkolenia/index.html` and `public/index.html`
   outside the Observability card is empty).
-- [ ] T02 Training page (`single.html`).
+- [x] T02 Training page (`single.html`).
   Given the same data, When I open `/szkolenia/observability-stos-grafana/`,
   Then I see two editions, March and June (December is sold out and not
   shown), each with its dates, "Kup" with its own `purchase_url` and a seat
@@ -134,24 +134,24 @@ hugo --gc --minify -d <scratch dir>
   slug. When I force the March counter to 0 in the browser (DevTools: the
   fetch returns 0), only the March row disappears; June stays on sale and
   the page is not in waitlist mode.
-- [ ] T03 `trainings.json`.
+- [x] T03 `trainings.json`.
   Given the same data, When Hugo builds, Then `public/szkolenia/trainings.json`
   has three Observability entries with slugs `2026-12-07-…`, `2027-03-15-…`,
   `2027-06-07-…` and their own `product_id`; the other entries are unchanged.
   Then a replay of a March `product_assigned` event in the `tap-router` admin
   (after deploy) finds the training (no `no-match`).
-- [ ] T04 Schema.org (`training-schema.html`, `trainings-list-schema.html`).
+- [x] T04 Schema.org (`training-schema.html`, `trainings-list-schema.html`).
   Given the same data, When Hugo builds, Then the page JSON-LD has one
   `CourseInstance` and one `Offer` per edition on sale (March and June,
   `InStock`; no December), and Google's Rich
   Results Test reports no errors for the page. Then the list page JSON-LD
   (`trainings-list-schema.html`) has one Observability `CourseInstance` with
   `startDate` 2027-03-15.
-- [ ] T05 `scripts/update_tickets.py`.
+- [x] T05 `scripts/update_tickets.py`.
   Given the same data, When I run `python scripts/update_tickets.py`, Then
   `data/tickets.yaml` has the three Observability slugs, and trainings
   without `editions` keep their slugs.
-- [ ] T06 Data + deploy.
+- [x] T06 Data + deploy.
   Given T01–T05, When I push `hugo`, Then Cloudflare Pages deploys, the live
   page shows March and June on sale at 3799.99 zł, and
   `https://patoarchitekci.io/szkolenia/trainings.json` lists December, March
@@ -192,6 +192,17 @@ Run 2, 2026-11-23 (partly on the file before D1–D3 were written in), 6 points:
   12 per product). A risk line covers it.
 - Rejected: "no `CLAUDE.md` in the repository". The workspace `CLAUDE.md`
   lives one directory up, outside the review scope.
+
+Code review, 2026-11-23, 2 points:
+
+- Rejected: "`merge` in `training-schema.html:39` keeps the March dates for
+  every instance". Hugo `merge` lets the right map win; the built JSON-LD has
+  two instances, 2027-03-15/16 and 2027-06-07/08.
+- Fixed: `data/tickets.yaml` now has the 2027 slugs (ran
+  `scripts/update_tickets.py`: March 12, June 12, December sold out).
+
+Deviations from the plan (implementation, accepted): when an edition sells
+out live, the main "Zapisz się" buttons switch to the next edition on sale.
 
 ## Risks
 
