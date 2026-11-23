@@ -23,9 +23,9 @@ rating:
   value: 4.9
   count: 7
 teaches:
-  - "Jak zdefiniować problem tak, żeby agent AI zbudował właściwe narzędzie"
-  - "Jak doprecyzować wymagania: agent dopytuje, Ty podejmujesz decyzje"
-  - "Jak z wymagań zrobić plan, a z planu specyfikację z kryteriami gotowości"
+  - "Jak razem z agentem zdefiniować problem, żeby zbudował właściwe narzędzie"
+  - "Jak doprecyzować wymagania w rozmowie z agentem: agent dopytuje, Ty decydujesz"
+  - "Jak agent z Twoich decyzji robi plan, a z planu specyfikację z kryteriami gotowości"
   - "Jak zlecić implementację agentowi i sprawdzić wynik: testy, review, CI"
   - "Kiedy pełny proces (duża funkcja), a kiedy krótka ścieżka (mała zmiana)"
   - "Dlaczego każde zadanie zaczyna się w czystej sesji agenta"
@@ -36,7 +36,7 @@ audience: "Administratorzy, Ops, DevOps i SRE, którzy piszą skrypty, pipeline'
 # Treść
 description:
   - "Szkolenie dla adminów, Ops i DevOps, nie dla programistów. Budujesz z agentem AI własne narzędzie dla zespołu: nie tylko skrypt czy automatyzację, ale pełną aplikację z logowaniem, bazą, API i interfejsem, wdrożoną przez pipeline."
-  - "Ale sednem nie jest kod. Uczysz się procesu pracy z agentem: jak zdefiniować problem, doprecyzować wymagania, opracować plan, napisać specyfikację i zlecić implementację. Agent dopytuje i zbiera fakty, Ty podejmujesz decyzje. Potem agent pisze kod: najpierw test, potem implementacja. Ty sprawdzasz wynik w code review i w CI."
+  - "Ale sednem nie jest kod. Uczysz się procesu pracy z agentem. Razem z agentem definiujesz problem, doprecyzowujesz wymagania, opracowujesz plan i specyfikację, a potem zlecasz mu implementację. Nie piszesz tych dokumentów sam: agent dopytuje, zbiera fakty i spisuje ustalenia, a Ty podejmujesz decyzje. Potem agent pisze kod: najpierw test, potem implementacja. Ty sprawdzasz wynik w code review i w CI."
   - "Dla Ops to znajomy schemat: jak przy zmianie na produkcji. Najpierw opis problemu i plan, potem wykonanie, potem weryfikacja. Różnica jest taka, że wykonawcą jest agent AI. To spec-driven development w lekkiej, przejrzystej formie. Plan, decyzje i specyfikacja zostają w repo, więc po miesiącu wiesz, dlaczego narzędzie działa tak, a nie inaczej."
   - "Ćwiczysz dwie ścieżki: dużą funkcję przez pełny proces i małą zmianę wymagań w trakcie przez krótką ścieżkę. Na koniec dodajesz AI do gotowego narzędzia. Wychodzisz z wdrożonym narzędziem, gotowymi skillami i promptami, którymi zaczniesz własny projekt."
   - "„Wszystko na żywym organizmie: widzisz efekty swojej pracy, napotykasz prawdziwe problemy i uczysz się je rozwiązywać. Polecam gorąco :)” - [Jan Szczyra](https://www.linkedin.com/in/janszczyra/)"
