@@ -62,24 +62,21 @@ modules:
     title: "Proces (teoria)"
     description: "Problem, doprecyzowanie, plan, specyfikacja, implementacja, weryfikacja. Kto co robi: agent zbiera fakty, Ty decydujesz. Kiedy pełny proces, a kiedy krótka ścieżka."
   - number: 3
-    title: "Repo i lab"
-    description: "CI, ochrona main, squash merge, przypięte GitHub Actions z cache. Dane labu w plikach poza Gitem: agent bierze je z plików, nikt nic nie kopiuje."
-  - number: 4
     title: "Harness i jego testy"
     description: "Reguły dla agenta, hooki i bramki jakości. Sprawdzamy, że naprawdę działają: hook blokuje commit do main, lint zatrzymuje zły kod."
-  - number: 5
+  - number: 4
     title: "Problem i plan"
     description: "Definiujesz narzędzie, agent dopytuje o szczegóły. Z odpowiedzi powstaje plan: funkcje, kolejność i decyzje do podjęcia."
-  - number: 6
+  - number: 5
     title: "Duża funkcja: pełny proces"
     description: "Doprecyzowanie, specyfikacja, podział na małe zadania, implementacja z testami, code review i wdrożenie. Pierwszy deploy i logowanie przez Entra ID."
-  - number: 7
+  - number: 6
     title: "Mała zmiana: krótka ścieżka"
     description: "Wymagania zmieniają się w trakcie, jak w pracy. Agent doprecyzowuje zmianę i od razu ją wdraża. Praca równoległa w dwóch sesjach."
-  - number: 8
+  - number: 7
     title: "AI w narzędziu"
     description: "Dodajemy model AI do gotowego narzędzia: structured output, obsługa limitów, koszt. Kiedy AI pomaga, a kiedy wystarczy zwykły kod."
-  - number: 9
+  - number: 8
     title: "Dalej sam"
     description: "Jak zacząć własny projekt tym samym procesem: prompty startowe na opis problemu, stack, jakość i testy."
 
