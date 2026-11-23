@@ -36,7 +36,7 @@ audience: "Administratorzy, Ops, DevOps i SRE, którzy piszą skrypty, pipeline'
 # Treść
 description:
   - "Szkolenie dla adminów, Ops i DevOps, nie dla programistów. Budujesz z agentem AI własne narzędzie dla zespołu: nie tylko skrypt czy automatyzację, ale pełną aplikację z logowaniem, bazą, API i interfejsem, wdrożoną przez pipeline."
-  - "Ale sednem nie jest kod. Uczysz się procesu pracy z agentem: jak zdefiniować problem, doprecyzować wymagania, opracować plan, napisać specyfikację i zlecić implementację. Agent dopytuje i zbiera fakty, Ty podejmujesz decyzje. Potem agent buduje kod testami, a Ty sprawdzasz wynik przez review i CI."
+  - "Ale sednem nie jest kod. Uczysz się procesu pracy z agentem: jak zdefiniować problem, doprecyzować wymagania, opracować plan, napisać specyfikację i zlecić implementację. Agent dopytuje i zbiera fakty, Ty podejmujesz decyzje. Potem agent pisze kod: najpierw test, potem implementacja. Ty sprawdzasz wynik w code review i w CI."
   - "Dla Ops to znajomy schemat: jak przy zmianie na produkcji. Najpierw opis problemu i plan, potem wykonanie, potem weryfikacja. Różnica jest taka, że wykonawcą jest agent AI. To spec-driven development w lekkiej, przejrzystej formie. Plan, decyzje i specyfikacja zostają w repo, więc po miesiącu wiesz, dlaczego narzędzie działa tak, a nie inaczej."
   - "Ćwiczysz dwie ścieżki: dużą funkcję przez pełny proces i małą zmianę wymagań w trakcie przez krótką ścieżkę. Na koniec dodajesz AI do gotowego narzędzia. Wychodzisz z wdrożonym narzędziem, gotowymi skillami i promptami, którymi zaczniesz własny projekt."
   - "„Wszystko na żywym organizmie: widzisz efekty swojej pracy, napotykasz prawdziwe problemy i uczysz się je rozwiązywać. Polecam gorąco :)” - Jan Szczyra"
@@ -71,7 +71,7 @@ modules:
     description: "Definiujesz narzędzie, agent dopytuje o szczegóły. Z odpowiedzi powstaje plan: funkcje, kolejność i decyzje do podjęcia."
   - number: 6
     title: "Duża funkcja: pełny proces"
-    description: "Doprecyzowanie, specyfikacja, podział na małe zadania, implementacja testami, review i wdrożenie. Pierwszy deploy i logowanie przez Entra ID."
+    description: "Doprecyzowanie, specyfikacja, podział na małe zadania, implementacja z testami, code review i wdrożenie. Pierwszy deploy i logowanie przez Entra ID."
   - number: 7
     title: "Mała zmiana: krótka ścieżka"
     description: "Wymagania zmieniają się w trakcie, jak w pracy. Agent doprecyzowuje zmianę i od razu ją wdraża. Praca równoległa w dwóch sesjach."
