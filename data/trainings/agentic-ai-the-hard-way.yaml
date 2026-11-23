@@ -109,11 +109,14 @@ benefits:
 price_net: 1625.20
 price_gross: 1999.00
 currency: "PLN"
-purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/agentic-ai-the-hard-way"
-product_id: "prod_TUozy2YFPHpGFV"
 
-dates:
-  - "2026-12-03"
+editions:
+  - dates: ["2026-12-03"]
+    purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/agentic-ai-the-hard-way"
+    product_id: "prod_TUozy2YFPHpGFV"
+  - dates: ["2027-05-13"]
+    purchase_url: "https://cart.easy.tools/checkout/patoarchitekci/agentic-ai-the-hard-way-2027-05"
+    product_id: "prod_VgSB2e7thcjZem"
 time: "9:30 – 17:00"
 start_time: "09:30"
 end_time: "17:00"
