@@ -40,7 +40,7 @@ description:
   - "Dla Ops to znajomy schemat: jak przy zmianie na produkcji. Najpierw opis problemu i plan, potem wykonanie, potem weryfikacja. Różnica jest taka, że wykonawcą jest agent AI. To spec-driven development w lekkiej, przejrzystej formie. Plan, decyzje i specyfikacja zostają w repo, więc po miesiącu wiesz, dlaczego narzędzie działa tak, a nie inaczej."
   - "Ćwiczysz dwie ścieżki: dużą funkcję przez pełny proces i małą zmianę wymagań w trakcie przez krótką ścieżkę. Na koniec dodajesz AI do gotowego narzędzia. Wychodzisz z wdrożonym narzędziem, gotowymi skillami i promptami, którymi zaczniesz własny projekt."
   - "„Wszystko na żywym organizmie: widzisz efekty swojej pracy, napotykasz prawdziwe problemy i uczysz się je rozwiązywać. Polecam gorąco :)” - [Jan Szczyra](https://www.linkedin.com/in/janszczyra/)"
-  - "„Zachwycające szkolenie! Układa wiedzę, jak korzystać z narzędzi do tworzenia aplikacji, pokazuje słabe i mocne strony. A na dodatek na realnym przykładzie!” - [Wojciech Guzik](https://www.linkedin.com/in/wojciech-guzik/)"
+  - "„Bardzo dobre wprowadzenie do tematu. Poleciłbym je każdemu, kto chce nauczyć się pracy z AI albo usystematyzować wiedzę.” - [Mateusz Głowacki](https://www.linkedin.com/in/mateusz-g%C5%82owacki-757817122)"
 
 skills:
   - "Definiowanie problemu i zakresu narzędzia"
