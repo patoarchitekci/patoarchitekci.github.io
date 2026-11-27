@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="content-language" content="pl-PL" />
+  <meta name="robots" content="noindex, follow" />
+  <title>AI w SDLC: proces, nie narzędzie - materiały z webinaru | Patoarchitekci</title>
+  <meta name="description" content="Materiały z webinaru o pracy z agentem kodującym: czym jest harness, pętla pracy, sześć zasad, flow na skillach Matta Pococka, linki do narzędzi i odcinki podcastu." />
+  <link rel="canonical" href="https://patoarchitekci.io/materials/ai-w-sdlc/" />
+  <link rel="icon" type="image/png" href="/img/png/favicon.png" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Patoarchitekci" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:url" content="https://patoarchitekci.io/materials/ai-w-sdlc/" />
+  <meta property="og:title" content="AI w SDLC: proces, nie narzędzie - materiały z webinaru" />
+  <meta property="og:description" content="Materiały z webinaru o pracy z agentem kodującym: czym jest harness, pętla pracy, sześć zasad, flow na skillach Matta Pococka, linki do narzędzi i odcinki podcastu." />
+  <meta property="og:image" content="https://patoarchitekci.io/metatag.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Tomorrow:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="materials.css" />
+</head>
+<body>
+<nav class="rail" aria-label="Spis treści">
+  <p>Spis treści</p>
+  <a href="#harness">Czym jest harness</a>
+  <a href="#hooki">Co pilnuje reguł</a>
+  <a href="#petla">Pętla pracy</a>
+  <a href="#flow">Flow na skillach</a>
+  <a href="#zasady">Sześć zasad</a>
+  <a href="#kontekst">Higiena kontekstu</a>
+  <a href="#linki">Linki</a>
+  <a href="#porownanie">Porównanie podejść</a>
+  <a href="#pytania">Pytania</a>
+  <a href="#podcast">Posłuchaj dalej</a>
+  <a href="#kontakt">Kontakt</a>
+</nav>
+
+<header class="band hero"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61 61" fill="none" class="deco d-sun" aria-hidden="true">
+<g>
+<path d="M28.5896 61L30.0666 36.6342H31.1409L32.618 61H28.5896Z" fill="currentColor"/>
+<path d="M17.0658 57.9482L27.7472 35.9994L28.7482 36.4022L20.7891 59.4863L17.0658 57.9482Z" fill="currentColor"/>
+<path d="M7.58075 50.7092L25.8551 34.5223L26.6242 35.2914L10.4251 53.5657L7.58075 50.7092Z" fill="currentColor"/>
+<path d="M1.58695 40.4062L24.671 32.4471L25.0861 33.4359L3.13728 44.1295L1.58695 40.4062Z" fill="currentColor"/>
+<path d="M0 28.5896L24.3658 30.0666V31.1409L0 32.618V28.5896Z" fill="currentColor"/>
+<path d="M3.05183 17.0658L25.0006 27.7472L24.5856 28.7482L1.51371 20.7891L3.05183 17.0658Z" fill="currentColor"/>
+<path d="M10.2786 7.58075L26.4777 25.8551L25.7086 26.6242L7.43426 10.4251L10.2786 7.58075Z" fill="currentColor"/>
+<path d="M20.5938 1.58695L28.5529 24.671L27.5641 25.0861L16.8705 3.13728L20.5938 1.58695Z" fill="currentColor"/>
+<path d="M32.4104 0L30.9334 24.3658H29.8591L28.382 0H32.4104Z" fill="currentColor"/>
+<path d="M43.9342 3.05183L33.2528 25.0006L32.2518 24.5856L40.2109 1.51371L43.9342 3.05183Z" fill="currentColor"/>
+<path d="M53.4193 10.2786L35.1449 26.4777L34.3758 25.7086L50.5627 7.43426L53.4193 10.2786Z" fill="currentColor"/>
+<path d="M59.413 20.5938L36.329 28.5529L35.9139 27.5641L57.8627 16.8705L59.413 20.5938Z" fill="currentColor"/>
+<path d="M61 32.4104L36.6342 30.9334V29.8591L61 28.382V32.4104Z" fill="currentColor"/>
+<path d="M57.9482 43.9342L35.9994 33.2528L36.4022 32.2518L59.4863 40.2109L57.9482 43.9342Z" fill="currentColor"/>
+<path d="M50.7092 53.4193L34.5223 35.1449L35.2914 34.3758L53.5657 50.5627L50.7092 53.4193Z" fill="currentColor"/>
+<path d="M40.4062 59.413L32.4471 36.329L33.4359 35.9139L44.1295 57.8627L40.4062 59.413Z" fill="currentColor"/>
+</g>
+</svg><div class="in">
+  <nav class="top" aria-label="Zostań w kontakcie">
+    <a class="who" href="https://www.linkedin.com/in/lukaszkaluzny/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><g fill="#201B20"><rect x="5" y="9.5" width="3" height="9"/><circle cx="6.5" cy="6.2" r="1.8"/><path d="M10.5 9.5h2.9v1.3c.5-.9 1.6-1.6 3.1-1.6 2.6 0 3.5 1.6 3.5 4.2v5.1h-3v-4.6c0-1.2-.3-2.1-1.5-2.1s-2 .9-2 2.1v4.6h-3z"/></g></svg>Łukasz Kałużny</a>
+    <a href="https://discord.com/invite/78zPcEaP22">Discord</a>
+    <a href="https://outlook.office.com/book/Patoarchitekci@protopia.tech">Bezpłatna konsultacja</a>
+    <a href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J">Spotify</a>
+    <a href="https://www.youtube.com/@Patoarchitekci">YouTube</a>
+    <a href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604">Apple Podcasts</a>
+    <a href="https://patoarchitekci.io/szkolenia/">Szkolenia</a>
+  </nav>
+  <div class="hgrid">
+  <div class="brand">
+  <div class="lockup">
+    <img src="patoarchitekci.svg" alt="Patoarchitekci" width="190" height="200">
+    <div class="claim" aria-label="Podcast o IT - bez ściemy"><div><span>Podcast</span><span>o IT</span></div><span class="dark">Bez ściemy</span></div>
+  </div>
+  <div class="partners">
+    <svg viewBox="0 0 2283 487" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Darize"><path fill="currentColor" d="M669.42 159.626C643.488 137.335 607.419 129.55 562.892 129.55C533.768 129.55 509.124 133.974 488.905 142.824C468.686 151.673 452.499 163.267 440.457 177.605C428.416 191.943 419.678 207.738 414.19 224.988L493.33 251.592C496.522 236.134 503.299 223.532 513.773 213.731C524.246 203.985 540.153 199.056 561.492 199.056C582.831 199.056 599.242 204.153 609.211 214.403C619.181 224.652 624.221 237.702 624.221 253.609V272.708H531.471C505.987 272.708 483.36 276.684 463.589 284.637C443.818 292.591 428.36 304.408 417.214 320.091C406.068 335.773 400.523 355.208 400.523 378.396C400.523 401.583 406.068 421.242 417.214 437.373C428.36 453.503 443.482 465.825 462.581 474.226C481.68 482.628 503.243 486.828 527.383 486.828C551.522 486.828 569.669 483.412 583.279 476.579C596.945 469.746 606.915 461.904 613.3 453.055C619.685 444.206 623.773 437.037 625.566 431.548H637.047V477.251H717.364V259.826C717.364 206.057 695.296 181.918 669.364 159.626H669.42ZM624.277 343.726C624.277 366.018 616.66 383.884 601.426 397.271C586.192 410.713 566.533 417.378 542.449 417.378C524.246 417.378 510.412 413.513 500.835 405.784C491.313 398.055 486.497 388.029 486.497 375.763C486.497 363.497 491.033 353.92 500.163 347.143C509.236 340.31 521.726 336.893 537.688 336.893H624.333V343.726H624.277Z"></path><path fill="currentColor" d="M1695.29 486.829C1661.65 486.829 1631.88 479.783 1605.97 465.692C1580.51 451.146 1560.51 430.918 1545.96 405.009C1531.87 378.644 1524.83 347.735 1524.83 312.279V304.097C1524.83 268.642 1531.87 237.96 1545.96 212.05C1560.06 185.686 1579.83 165.458 1605.28 151.367C1630.74 136.821 1660.29 129.548 1693.92 129.548C1727.11 129.548 1755.97 137.049 1780.52 152.049C1805.06 166.595 1824.15 187.05 1837.79 213.414C1851.43 239.323 1858.24 269.551 1858.24 304.097V333.416H1612.1C1613.01 356.599 1621.65 375.463 1638.01 390.008C1654.38 404.554 1674.38 411.827 1698.01 411.827C1722.1 411.827 1739.83 406.6 1751.2 396.145C1762.56 385.69 1771.2 374.099 1777.11 361.371L1847.33 398.19C1840.97 410.009 1831.65 422.964 1819.38 437.055C1807.56 450.691 1791.65 462.51 1771.65 472.51C1751.65 482.056 1726.2 486.829 1695.29 486.829ZM1612.78 269.324H1770.97C1769.15 249.778 1761.2 234.096 1747.11 222.278C1733.47 210.459 1715.51 204.55 1693.24 204.55C1670.06 204.55 1651.65 210.459 1638.01 222.278C1624.38 234.096 1615.97 249.778 1612.78 269.324Z"></path><path fill="currentColor" d="M1194.98 477.283V375.008L1380.44 220.914V210.005H1201.79V139.094H1474.53V241.369L1289.07 395.463V406.373H1479.98V477.283H1194.98Z"></path><path fill="currentColor" d="M1039.77 477.282V139.094H1125.68V477.282H1039.77Z"></path><path fill="currentColor" d="M783.078 477.283V139.094H867.625V177.277H879.898C884.898 163.64 893.08 153.64 904.444 147.276C916.263 140.912 929.899 137.731 945.354 137.731H986.264V214.096H943.991C922.172 214.096 904.217 220.005 890.126 231.823C876.035 243.187 868.989 260.915 868.989 285.006V477.283H783.078Z"></path><path fill="currentColor" d="M152.73 486.828C125.912 486.828 100.684 480.237 77.0471 467.055C53.8648 453.419 35.228 433.645 21.1368 407.736C7.0456 381.826 0 350.462 0 313.643V302.734C0 265.915 7.0456 234.55 21.1368 208.641C35.228 182.731 53.8648 163.185 77.0471 150.003C100.229 136.366 125.457 129.548 152.73 129.548C173.185 129.548 190.231 132.048 203.868 137.048C217.959 141.594 229.323 147.503 237.96 154.776C246.596 162.049 253.187 169.776 257.733 177.958H270.006V0H355.917V477.283H271.369V436.373H259.096C251.369 449.1 239.323 460.691 222.959 471.146C207.05 481.601 183.64 486.828 152.73 486.828ZM178.64 411.827C205.004 411.827 227.05 403.418 244.778 386.599C262.505 369.326 271.369 344.325 271.369 311.597V304.779C271.369 272.051 262.505 247.278 244.778 230.459C227.505 213.186 205.459 204.55 178.64 204.55C152.276 204.55 130.23 213.186 112.502 230.459C94.7747 247.278 85.9109 272.051 85.9109 304.779V311.597C85.9109 344.325 94.7747 369.326 112.502 386.599C130.23 403.418 152.276 411.827 178.64 411.827Z"></path><path fill="currentColor" d="M1125.68 0H1038.91V86.7744H1125.68V0Z"></path><path fill="currentColor" d="M2231.63 267.733L2142.94 197.858L2189.09 160.47L2220.7 183.374V83.9567L1993.62 267.733H1943.83V0H1994.2L2082.9 69.8753L2036.75 107.263L2005.13 84.3591V183.777L2232.22 0H2282.02V267.733H2231.63Z"></path></svg>
+  </div>
+  </div>
+  <div class="titleblock">
+    <p class="kicker">Recap webinaru Darize</p>
+    <h1>AI w SDLC: <span>proces, nie narzędzie</span></h1>
+    <p class="by">Prowadził <a class="who" href="https://www.linkedin.com/in/lukaszkaluzny/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="currentColor"/><g fill="#201B20"><rect x="5" y="9.5" width="3" height="9"/><circle cx="6.5" cy="6.2" r="1.8"/><path d="M10.5 9.5h2.9v1.3c.5-.9 1.6-1.6 3.1-1.6 2.6 0 3.5 1.6 3.5 4.2v5.1h-3v-4.6c0-1.2-.3-2.1-1.5-2.1s-2 .9-2 2.1v4.6h-3z"/></g></svg>Łukasz Kałużny</a> Protopia</p>
+  </div>
+  </div>
+</div>
+<svg class="cloud" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#FFC107" d="M0 200V120a230 150 0 0 1 400 30a160 120 0 0 1 280-30a260 170 0 0 1 460 30a160 110 0 0 1 300-40V200Z"/></svg>
+</header>
+
+<div class="band say">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 62" fill="none" class="deco d-x1" aria-hidden="true">
+<path d="M58.7713 4.26074L58.0489 3.54216C54.6414 0.152614 49.1075 0.152614 45.6864 3.54216L37.3447 11.8398C33.9372 15.2293 28.4034 15.2293 24.9822 11.8398L16.6406 3.54216C13.233 0.152614 7.69921 0.152614 4.27805 3.54216L3.55565 4.26074C0.148117 7.65028 0.148117 13.1549 3.55565 16.558L11.8973 24.8556C15.3048 28.2451 15.3048 33.7498 11.8973 37.1529L3.56928 45.4369C0.148117 48.84 0.161747 54.3582 3.58291 57.7477L4.30531 58.4663C7.72647 61.8558 13.2603 61.8423 16.6678 58.4392C17.9763 57.1376 19.3939 55.7276 20.7978 54.3175C22.2562 52.8668 23.7146 51.416 25.0504 50.0738C28.4034 46.7385 33.8145 46.6707 37.2493 49.9111C38.6941 51.2669 40.2752 52.7448 41.8972 54.2226C43.8736 55.9716 46.0408 57.6664 48.0035 59.1442C51.7109 61.9101 56.9449 61.3271 59.9299 57.8155C62.9149 54.3039 62.6423 49.0976 59.3029 45.9114C57.8036 44.4878 56.168 42.9015 54.5596 41.3152L50.3888 37.1664C46.9812 33.7769 46.9812 28.2723 50.3888 24.8692L58.7304 16.5716C62.1379 13.182 62.1379 7.67739 58.7304 4.27429L58.7713 4.26074Z" stroke-width="2" stroke="currentColor"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109.243 109.243" fill="none" class="deco d-x2" aria-hidden="true">
+<path d="M107.121 76.4999L85.2489 54.6213L107.121 32.7489L76.4937 2.12132L54.6213 23.9937L32.7489 2.12132L2.12128 32.7427L23.9937 54.6213L2.12128 76.4999L32.7427 107.121L54.6213 85.2489L76.4937 107.121L107.121 76.4999Z" stroke-width="3" stroke="currentColor"/>
+</svg>
+  <div class="in"><p>Jak poukładać pracę z agentem kodującym. Tu masz wszystko, co padło na żywo: czym jest harness, jak wygląda pętla pracy, sześć zasad i linki do narzędzi. Na końcu odcinki podcastu, które rozwijają te tematy.</p></div>
+  <svg class="cloud" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#201B20" d="M0 200V130a110 90 0 0 1 200 20a250 170 0 0 1 440-40a150 120 0 0 1 260 40a300 160 0 0 1 540-30V200Z"/></svg>
+</div>
+
+<main class="band main"><div class="in">
+
+<section id="harness">
+  <h2>Czym jest harness</h2>
+  <p class="lead">Prompt engineering, context engineering, teraz harness engineering. Słowa się zmieniają. Po polsku harness to uprząż. Albo chomąto: zakładasz je agentowi, żeby orał pole, czyli kodował.</p>
+  <h3>Jedno słowo, trzy znaczenia</h3>
+  <p>Rynek używa słowa „harness” na trzy sposoby. Stąd połowa nieporozumień w dyskusjach.</p>
+  <div class="panel"><div class="layers">
+    <div class="ly"><b>Model</b><span>Claude Sonnet, Claude Opus</span></div>
+    <p class="call dim">To nie jest harness.</p>
+    <div class="ly"><b>Agent kodujący</b><span>Claude Code: pętla agenta, narzędzia, zarządzanie kontekstem, system prompt.</span></div>
+    <p class="call"><b>1. „Agent harness”</b>Sam agent kodujący. Tak mówi Anthropic. To dostajesz gotowe.</p>
+    <div class="ly mine"><b>Harness w Twoim repozytorium</b><span>To, co zespół buduje wokół agenta.</span>
+      <div class="gs">
+        <div><b>Guides</b><span>Zanim agent zadziała: <code>AGENTS.md</code>, skille, spec i plan.</span></div>
+        <div><b>Sensors</b><span>Po tym, jak zadziała: hooki, lintery, testy, CI, review.</span></div>
+      </div>
+    </div>
+    <p class="call"><b>3. „Outer harness”</b>Harness engineering: to, co zespół buduje dla swojego kodu. OpenAI, Birgitta Böckeler.<em>Tego znaczenia używamy</em></p>
+  </div></div>
+  <p><b>2. „Everything except the model”.</b> Znaczenia 1 i 3 razem. LangChain: „If you're not the model, you're the harness.”</p>
+  <blockquote>Jeżeli nic nie wymusisz, to ty nie masz żadnego procesu.<footer>Łukasz Kałużny</footer></blockquote>
+</section>
+
+<section id="hooki">
+  <h2>Co pilnuje reguł</h2>
+  <p class="lead">Reguły piszesz raz, w <code>AGENTS.md</code>. Agent czyta je na starcie każdej sesji. Potem pracę sprawdzają bramki, które działają bez Twojej uwagi.</p>
+  <div class="panel wide"><div class="dia"><svg viewBox="0 0 1000 452" role="img" aria-label="Schemat: AGENTS.md czyta agent na starcie. Pięć bramek sprawdza pracę: hook po edycji, bramka jakości na koniec tury, git hook przed commitem, CI na pull requeście i review. Na czerwono błąd wraca do agenta.">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#201B20"/></marker></defs>
+    <g class="you"><rect x="1" y="165" width="170" height="80" rx="14"/><text class="t" x="86" y="201">AGENTS.md</text><text class="s" x="86" y="223">reguły piszesz raz</text></g>
+    <path class="ln" d="M175 205H294" marker-end="url(#ah)"/><text class="lb" x="235" y="195">czyta na starcie</text>
+    <g class="ag"><rect x="300" y="165" width="150" height="80" rx="14"/><text class="t" x="375" y="201">Agent</text><text class="s" x="375" y="223">pisze kod i testy</text></g>
+    <path class="ln" d="M452 205H500M500 45V365"/>
+    <path class="ln" d="M500 45H646" marker-end="url(#ah)"/><text class="lb" x="575" y="35">zapisuje plik</text>
+    <path class="ln" d="M500 125H646" marker-end="url(#ah)"/><text class="lb" x="575" y="115">kończy turę</text>
+    <path class="ln" d="M500 205H646" marker-end="url(#ah)"/><text class="lb" x="575" y="195">commituje</text>
+    <path class="ln" d="M500 285H646" marker-end="url(#ah)"/><text class="lb" x="575" y="275">pushuje branch</text>
+    <path class="ln" d="M500 365H646" marker-end="url(#ah)"/><text class="lb" x="575" y="355">prosi o review</text>
+    <g class="gate"><rect x="652" y="15" width="296" height="60" rx="14"/><text class="t" x="800" y="41">Hook po edycji</text><text class="s" x="800" y="62">linter i formatter na zmienionym pliku</text></g>
+    <g class="gate"><rect x="652" y="95" width="296" height="60" rx="14"/><text class="t" x="800" y="121">Bramka jakości</text><text class="s" x="800" y="142">build i testy, czerwone blokuje</text></g>
+    <g class="gate"><rect x="652" y="175" width="296" height="60" rx="14"/><text class="t" x="800" y="201">Git hook: pre-commit</text><text class="s" x="800" y="222">commit przechodzi tylko na zielono</text></g>
+    <g class="gate"><rect x="652" y="255" width="296" height="60" rx="14"/><text class="t" x="800" y="281">CI na pull requeście</text><text class="s" x="800" y="302">te same sprawdzenia na serwerze</text></g>
+    <g class="gate"><rect x="652" y="335" width="296" height="60" rx="14"/><text class="t" x="800" y="361">Review</text><text class="s" x="800" y="382">świeży kontekst, bez prawa edycji</text></g>
+    <path class="ln dash" d="M948 45H980V365M948 125H980M948 205H980M948 285H980M948 365H980M980 365V436H375V251" marker-end="url(#ah)"/>
+    <text class="lb" x="678" y="428">czerwono: błąd wraca do agenta, a agent go naprawia</text>
+  </svg></div>
+  <p class="key"><span><i></i>robi agent</span><span><i class="on"></i>decydujesz Ty</span><span><i class="gate"></i>sprawdza bramka</span></p></div>
+  <div class="cols">
+    <div>
+      <h3>Hooki z webinaru</h3>
+      <ul class="dots">
+        <li><b>Po edycji pliku:</b> formatter i linter, tylko na tym pliku.</li>
+        <li><b>Na koniec sesji:</b> testy i build.</li>
+        <li><b>Pre-commit:</b> pełne sprawdzenie. Commit przechodzi tylko na zielono.</li>
+      </ul>
+      <p class="dim">Progi jakości zapisz jawnie: złożoność, liczba argumentów, martwy kod. Konfigurację napisze agent, Ty ją sprawdzasz.</p>
+    </div>
+    <div>
+      <h3>Markdown kontra hook</h3>
+      <ul class="dots">
+        <li>Reguła w markdownie nic nie kosztuje, ale działa tylko wtedy, gdy model jej posłucha.</li>
+        <li>Hook nie zależy od modelu. Mierzy wynik i blokuje, gdy wynik jest czerwony.</li>
+        <li>Cena hooka: koniec tury czeka na build i testy, a skille i agenci w repozytorium zajmują kontekst.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="petla">
+  <h2>Jedno zadanie, jedna sesja, jeden PR</h2>
+  <p class="lead">Wiele zespołów opisało pracę z agentem i każdy opis to ta sama pętla. Sześć kroków: agent robi cztery, a Ty decydujesz w dwóch.</p>
+  <div class="panel wide"><div class="dia"><svg viewBox="0 0 1000 290" role="img" aria-label="Pętla w sześciu krokach: plan, akceptacja, kod, weryfikacja, review, merge. Agent robi cztery kroki. Ty zatwierdzasz plan i mergujesz. Weryfikacja na czerwono: popraw i powtórz. Review zgłasza zmiany: agent poprawia kod. Pięć pierwszych kroków to jedna sesja agenta, merge to jeden pull request.">
+    <g class="ag"><rect x="1" y="70" width="138" height="84" rx="14"/><text class="t" x="70" y="104">Plan</text><text class="s" x="70" y="125">agent pisze</text><text class="s" x="70" y="141">plan</text></g>
+    <g class="you"><rect x="172" y="70" width="140" height="84" rx="14"/><text class="t" x="242" y="104" style="font-size:16px">Akceptacja</text><text class="s" x="242" y="125">zatwierdzasz</text><text class="s" x="242" y="141">albo poprawiasz</text></g>
+    <g class="ag"><rect x="344" y="70" width="140" height="84" rx="14"/><text class="t" x="414" y="104">Kod</text><text class="s" x="414" y="125">agent pisze</text><text class="s" x="414" y="141">kod i testy</text></g>
+    <g class="ag"><rect x="516" y="70" width="140" height="84" rx="14"/><text class="t" x="586" y="104" style="font-size:15px">Weryfikacja</text><text class="s" x="586" y="125">testy, lint, e2e</text><text class="s" x="586" y="141">aż do zielonego</text></g>
+    <g class="ag"><rect x="688" y="70" width="140" height="84" rx="14"/><text class="t" x="758" y="104">Review</text><text class="s" x="758" y="125">świeży kontekst,</text><text class="s" x="758" y="141">mówi APPROVE</text></g>
+    <g class="you"><rect x="860" y="70" width="139" height="84" rx="14"/><text class="t" x="930" y="104">Merge</text><text class="s" x="930" y="125">squash i merge</text><text class="s" x="930" y="141">robisz Ty</text></g>
+    <path class="ln" d="M143 112H164M316 112H336M488 112H508M660 112H680M832 112H852" marker-end="url(#ah)"/>
+    <path class="ln" d="M143 112H164" marker-end="url(#ah)"/><path class="ln" d="M316 112H336" marker-end="url(#ah)"/><path class="ln" d="M488 112H508" marker-end="url(#ah)"/><path class="ln" d="M660 112H680" marker-end="url(#ah)"/>
+    <path class="ln dash" d="M556 66C556 28 616 28 616 62" marker-end="url(#ah)"/><text class="lb" x="586" y="20">czerwono: popraw i powtórz</text>
+    <path class="ln dash" d="M758 158V190H414V162" marker-end="url(#ah)"/><text class="lb" x="586" y="210">ZMIANY: agent poprawia kod</text>
+    <path class="ln" d="M1 232V244H828V232"/><text class="lb strong" x="414" y="264">jedna sesja agenta</text><text class="lb" x="414" y="282">zaczynasz w folderze projektu, kończysz, gdy zadanie jest gotowe</text>
+    <path class="ln" d="M860 232V244H999V232"/><text class="lb strong" x="930" y="264">jeden PR</text><text class="lb" x="930" y="282">merguje człowiek</text>
+  </svg></div>
+  <p class="key"><span><i></i>robi agent</span><span><i class="on"></i>decydujesz Ty</span></p>
+  <div class="whyin">
+    <h3>Dlaczego nowa sesja na każde zadanie</h3>
+    <ol class="why">
+      <li><b>Stary kontekst miesza zadania</b><span>Model za każdym razem czyta całą rozmowę, razem z tym, co dotyczyło poprzedniego zadania.</span></li>
+      <li><b>Stary kontekst kosztuje</b><span>Za każde ponowne czytanie płacisz tokenami.</span></li>
+      <li><b>Nowa sesja nic nie gubi</b><span>Stan jest na dysku: plik z regułami, ticket, plan i commity.</span></li>
+      <li><b>Mały PR da się zreviewować</b><span>Jedno zadanie daje jeden mały pull request.</span></li>
+    </ol>
+  </div></div>
+</section>
+
+<section id="flow">
+  <h2>Flow na skillach Matta Pococka</h2>
+  <p class="lead">Tak wyglądało demo. Każdy skill to jeden krok, a po każdym kroku zostaje plik. Skille są małe, więc łatwo je zmienić pod swój zespół.</p>
+  <div class="panel wide"><div class="dia"><svg viewBox="0 0 1000 262" role="img" aria-label="Flow: grill-with-docs robi wywiad i zapisuje słownik pojęć oraz ADR. to-spec publikuje spec w issue. to-tickets dzieli większą zmianę na małe tickety. implement albo implement-spec pisze kod z tdd i kończy code-review. Na końcu pull request, który merguje człowiek.">
+    <g class="you"><rect x="1" y="16" width="167" height="88" rx="14"/><text class="c" x="84" y="48">/grill-with-docs</text><text class="s" x="84" y="72">wywiad, pytanie</text><text class="s" x="84" y="89">po pytaniu</text></g>
+    <g class="ag"><rect x="208" y="16" width="168" height="88" rx="14"/><text class="c" x="292" y="48">/to-spec</text><text class="s" x="292" y="72">spec z rozmowy,</text><text class="s" x="292" y="89">publikacja w issue</text></g>
+    <g class="ag"><rect x="416" y="16" width="168" height="88" rx="14"/><text class="c" x="500" y="48">/to-tickets</text><text class="s" x="500" y="72">większa zmiana:</text><text class="s" x="500" y="89">małe tickety</text></g>
+    <g class="ag"><rect x="624" y="16" width="168" height="88" rx="14"/><text class="c" x="708" y="40">/implement lub</text><text class="c" x="708" y="59">/implement-spec</text><text class="s" x="708" y="86">/tdd i /code-review</text></g>
+    <g class="you"><rect x="832" y="16" width="167" height="88" rx="14"/><text class="t" x="916" y="50">Pull request</text><text class="s" x="916" y="72">dowody i ryzyko,</text><text class="s" x="916" y="89">merguje człowiek</text></g>
+    <path class="ln" d="M172 60H200" marker-end="url(#ah)"/><path class="ln" d="M380 60H408" marker-end="url(#ah)"/><path class="ln" d="M588 60H616" marker-end="url(#ah)"/><path class="ln" d="M796 60H824" marker-end="url(#ah)"/>
+    <path class="ln dash" d="M84 108V168" marker-end="url(#ah)"/><path class="ln dash" d="M292 108V168" marker-end="url(#ah)"/><path class="ln dash" d="M500 108V168" marker-end="url(#ah)"/><path class="ln dash" d="M708 108V168" marker-end="url(#ah)"/>
+    <g class="file"><rect x="1" y="174" width="167" height="70" rx="10"/><text class="c" x="84" y="203">GLOSSARY.md + ADR</text><text class="s" x="84" y="226">słownik pojęć w repo</text></g>
+    <g class="file"><rect x="208" y="174" width="168" height="70" rx="10"/><text class="c" x="292" y="203">Spec</text><text class="s" x="292" y="226">GitHub Issue</text></g>
+    <g class="file"><rect x="416" y="174" width="168" height="70" rx="10"/><text class="c" x="500" y="203">Tickety</text><text class="s" x="500" y="226">z zależnościami</text></g>
+    <g class="file"><rect x="624" y="174" width="168" height="70" rx="10"/><text class="c" x="708" y="203">Kod i testy</text><text class="s" x="708" y="226">jeden branch</text></g>
+  </svg></div>
+  <p class="key"><span><i></i>robi agent</span><span><i class="on"></i>decydujesz Ty</span><span><i class="file"></i>plik, który zostaje</span></p></div>
+  <div class="cols">
+    <div>
+      <h3>Czemu tak</h3>
+      <ul class="dots">
+        <li><b>Wywiad na start.</b> Najczęstsza porażka to nieporozumienie: agent zbudował coś innego, niż chciałeś.</li>
+        <li><b>Spec przed kodem.</b> Agent dostaje wszystko na tacy i nie przeszukuje repozytorium na ślepo.</li>
+        <li><b>Małe kroki.</b> Większą zmianę dzielisz na tickety, małą puszczasz od razu do implementacji.</li>
+        <li><b>Dwa sposoby implementacji.</b> <code>/implement</code> robi spec albo tickety w jednej sesji. <code>/implement-spec</code> bierze cały spec na jeden branch i puszcza subagentów równolegle.</li>
+        <li><b>Review na końcu.</b> Agent sprawdza kod ze specem, a Ty dostajesz PR z dowodami.</li>
+      </ul>
+      <p class="dim">Do speca warto dopisać sekcje techniczne: zmiany w kodzie, kontrakty, model danych, failure modes i decyzje o testach.</p>
+    </div>
+    <div>
+      <h3>Słownik: ubiquitous language z DDD</h3>
+      <ul class="dots">
+        <li><code>/grill-with-docs</code> sprawdza Twoje słowa ze słownikiem w <code>GLOSSARY.md</code> i dopisuje nowe pojęcia w trakcie wywiadu.</li>
+        <li>W demo słownik nie znał operacji „Zamknij”. Ustalenie: akcja nazywa się „Kill”, a „Close” zostaje dla zamykania zakładki.</li>
+        <li>Zmienne, funkcje i pliki dostają te same nazwy, więc agent łatwiej porusza się po kodzie.</li>
+        <li>Agent pisze krócej i zużywa mniej tokenów, bo jedno pojęcie zastępuje długi opis.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="zasady">
+  <h2>Sześć złotych zasad</h2>
+  <div class="panel wide gold">
+  <ol class="rows">
+    <li><span class="n">1</span><h4>Jeden task, jedna sesja, jeden PR</h4><p>Każde zadanie zaczynasz w nowej sesji, w folderze projektu.</p></li>
+    <li><span class="n">2</span><h4>Dopracuj pomysł, zanim zaczniesz</h4><p>Niech agent przeprowadzi z Tobą wywiad. Garbage in, garbage out.</p></li>
+    <li><span class="n">3</span><h4>Dwie poprawki tego samego i <code>/clear</code></h4><p>Trzeci krok to nowa sesja i lepszy prompt.</p></li>
+    <li><span class="n">4</span><h4>Unikaj długich sesji</h4><p>Jakość spada, zanim zapełni się okno kontekstu.</p></li>
+    <li><span class="n">5</span><h4>Zapytaj agenta, jak to działa</h4><p>Nie zgaduj. Agent przeczyta pliki za Ciebie.</p></li>
+    <li><span class="n">6</span><h4>Zapytaj, jak to zmienić, i daj się poprawić</h4><p>Powiedz, co chcesz osiągnąć. Zapytaj o słabe punkty.</p></li>
+  </ol>
+  </div>
+  <p class="dim">Zasady 1 i 2 dotyczą startu zadania. Zasady 3 i 4 pilnują czystej sesji. Zasady 5 i 6 mówią, jak pytać agenta.</p>
+  <div class="cols">
+    <div>
+      <h3>Prompt do zasady 2</h3>
+      <pre>Interview me about this before we plan anything: &lt;your idea, or the Jira key&gt;
+Ask one question at a time. Give a recommended answer for each question.
+Read the ticket and the code first when they can answer a question.
+Write no code and no files. Stop when the idea is clear, and give me a summary for the ticket.</pre>
+      <p class="dim">Do wywiadu nie potrzebujesz skilla. Odpowiedz na każde pytanie, możesz się nie zgodzić albo napisać „nie wiem”. Samo zadanie zrób już w nowej sesji.</p>
+    </div>
+    <div>
+      <h3>Prompt do zasady 5</h3>
+      <pre>I am new in this repository and I do not know how the coding agent is set up here.
+Read AGENTS.md, the agent configuration folder and docs/ first.
+Tell me in 10 lines: what runs automatically, which commands I can type, and where the rules are.
+Then give me 3 things to try first.</pre>
+      <p class="dim">Dobre pierwsze pytanie brzmi: „Nie wiem, jak to działa ani gdzie szukać”. Nie musisz znać nazw plików.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kontekst">
+  <h2>Higiena kontekstu</h2>
+  <div class="cols">
+    <div>
+      <h3>Context poisoning</h3>
+      <p>Agent przyjął błędne założenie. Twoja poprawka trafia do rozmowy, ale błędne założenie dalej w niej siedzi, a model czyta jedno i drugie.</p>
+      <ul class="dots">
+        <li>Trzeci raz tłumaczysz to samo.</li>
+        <li>Masz ochotę nakrzyczeć na agenta. Mocniejsze słowa nie pomogą.</li>
+        <li>Napisz jednym zdaniem, co ma być inaczej. Zrób <code>/clear</code>. Wklej ticket i to zdanie.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Context rot</h3>
+      <p>Im więcej tokenów, tym mniej precyzji i tym gorzej model pamięta szczegóły.</p>
+      <ul class="dots">
+        <li>Wyniki narzędzi zapełniają okno szybciej niż Twoje prompty.</li>
+        <li>Zmieniasz zadanie: <code>/clear</code>. Zadanie się dłuży: <code>/compact</code>.</li>
+        <li>Research i przeszukiwanie kodu oddaj subagentom, żeby nie zaśmiecać głównego wątku.</li>
+      </ul>
+    </div>
+  </div>
+  <blockquote>Jeżeli macie ochotę wyrzucić komputer za okno, przeklinać, zwyzywać go, to jest moment na porzucenie sesji.<footer>Łukasz Kałużny</footer></blockquote>
+  <p class="dim">Z dokumentacji Claude Code: „A clean session with a better prompt almost always outperforms a long session with accumulated corrections.”</p>
+</section>
+
+<section id="linki">
+  <h2>Linki z webinaru</h2>
+  <p class="lead">Zestaw jest celowo mały. Dużo skilli i serwerów MCP to więcej tokenów i gorszy wynik.</p>
+  <ul class="links">
+    <li><a href="https://gist.github.com/kaluzaaa/a30528a498cd7b38ce39720d689bad38">Gist z zasadami</a><span>Obiecany na webinarze: zasady pracy i prompt do setupu repozytorium.</span></li>
+    <li><a href="https://github.com/mattpocock/skills">Skille Matta Pococka</a><span>Grilling, domain modeling, spec. Dobry start do własnego workflow.</span></li>
+    <li><a href="https://support.atlassian.com/atlassian-ai-gateway/docs/get-started-with-the-atlassian-remote-mcp-server/">Atlassian Remote MCP Server</a><span>Jira i Confluence w chmurze, logowanie przez OAuth, bez instalacji.</span></li>
+    <li><a href="https://github.com/bartekpucek/miodkuj">miodkuj</a><span>Skill, który przepisuje tekst na poprawną polszczyznę. Nazwa od profesora Miodka.</span></li>
+    <li><a href="https://github.com/blader/humanizer">Humanizer</a><span>To samo dla angielskiego: baza typowych zwrotów z AI i ich poprawki.</span></li>
+    <li><a href="https://github.com/tt-a1i/archify/tree/main">Archify</a><span>Klikalne diagramy z kodu. W demo: przepływ requestu przez 11 mikroserwisów.</span></li>
+    <li><a href="https://github.com/rtk-ai/rtk">RTK</a><span>Proxy dla poleceń CLI, które zmniejsza zużycie tokenów.</span></li>
+    <li><a href="https://github.com/MicrosoftDocs/mcp">Microsoft Learn MCP</a><span>Aktualna dokumentacja Microsoftu i Azure prosto do agenta.</span></li>
+    <li><a href="https://github.com/hashicorp/terraform-mcp-server">Terraform MCP</a><span>Pobiera dokumentację dla Twojej wersji providera.</span></li>
+    <li><a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator">Skill Creator</a><span>Oficjalny skill Anthropic do budowania własnych skilli z powtarzalnych instrukcji.</span></li>
+    <li><a href="https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright">Playwright dla Claude Code</a><span>Przeglądarka dla agenta, na przykład do exploratory testingu.</span></li>
+  </ul>
+  <h3>Kilka repozytoriów naraz: workspace</h3>
+  <div class="panel wide"><div class="dia"><svg viewBox="0 0 1000 290" role="img" aria-label="Workspace: jedną sesję agenta uruchamiasz w folderze nadrzędnym. Folder ma własny plik AGENTS.md, który opisuje, jak repozytoria się łączą, oraz sklonowane repozytoria api, web i infra, każde z własnym gitem i własnym AGENTS.md.">
+    <g class="you"><rect x="1" y="105" width="190" height="80" rx="14"/><text class="t" x="96" y="141">Agent</text><text class="s" x="96" y="163">tu uruchamiasz sesję</text></g>
+    <path class="ln" d="M195 145H252" marker-end="url(#ah)"/>
+    <rect class="ln dash" x="260" y="34" width="739" height="246" rx="18"/>
+    <text class="c" x="275" y="22" style="text-anchor:start">workspace/</text><text class="lb" x="375" y="22" style="text-anchor:start">lokalny git, bez remote</text>
+    <g class="gate"><rect x="285" y="58" width="689" height="60" rx="14"/><text class="c" x="630" y="84">AGENTS.md</text><text class="s" x="630" y="105">które repo za co odpowiada i jak się łączą: wywołania, kontrakty, kolejność deployu</text></g>
+    <g class="ag"><rect x="285" y="140" width="216" height="76" rx="14"/><text class="c" x="393" y="172">api/</text><text class="s" x="393" y="195">własny .git i AGENTS.md</text></g>
+    <g class="ag"><rect x="521" y="140" width="216" height="76" rx="14"/><text class="c" x="629" y="172">web/</text><text class="s" x="629" y="195">własny .git i AGENTS.md</text></g>
+    <g class="ag"><rect x="757" y="140" width="217" height="76" rx="14"/><text class="c" x="866" y="172">infra/</text><text class="s" x="866" y="195">własny .git i AGENTS.md</text></g>
+    <text class="lb" x="630" y="256">jedna sesja zmienia wszystkie repozytoria: jeden plan w workspace, jeden PR w każdym repo</text>
+  </svg></div>
+  <p class="key"><span><i></i>repozytorium</span><span><i class="on"></i>tu uruchamiasz sesję</span><span><i class="gate"></i>plik z regułami workspace</span></p></div>
+  <pre>workspace/        &lt;- tu uruchamiasz agenta
+├── .git/         # lokalny git, tylko dla AGENTS.md i .gitignore
+├── AGENTS.md     # które repo za co odpowiada i jak się łączą
+├── api/          # osobne repo, własny AGENTS.md
+├── web/          # osobne repo, własny AGENTS.md
+└── infra/        # osobne repo, własny AGENTS.md</pre>
+  <p class="dim">Jeden plan w workspace, jeden PR w każdym repozytorium. Commitujesz w każdym repo osobno.</p>
+</section>
+
+<section id="porownanie">
+  <h2>Wszyscy budują tę samą pętlę</h2>
+  <p class="lead">Spec Kit, OpenSpec, skille Pococka, Superpowers, BMAD: każde podejście to ta sama pętla. Różni je ostatnia kolumna, czyli to, ile jakości zależy od dobrej woli modelu.</p>
+  <div class="scroll">
+    <table>
+      <tr><th>Podejście</th><th>Spec przed kodem</th><th>Plan i akceptacja</th><th>Sprawdza maszyna</th><th>Osobne review</th><th>Stan między sesjami</th><th>Co pilnuje reguł</th></tr>
+      <tr><td>Spec Kit</td><td>tak</td><td>tak</td><td class="p">częściowo</td><td class="p">częściowo</td><td class="p">częściowo</td><td>markdown</td></tr>
+      <tr><td>OpenSpec</td><td>tak</td><td>tak</td><td class="p">częściowo</td><td class="p">częściowo</td><td class="p">częściowo</td><td>markdown</td></tr>
+      <tr><td>Skille Pococka</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>markdown</td></tr>
+      <tr><td>Superpowers</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td class="p">częściowo</td></tr>
+      <tr><td>GSD</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td class="p">częściowo</td></tr>
+      <tr><td>BMAD</td><td>tak</td><td>tak</td><td class="p">częściowo</td><td>tak</td><td>tak</td><td>markdown</td></tr>
+      <tr><td>AWS AI-DLC / Kiro</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td class="hook">hook</td></tr>
+      <tr><td>Anthropic AI-native SDLC</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td>tak</td><td class="hook">hook</td></tr>
+      <tr><td>Affirm (case study)</td><td class="p">częściowo</td><td>tak</td><td>tak</td><td class="p">częściowo</td><td class="p">częściowo</td><td class="p">częściowo</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="pytania">
+  <h2>Pytania z końcówki</h2>
+  <ul class="qa">
+    <li><h4>Superpowers czy skille Pococka?</h4><p>Opinia Łukasza: Pocock. Lekkie, inżynierskie podejście, które nie narzuca się w repozytorium. Superpowers wyglądają dobrze na początku, potem brakuje im struktury.</p></li>
+    <li><h4>Tokeny kończą się za szybko. Co robić?</h4><p>Minimalny setup: mało skilli i mało serwerów MCP. Precyzyjny spec, żeby agent nie przeszukiwał kodu. Subagenci używani świadomie. Do tego RTK.</p></li>
+    <li><h4>Claude, Codex czy Copilot?</h4><p>Używasz tego, co masz dostępne i na co masz limity. Reszta to preferencje.</p></li>
+    <li><h4>Jak reviewować testy od agenta?</h4><p>Scenariusze w stylu BDD i analiza statyczna zawsze włączona. Model danych i kontrakty definiujesz z góry. Te praktyki są starsze niż AI: „Extreme Programming Explained” to rok 1999.</p></li>
+  </ul>
+</section>
+
+</div>
+<svg class="cloud" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#ffffff" d="M0 200V110a280 160 0 0 1 500 30a140 110 0 0 1 240-20a230 170 0 0 1 400 30a170 120 0 0 1 300-30V200Z"/></svg>
+</main>
+
+<section class="band pod" id="podcast">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none" class="deco d-star" aria-hidden="true">
+<path d="M59.736 29.712C46.344 28.476 40.14 27.36 36.384 23.616C32.64 19.872 31.512 13.668 30.288 0.264C30.276 0.12 30.144 0 30 0C29.856 0 29.724 0.12 29.712 0.264C28.476 13.656 27.36 19.86 23.616 23.616C19.872 27.36 13.668 28.488 0.264 29.712C0.12 29.724 0 29.856 0 30C0 30.144 0.12 30.276 0.264 30.288C13.656 31.524 19.86 32.64 23.616 36.384C27.36 40.128 28.488 46.332 29.712 59.736C29.724 59.88 29.856 60 30 60C30.144 60 30.276 59.88 30.288 59.736C31.524 46.344 32.64 40.14 36.384 36.384C40.128 32.64 46.332 31.512 59.736 30.288C59.88 30.276 60 30.144 60 30C60 29.856 59.88 29.724 59.736 29.712Z" fill="currentColor"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 63 62" fill="none" class="deco d-x3" aria-hidden="true">
+<path d="M58.7713 4.26074L58.0489 3.54216C54.6414 0.152614 49.1075 0.152614 45.6864 3.54216L37.3447 11.8398C33.9372 15.2293 28.4034 15.2293 24.9822 11.8398L16.6406 3.54216C13.233 0.152614 7.69921 0.152614 4.27805 3.54216L3.55565 4.26074C0.148117 7.65028 0.148117 13.1549 3.55565 16.558L11.8973 24.8556C15.3048 28.2451 15.3048 33.7498 11.8973 37.1529L3.56928 45.4369C0.148117 48.84 0.161747 54.3582 3.58291 57.7477L4.30531 58.4663C7.72647 61.8558 13.2603 61.8423 16.6678 58.4392C17.9763 57.1376 19.3939 55.7276 20.7978 54.3175C22.2562 52.8668 23.7146 51.416 25.0504 50.0738C28.4034 46.7385 33.8145 46.6707 37.2493 49.9111C38.6941 51.2669 40.2752 52.7448 41.8972 54.2226C43.8736 55.9716 46.0408 57.6664 48.0035 59.1442C51.7109 61.9101 56.9449 61.3271 59.9299 57.8155C62.9149 54.3039 62.6423 49.0976 59.3029 45.9114C57.8036 44.4878 56.168 42.9015 54.5596 41.3152L50.3888 37.1664C46.9812 33.7769 46.9812 28.2723 50.3888 24.8692L58.7304 16.5716C62.1379 13.182 62.1379 7.67739 58.7304 4.27429L58.7713 4.26074Z" stroke-width="2" stroke="currentColor"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" fill="none" class="deco d-x4" aria-hidden="true">
+<path d="M84.7635 32.5616L75.4983 32.506L75.4427 23.2414C75.3748 11.3085 65.6401 1.5683 53.7004 1.50036C41.7607 1.43242 32.1372 11.0553 32.2052 22.9943L32.2608 32.259L22.9956 32.2034C11.0558 32.1354 1.43241 41.7583 1.50036 53.6974C1.5683 65.6364 11.3029 75.3704 23.2427 75.4384L32.5078 75.494L32.5635 84.7586C32.6314 96.6976 42.3722 106.432 54.3057 106.5C66.2454 106.568 75.8689 96.9447 75.801 85.0057L75.7454 75.741L85.0105 75.7966C96.9503 75.8646 106.574 66.2417 106.5 54.3026C106.432 42.3636 96.697 32.6296 84.7573 32.5616H84.7635Z" stroke-width="3" stroke="currentColor"/>
+</svg>
+  <div class="in">
+    <p class="say-s">Godzina to za mało. Te tematy rozkładamy w podcaście na czynniki pierwsze, bez zbędnego żargonu i BS.</p>
+    <h2>Posłuchaj dalej</h2>
+    <ul class="eps">
+      <li><img src="/img/202-square.webp" alt="" width="360" height="360"><p class="n">#202 · 47 min</p><h3>Kto się podpisze pod kodem od AI? - SDLC, koszty i harness</h3><p>Code review, harness dla agentów i realne koszty tokenów. Zanim odpalisz stado agentów.</p><p class="go"><a href="https://patoarchitekci.io/202/">Strona odcinka</a><a href="https://www.youtube.com/watch?v=2hLtron9OwQ">YouTube</a><a href="https://open.spotify.com/episode/0VhBqUtmG9YUbXBQxIav7x">Spotify</a></p></li>
+      <li><img src="/img/204-square.webp" alt="" width="360" height="360"><p class="n">#204 · 47 min</p><h3>Good enough definiujesz ty, nie agent - SDLC z AI</h3><p>SDLC z AI faza po fazie: wymagania, harness, code review, ograniczanie uprawnień agenta.</p><p class="go"><a href="https://patoarchitekci.io/204/">Strona odcinka</a><a href="https://www.youtube.com/watch?v=ufcWXc-m65U">YouTube</a><a href="https://open.spotify.com/episode/4OFSANHD5AmSkWDCWKHFlP">Spotify</a></p></li>
+      <li><img src="/img/205-square.webp" alt="" width="360" height="360"><p class="n">#205 · 37 min</p><h3>Sześć plików do jednego buga? - Spec Kit pod lupą</h3><p>Spec-driven development na przykładzie GitHub Spec Kit. Narzędzie czy chomąto?</p><p class="go"><a href="https://patoarchitekci.io/205/">Strona odcinka</a><a href="https://www.youtube.com/watch?v=VwosIpNC5nI">YouTube</a><a href="https://open.spotify.com/episode/5LDS6Lbi2IOMogwTRU7KzL">Spotify</a></p></li>
+      <li><img src="/img/210-square.webp" alt="" width="360" height="360"><p class="n">#210 · 33 min</p><h3>Q&amp;A o AI z Oskarem (i nie tylko)</h3><p>BDD czy Markdown, ignorowany Sonar, odpowiedzialność za kod. Czy harness ma sens bez działającego CI?</p><p class="go"><a href="https://patoarchitekci.io/210/">Strona odcinka</a><a href="https://www.youtube.com/watch?v=MCH4rZ8oZnI">YouTube</a><a href="https://open.spotify.com/episode/2VSJQ37sWCinrD84DU6W8g">Spotify</a></p></li>
+      <li><img src="/img/163-square.webp" alt="" width="360" height="360"><p class="n">#163 · 43 min</p><h3>Prosto i praktycznie wyjaśniamy: MCP (Model Context Protocol)</h3><p>MCP bez szamaństwa. Bezpieczeństwo i powód, dla którego za dużo narzędzi zabija LLM.</p><p class="go"><a href="https://patoarchitekci.io/163/">Strona odcinka</a><a href="https://www.youtube.com/watch?v=yrNf0_dxVYQ">YouTube</a><a href="https://open.spotify.com/episode/7ELXEzuiy0Ep0NbFU6E1HN">Spotify</a></p></li>
+    </ul>
+    <a class="btn" href="https://patoarchitekci.io/">Wszystkie odcinki</a>
+  </div>
+  <svg class="cloud" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#201B20" d="M0 200V140a160 110 0 0 1 280-10a260 170 0 0 1 460 20a130 100 0 0 1 220-30a270 160 0 0 1 480 20V200Z"/></svg>
+</section>
+
+<footer class="band bar" id="kontakt">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61 61" fill="none" class="deco d-sun2" aria-hidden="true">
+<g>
+<path d="M28.5896 61L30.0666 36.6342H31.1409L32.618 61H28.5896Z" fill="currentColor"/>
+<path d="M17.0658 57.9482L27.7472 35.9994L28.7482 36.4022L20.7891 59.4863L17.0658 57.9482Z" fill="currentColor"/>
+<path d="M7.58075 50.7092L25.8551 34.5223L26.6242 35.2914L10.4251 53.5657L7.58075 50.7092Z" fill="currentColor"/>
+<path d="M1.58695 40.4062L24.671 32.4471L25.0861 33.4359L3.13728 44.1295L1.58695 40.4062Z" fill="currentColor"/>
+<path d="M0 28.5896L24.3658 30.0666V31.1409L0 32.618V28.5896Z" fill="currentColor"/>
+<path d="M3.05183 17.0658L25.0006 27.7472L24.5856 28.7482L1.51371 20.7891L3.05183 17.0658Z" fill="currentColor"/>
+<path d="M10.2786 7.58075L26.4777 25.8551L25.7086 26.6242L7.43426 10.4251L10.2786 7.58075Z" fill="currentColor"/>
+<path d="M20.5938 1.58695L28.5529 24.671L27.5641 25.0861L16.8705 3.13728L20.5938 1.58695Z" fill="currentColor"/>
+<path d="M32.4104 0L30.9334 24.3658H29.8591L28.382 0H32.4104Z" fill="currentColor"/>
+<path d="M43.9342 3.05183L33.2528 25.0006L32.2518 24.5856L40.2109 1.51371L43.9342 3.05183Z" fill="currentColor"/>
+<path d="M53.4193 10.2786L35.1449 26.4777L34.3758 25.7086L50.5627 7.43426L53.4193 10.2786Z" fill="currentColor"/>
+<path d="M59.413 20.5938L36.329 28.5529L35.9139 27.5641L57.8627 16.8705L59.413 20.5938Z" fill="currentColor"/>
+<path d="M61 32.4104L36.6342 30.9334V29.8591L61 28.382V32.4104Z" fill="currentColor"/>
+<path d="M57.9482 43.9342L35.9994 33.2528L36.4022 32.2518L59.4863 40.2109L57.9482 43.9342Z" fill="currentColor"/>
+<path d="M50.7092 53.4193L34.5223 35.1449L35.2914 34.3758L53.5657 50.5627L50.7092 53.4193Z" fill="currentColor"/>
+<path d="M40.4062 59.413L32.4471 36.329L33.4359 35.9139L44.1295 57.8627L40.4062 59.413Z" fill="currentColor"/>
+</g>
+</svg>
+  <div class="in">
+    <h2>Zostań w kontakcie</h2>
+    <nav class="btns" aria-label="Linki">
+      <a class="hot" href="https://www.linkedin.com/in/lukaszkaluzny/">Łukasz Kałużny na LinkedIn</a>
+      <a class="discord" href="https://discord.com/invite/78zPcEaP22">Dołącz do Discord</a>
+      <a class="hot" href="https://outlook.office.com/book/Patoarchitekci@protopia.tech">Bezpłatna konsultacja</a>
+      <a class="hot" href="https://www.youtube.com/@PoweredByProtopia">Powered by Protopia</a>
+      <a href="https://open.spotify.com/show/13wiwR1mmHD3PTBcMt9J9J">Spotify</a>
+      <a href="https://podcasts.apple.com/il/podcast/patoarchitekci/id1477067604">Apple Podcasts</a>
+      <a href="https://www.youtube.com/@Patoarchitekci">YouTube</a>
+      <a href="https://patoarchitekci.io/szkolenia/">Nadchodzące szkolenia</a>
+      <a href="https://patoarchitekci.io/links/">Wszystkie linki</a>
+    </nav>
+    <p class="end">Nowy odcinek w każdy piątek. Recap powstał na podstawie nagrania webinaru.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const links = [...document.querySelectorAll('.rail a')];
+  const targets = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  const mark = id => links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + id));
+  if (!('IntersectionObserver' in window) || !targets.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) mark(e.target.id); });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  targets.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
